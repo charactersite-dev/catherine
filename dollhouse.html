@@ -25,6 +25,10 @@ body{background:linear-gradient(180deg,#f8c0d8 0%,#f0a0c8 25%,#e880b8 55%,#d060a
     <main id="main-content">
       <h2>Dollhouse</h2>
       <hr>
+      <div class="layout-switch" role="group" aria-label="Layout">
+        <button type="button" data-layout="shelves">Shelves</button>
+        <button type="button" data-layout="bookcase">Bookcase</button>
+      </div>
       <div id="dollhouse-sections"></div>
     </main>
   </div>
@@ -204,7 +208,42 @@ var dollhouseSections=[
   ]},
 ];
 
-Gallery.sections('dollhouse-sections',dollhouseSections,{max:200,min:50});
+// Two ways to show the same dolls: frosted shelves, or the white bookcase
+function renderBookcase(target){
+  var c=document.getElementById(target);
+  var bc=document.createElement('div');bc.className='bookcase';
+  bc.innerHTML='<div class="bookcase-top"></div>';
+  var mid=document.createElement('div');mid.className='bookcase-middle';
+  dollhouseSections.forEach(function(s){
+    var t=document.createElement('div');t.className='section-title';t.setAttribute('aria-label',s.label);t.innerHTML=makeLetters(s.label);
+    mid.appendChild(t);
+    var per=4;
+    for(var i=0;i<s.items.length;i+=per){
+      var row=document.createElement('div');row.className='bookcase-shelf';mid.appendChild(row);
+      Gallery.shelf(row,s.items.slice(i,i+per),{max:160,min:50});
+    }
+  });
+  bc.appendChild(mid);
+  bc.insertAdjacentHTML('beforeend','<div class="bookcase-bottom"></div>');
+  c.appendChild(bc);
+}
+function showDolls(layout){
+  if(layout!=='bookcase') layout='shelves';
+  var c=document.getElementById('dollhouse-sections');c.innerHTML='';
+  document.querySelectorAll('.layout-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.layout===layout?'true':'false');});
+  if(layout==='bookcase') renderBookcase('dollhouse-sections');
+  else Gallery.sections('dollhouse-sections',dollhouseSections,{max:200,min:50});
+}
+document.querySelectorAll('.layout-switch button').forEach(function(b){
+  b.addEventListener('click',function(){
+    try{localStorage.setItem('dollsLayout',b.dataset.layout);}catch(e){}
+    history.replaceState(null,'',b.dataset.layout==='bookcase'?'#bookcase':location.pathname);
+    showDolls(b.dataset.layout);
+  });
+});
+var startLayout=location.hash.slice(1);
+if(startLayout!=='bookcase'){try{startLayout=localStorage.getItem('dollsLayout');}catch(e){}}
+showDolls(startLayout);
 </script>
 </body>
 </html>
