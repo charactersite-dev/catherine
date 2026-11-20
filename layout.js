@@ -72,6 +72,7 @@
           <img src="assets/artworkneocDIVcrop.gif" alt="">
           <div class="sidebar-links">
             <a href="https://penningmermaid.neocities.org/">My OCs</a>
+            <a href="old/index.html">Old Layouts</a>
             <a href="#">External 2</a>
           </div>
         </div>

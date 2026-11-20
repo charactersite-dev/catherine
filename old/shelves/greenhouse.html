@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="../pixel-map.js"></script>
+<meta charset="UTF-8">
+<meta name="description" content="A pixel greenhouse full of flowers, potted plants, bugs, mushrooms and a veggie garden.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pixel Greenhouse</title>
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<!-- archived layout: see ../index.html -->
+<body class="page-greenhouse">
+<a class="old-banner" href="../index.html" style="position:fixed;left:8px;bottom:8px;z-index:99999;font:700 11px/1 sans-serif;background:#fff;color:#7030a0;padding:6px 10px;border-radius:12px;text-decoration:none;box-shadow:0 1px 6px rgba(0,0,0,.2)">✦ old layout · back to the site history</a>
+<div class="sky-bg"></div>
+<div class="cloud c1"></div>
+<div class="cloud c2"></div>
+<div class="cloud c3"></div>
+
+<div id="top"></div>
+
+<nav id="pixel-nav">
+  <div id="pixel-nav-links">
+    <a href="../../index.html">🏠 Home</a>
+    <a href="https://callmecatherine.neocities.org/aquarium">🐠 Aquarium</a>
+    <a href="https://callmecatherine.neocities.org/dollhouse">🏡 Dollhouse</a>
+    <a href="https://callmecatherine.neocities.org/greenhouse">🌸 Greenhouse</a>
+    <a href="https://callmecatherine.neocities.org/journal/journal">📓 Journal</a>
+    <a href="https://callmecatherine.neocities.org/people">👥 People</a>
+    <a href="https://callmecatherine.neocities.org/space">🌙 Space</a>
+    <a href="https://callmecatherine.neocities.org/trinkets">✨ Trinkets</a>
+    <a href="#top">↑ Top</a>
+  </div>
+  <button id="pixel-nav-toggle" aria-label="Navigation">☰ nav</button>
+</nav>
+
+<header>
+  <h1>Pixel Greenhouse</h1>
+  <div class="header-deco" id="headerDeco"></div>
+</header>
+
+<div class="greenhouse-wrap">
+  <div class="greenhouse-body">
+    <div class="section-title">🌷 flowers &amp; blooms</div>
+    <div class="shelf-section"><div class="pixel-grid" id="shelf-flowers"></div></div>
+
+    <div class="section-title">🪴 potted plants</div>
+    <div class="shelf-section"><div class="pixel-grid" id="shelf-potted"></div></div>
+
+    <div class="section-title">🌿 trees &amp; greenery</div>
+    <div class="shelf-section"><div class="pixel-grid" id="shelf-trees"></div></div>
+
+    <div class="section-title">🐛 bugs &amp; critters</div>
+    <div class="shelf-section"><div class="pixel-grid" id="shelf-bugs"></div></div>
+
+    <div class="section-title">🍄 mushrooms &amp; fungi</div>
+    <div class="shelf-section"><div class="pixel-grid" id="shelf-mushrooms"></div></div>
+  </div>
+</div>
+
+<!-- Outdoor veggie garden -->
+<div class="outdoor-wrap">
+  <div class="garden-bed">
+    <div class="garden-title">🥕 veggie garden</div>
+    <div class="dirt-field" id="dirt-field"></div>
+  </div>
+</div>
+
+<a id="top-btn" href="#top">↑ Top</a>
+<a id="scented-footer" href="https://scentedclub.neocities.org/" target="_blank" rel="noopener">🌿 Scented // Damp Earth</a>
+
+<script>
+const BASE = '../../pixels/greenhouse/';
+const MIN = 50, MAX = 200;
+
+const sizeImg = (el) => {
+  let w = el.naturalWidth, h = el.naturalHeight;
+  if (w === 0 || h === 0) return;
+  if (w < MIN && h < MIN) { const scale = MIN / Math.min(w, h); w = Math.round(w * scale); h = Math.round(h * scale); }
+  else if (w < MIN) { const scale = MIN / w; w = MIN; h = Math.round(h * scale); }
+  else if (h < MIN) { const scale = MIN / h; h = MIN; w = Math.round(w * scale); }
+  if (w > MAX && h > MAX) { const scale = MAX / Math.max(w, h); w = Math.round(w * scale); h = Math.round(h * scale); }
+  else if (h > MAX) { const scale = MAX / h; h = MAX; w = Math.round(w * scale); }
+  else if (w > MAX) { const scale = MAX / w; w = MAX; h = Math.round(h * scale); }
+  el.width = w; el.height = h;
+};
+
+const img = (src, _hint, title) => {
+  const el = document.createElement('img');
+  el.src = BASE + src;
+  if (title) el.title = title;
+  if (el.complete && el.naturalWidth) sizeImg(el);
+  else el.onload = () => sizeImg(el);
+  return el;
+};
+
+const load = (id, arr) => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  arr.forEach(([src, h, label]) => el.appendChild(img(src, h, label)));
+};
+
+const flowers = [
+  ['divflowera16.gif',48,'flower divider'],['lacroixdaisy.gif',48,'daisy'],['lacroixtulip.gif',48,'tulip'],
+  ['tulip2.gif',32,'tulip 2'],['rosa.gif',40,'rose'],['ikflower08-pinkrose.gif',40,'pink rose'],
+  ['carnations.png',48,'carnations'],['miniflorzinha.gif',24,'mini flower'],['mini066.gif',24,'mini flower 2'],
+  ['mini132.gif',20,'mini flower 3'],['mini2.gif',24,'mini flower 4'],['miniheart4.gif',24,'mini heart flower'],
+  ['artworkneocities (21).gif',40,'flower gif'],['artworkneocities (30).gif',48,'flower 2'],
+  ['artworkneocities (63).gif',40,'flower 3'],['artworkneocities (64).gif',48,'flower 4'],
+  ['artworkneocities (68).gif',32,'flower 5'],['artworkneocities (70).gif',32,'flower 6'],
+  ['artworkneocities (76).gif',40,'flower 7'],['artworkneocities (77).gif',40,'flower 8'],
+  ['artworkneocities (84).gif',24,'flower 9'],['p-i-x-e-l-stumblr (11).gif',56,'pixel flower a'],
+  ['p-i-x-e-l-stumblr (12).gif',48,'pixel flower b'],['p-i-x-e-l-stumblr (17).gif',56,'pixel flower c'],
+  ['p-i-x-e-l-stumblr (7).gif',48,'pixel flower d'],['p-i-x-e-l-stumblr (9).gif',56,'pixel flower e'],
+  ['artworkneocities (16).gif',24,'small flower'],['artworkneocities (18).gif',24,'small flower 2'],
+  ['ico6.gif',24,'icon flower'],['ico8.gif',24,'icon flower 2'],['mini111.gif',20,'tiny flower'],
+  ['darosamaple_sm.png',40,'rosy maple'],['flower_crate.png',48,'flower crate'],
+];
+const potted = [
+  ['0coinplant.png',48,'coin plant'],['0monstera.png',56,'monstera'],['4peacelily.png',48,'peace lily'],
+  ['4violet.png',40,'violet'],['artworkneocities (3).png',32,'potted plant'],['plant1-1.png',56,'plant big'],
+  ['artworksucculent.gif',40,'succulent'],['2plant1.gif',32,'plant gif 1'],['2plant5.gif',32,'plant gif 5'],
+  ['miniverdura.gif',24,'mini plant'],['planta.gif',20,'tiny plant'],['sprout4.gif',28,'sprout'],
+  ['PothosVineTop.png',48,'pothos vine'],['pixel-worldTUMBLR (2).webp',40,'pixel world plant 2'],
+  ['pixel-worldTUMBLR (3).webp',40,'pixel world plant 3'],['pixel-worldTUMBLR (4).webp',40,'pixel world plant 4'],
+  ['pixel-worldTUMBLR (5).webp',40,'pixel world plant 5'],['pixel-worldTUMBLR (6).webp',40,'pixel world plant 6'],
+  ['pixel-worldTUMBLR (7).webp',40,'pixel world plant 7'],['pixel-worldTUMBLR (8).webp',40,'pixel world plant 8'],
+  ['pixel-worldTUMBLR (9).webp',40,'pixel world plant 9'],
+];
+const trees = [
+  ['bonsai3.gif',40,'bonsai'],['TreeStump.gif',48,'tree stump'],['grass1.gif',20,'grass'],
+  ['d9kfjom-ccb129ee-45b2-49bc-a37f-c9031b84a77e.png',56,'big plant'],
+  ['tumblr_c014b7436bf6af14fb7caf5aca144b46_8173e5b9_250.png',56,'tumblr plant 1'],
+  ['tumblr_da47253757e47d0c0ca6647ee67acf3a_0ff5346c_250.png',56,'tumblr plant 2'],
+  ['tumblr_inline_o9aoelzNQU1reem51_100.png',56,'tumblr plant 3'],
+  ['d4zkzjc-1c8e16c8-d1f7-4b68-a54a-4fc25a494073.gif',56,'tree gif'],
+  ['pixelbankneocities (24).gif',40,'pixel bank plant 24'],['pixelbankneocities (47).gif',40,'pixel bank plant 47'],
+  ['dalunamoth_sm.png',40,'da luna moth'],
+];
+const bugs = [
+  ['butterfly.gif',48,'butterfly'],['butterfly_l1_hunny_dot_sunnyday_dot.gif',32,'small butterfly'],
+  ['borbo.gif',32,'borbo bug'],['bee.gif',24,'bee'],['bee_001.gif',28,'bee 2'],['caracol.gif',32,'snail'],
+  ['2sCaterpillar.gif',28,'caterpillar'],['d38h5cc-e461e84a-1a04-4e3e-8842-934a7525516c.gif',32,'bug gif'],
+  ['garden-frog-lily-pad.gif',48,'frog on lily pad'],['196.gif',24,'critter'],['27.gif',20,'tiny critter'],
+  ['FROMatp-boo-jp.gif',24,'boo ghost 1'],['FROMatp-boo-jp2.gif',24,'boo ghost 2'],['FROMatp-boo-jp3.gif',24,'boo ghost 3'],
+];
+const mushrooms = [
+  ['mushroomst.gif',56,'mushrooms'],['kinoko16.gif',24,'small mushroom'],['th_mini108.gif',32,'mini mushroom'],
+  ['th_mini065.gif',20,'tiny mushroom'],['mini066.gif',24,'mini 066'],
+];
+
+const veggies = [['corn.gif','corn'],['potato.gif','potato'],['turnip.gif','turnip'],['garlic1.gif','garlic'],['icon-carrot.gif','carrot']];
+const veggieEmoji = ['🌽','🥕','🥔','🧄','🌿','🫛','🥦','🫚'];
+const fruits = [['2blueberries.png','blueberries'],['watermelon.gif','watermelon']];
+const fruitEmoji = ['🍓','🫐','🍉','🍇','🍒','🍑','🍋','🍎'];
+const other = [['water_can.gif','watering can'],['gnome2.gif','gnome 2'],['gnome3.gif','gnome 3'],['sign2.gif','sign 2'],['sign4.gif','sign 4'],['mini2.gif','mini deco'],['th_mini065.gif','tiny deco']];
+const otherEmoji = ['🪣','🌻','🪴','🧺','🪱','🌾','🍂','🪵'];
+
+const half = arr => { const mid = Math.ceil(arr.length / 2); return [arr.slice(0, mid), arr.slice(mid)]; };
+const sortLargeToEnd = col => { const imgs = [...col.querySelectorAll('img')]; const large = imgs.filter(i => i.height >= MAX || i.width >= MAX); large.forEach(i => col.appendChild(i)); };
+const buildCol = (items, emojis) => {
+  const col = document.createElement('div');
+  col.className = 'dirt-col';
+  let loaded = 0;
+  items.forEach(([src, title]) => {
+    const el = document.createElement('img');
+    el.src = BASE + src;
+    if (title) el.title = title;
+    const onDone = () => { sizeImg(el); loaded++; if (loaded === items.length) sortLargeToEnd(col); };
+    if (el.complete && el.naturalWidth) onDone();
+    else el.onload = onDone;
+    col.appendChild(el);
+  });
+  if (emojis && emojis.length) {
+    emojis.forEach(e => {
+      const span = document.createElement('span');
+      span.style.cssText = 'font-size:1.2rem;line-height:1;display:block;text-align:center;';
+      span.textContent = e;
+      col.appendChild(span);
+    });
+  }
+  return col;
+};
+
+const field = document.getElementById('dirt-field');
+const [veggiesA, veggiesB] = half(veggies);
+const [fruitsA, fruitsB]   = half(fruits);
+const [otherA,  otherB]    = half(other);
+const [emojiVA, emojiVB]   = half(veggieEmoji);
+const [emojiFА, emojiFB]   = half(fruitEmoji);
+const [emojiOA, emojiOB]   = half(otherEmoji);
+[[veggiesA,emojiVA],[veggiesB,emojiVB],[fruitsA,emojiFА],[fruitsB,emojiFB],[otherA,emojiOA],[otherB,emojiOB]]
+  .forEach(([items, emojis]) => field.appendChild(buildCol(items, emojis)));
+
+const headerDeco = [
+  ['miniflorzinha.gif',20,''],['bee.gif',20,''],['tulip2.gif',28,''],
+  ['bee_001.gif',22,''],['miniflorzinha.gif',20,''],['mini132.gif',18,''],['sprout4.gif',24,''],
+];
+const scenes = [
+  ['shelf-flowers', flowers],['shelf-potted', potted],['shelf-trees', trees],
+  ['shelf-bugs', bugs],['shelf-mushrooms', mushrooms],['headerDeco', headerDeco],
+];
+scenes.forEach(([id, arr]) => load(id, arr));
+
+document.getElementById('pixel-nav-toggle').addEventListener('click', function() {
+  document.getElementById('pixel-nav').classList.toggle('open');
+});
+
+(function() {
+  var cur = window.location.pathname.replace(/\/$/, '').split('/').pop() || 'index';
+  document.querySelectorAll('#pixel-nav-links a').forEach(function(a) {
+    var page = (a.getAttribute('href') || '').replace(/\/$/, '').split('/').pop() || 'index';
+    if (page === cur) { a.style.background = 'rgba(74,124,32,.28)'; a.style.fontWeight = '700'; }
+  });
+})();
+</script>
+</body>
+</html>

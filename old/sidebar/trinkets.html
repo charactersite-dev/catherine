@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="../pixel-map.js"></script>
+  <meta charset="UTF-8">
+  <title>CallmeCatherine ~ Trinkets</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script type="text/javascript">
+// <![CDATA[
+var colour="random"; // in addition to "random" can be set to any valid colour eg "#f0f" or "red"
+var sparkles=50;
+
+/****************************
+*  Tinkerbell Magic Sparkle *
+*(c)2005-13 mf2fm web-design*
+*  http://www.mf2fm.com/rv  *
+* DON'T EDIT BELOW THIS BOX *
+****************************/
+var x=ox=400;
+var y=oy=300;
+var swide=800;
+var shigh=600;
+var sleft=sdown=0;
+var tiny=new Array();
+var star=new Array();
+var starv=new Array();
+var starx=new Array();
+var stary=new Array();
+var tinyx=new Array();
+var tinyy=new Array();
+var tinyv=new Array();
+
+window.onload=function() { if (document.getElementById) {
+  var i, rats, rlef, rdow;
+  for (var i=0; i<sparkles; i++) {
+    var rats=createDiv(3, 3);
+    rats.style.visibility="hidden";
+    rats.style.zIndex="999";
+    document.body.appendChild(tiny[i]=rats);
+    starv[i]=0;
+    tinyv[i]=0;
+    var rats=createDiv(5, 5);
+    rats.style.backgroundColor="transparent";
+    rats.style.visibility="hidden";
+    rats.style.zIndex="999";
+    var rlef=createDiv(1, 5);
+    var rdow=createDiv(5, 1);
+    rats.appendChild(rlef);
+    rats.appendChild(rdow);
+    rlef.style.top="2px";
+    rlef.style.left="0px";
+    rdow.style.top="0px";
+    rdow.style.left="2px";
+    document.body.appendChild(star[i]=rats);
+  }
+  set_width();
+  sparkle();
+}}
+
+function sparkle() {
+  var c;
+  if (Math.abs(x-ox)>1 || Math.abs(y-oy)>1) {
+    ox=x;
+    oy=y;
+    for (c=0; c<sparkles; c++) if (!starv[c]) {
+      star[c].style.left=(starx[c]=x)+"px";
+      star[c].style.top=(stary[c]=y+1)+"px";
+      star[c].style.clip="rect(0px, 5px, 5px, 0px)";
+      star[c].childNodes[0].style.backgroundColor=star[c].childNodes[1].style.backgroundColor=(colour=="random")?newColour():colour;
+      star[c].style.visibility="visible";
+      starv[c]=50;
+      break;
+    }
+  }
+  for (c=0; c<sparkles; c++) {
+    if (starv[c]) update_star(c);
+    if (tinyv[c]) update_tiny(c);
+  }
+  setTimeout("sparkle()", 40);
+}
+
+function update_star(i) {
+  if (--starv[i]==25) star[i].style.clip="rect(1px, 4px, 4px, 1px)";
+  if (starv[i]) {
+    stary[i]+=1+Math.random()*3;
+    starx[i]+=(i%5-2)/5;
+    if (stary[i]<shigh+sdown) {
+      star[i].style.top=stary[i]+"px";
+      star[i].style.left=starx[i]+"px";
+    }
+    else {
+      star[i].style.visibility="hidden";
+      starv[i]=0;
+      return;
+    }
+  }
+  else {
+    tinyv[i]=50;
+    tiny[i].style.top=(tinyy[i]=stary[i])+"px";
+    tiny[i].style.left=(tinyx[i]=starx[i])+"px";
+    tiny[i].style.width="2px";
+    tiny[i].style.height="2px";
+    tiny[i].style.backgroundColor=star[i].childNodes[0].style.backgroundColor;
+    star[i].style.visibility="hidden";
+    tiny[i].style.visibility="visible"
+  }
+}
+
+function update_tiny(i) {
+  if (--tinyv[i]==25) {
+    tiny[i].style.width="1px";
+    tiny[i].style.height="1px";
+  }
+  if (tinyv[i]) {
+    tinyy[i]+=1+Math.random()*3;
+    tinyx[i]+=(i%5-2)/5;
+    if (tinyy[i]<shigh+sdown) {
+      tiny[i].style.top=tinyy[i]+"px";
+      tiny[i].style.left=tinyx[i]+"px";
+    }
+    else {
+      tiny[i].style.visibility="hidden";
+      tinyv[i]=0;
+      return;
+    }
+  }
+  else tiny[i].style.visibility="hidden";
+}
+
+document.onmousemove=mouse;
+function mouse(e) {
+  if (e) {
+    y=e.pageY;
+    x=e.pageX;
+  }
+  else {
+    set_scroll();
+    y=event.y+sdown;
+    x=event.x+sleft;
+  }
+}
+
+window.onscroll=set_scroll;
+function set_scroll() {
+  if (typeof(self.pageYOffset)=='number') {
+    sdown=self.pageYOffset;
+    sleft=self.pageXOffset;
+  }
+  else if (document.body && (document.body.scrollTop || document.body.scrollLeft)) {
+    sdown=document.body.scrollTop;
+    sleft=document.body.scrollLeft;
+  }
+  else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) {
+    sleft=document.documentElement.scrollLeft;
+    sdown=document.documentElement.scrollTop;
+  }
+  else {
+    sdown=0;
+    sleft=0;
+  }
+}
+
+window.onresize=set_width;
+function set_width() {
+  var sw_min=999999;
+  var sh_min=999999;
+  if (document.documentElement && document.documentElement.clientWidth) {
+    if (document.documentElement.clientWidth>0) sw_min=document.documentElement.clientWidth;
+    if (document.documentElement.clientHeight>0) sh_min=document.documentElement.clientHeight;
+  }
+  if (typeof(self.innerWidth)=='number' && self.innerWidth) {
+    if (self.innerWidth>0 && self.innerWidth<sw_min) sw_min=self.innerWidth;
+    if (self.innerHeight>0 && self.innerHeight<sh_min) sh_min=self.innerHeight;
+  }
+  if (document.body.clientWidth) {
+    if (document.body.clientWidth>0 && document.body.clientWidth<sw_min) sw_min=document.body.clientWidth;
+    if (document.body.clientHeight>0 && document.body.clientHeight<sh_min) sh_min=document.body.clientHeight;
+  }
+  if (sw_min==999999 || sh_min==999999) {
+    sw_min=800;
+    sh_min=600;
+  }
+  swide=sw_min;
+  shigh=sh_min;
+}
+
+function createDiv(height, width) {
+  var div=document.createElement("div");
+  div.style.position="absolute";
+  div.style.height=height+"px";
+  div.style.width=width+"px";
+  div.style.overflow="hidden";
+  return (div);
+}
+
+function newColour() {
+  var c=new Array();
+  c[0]=255;
+  c[1]=Math.floor(Math.random()*256);
+  c[2]=Math.floor(Math.random()*(256-c[1]/2));
+  c.sort(function(){return (0.5 - Math.random());});
+  return ("rgb("+c[0]+", "+c[1]+", "+c[2]+")");
+}
+// ]]>
+</script>
+</head>
+<!-- archived layout: see ../index.html -->
+<body>
+<a class="old-banner" href="../index.html" style="position:fixed;left:8px;bottom:8px;z-index:99999;font:700 11px/1 sans-serif;background:#fff;color:#7030a0;padding:6px 10px;border-radius:12px;text-decoration:none;box-shadow:0 1px 6px rgba(0,0,0,.2)">✦ old layout · back to the site history</a>
+
+  <!-- start loading sidebar -->
+  <div id="sidebar-container"></div>
+  <script>
+    fetch('sidebar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('sidebar-container').innerHTML = data;
+      });
+  </script>
+  <!-- end load-the-sidebar -->
+
+  <!-- main content box -->
+  <div class="page-container">
+    <main id="main-content">
+
+      <section>
+        <h2>Trinkets</h2>
+      </section>
+
+      <section id="trinkets-sections"></section>
+
+    </main>
+  </div>
+
+  <footer align="center"><br><a href="../../index.html"><img src="../../assets/backtohome.gif"></a><br></footer>
+
+  <script>
+  const T='../../pixels/trinkets/';const F='../../pixels/trinkets/food/';const FA='../../pixels/trinkets/fani/';
+
+  const FAVORITES=[
+    {src:T+'artworkneocities (56).gif',alt:'roseglass',href:'https://artwork.neocities.org'},
+    {src:T+'sugarberryiconFROMgeocities-kajikan3.gif',alt:'mylittlepony3',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:T+'pika5.gif',alt:'pikachuSM',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:T+'splendid4.gif',alt:'teentitansraven',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:T+'girfromgeocities-tamz_queen.gif',alt:'nickjr-Gir',href:'https://web.archive.org/web/20021015075909/http://www.geocities.com/tamz_queen/trial.html'},
+    {src:T+'gifcities (75).gif',alt:'mariostar-bottle',href:'https://gifcities.org'},
+    {src:FA+'Pixel112.png',alt:'bananasplit',href:'https://web.archive.org/web/20051111082104if_/http://www.scribbleland.net/'},
+    {src:T+'mutterbutter.neocities.org.gif',alt:'catinteacup',href:'https://mutterbutter.neocities.org'},
+    {src:T+'gifcities (72).gif',alt:'hamsterinjar',href:'https://gifcities.org'},
+    {src:T+'love_potion.gif',alt:'lovepotion',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:T+'rainbow.gif',alt:'rainbow',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'CraneGame1.png',alt:'cranegame',href:'https://web.archive.org/web/20070727174212/http://www.scribbleland.net/'},
+    {src:T+'a-trophy.gif',alt:'trophy',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'allyratworldneocities (1).gif',alt:'tiara',href:'https://allyratworld.neocities.org'},
+    {src:T+'k018.gif',alt:'pottedflower',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:T+'sleeping-teddybear.gif',alt:'sleepingteddybear',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'pink-juke-box.gif',alt:'pinkjukebox',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'lejlart.com.png',alt:'lisafranktiger',href:'https://lejlart.com'},
+    {src:T+'lejlart.com2.png',alt:'lisafrankdog',href:'https://lejlart.com'},
+    {src:T+'lejlartcom.gif',alt:'lisafrankcat',href:'https://lejlart.com'},
+    {src:T+'gifcities (67).gif',alt:'rainbowbriteandunicorn',href:'https://gifcities.org'},
+  ];
+
+  const FANDOMS=[
+    {src:T+'lisa-ballerina-bunnies.png',alt:'AI-lisafrank-ballerina',href:'https://lejlart.com'},
+    {src:T+'lisa-bunny-leapoverflower.png',alt:'AI-lisafrank-bunny',href:'https://lejlart.com'},
+    {src:T+'lisa-dogs.png',alt:'AI-lisafrank-dogs',href:'https://lejlart.com'},
+    {src:T+'lisa-hummingbird.png',alt:'AI-lisafrank-hummingbird',href:'https://lejlart.com'},
+    {src:T+'lisa-jewelrybox.png',alt:'AI-lisafrank-jewelrybox',href:'https://lejlart.com'},
+    {src:T+'lisa-paintdogs.png',alt:'AI-lisafrank-paintdogs',href:'https://lejlart.com'},
+    {src:T+'lisa-huggingpenguins.png',alt:'AI-lisafrank-penguins',href:'https://lejlart.com'},
+    {src:T+'lisa-richcat.png',alt:'AI-lisafrank-richcat',href:'https://lejlart.com'},
+    {src:T+'lisa-sealion.png',alt:'AI-lisafrank-sealion',href:'https://lejlart.com'},
+    {src:T+'care-bear-blue.gif',alt:'carebear-blue',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'green-care-bear.gif',alt:'carebear-green',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'pink-care-bear.gif',alt:'carebear-pink',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'care-bear-yello.gif',alt:'carebear-yellow',href:'https://myblinkie.holidaycomments.com/gallery'},
+   {src:T+'carebedtimebear.gif',alt:'carebear-sm',href:'https://artwork.neocities.org'},
+    {src:T+'caregramsbear.gif',alt:'carebear-sm',href:'https://artwork.neocities.org'},
+    
+    <!--start disney section, sort characters and character franchises together-->
+    { href: "https://artwork.neocities.org", src: "../../pixels/dividers/artworkneocities (37).gif", alt:"Disney Divider" },
+    {src:T+'artworkneocities (36).gif',alt:'mickeyminnie',href:'https://artwork.neocities.org'},
+    {src:T+'gifcities (19).gif',alt:'mickeymousebook',href:'https://gifcities.org'},
+      { href: "https://sakuradreams.neocities.org/", src: "../../pixels/trinkets/Eeyore12.gif" },
+  { href: "https://sakuradreams.neocities.org/", src: "../../pixels/trinkets/Eeyore13.gif" },
+  { href: "https://sakuradreams.neocities.org/", src: "../../pixels/trinkets/Tigger19.gif" },
+  { href: "https://sakuradreams.neocities.org/", src: "../../pixels/trinkets/Piglet30.gif" },
+  { href: "https://sakuradreams.neocities.org/", src: "../../pixels/trinkets/Mickey52.gif" },
+  { href: "https://sakuradreams.neocities.org/", src: "../../pixels/trinkets/Minnie12.gif" },
+  { href: "https://sakuradreams.neocities.org/", src: "../../pixels/trinkets/Minnie05.gif" },
+  { href: "https://sakuradreams.neocities.org/", src: "../../pixels/trinkets/Minnie14.gif" },
+    {src:T+'artworkneocities (102).gif',alt:'ariel',href:'https://artwork.neocities.org'},
+    {src:T+'pixel-gardenTUMBLR (2).gif',alt:'disney-ARIEL',href:'https://pixel-garden.tumblr.com'},
+    {src:T+'gifcities (71).gif',alt:'disney-ariel',href:'https://gifcities.org'},
+    {src:T+'splendid3.gif',alt:'disneyariel',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:T+'pixel-gardenTUMBLR (4).gif',alt:'disney-beast',href:'https://pixel-garden.tumblr.com'},
+    {src:T+'pixel-gardenTUMBLR (3).gif',alt:'disney-belle',href:'https://pixel-garden.tumblr.com'},
+    {src:T+'splendid2.gif',alt:'disneybelle',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:T+'artworkneocities (97).gif',alt:'disney-b&B-rose',href:'https://artwork.neocities.org'},
+    {src:T+'splendid1.gif',alt:'disneyjasmine',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+      { href: "https://sakuradreams.neocities.org/", src: "../../pixels/trinkets/Aladdin39.gif" },
+    {src:T+'gifcities (18).gif',alt:'doll-tinkerbell',href:'https://gifcities.org'},
+    {src:T+'artworkneocities (35).gif',alt:'tinkerbell',href:'https://artwork.neocities.org'},
+    {src:T+'artworkneocities (38).gif',alt:'tinkerbell2',href:'https://artwork.neocities.org'},
+    {src:T+'000ARIEL.gif',alt:'disney-ariel',href:'https://artwork.neocities.org'},
+    { href: "https://sakuradreams.neocities.org/", src: "../../pixels/aqua/LM08.gif", alt: "ariel in clam" },
+    {src:T+'000BELLE.gif',alt:'disney-belle',href:'https://artwork.neocities.org'},
+    {src:T+'000CINDY.gif',alt:'disney-cindy',href:'https://artwork.neocities.org'},
+    {src:T+'chibi_ariel.gif',alt:'disney-ariel',href:'https://artwork.neocities.org'},
+    {src:T+'chibi_aurora.gif',alt:'disney-aurora',href:'https://artwork.neocities.org'},
+    {src:T+'chibi_belle.gif',alt:'disney-belle',href:'https://artwork.neocities.org'},
+    {src:T+'chibi_cinderella.gif',alt:'disney-cindy',href:'https://artwork.neocities.org'},
+    {src:T+'chibi_jasmine.gif',alt:'disney-jasmine',href:'https://artwork.neocities.org'},
+    
+    {src:T+'pixelbankneocities (12).gif',alt:'godzilla',href:'https://pixelbank.neocities.org'},
+    
+    {src:T+'hamtarofromgeocities-tamzqueen.gif',alt:'hamtaro',href:'https://web.archive.org/web/20021015075909/http://www.geocities.com/tamz_queen/trial.html'},
+    
+    <!--start hello kitty & Sanrio section-->
+    {src:T+'hello-kitty-bow.gif',alt:'hellokitty-bow',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'pixel-world-TUMBLR (10).webp',alt:'sanrio-hellokitty',href:'https://pixel-world.tumblr.com'},
+    {src:T+'artworkneocities (13).gif',alt:'hellokittyBOOK',href:'https://artwork.neocities.org'},
+    {src:T+'3dancingpurin.gif',alt:'sanrio-purin',href:'https://artwork.neocities.org'},
+    {src:T+'CinnamorollBalloon.gif',alt:'sanrio-cinna',href:'https://artwork.neocities.org'},
+    {src:T+'gang.gif',alt:'sanrio-group',href:'https://artwork.neocities.org'},
+    
+    <!--start a separate kaoani section-->
+    {src:T+'gifcities (25).gif',alt:'kaoani-angel',href:'https://gifcities.org'},
+    {src:T+'gifcities (22).gif',alt:'kaoani-bouquet',href:'https://gifcities.org'},
+    {src:T+'gifcities (21).gif',alt:'kaoani-bubbles',href:'https://gifcities.org'},
+    {src:T+'gifcities (54).gif',alt:'kaoani-hamster',href:'https://gifcities.org'},
+    {src:T+'gifcities (24).gif',alt:'kaoani-orange',href:'https://gifcities.org'},
+    {src:T+'gifcities (23).gif',alt:'kaoani-pool',href:'https://gifcities.org'},
+    {src:T+'gifcities (41).gif',alt:'kaoani-princess',href:'https://gifcities.org'},
+    {src:T+'artworkneocities (51).gif',alt:'kaoanicat',href:'https://artwork.neocities.org'},
+    {src:T+'gifcities (55).gif',alt:'catinPOOL',href:'https://gifcities.org'},
+        
+    {src:T+'cha_yoke2-rainbowbitsy.gif',alt:'kirby',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    
+    <!--mario section-->
+    { href: "https://artwork.neocities.org", src: "../../pixels/dividers/artworkneocities (96).gif", alt: "Mario Divider" },
+    {src:T+'gifcities (33).gif',alt:'mario-climb',href:'https://gifcities.org'},
+    {src:T+'gifcities (28).gif',alt:'mario-coin0',href:'https://gifcities.org'},
+    {src:T+'gifcities (35).gif',alt:'mario-peach',href:'https://gifcities.org'},
+    {src:T+'gifcities (30).gif',alt:'mario-pipe',href:'https://gifcities.org'},
+    {src:T+'gifcities (29).gif',alt:'mario-rainbowstar',href:'https://gifcities.org'},
+    {src:T+'pixelbankneocities (28).gif',alt:'mariocoin',href:'https://pixelbank.neocities.org'},
+    {src:T+'gifcities (75).gif',alt:'mariostar-bottle',href:'https://gifcities.org'},
+    
+    <!--my little pony section-->
+        {src:T+'2starflower.gif',alt:'mylittlepony-star',href:'https://artwork.neocities.org'},
+    {src:T+'sugarberryiconFROMgeocities-kajikan.gif',alt:'mylittlepony',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:T+'gifcities (50).gif',alt:'mylittlepony-pink',href:'https://gifcities.org'},
+    {src:T+'sugarberryiconFROMgeocities-kajikan3.gif',alt:'mylittlepony3',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:T+'sugarberryiconFROMgeocities-kajikan4.gif',alt:'mylittlepony4',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    
+    {src:T+'Pixel150.png',alt:'neopets',href:'https://web.archive.org/web/20051111082104if_/http://www.scribbleland.net/'},
+    {src:T+'PixelBlink8.gif',alt:'neopets5',href:'https://web.archive.org/web/20051111082104if_/http://www.scribbleland.net/'},
+    
+    <!--start Pokemon and Digimon section-->
+    {src:T+'gifcities (11).gif',alt:'digimon-plant',href:'https://gifcities.org'},
+    {src:T+'webarchive (4).gif',alt:'jigglypuffsinging',href:'https://en.wikipedia.org/wiki/GeoCities'},
+    {src:T+'gifcities (8).gif',alt:'pikachu',href:'https://gifcities.org'},
+    {src:T+'gifcities (65).gif',alt:'pikachu-grapes',href:'https://gifcities.org'},
+    {src:T+'gifcities (27).gif',alt:'pikachuandpichu',href:'https://gifcities.org'},
+    {src:T+'artworkneocities (81).gif',alt:'pikachuball1',href:'https://artwork.neocities.org'},
+    {src:T+'gifcities (9).gif',alt:'pikachuball2',href:'https://gifcities.org'},
+    {src:T+'gifcities (7).gif',alt:'pikachurollingball',href:'https://gifcities.org'},
+    {src:T+'pika5.gif',alt:'pikachuSM',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    
+
+<!--start sailor moon section-->
+    {src:T+'sm5.gif',alt:'sailormoon-small',href:'https://artwork.neocities.org'},
+    {src:T+'chibichibifromgeocities-tamz_queen.gif',alt:'sailormoon-chibi',href:'https://web.archive.org/web/20021015075909/http://www.geocities.com/tamz_queen/trial.html'},
+    {src:T+'gifcities (45).gif',alt:'sailormoon-chibiusa',href:'https://gifcities.org'},
+    {src:T+'gifcities (36).gif',alt:'sailormoon-usagi',href:'https://gifcities.org'},
+    {src:T+'gifcities (43).gif',alt:'sailormoon-usagi2',href:'https://gifcities.org'},
+    {src:T+'gifcities (37).gif',alt:'sailormoon-usagi4',href:'https://gifcities.org'},
+    {src:T+'mikaruromansu.gif',alt:'sailormooncouple',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:T+'gifcities (46).gif',alt:'sailormoongroup1',href:'https://gifcities.org'},
+    
+
+    {src:T+'splendid4.gif',alt:'teentitansraven',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:T+'0000ARNOLD.gif',alt:'cartoon',href:'https://artwork.neocities.org'},
+    {src:T+'0000HELGA.gif',alt:'cartoon',href:'https://artwork.neocities.org'},
+    
+
+    {src:T+'3sw.png',alt:'nintendoswitch',href:'https://artwork.neocities.org'},
+  ];
+
+  const FOOD=[
+    {src:F+'artworkneocities (50).gif',alt:'apple',href:'https://artwork.neocities.org'},
+    {src:F+'gifcities (51).gif',alt:'apple2',href:'https://gifcities.org'},
+    {src:FA+'Pixel112.png',alt:'bananasplit',href:'https://web.archive.org/web/20051111082104if_/http://www.scribbleland.net/'},
+    {src:F+'scribbleland.gif',alt:'bananasplit2',href:'https://web.archive.org/web/20051111082104if_/http://www.scribbleland.net/'},
+    {src:F+'pixelbankneocities (59).gif',alt:'boba',href:'https://pixelbank.neocities.org'},
+    {src:F+'burned.gif',alt:'burnedtoast',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:F+'ssc6-candied.gif',alt:'candystrawberry',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:F+'chocolate.gif',alt:'chocolatebar',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:F+'artworkneocities (65).gif',alt:'chocstrawb',href:'https://artwork.neocities.org'},
+    {src:F+'gifcities (34).gif',alt:'cokecan',href:'https://gifcities.org'},
+    {src:F+'pinkcc.gif',alt:'cottoncandy',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:F+'egg.gif',alt:'eggtoast',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:F+'artworkneocities (93).gif',alt:'grapes',href:'https://artwork.neocities.org'},
+    {src:F+'ice-cream.gif',alt:'icecream',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:F+'scribbleland1.gif',alt:'icecream2',href:'https://web.archive.org/web/20051111082104if_/http://www.scribbleland.net/'},
+    {src:F+'icecream_1.gif',alt:'icecream3',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:F+'ice-cream-cone.gif',alt:'icecreamcone',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:F+'marmelade_strawberry.gif',alt:'jamTOAST',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:FA+'Pixel101.png',alt:'juicebear',href:'https://web.archive.org/web/20051111082104if_/http://www.scribbleland.net/'},
+    {src:FA+'Pixel102.png',alt:'juicebear2',href:'https://web.archive.org/web/20051111082104if_/http://www.scribbleland.net/'},
+    {src:FA+'Pixel103.png',alt:'juicebear3',href:'https://web.archive.org/web/20051111082104if_/http://www.scribbleland.net/'},
+    {src:F+'lemon.gif',alt:'lemon',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:F+'pixelbankneocities (20).gif',alt:'lovecoffeemug',href:'https://pixelbank.neocities.org'},
+    {src:F+'artworkneocities (44).gif',alt:'parfait',href:'https://artwork.neocities.org'},
+    {src:F+'peach.gif',alt:'peach',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:F+'artworkneocities (23).gif',alt:'pear',href:'https://artwork.neocities.org'},
+    {src:F+'artworkneocities (17).gif',alt:'strawberry',href:'https://artwork.neocities.org'},
+    {src:F+'allyratworldneocities (4).gif',alt:'strawbMilk',href:'https://allyratworld.neocities.org'},
+    {src:F+'wedding-cake.gif',alt:'weddingcake',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:F+'2cake2.gif',alt:'cake',href:'https://artwork.neocities.org'},
+    {src:F+'2chocosundae.gif',alt:'chocosundae',href:'https://artwork.neocities.org'},
+    {src:F+'7strawberry-parfait.gif',alt:'parfait',href:'https://artwork.neocities.org'},
+    {src:FA+'artworkbearteacup.gif',alt:'bearsinteacup',href:'https://artwork.neocities.org'},
+    {src:FA+'bun_strawbcake.gif',alt:'cake-bunny',href:'https://artwork.neocities.org'},
+    {src:T+'icecream.gif',alt:'icecreamTRUCK',href:'https://artwork.neocities.org'},
+    {src:T+'sunday2.GIF',alt:'strawberrysundae',href:'https://artwork.neocities.org'},
+    {src:FA+'0sloth_orange.gif',alt:'sloth-orange',href:'https://artwork.neocities.org'},
+    {src:FA+'1lollipop_1.gif',alt:'lollipop-hamster',href:'https://artwork.neocities.org'},
+    {src:FA+'7apple-3.gif',alt:'apple-worm',href:'https://artwork.neocities.org'},
+  ];
+
+  const ANIMALS=[
+    {src:T+'1catboy4.png',alt:'cat-cowboy',href:'https://artwork.neocities.org'},
+    {src:T+'animals-dancing.gif',alt:'animals-dancing',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'artworkneocities (9).gif',alt:'bird',href:'https://artwork.neocities.org'},
+    {src:T+'scribbleland4.gif',alt:'cat',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:T+'gifcities (42).gif',alt:'catinbowl',href:'https://gifcities.org'},
+    {src:T+'pixelbankneocities (39).gif',alt:'catrun',href:'https://pixelbank.neocities.org'},
+    {src:T+'cat-vintage-glow-net-gabby.gif',alt:'cats',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:T+'deerbabyani.gif',alt:'deerbaby',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:T+'pixelbankneocities (52).gif',alt:'dog',href:'https://pixelbank.neocities.org'},
+    {src:T+'dog-enjoys-meal.gif',alt:'dog-meal',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'cute-dogplush.gif',alt:'dogplush',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'gifcities (73).gif',alt:'fishbowl',href:'https://gifcities.org'},
+    {src:T+'giraffe-jr.gif',alt:'giraffe',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'gifcities (57).gif',alt:'GROUPofhams',href:'https://gifcities.org'},
+    {src:T+'gifcities (58).gif',alt:'GROUPofhams2',href:'https://gifcities.org'},
+    {src:T+'pixelbankneocities (36).gif',alt:'hamster',href:'https://pixelbank.neocities.org'},
+    {src:T+'gifcities (53).gif',alt:'hamster',href:'https://gifcities.org'},
+    {src:T+'gifcities (72).gif',alt:'hamsterinjar',href:'https://gifcities.org'},
+    {src:T+'gifcities (56).gif',alt:'hamtaroGROUPofhams',href:'https://gifcities.org'},
+    {src:T+'lamb.gif',alt:'lamb',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'k022.gif',alt:'lion',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:T+'pippsbaloon-celestial-sodapop-net-juna.gif',alt:'panda',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:FA+'char23.gif',alt:'PINKBUNNY',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:T+'pixelbankneocities (25).gif',alt:'pinksheep',href:'https://pixelbank.neocities.org'},
+    {src:T+'ani_yoke14-rainbow-bitsy.gif',alt:'rainbowdog',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:T+'pixelbankneocities (34).gif',alt:'sheep',href:'https://pixelbank.neocities.org'},
+    {src:T+'pixelbankneocities (55).gif',alt:'yellowbird2',href:'https://pixelbank.neocities.org'},
+    {src:T+'3pandabear.gif',alt:'pandabears2',href:'https://artwork.neocities.org'},
+    {src:T+'BabyPenguin.gif',alt:'penguin',href:'https://artwork.neocities.org'},
+    {src:T+'BouncingBubbleKitty.gif',alt:'kitten-bouncing',href:'https://artwork.neocities.org'},
+    {src:T+'bun_cloud.gif',alt:'kittenonCLOUD',href:'https://artwork.neocities.org'},
+    {src:T+'kittybyartwork.gif',alt:'kitty',href:'https://artwork.neocities.org'},
+    {src:T+'nest.gif',alt:'birdnest',href:'https://artwork.neocities.org'},
+    {src:T+'romeo.gif',alt:'cat-in-bed',href:'https://artwork.neocities.org'},
+    {src:T+'yupio_2.gif',alt:'hamster',href:'https://artwork.neocities.org'},
+    {src:T+'sleepingBEAR.gif',alt:'sleepingBEAR',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'artworkneocities (100).gif',alt:'sleeppenguin',href:'https://artwork.neocities.org'},
+    {src:T+'rain-puddle-bears.gif',alt:'rain-bears',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'beach-duck.gif',alt:'beach-duck',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'beach-duck-girl.gif',alt:'beach-duck-girl',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'artworkneocities (92).gif',alt:'duck',href:'https://artwork.neocities.org'},
+    {src:T+'artworkneocities (12).gif',alt:'frog',href:'https://artwork.neocities.org'},
+    {src:T+'rain-umbrella-seat.gif',alt:'rain-umbrella-BUNNY',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'pixelbankneocities (53).gif',alt:'swan',href:'https://pixelbank.neocities.org'},
+    {src:T+'umbrella-rain.gif',alt:'umbrella-rain',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'mailbear.gif',alt:'bearpostman',href:'https://artwork.neocities.org'},
+    {src:T+'OldClowningAround.gif',alt:'bear-clown',href:'https://artwork.neocities.org'},
+    
+  ];
+
+  const FANTASY=[
+    {src:T+'castle-love.gif',alt:'castle',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'purple-dragon.gif',alt:'dragon',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'fat-pink-fly.gif',alt:'fatpinkfly',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'love_potion.gif',alt:'lovepotion',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:T+'FROMatp-boo-jp5.gif',alt:'treasurechest',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:T+'unicorn.gif',alt:'unicorn',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'ikalva-2.gif',alt:'tiny-fairy',href:'https://artwork.neocities.org'},
+    {src:T+'p-i-x-e-l-stumblr (10).webp',alt:'pretty-castle',href:'https://p-i-x-e-l-s.tumblr.com'},
+  ];
+
+  const OBJECTS=[
+    {src:T+'airplaneinclouds.gif',alt:'airplane',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'pixelbankneocities (49).gif',alt:'balloons',href:'https://pixelbank.neocities.org'},
+    {src:T+'gifcities (49).gif',alt:'balloons2',href:'https://gifcities.org'},
+    {src:T+'pixelbankneocities (23).gif',alt:'camera',href:'https://pixelbank.neocities.org'},
+    {src:T+'k00-fromannezca-com.gif',alt:'candle',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:T+'pixelbankneocities (7).gif',alt:'cellphone',href:'https://pixelbank.neocities.org'},
+    {src:T+'pixelbankneocities (42).gif',alt:'diamond',href:'https://pixelbank.neocities.org'},
+    {src:T+'pixelbankneocities (46).gif',alt:'fireworks',href:'https://pixelbank.neocities.org'},
+    {src:T+'pixelbankneocities (22).gif',alt:'flowerkey',href:'https://pixelbank.neocities.org'},
+    {src:T+'glitterrainbow.gif',alt:'glitterrainbow',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'pixelbankneocities (31).gif',alt:'goldcrown',href:'https://pixelbank.neocities.org'},
+    {src:T+'pixelbankneocities (66).gif',alt:'heart2',href:'https://pixelbank.neocities.org'},
+    {src:T+'gold-heart-locket.gif',alt:'heartlocket',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'gifcities (4).gif',alt:'jarofheart-girly',href:'https://gifcities.org'},
+    {src:T+'gifcities (74).gif',alt:'jarofhearts',href:'https://gifcities.org'},
+    {src:T+'pixelbankneocities (18).gif',alt:'lovekey',href:'https://pixelbank.neocities.org'},
+    {src:T+'allyratworldneocities (3).gif',alt:'magicKEY',href:'https://allyratworld.neocities.org'},
+    {src:T+'parfume.gif',alt:'perfume',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'mall_char14.gif',alt:'pinkJOURNAL',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:T+'pixelbankneocities (35).gif',alt:'pinkPC',href:'https://pixelbank.neocities.org'},
+    {src:T+'pixelbankneocities (27).gif',alt:'pinkpresent',href:'https://pixelbank.neocities.org'},
+    {src:T+'pink-tub.gif',alt:'pinktub',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'lovetinypixelblogspot.gif',alt:'pixelhouse',href:'https://lovetinypixel.blogspot.com'},
+    {src:T+'pixelbankneocities (45).gif',alt:'purplegem',href:'https://pixelbank.neocities.org'},
+    {src:T+'purple-purse.gif',alt:'purplepurse',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'rainbow.gif',alt:'rainbow',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'pixelbankneocities (5).gif',alt:'rainbowdiamond',href:'https://pixelbank.neocities.org'},
+    {src:T+'pixelbankneocities (16).gif',alt:'roseblackbow',href:'https://pixelbank.neocities.org'},
+    {src:T+'allyratworldneocities (1).gif',alt:'tiara',href:'https://allyratworld.neocities.org'},
+    {src:T+'jar-fireflies.gif',alt:'jaroffireflies',href:'https://artwork.neocities.org'},
+    {src:T+'jar-mush.gif',alt:'jarofmushroom',href:'https://artwork.neocities.org'},
+    {src:T+'jar-soot.gif',alt:'jarofsoot',href:'https://artwork.neocities.org'},
+    {src:T+'jarshelf.gif',alt:'shelffullofjars',href:'https://artwork.neocities.org'},
+    {src:T+'jarstars.png',alt:'jarofstars',href:'https://artwork.neocities.org'},
+    {src:T+'jbox.png',alt:'jewelrybox',href:'https://artwork.neocities.org'},
+    {src:T+'crystal.gif',alt:'pretty-crystal',href:'https://artwork.neocities.org'},
+    {src:T+'Boombox.gif',alt:'boombox',href:'https://artwork.neocities.org'},
+    {src:T+'flying-heart.gif',alt:'flyingheart-pink',href:'https://artwork.neocities.org'},
+    {src:T+'1634.gif',alt:'starrainbow',href:'https://artwork.neocities.org'},
+    {src:T+'1flamingofloat.png',alt:'flamingo-float-pool',href:'https://artwork.neocities.org'},
+    {src:T+'1MakeUpBuddies1.gif',alt:'makeup',href:'https://artwork.neocities.org'},
+    {src:T+'1MakeUpBuddies2.gif',alt:'makeup',href:'https://artwork.neocities.org'},
+  ];
+
+  const SEASONS=[
+    {src:T+'artworkneocities (94).gif',alt:'autumnleaves',href:'https://artwork.neocities.org'},
+    {src:T+'night-bear-on-blanket.gif',alt:'bear-blanket',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'winter-bunny-snowman.gif',alt:'bunny-snowman',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'butterfly.gif',alt:'butterfly',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'windmill.gif',alt:'pinwheel',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'pixelbankneocities (44).gif',alt:'rainbowbutterfly',href:'https://pixelbank.neocities.org'},
+  ];
+
+  const MISC=[
+    {src:T+'webarchive (3).gif',alt:'boombox',href:'https://en.wikipedia.org/wiki/GeoCities'},
+    {src:T+'allyratworldneocities (2).gif',alt:'bunny-ipod',href:'https://allyratworld.neocities.org'},
+    {src:T+'pixelbankneocities (67).gif',alt:'musicnoteheart',href:'https://pixelbank.neocities.org'},
+    {src:T+'pink-juke-box.gif',alt:'pinkjukebox',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'cyworld2 (7).gif',alt:'discoworld',href:'https://web.archive.org/web/20190630085013/http://cyworld.com/'},
+    {src:T+'mbuilding.gif',alt:'building',href:'https://artwork.neocities.org'},
+    {src:T+'mbuilding2.gif',alt:'building',href:'https://artwork.neocities.org'},
+  ];
+
+  const TOYS=[
+    {src:T+'pixelbankneocities (65).gif',alt:'bearballoon',href:'https://pixelbank.neocities.org'},
+    {src:T+'pixelbankneocities (37).gif',alt:'bearIDEA',href:'https://pixelbank.neocities.org'},
+    {src:T+'pixelbankneocities (43).gif',alt:'bearOK',href:'https://pixelbank.neocities.org'},
+    {src:T+'CraneGame1.png',alt:'cranegame',href:'https://web.archive.org/web/20070727174212/http://www.scribbleland.net/'},
+    {src:T+'pixelbankneocities (26).gif',alt:'pink3ds',href:'https://pixelbank.neocities.org'},
+    {src:T+'pixelbankneocities (33).gif',alt:'pink3ds2',href:'https://pixelbank.neocities.org'},
+    {src:T+'pink-car.gif',alt:'pinkcar',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'allyratworldneocities (5).gif',alt:'pollypocket',href:'https://allyratworld.neocities.org'},
+    {src:T+'3bot.gif',alt:'robot',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:T+'70bots.gif',alt:'robot2',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:T+'ele_erica02.gif',alt:'robotbaby',href:'https://web.archive.org/web/20091027020852/http://geocities.com/glitteren/'},
+    {src:T+'fixed-ballerina.gif',alt:'smallballerina',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'Tamagotchi2.gif',alt:'tamagotchi',href:'https://web.archive.org/web/20051111082104if_/http://www.scribbleland.net/'},
+    {src:T+'teddybear-couple.gif',alt:'teddybear-couple',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'gifcities (70).gif',alt:'teddyinjar',href:'https://gifcities.org'},
+    {src:T+'a-trophy.gif',alt:'trophy',href:'https://myblinkie.holidaycomments.com/gallery'},
+    {src:T+'artworkneocities (103).gif',alt:'tv',href:'https://artwork.neocities.org'},
+    {src:T+'artworkneocities (107).gif',alt:'tv2',href:'https://artwork.neocities.org'},
+    {src:T+'artworkneocities (55).gif',alt:'tv3',href:'https://artwork.neocities.org'},
+    {src:T+'16bot.gif',alt:'robot',href:'https://artwork.neocities.org'},
+    {src:T+'176bot.gif',alt:'robot',href:'https://artwork.neocities.org'},
+    {src:T+'2bot.gif',alt:'robot',href:'https://artwork.neocities.org'},
+    {src:T+'32bot.gif',alt:'robot',href:'https://artwork.neocities.org'},
+    {src:T+'7teddy-2.gif',alt:'teddy',href:'https://artwork.neocities.org'},
+    {src:T+'anitv1.gif',alt:'cat-tv',href:'https://artwork.neocities.org'},
+    {src:T+'bear11.gif',alt:'plushie-bear',href:'https://artwork.neocities.org'},
+    {src:T+'BearPlush2.png',alt:'bear-plushie',href:'https://artwork.neocities.org'},
+
+  ];
+
+const unsorted = [
+  { href: "https://cinni.net/?z=/toybox/ani", src: "../../pixels/trinkets/kao/Artist_Kaoani.gif", alt: "Kaoani" },
+  { href: "https://cinni.net/?z=/toybox/ani", src: "../../pixels/trinkets/kao/kittya18.gif",  alt: "Kaoani" },
+  { href: "https://cinni.net/?z=/toybox/ani", src: "../../pixels/trinkets/kao/kao.gif", alt: "Kaoani" },
+  { href: "https://cinni.net/?z=/toybox/ani", src: "../../pixels/trinkets/a9.gif", alt: "Hamtaro" },
+  { href: "https://cinni.net/?z=/toybox/ani", src: "../../pixels/trinkets/neopets-fairy.gif", alt: "Neopets-fairy-bottle" },
+
+  { href: "https://web.archive.org/web/20031002125259/http://primadonna.fiyaa.com/ulala.html", src: "../../pixels/trinkets/mac-nursejoy.gif", alt:"Pokemon-Joy" },
+  { href: "https://web.archive.org/web/20031002125259/http://primadonna.fiyaa.com/ulala.html", src: "../../pixels/trinkets/misc-cerecere.gif", alt:"Sailormoon-villains" },
+  { href: "https://web.archive.org/web/20031002125259/http://primadonna.fiyaa.com/ulala.html", src: "../../pixels/trinkets/misc-junjun.gif", alt:"Sailormoon-villains" },
+  { href: "https://web.archive.org/web/20031002125259/http://primadonna.fiyaa.com/ulala.html", src: "../../pixels/trinkets/misc-pallapalla.gif", alt:"Sailormoon-villains" },
+  { href: "https://web.archive.org/web/20031002125259/http://primadonna.fiyaa.com/ulala.html", src: "../../pixels/trinkets/misc-vesves.gif", alt:"Sailormoon-villains" },
+  { href: "https://web.archive.org/web/20031002125259/http://primadonna.fiyaa.com/ulala.html", src: "../../pixels/trinkets/misc-luna.gif", alt: "Sailormoon" },
+  { href: "https://web.archive.org/web/20031002125259/http://primadonna.fiyaa.com/ulala.html", src: "../../pixels/trinkets/item-brooch1.gif", alt: "Sailormoon" },
+  { href: "https://web.archive.org/web/20031002125259/http://primadonna.fiyaa.com/ulala.html", src: "../../pixels/trinkets/item-brooch3.gif", alt: "Sailormoon" },
+  { href: "https://web.archive.org/web/20031002125259/http://primadonna.fiyaa.com/ulala.html", src: "../../pixels/trinkets/item-brooch4.gif", alt: "Sailormoon" },
+
+  { href: "https://web.archive.org/web/20100419011152/http://neskaya.net/pixels.php?", src: "../../pixels/trinkets/new (17).gif", alt: "Bunnies-in-grass" },
+  { href: "https://web.archive.org/web/20100419011152/http://neskaya.net/pixels.php?", src: "../../pixels/trinkets/new (39).gif", alt: "Bears Plushies" },
+  { href: "https://web.archive.org/web/20100419011152/http://neskaya.net/pixels.php?", src: "../../pixels/trinkets/pixel (17).gif", alt: "Sanrio with food" },
+
+
+  { href: "https://sakuradreams.neocities.org/", src: "../../pixels/trinkets/Cat138.gif", alt: "Cat in grass" },
+  { href: "https://sakuradreams.neocities.org/", src: "../../pixels/trinkets/Cat123.gif", alt: "Beautiful white cat" },
+
+  { href: "https://gifcities.org/", src: "../../pixels/trinkets/kao/blobconfetti_from_mypixelmelody.gif", alt:"Kaoani-hearts" },
+  { href: "https://gifcities.org/", src: "../../pixels/trinkets/Pixel_heat_wings.gif", alt: "heart with wings"},
+  { href: "https://gifcities.org/", src: "../../pixels/trinkets/trainpink.gif", alt: "Pink train cars" },
+  { href: "https://gifcities.org/", src: "../../pixels/trinkets/Reddragon.gif", alt: "Red Dragon"},
+
+  { href: "https://gifcities.org/", src: "../../pixels/trinkets/adoptedpixelcarriagefairytale.gif", alt: "Cinderella carriage" },
+  { href: "https://gifcities.org/", src: "../../pixels/trinkets/adoptedpixelcupcake.gif", alt: "Cupcake"},
+  { href: "https://gifcities.org/", src: "../../pixels/trinkets/adoptedpixeldigitalpet.gif", alt: "Tamagotchi" },
+  { href: "https://gifcities.org/", src: "../../pixels/trinkets/adoptedpixelfrogfairytale.gif", alt: "Fantasy-frog" },
+  { href: "https://gifcities.org/", src: "../../pixels/trinkets/adoptedpixelshoefairytale.gif", alt: "Cinderella-shoe" },
+
+  { href: "https://gifcities.org/", src: "../../pixels/trinkets/amarihege-pixel1.gif"},
+  { href: "https://gifcities.org/", src: "../../pixels/trinkets/amarihege-pixel2.gif" },
+
+  { href: "https://rosedryad.com/", src: "../../pixels/trinkets/neopetsfairy1.png" , alt: "Neopets fairy"},
+
+
+];
+
+  const sections = [
+    ['Favorites', FAVORITES],
+    ['Fandoms', FANDOMS],
+    ['Food & Drinks', FOOD],
+    ['Animals', ANIMALS],
+    ['Fantasy', FANTASY],
+    ['Objects', OBJECTS],
+    ['Seasons & Nature', SEASONS],
+    ['Miscellaneous', MISC],
+    ['Toys', TOYS],
+    ['Unsorted', unsorted],
+  ];
+
+  const container = document.getElementById('trinkets-sections');
+  sections.forEach(([label, items], idx) => {
+    if (idx > 0) {
+      const divider = document.createElement('div');
+      divider.innerHTML = '<br><hr><br>';
+      container.appendChild(divider);
+    }
+    const sec = document.createElement('section');
+    const letters = label.split('').map((c, i) =>
+      c === ' ' ? `<span style="display:inline-block;width:5px"></span>`
+                : `<span class="letter" style="--i:${i}">${c}</span>`
+    ).join('');
+    sec.innerHTML = `<div class="section-title">${letters}</div><div id="shelf-${label.replace(/\W+/g,'-')}"></div>`;
+    container.appendChild(sec);
+    const shelf = sec.querySelector('div:last-child');
+    items.forEach(({src, alt, href}) => {
+      const a = document.createElement('a');
+      a.href = href || '#'; a.target = '_blank'; a.rel = 'noopener';
+      const img = document.createElement('img');
+      img.src = src; img.alt = alt || '';
+      a.appendChild(img); shelf.appendChild(a);
+    });
+  });
+
+  function resizeImage(img) {
+    const max = 100;
+    const min = 50;
+    const w = img.naturalWidth;
+    const h = img.naturalHeight;
+    if (!w || !h) return;
+    const scaleDown = Math.min(max / w, max / h, 1);
+    const scaleUp = Math.max(min / w, min / h, 1);
+    let scale = 1;
+    if (w > max || h > max) { scale = scaleDown; }
+    if (w < min || h < min) { scale = scaleUp; }
+    img.style.width = (w * scale) + "px";
+    img.style.height = (h * scale) + "px";
+  }
+  window.addEventListener("load", () => {
+    document.querySelectorAll("img").forEach(img => {
+      if (img.complete) { resizeImage(img); } else { img.onload = () => resizeImage(img); }
+    });
+  });
+  </script>
+</body>
+</html>
