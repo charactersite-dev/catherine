@@ -9,21 +9,30 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Pacifico&family=Press+Start+2P&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
-body{background:linear-gradient(180deg,#b8e4f8 0%,#d4f0c0 55%,#a8d870 80%,#78b840 100%) !important;background-attachment:fixed !important;}
+/* Sky: blue to green with drifting clouds (from the old greenhouse) */
+body{background:linear-gradient(180deg,#b8e8ff 0%,#dff5e3 60%,#c8efd4 100%) fixed !important;}
 .page-container{background:rgba(255,255,255,0.5);border-color:rgba(120,200,80,0.4);}
-#blossoms{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:-1;overflow:hidden;}
-@keyframes fallPetal{
-  0%{transform:translate(0,-60px) rotate(0deg);opacity:.85;}
-  20%{transform:translate(calc(var(--drift,90px)*0.4),17vh) rotate(calc(var(--spin,360deg)*0.2));}
-  45%{transform:translate(calc(var(--drift,90px)*-0.3),45vh) rotate(calc(var(--spin,360deg)*0.5));opacity:.75;}
-  70%{transform:translate(calc(var(--drift,90px)*0.65),72vh) rotate(calc(var(--spin,360deg)*0.8));}
-  100%{transform:translate(var(--drift,90px),110vh) rotate(var(--spin,360deg));opacity:.3;}
-}
-.petal{position:absolute;top:-40px;width:var(--pw,7px);height:var(--ph,17px);background:linear-gradient(160deg, rgba(255,255,255,0.45) 0%, var(--pc,#ff7aa2) 55%);border-radius:50% 50% 50% 0%;animation:fallPetal var(--dur,8s) linear infinite var(--del,0s);}
+.gh-cloud{position:fixed;z-index:0;background:#fff;border-radius:50px;opacity:.7;animation:ghDrift linear infinite;pointer-events:none;}
+.gh-cloud::before,.gh-cloud::after{content:'';position:absolute;background:#fff;border-radius:50%;}
+.gh-c1{width:80px;height:24px;top:8%;animation-duration:40s;}
+.gh-c1::before{width:40px;height:40px;top:-20px;left:10px;}.gh-c1::after{width:30px;height:30px;top:-14px;left:35px;}
+.gh-c2{width:60px;height:18px;top:15%;animation-duration:55s;animation-delay:-20s;}
+.gh-c2::before{width:30px;height:30px;top:-16px;left:8px;}.gh-c2::after{width:22px;height:22px;top:-10px;left:28px;}
+.gh-c3{width:100px;height:28px;top:5%;animation-duration:70s;animation-delay:-35s;}
+.gh-c3::before{width:50px;height:50px;top:-26px;left:12px;}.gh-c3::after{width:36px;height:36px;top:-18px;left:50px;}
+@keyframes ghDrift{from{transform:translateX(-150px);}to{transform:translateX(110vw);}}
+
+/* Veggie garden: planting rows of soil, left to right */
+.garden-bed{border:3px solid #4a2a08;border-radius:10px;overflow:hidden;background:#5c3410;max-width:760px;margin:0 auto;box-shadow:0 6px 24px rgba(0,0,0,.2);}
+.garden-bed .row{align-items:flex-end;gap:8px;padding:10px 12px 12px;margin:0;
+  background-image:linear-gradient(180deg,#2e1204 0%,#5a3010 12%,#8a5428 35%,#a86c38 50%,#8a5428 65%,#5a3010 88%,#2e1204 100%);
+  border-bottom:6px solid #1a0a02;}
+.garden-bed .row:last-child{border-bottom:none;}
+.garden-bed img{max-height:64px;}
 </style>
 </head>
 <body>
-<div id="blossoms"></div>
+<div class="gh-cloud gh-c1"></div><div class="gh-cloud gh-c2"></div><div class="gh-cloud gh-c3"></div>
 
 <div class="page-wrap">
   <div id="layout-header"></div>
@@ -50,19 +59,6 @@ body{background:linear-gradient(180deg,#b8e4f8 0%,#d4f0c0 55%,#a8d870 80%,#78b84
 <script src="layout.js"></script>
 <script src="gallery.js"></script>
 <script>
-// Cherry blossom petals
-(function(){
-  var c=document.getElementById('blossoms');
-  var colors=['#ff6f9c','#ff4f81','#ff8fab','#fb6f92','#ffa3c4','#e0507a','#d6336c','#e8638a','#d94f87','#ff7aa2'];
-  for(var i=0;i<28;i++){
-    var p=document.createElement('div');p.className='petal';
-    var pw=5+Math.random()*6,ph=pw*2.1+Math.random()*5;
-    var drift=(50+Math.random()*130)+'px';
-    var spin=(180+Math.random()*360)*(Math.random()>.5?1:-1)+'deg';
-    p.style.cssText='--pw:'+pw+'px;--ph:'+ph+'px;--pc:'+colors[Math.floor(Math.random()*colors.length)]+';--dur:'+(6+Math.random()*9)+'s;--del:'+(-Math.random()*15)+'s;--drift:'+drift+';--spin:'+spin+';left:'+(Math.random()*110-5)+'%;';
-    c.appendChild(p);
-  }
-})();
 
 
 var aw='https://artwork.neocities.org',gh='https://gifcities.org/',pb='https://pixelbank.neocities.org',pw='https://pixel-world.tumblr.com',mb='https://myblinkie.holidaycomments.com/gallery';
@@ -85,7 +81,7 @@ var flowers=fromFiles([
   'p-i-x-e-l-stumblr (7).gif','darosymaple_sm.png','flower_crate.png','artworkneocities (30).gif',
   'p-i-x-e-l-stumblr (11).gif','p-i-x-e-l-stumblr (12).gif','p-i-x-e-l-stumblr (17).gif','p-i-x-e-l-stumblr (9).gif',
   {href:'https://web.archive.org/web/20060527122705/http://died.altervista.org/',src:'pixels/dolls/doll030.gif',alt:'died_rosarossa'},
-  {href:"https://www.pinterest.com/",src:"pixels/greenhouse/pinterest2 (2).jpg",alt:"dandelion kitties"},
+  {href:"https://www.pinterest.com/",src:"pixels/greenhouse/pinterest2 (2).webp",alt:"dandelion kitties"},
 ],aw);
 
 var potted=fromFiles([
@@ -154,6 +150,14 @@ var sections=[
 
 
 Gallery.sections('greenhouse-sections',sections,{max:200,min:50});
+// Lay the veggie garden out in rows of soil
+(function(){
+  var sec=[...document.querySelectorAll('#greenhouse-sections .gallery-section')].find(function(s){return /Veggie/.test(s.querySelector('.section-title').getAttribute('aria-label'));});
+  if(!sec) return;
+  var shelf=sec.querySelector('.shelf'), row=shelf.querySelector('.row'), links=[...row.children], per=7;
+  shelf.innerHTML=''; shelf.classList.add('garden-bed');
+  for(var i=0;i<links.length;i+=per){var r=document.createElement('div');r.className='row';links.slice(i,i+per).forEach(function(l){r.appendChild(l);});shelf.appendChild(r);}
+})();
 </script>
 </body>
 </html>

@@ -8,10 +8,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Pacifico&family=Press+Start+2P&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>
+/* Falling cherry blossoms */
+#blossoms{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+@keyframes fallPetal{
+  0%{transform:translate(0,-60px) rotate(0deg);opacity:.85;}
+  20%{transform:translate(calc(var(--drift,90px)*0.4),17vh) rotate(calc(var(--spin,360deg)*0.2));}
+  45%{transform:translate(calc(var(--drift,90px)*-0.3),45vh) rotate(calc(var(--spin,360deg)*0.5));opacity:.75;}
+  70%{transform:translate(calc(var(--drift,90px)*0.65),72vh) rotate(calc(var(--spin,360deg)*0.8));}
+  100%{transform:translate(var(--drift,90px),110vh) rotate(var(--spin,360deg));opacity:.3;}
+}
+.petal{position:absolute;top:-40px;width:var(--pw,7px);height:var(--ph,17px);background:linear-gradient(160deg, rgba(255,255,255,0.45) 0%, var(--pc,#ff7aa2) 55%);border-radius:50% 50% 50% 0%;animation:fallPetal var(--dur,8s) linear infinite var(--del,0s);}
+</style>
 </head>
 <body>
-<div id="stars"></div>
-<div id="clouds"></div>
+<div id="blossoms"></div>
 
 <div class="page-wrap">
   <div id="layout-header"></div>
@@ -39,6 +50,20 @@
 <script src="layout.js"></script>
 <script src="gallery.js"></script>
 <script>
+// Cherry blossom petals
+(function(){
+  var c=document.getElementById('blossoms');
+  var colors=['#ff6f9c','#ff4f81','#ff8fab','#fb6f92','#ffa3c4','#e0507a','#d6336c','#e8638a','#d94f87','#ff7aa2'];
+  for(var i=0;i<28;i++){
+    var p=document.createElement('div');p.className='petal';
+    var pw=5+Math.random()*6,ph=pw*2.1+Math.random()*5;
+    var drift=(50+Math.random()*130)+'px';
+    var spin=(180+Math.random()*360)*(Math.random()>.5?1:-1)+'deg';
+    p.style.cssText='--pw:'+pw+'px;--ph:'+ph+'px;--pc:'+colors[Math.floor(Math.random()*colors.length)]+';--dur:'+(6+Math.random()*9)+'s;--del:'+(-Math.random()*15)+'s;--drift:'+drift+';--spin:'+spin+';left:'+(Math.random()*110-5)+'%;';
+    c.appendChild(p);
+  }
+})();
+
 var avatars=[
   {src:"pixels/avatars/1315974sa2ydv46zz.gif",alt:"rose under a glass dome"},
   {src:"pixels/avatars/206428ib1rn9bxv3.gif",alt:"Cinderella"},

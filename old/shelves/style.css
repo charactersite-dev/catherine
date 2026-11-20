@@ -823,4 +823,6 @@ body.page-dollhouse .shelf-bottomcap { aspect-ratio: 1105/419; padding: 0; backg
   border-right: none; border-bottom: 6px solid #1a0a02;
 }
 .dirt-col:last-child { border-bottom: none; }
-.outdoor-wrap { width: min(1032px, 100%); }
+.outdoor-wrap { width: min(760px, 100%); }
+.dirt-col { gap: 8px; padding: 10px 12px 12px; }
+.dirt-col img { max-height: 64px; width: auto; }

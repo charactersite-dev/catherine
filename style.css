@@ -494,10 +494,11 @@ a:focus-visible { outline: 2px dashed #b060d0; outline-offset: 2px; border-radiu
 .linkback-copy { font: 700 12px 'Nunito', sans-serif; color: #fff; background: #b060d0; border: 0; border-radius: 16px; padding: 6px 16px; cursor: pointer; transition: background-color .2s ease; }
 .linkback-copy:hover { background: #9040c0; }
 
-/* Guestbook page: open book */
+/* Home guestbook: open book */
 .book { position: relative; width: 100%; aspect-ratio: 1312 / 776; background: url('assets/guestbook-book.webp') center / 100% 100% no-repeat; margin-top: 8px; }
 .book-page { position: absolute; top: 6%; bottom: 13%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-.book-left { left: 6%; right: 54%; padding: 0 4%; gap: 12px; }
+.book-left { left: 6%; right: 54%; padding: 0 4%; gap: 8px; }
+.book-left .sub { font-size: 12px; color: #a080b0; }
 .book-right { left: 53%; right: 5%; }
 .book-right iframe { width: 100%; height: 100%; border: 0; border-radius: 8px; }
 .book-title { font-family: 'Pacifico', cursive; font-size: 24px; color: #b060d0; }
@@ -522,6 +523,19 @@ a:focus-visible { outline: 2px dashed #b060d0; outline-offset: 2px; border-radiu
 
 /* Tile wall (the first trinkets layout) */
 body[data-layout="tiles"] { background: #f6d9e4 url('assets/trinkets-wall.webp') center / cover fixed no-repeat; }
+
+/* Wide screens: sidebar sits off to the left; trinkets get a centered column.
+   On the tile wall the corkboard is sized to match that column exactly. */
+@media (min-width: 1100px) {
+  /* The corkboard always covers at least the middle 54% of the screen, so a 52vw column stays on it */
+  body[data-layout="tiles"] { --col: min(1040px, 52vw); }
+  body[data-layout="cabinets"] { --col: clamp(560px, calc(100vw - 500px), 1040px); }
+  body[data-layout="tiles"] .page-wrap, body[data-layout="cabinets"] .page-wrap { max-width: none; }
+  body[data-layout="tiles"] .body-layout, body[data-layout="cabinets"] .body-layout { display: block; position: relative; }
+  body[data-layout="tiles"] #layout-sidebar, body[data-layout="cabinets"] #layout-sidebar { position: absolute; left: 0; top: 0; }
+  body[data-layout="tiles"] .main-content, body[data-layout="cabinets"] .main-content,
+  body[data-layout="tiles"] .top-header, body[data-layout="cabinets"] .top-header { width: var(--col); margin: 0 auto; }
+}
 .tw { border-radius: 18px; overflow: hidden; padding-bottom: 24px; }
 .tw-top { height: 100px; background: url('assets/trinkets-wall-top.webp') center / cover no-repeat; margin-bottom: 16px; }
 .tw-section { margin-bottom: 12px; }
@@ -577,3 +591,18 @@ body[data-layout="cabinets"] .top-header svg { filter: drop-shadow(0 2px 3px rgb
 .cubby img { display: block; image-rendering: pixelated; max-width: 100%; max-height: 100%; }
 .cubby-empty { align-items: center; }
 .placeholder-heart { font-size: 16px; color: rgba(160,152,144,.4); user-select: none; }
+
+/* Dolls: white bookcase layout (crown, repeating shelves, carved legs) */
+.bookcase { max-width: 1000px; margin: 16px auto 0; }
+.bookcase-top { aspect-ratio: 1105 / 92; background: url('assets/bookcase-top.png') bottom center / 100% auto no-repeat; }
+.bookcase-middle {
+  padding: 8px 12.5% 0;
+  background:
+    url('assets/bookcase-post-l.png') left top / 11.77% auto repeat-y,
+    url('assets/bookcase-post-r.png') right top / 11.77% auto repeat-y,
+    linear-gradient(#fffcfb, #fffcfb) center / 78% 100% no-repeat;
+}
+.bookcase-middle .section-title { margin: 16px 0 4px; }
+.bookcase-shelf { padding: 8px 8px 4%; background: url('assets/bookcase-board.png') bottom center / 100% auto no-repeat; }
+.bookcase-shelf .row { align-items: flex-end; }
+.bookcase-bottom { aspect-ratio: 1105 / 419; background: url('assets/bookcase-bottom.png') top center / 100% 100% no-repeat; }

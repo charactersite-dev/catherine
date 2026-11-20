@@ -43,7 +43,6 @@
           <img src="assets/artworkneocDIVcrop.gif" alt="">
           <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="guestbook.html">Guestbook</a></li>
             <li><a href="blinkies.html">Blinkies</a></li>
             <li><a href="dividers.html">Dividers</a></li>
             <li><a href="trinkets.html">Trinkets</a></li>

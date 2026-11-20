@@ -197,7 +197,7 @@
     { href:gc,  src:T+'Pooh52.gif',  alt:'' },
     { href:gc,  src:T+'tumblr_lkl6ckCx0N1qfamg6.gif',  alt:'' },
     { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (10).gif', alt:'' },
-    { href:'https://www.pinterest.com/', src:T+'pinterest2 (6).jpg', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'pinterest2 (6).webp', alt:'' },
     { href:aw, src:'pixels/dividers/artworkneocities (37).gif', alt:'Disney Divider' },
   ];
 
@@ -359,8 +359,8 @@
     { href:gc,  src:T+'pixelbankneocities (56).gif',  alt:'' },
     { href:gc,  src:T+'tumblr_lmt0e9tqPq1qfel73.gif',  alt:'' },
     { href:gc,  src:T+'tumblr_lmt0ecaCaZ1qfel73.gif',  alt:'' },
-    { href:'https://www.pinterest.com/', src:T+'fromPINTEREST (2).jpg', alt:'' },
-    { href:'https://www.pinterest.com/', src:T+'pinterest2 (10).jpg', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'fromPINTEREST (2).webp', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'pinterest2 (10).webp', alt:'' },
   ];
 
   // ════════════════════════════════════════════════════
@@ -489,10 +489,10 @@
     { href:gc,  src:T+'webarchive (2).gif',  alt:'' },
     { href:gc,  src:T+'wjcactusdog2.gif',  alt:'' },
     { href:gc,  src:T+'yupio_1.gif',  alt:'' },
-    { href:'https://www.pinterest.com/', src:T+'fromPINTEREST (1).jpg', alt:'' },
-    { href:'https://www.pinterest.com/', src:T+'fromPINTEREST (3).jpg', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'fromPINTEREST (1).webp', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'fromPINTEREST (3).webp', alt:'' },
     { href:'https://www.pinterest.com/', src:T+'fromPINTEREST (4).gif', alt:'' },
-    { href:'https://www.pinterest.com/', src:T+'pinterest2 (4).jpg', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'pinterest2 (4).webp', alt:'' },
     { href:gc,  src:T+'gifcities (56).gif',                 alt:'hamtaroGROUPofhams' },
     { href:'https://web.archive.org/web/20100419011152/http://neskaya.net/pixels.php?', src:'pixels/trinkets/new (39).gif', alt:'Bears Plushies' },
   ];
@@ -616,7 +616,7 @@
     { href:gc,  src:T+'tumblr_ll7xs2LGNL1qi6qow.gif',  alt:'' },
     { href:gc,  src:T+'tumblr_lm6r9oVFgE1qfoi4t.gif',  alt:'' },
     { href:'https://gifcities.org/', src:T+'gifcities (9).gif', alt:'' },
-    { href:'https://www.pinterest.com/', src:T+'pinterest2 (8).jpg', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'pinterest2 (8).webp', alt:'' },
     { href:mb,  src:T+'glitterrainbow.gif',                 alt:'glitterrainbow' },
     { href:aw2, src:T+'allyratworldneocities (3).gif',      alt:'magicKEY' },
     { href:mb,  src:T+'rainbow.gif',                        alt:'rainbow' },
@@ -659,7 +659,7 @@
     { href:gc,  src:T+'tumblr_lumf2k2DXA1qibcty.gif',  alt:'' },
     { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (26).gif', alt:'' },
     { href:'https://www.pinterest.com/', src:T+'pinterest2 (1).gif', alt:'' },
-    { href:'https://www.pinterest.com/', src:T+'pinterest2 (3).jpg', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'pinterest2 (3).webp', alt:'' },
     { href:gc,  src:T+'pretty-girly-GLITTERrose.gif',  alt:'' },
   ];
 
@@ -873,9 +873,9 @@
     let used = 0;
     tray.querySelectorAll('.cubby').forEach(c => { used += area(c); });
     // Try each width that fits and keep the one with the fewest empty cubbies
-    const room = tray.closest('.cab-block').clientWidth - 32 - 12;
+    const room = document.querySelector('.layout-cabinets').clientWidth - 32 - 12;
     const maxCols = Math.max(2, Math.floor((room + GAP) / (CELL + GAP)));
-    const minCols = Math.max(2, Math.ceil(maxCols * 0.6));
+    const minCols = maxCols;   // every cabinet the same width
     let best = maxCols, bestEmpty = Infinity;
     for (let c = maxCols; c >= minCols; c--) {
       tray.style.gridTemplateColumns = 'repeat(' + c + ', ' + CELL + 'px)';
