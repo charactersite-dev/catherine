@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>CallMeCatherine ~ Outer Space</title>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pacifico&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CallMeCatherine ~ Pixel Space</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Pacifico&family=Press+Start+2P&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
 body {
@@ -24,7 +26,6 @@ a { color: #a080ff; text-decoration: underline; }
 </style>
 </head>
 <body>
-<span id="page-top"></span>
 
 <div class="page-wrap">
   <div id="layout-header"></div>
@@ -35,8 +36,9 @@ a { color: #a080ff; text-decoration: underline; }
 
       <div class="page-container">
         <main id="main-content">
-          <section><h2>Outer Space</h2><hr><br></section>
-          <div class="row" id="space-shelf"></div>
+          <h2>Outer Space</h2>
+          <hr>
+          <div id="space-shelf"></div>
         </main>
       </div>
 
@@ -48,6 +50,7 @@ a { color: #a080ff; text-decoration: underline; }
 
 <script src="sparkle.js"></script>
 <script src="layout.js"></script>
+<script src="gallery.js"></script>
 <script>
 var spaceItems=[
   {href:"https://artwork.neocities.org",src:"pixels/space/bedtime-star.gif",alt:"star"},
@@ -65,14 +68,7 @@ var spaceItems=[
   {href:"https://pixelbank.neocities.org",src:"pixels/space/pixelbankneocities (8).gif",alt:"space"},
   {href:"https://thegardenofmadeline.neocities.org",src:"pixels/space/thegardenofmadeline.gif",alt:"space cat"},
 ];
-document.addEventListener('DOMContentLoaded',function(){
-  var shelf=document.getElementById('space-shelf');
-  spaceItems.forEach(function(item){
-    var a=document.createElement('a');a.href=item.href;a.target='_blank';
-    var img=document.createElement('img');img.src=item.src;img.alt=item.alt;img.loading='lazy';img.style.imageRendering='pixelated';img.style.margin='4px';
-    a.appendChild(img);shelf.appendChild(a);
-  });
-});
+Gallery.shelf('space-shelf',spaceItems);
 </script>
 </body>
 </html>

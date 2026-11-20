@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>CallMeCatherine ~ Greenhouse</title>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pacifico&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CallMeCatherine ~ Pixel Garden</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Pacifico&family=Press+Start+2P&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
 body{background:linear-gradient(180deg,#b8e4f8 0%,#d4f0c0 55%,#a8d870 80%,#78b840 100%) !important;background-attachment:fixed !important;}
@@ -21,7 +23,6 @@ body{background:linear-gradient(180deg,#b8e4f8 0%,#d4f0c0 55%,#a8d870 80%,#78b84
 </style>
 </head>
 <body>
-<span id="page-top"></span>
 <div id="blossoms"></div>
 
 <div class="page-wrap">
@@ -33,7 +34,8 @@ body{background:linear-gradient(180deg,#b8e4f8 0%,#d4f0c0 55%,#a8d870 80%,#78b84
 
   <div class="page-container">
     <main id="main-content">
-      <section><h2>Greenhouse</h2><hr><br></section>
+      <h2>Greenhouse</h2>
+      <hr>
       <div id="greenhouse-sections"></div>
     </main>
   </div>
@@ -46,6 +48,7 @@ body{background:linear-gradient(180deg,#b8e4f8 0%,#d4f0c0 55%,#a8d870 80%,#78b84
 
 <script src="sparkle.js"></script>
 <script src="layout.js"></script>
+<script src="gallery.js"></script>
 <script>
 // Cherry blossom petals
 (function(){
@@ -61,19 +64,6 @@ body{background:linear-gradient(180deg,#b8e4f8 0%,#d4f0c0 55%,#a8d870 80%,#78b84
   }
 })();
 
-var MAX=200,MIN=50;
-function resizeImg(img){var w=img.naturalWidth,h=img.naturalHeight;if(!w||!h)return;var sd=Math.min(MAX/w,MAX/h,1),su=Math.max(MIN/w,MIN/h,1),sc=(w>MAX||h>MAX)?sd:(w<MIN||h<MIN)?su:1;img.style.width=w*sc+'px';img.style.height=h*sc+'px';}
-function attachR(img){if(img.naturalWidth>0)resizeImg(img);else if(img.complete)setTimeout(function(){attachR(img);},50);else img.onload=function(){resizeImg(img);};}
-function renderArray(arr,id){
-  var c=document.getElementById(id);if(!c)return;
-  var row=document.createElement('div');row.className='row';c.appendChild(row);
-  arr.forEach(function(item){
-    if(item.break){row=document.createElement('div');row.className='row';c.appendChild(row);return;}
-    var a=document.createElement('a');a.href=item.href||'#';a.target='_blank';
-    var img=document.createElement('img');img.src=item.src;img.alt=item.alt||'';img.loading='lazy';
-    attachR(img);a.appendChild(img);row.appendChild(a);
-  });
-}
 
 var aw='https://artwork.neocities.org',gh='https://gifcities.org/',pb='https://pixelbank.neocities.org',pw='https://pixel-world.tumblr.com',mb='https://myblinkie.holidaycomments.com/gallery';
 var BASE='pixels/greenhouse/';
@@ -147,23 +137,8 @@ var sections=[
   ]},
 ];
 
-function makeLetters(label){
-  return label.split('').map(function(c,i){
-    return c===' '?'<span style="display:inline-block;width:5px"></span>':'<span class="letter" style="--i:'+i+'">'+c+'</span>';
-  }).join('');
-}
 
-window.addEventListener('DOMContentLoaded',function(){
-  var container=document.getElementById('greenhouse-sections');
-  sections.forEach(function(s,idx){
-    if(idx>0){var d=document.createElement('div');d.innerHTML='<br><hr><br>';container.appendChild(d);}
-    var id='shelf-'+s.label.replace(/\W+/g,'-').toLowerCase();
-    var sec=document.createElement('section');
-    sec.innerHTML='<div class="section-title">'+makeLetters(s.label)+'</div><div id="'+id+'"></div>';
-    container.appendChild(sec);
-    renderArray(s.items,id);
-  });
-});
+Gallery.sections('greenhouse-sections',sections,{max:200,min:50});
 </script>
 </body>
 </html>
