@@ -755,115 +755,211 @@
   ];
 
   // ════════════════════════════════════════════════════
-  // RENDER HELPERS
+  // ONE LIST OF BOXES, THREE WAYS TO SHOW IT
   // ════════════════════════════════════════════════════
+  const BOXES = [
+    { title: 'Favorites', sections: [{ items: FAVORITES }] },
+    { title: 'Fandoms', sections: [
+      { label: 'Lisa Frank',           items: FANDOMS_LISAFRANK },
+      { label: 'Care Bears',           items: FANDOMS_CAREBEARS },
+      { label: 'Disney',               items: FANDOMS_DISNEY },
+      { label: 'Hello Kitty & Sanrio', items: FANDOMS_SANRIO },
+      { label: 'Mario',                items: FANDOMS_MARIO },
+      { label: 'My Little Pony',       items: FANDOMS_MLP },
+      { label: 'Neopets',              items: FANDOMS_NEOPETS },
+      { label: 'Pokemon & Digimon',    items: FANDOMS_POKEMON },
+      { label: 'Sailor Moon',          items: FANDOMS_SAILORMOON },
+      { label: 'Other',                items: FANDOMS_OTHER },
+    ]},
+    { title: 'Food & Drinks',    sections: [{ items: FOOD }] },
+    { title: 'Animals',          sections: [{ items: ANIMALS }] },
+    { title: 'Fantasy',          sections: [{ items: FANTASY }] },
+    { title: 'Objects',          sections: [{ items: OBJECTS }] },
+    { title: 'Seasons & Nature', sections: [{ items: SEASONS }] },
+    { title: 'Miscellaneous',    sections: [{ items: MISC }] },
+    { title: 'Toys',             sections: [{ items: TOYS }] },
+    { title: 'Uncategorized',    sections: [{ items: UNSORTED }] },
+  ];
 
-  function makeLetters(label) {
-    return label.split('').map((c, i) =>
-      c === ' '
-        ? `<span style="display:inline-block;width:5px"></span>`
-        : `<span class="letter" style="--i:${i}">${c}</span>`
-    ).join('');
+  const LAYOUTS = { shelves: 'Shelves', tiles: 'Tile wall', cabinets: 'Cabinets' };
+
+  function el(tag, cls, html) {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html != null) e.innerHTML = html;
+    return e;
+  }
+  function pic(item, cls) {
+    const a = el(item.href ? 'a' : 'span');
+    if (item.href) { a.href = item.href; a.target = '_blank'; a.rel = 'noopener'; }
+    const img = document.createElement('img');
+    img.src = item.src; img.alt = item.alt || ''; img.loading = 'lazy'; img.decoding = 'async';
+    if (cls) img.className = cls;
+    a.appendChild(img);
+    return a;
+  }
+  function titleLetters(text, cls) {
+    const t = el('div', cls);
+    t.setAttribute('aria-label', text);
+    t.innerHTML = makeLetters(text);
+    return t;
   }
 
-  function makeContentBox(titleText) {
-    const box = document.createElement('div');
-    box.className = 'content-box';
-    if (titleText) {
-      const title = document.createElement('div');
-      title.className = 'section-title';
-      title.innerHTML = makeLetters(titleText);
-      box.appendChild(title);
-      const hr = document.createElement('hr');
-      box.appendChild(hr);
-      const br = document.createElement('br');
-      box.appendChild(br);
+  // ── Shelves: the frosted boxes ──
+  function renderShelves(wrapper) {
+    BOXES.forEach(box => {
+      const b = el('div', 'content-box');
+      b.appendChild(titleLetters(box.title, 'section-title'));
+      b.appendChild(el('hr'));
+      box.sections.forEach((sec, i) => {
+        const section = el('section', box.sections.length > 1 ? 'gallery-section' : '');
+        if (sec.label) section.appendChild(titleLetters(sec.label, 'section-title'));
+        const shelf = el('div');
+        shelf.id = 'shelf-' + (sec.label || box.title).toLowerCase().replace(/\W+/g, '-');
+        section.appendChild(shelf);
+        b.appendChild(section);
+        wrapper.appendChild(b);
+        renderArray(sec.items, shelf.id);
+      });
+    });
+  }
+
+  // ── Tile wall: the first trinkets layout ──
+  const TILE_DIVIDERS = ['pixels/dividers/Glitter_stars.gif', 'pixels/dividers/artworkneocities (37).gif', 'pixels/dividers/line_heart003_pk.gif', 'pixels/dividers/artworkneocities (60).gif'];
+  function renderTiles(wrapper) {
+    const wall = el('div', 'tw');
+    wall.appendChild(el('div', 'tw-top'));
+    let n = 0;
+    BOXES.forEach((box, bi) => {
+      box.sections.forEach(sec => {
+        const section = el('div', 'tw-section');
+        section.appendChild(titleLetters(sec.label || box.title, 'tw-title title-word-' + (n++ % 10 + 1)));
+        const row = el('div', 'tw-row');
+        sec.items.forEach(item => row.appendChild(pic(item, 'tile')));
+        section.appendChild(row);
+        wall.appendChild(section);
+      });
+      if (bi < BOXES.length - 1) {
+        const d = el('div', 'tw-divider');
+        const img = document.createElement('img');
+        img.src = TILE_DIVIDERS[bi % TILE_DIVIDERS.length]; img.alt = ''; img.loading = 'lazy';
+        d.appendChild(img);
+        wall.appendChild(d);
+      }
+    });
+    wrapper.appendChild(wall);
+  }
+
+  // ── Cabinets: shadow-box trays, cubbies sized to each picture ──
+  const CELL = 72, GAP = 6;
+  function spansFor(px) { return px <= CELL - 8 ? 1 : 2; }
+  function sizeCubby(img) {
+    const cubby = img.closest('.cubby');
+    let w = img.naturalWidth, h = img.naturalHeight;
+    if (!cubby || !w || !h) return;
+    const MIN = 40, MAX = 2 * CELL + GAP - 12;
+    if (w < MIN && h < MIN) { const k = MIN / Math.max(w, h); w = Math.round(w * k); h = Math.round(h * k); }
+    if (w > MAX || h > MAX) { const k = MAX / Math.max(w, h); w = Math.round(w * k); h = Math.round(h * k); }
+    img.style.width = w + 'px'; img.style.height = h + 'px';
+    cubby.style.gridColumn = 'span ' + spansFor(w);
+    cubby.style.gridRow = 'span ' + spansFor(h);
+  }
+  // After the pictures settle, top up only the last row so each tray is a tidy rectangle
+  function fillLastRow(tray) {
+    tray.querySelectorAll('.cubby-empty').forEach(e => e.remove());
+    // Bigger cubbies first, smaller ones fill in around them (keeps each size in its original order)
+    const area = c => (parseInt((c.style.gridColumn || 'span 1').split(' ')[1], 10) || 1) * (parseInt((c.style.gridRow || 'span 1').split(' ')[1], 10) || 1);
+    [...tray.children].map((c, i) => [c, i]).sort((a, b) => area(b[0]) - area(a[0]) || a[1] - b[1]).forEach(([c]) => tray.appendChild(c));
+    let used = 0;
+    tray.querySelectorAll('.cubby').forEach(c => { used += area(c); });
+    // Try each width that fits and keep the one with the fewest empty cubbies
+    const room = tray.closest('.cab-block').clientWidth - 32 - 12;
+    const maxCols = Math.max(2, Math.floor((room + GAP) / (CELL + GAP)));
+    const minCols = Math.max(2, Math.ceil(maxCols * 0.6));
+    let best = maxCols, bestEmpty = Infinity;
+    for (let c = maxCols; c >= minCols; c--) {
+      tray.style.gridTemplateColumns = 'repeat(' + c + ', ' + CELL + 'px)';
+      const rows = getComputedStyle(tray).gridTemplateRows.split(' ').length;
+      const empty = c * rows - used;
+      if (empty < bestEmpty) { best = c; bestEmpty = empty; }
+      if (empty < c / 3) break;   // last row nearly full: good enough, keep it wide
     }
-    return box;
+    tray.style.gridTemplateColumns = 'repeat(' + best + ', ' + CELL + 'px)';
+    const cols = best;
+    const rows = getComputedStyle(tray).gridTemplateRows.split(' ').length;
+    for (let i = used; i < cols * rows; i++) {
+      tray.appendChild(el('div', 'cubby cubby-empty', '<span class="placeholder-heart">♡</span>'));
+    }
+  }
+  function renderCabinets(wrapper) {
+    const all = [];
+    BOXES.forEach(box => {
+      const block = el('div', 'cab-block');
+      block.appendChild(el('div', 'plaque', box.title.replace(/&/g, '&amp;')));
+      box.sections.forEach(sec => {
+        if (sec.label) block.appendChild(el('div', 'plaque plaque-small', sec.label.replace(/&/g, '&amp;')));
+        const cab = el('div', 'cabinet');
+        const tray = el('div', 'tray');
+        sec.items.forEach(item => {
+          const cubby = el('div', 'cubby');
+          const p = pic(item);
+          cubby.appendChild(p);
+          const img = p.querySelector('img');
+          img.loading = 'eager';
+          img.onload = () => sizeCubby(img);
+          img.onerror = () => cubby.remove();
+          tray.appendChild(cubby);
+        });
+        cab.appendChild(tray);
+        block.appendChild(cab);
+        all.push(tray);
+      });
+      wrapper.appendChild(block);
+    });
+    let t;
+    const settle = () => { clearTimeout(t); t = setTimeout(() => all.forEach(fillLastRow), 150); };
+    wrapper.addEventListener('load', settle, true);
+    window.addEventListener('resize', settle);
+    settle();
   }
 
-  function addSection(container, label, items, shelfId) {
-    const sec = document.createElement('section');
-    const title = document.createElement('div');
-    title.className = 'section-title';
-    title.innerHTML = makeLetters(label);
-    const shelf = document.createElement('div');
-    shelf.id = shelfId;
-    sec.appendChild(title);
-    sec.appendChild(shelf);
-    container.appendChild(sec);
-    renderArray(items, shelfId);
-  }
-
-  function addDivider(container) {
-    const d = document.createElement('div');
-    d.innerHTML = '<br><hr><br>';
-    container.appendChild(d);
-  }
-
-  // ════════════════════════════════════════════════════
-  // BUILD PAGE
-  // ════════════════════════════════════════════════════
-  window.addEventListener('DOMContentLoaded', () => {
+  // ── Switch between layouts (remembered for next visit) ──
+  function render(layout) {
+    if (!LAYOUTS[layout]) layout = 'shelves';
     const wrapper = document.getElementById('trinkets-wrapper');
+    wrapper.innerHTML = '';
+    document.body.dataset.layout = layout;
 
-    // ── Title box ──
-    const titleBox = makeContentBox(null);
-    titleBox.innerHTML = `
-      <h2>Trinkets</h2>
-      <hr>
-    `;
+    const titleBox = el('div', 'content-box');
+    titleBox.innerHTML = '<h2>Trinkets</h2><hr>';
+    const sw = el('div', 'layout-switch');
+    sw.setAttribute('role', 'group');
+    sw.setAttribute('aria-label', 'Layout');
+    Object.entries(LAYOUTS).forEach(([key, name]) => {
+      const btn = el('button', '', name);
+      btn.type = 'button';
+      btn.setAttribute('aria-pressed', key === layout ? 'true' : 'false');
+      btn.addEventListener('click', () => {
+        try { localStorage.setItem('trinketsLayout', key); } catch (e) {}
+        history.replaceState(null, '', key === 'shelves' ? location.pathname : '#' + key);
+        render(key);
+      });
+      sw.appendChild(btn);
+    });
+    titleBox.appendChild(sw);
     wrapper.appendChild(titleBox);
 
+    const body = el('div', 'layout-' + layout);
+    wrapper.appendChild(body);
+    if (layout === 'tiles') renderTiles(body);
+    else if (layout === 'cabinets') renderCabinets(body);
+    else renderShelves(body);
+  }
 
-    // ── Favorites ──
-    const favBox = makeContentBox('Favorites');
-    const favShelf = document.createElement('div');
-    favShelf.id = 'shelf-favorites';
-    favBox.appendChild(favShelf);
-    wrapper.appendChild(favBox);
-    renderArray(FAVORITES, 'shelf-favorites');
-
-    // ── Fandoms (one box, sub-sections inside) ──
-    const fanBox = makeContentBox('Fandoms');
-    wrapper.appendChild(fanBox);
-
-    const fandomSubs = [
-      ['Lisa Frank',           FANDOMS_LISAFRANK,  'shelf-lisafrank'],
-      ['Care Bears',           FANDOMS_CAREBEARS,  'shelf-carebears'],
-      ['Disney',               FANDOMS_DISNEY,     'shelf-disney'],
-      ['Hello Kitty & Sanrio', FANDOMS_SANRIO,     'shelf-sanrio'],
-      ['Mario',                FANDOMS_MARIO,      'shelf-mario'],
-      ['My Little Pony',       FANDOMS_MLP,        'shelf-mlp'],
-      ['Neopets',              FANDOMS_NEOPETS,    'shelf-neopets'],
-      ['Pokemon & Digimon',    FANDOMS_POKEMON,    'shelf-pokemon'],
-      ['Sailor Moon',          FANDOMS_SAILORMOON, 'shelf-sailormoon'],
-      ['Other',                FANDOMS_OTHER,      'shelf-fandoms-other'],
-    ];
-    fandomSubs.forEach(([label, items, id], idx) => {
-      if (idx > 0) addDivider(fanBox);
-      addSection(fanBox, label, items, id);
-    });
-
-    // ── Remaining top-level sections — each its own box ──
-    const topSections = [
-      ['Food & Drinks',    FOOD,     'shelf-food'],
-      ['Animals',          ANIMALS,  'shelf-animals'],
-      ['Fantasy',          FANTASY,  'shelf-fantasy'],
-      ['Objects',          OBJECTS,  'shelf-objects'],
-      ['Seasons & Nature', SEASONS,  'shelf-seasons'],
-      ['Miscellaneous',    MISC,     'shelf-misc'],
-      ['Toys',             TOYS,     'shelf-toys'],
-      ['Uncategorized',    UNSORTED, 'shelf-unsorted'],
-    ];
-    topSections.forEach(([label, items, id]) => {
-      const box = makeContentBox(label);
-      const shelf = document.createElement('div');
-      shelf.id = id;
-      box.appendChild(shelf);
-      wrapper.appendChild(box);
-      renderArray(items, id);
-    });
+  window.addEventListener('DOMContentLoaded', () => {
+    let saved = location.hash.slice(1);
+    if (!LAYOUTS[saved]) { try { saved = localStorage.getItem('trinketsLayout'); } catch (e) {} }
+    render(saved);
   });
 </script>
 
