@@ -139,7 +139,7 @@ body.page-aquarium #pixel-nav-links a:hover { background: rgba(50,150,200,.18); 
 #ocean-bg {
   position: absolute;
   inset: 0;
-  background-image: url('../../assets/bgsea.png');
+  background-image: none;
   background-repeat: no-repeat;
   background-position: center;
   background-size: 98vw;
@@ -315,9 +315,9 @@ body.page-dollhouse #top-btn {
   padding: 8px 40px;
 }
 body.page-dollhouse .page-header { width: 100%; aspect-ratio: 1366/359; background: url("../assets/1.png") top center / 100% 100% no-repeat; }
-.shelf-topcap   { aspect-ratio: 1366/115; background: url("../../assets/2.png") top center / 100% 100% no-repeat; }
+.shelf-topcap   { aspect-ratio: 1366/115; background: none; }
 .shelf-bottomcap{ aspect-ratio: 1366/296; background: url("../assets/4.png") top center / 100% 100% no-repeat; }
-.shelf-middle   { width: 100%; background: url("../../assets/3.png") top center / 100% auto repeat-y; }
+.shelf-middle   { width: 100%; background: none; }
 .grid .row {
   width: 898px;
   max-width: 898px;
