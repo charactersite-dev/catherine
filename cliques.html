@@ -74,6 +74,16 @@ body {
 
 .clique-group { text-align: left; }
 .clique-group-entries { display: flex; flex-wrap: wrap; align-items: flex-start; }
+.clique-list { list-style: none; padding: 0; margin: 0 8px; columns: 2; column-gap: 24px; font-size: 13px; width: 100%; }
+.clique-list li { break-inside: avoid; padding: 2px 0; }
+.clique-list a { color: #7030a0; font-weight: 600; }
+.clique-list span { color: #9a70b8; font-size: 12px; }
+.clique-pixels { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 8px; margin: 0 8px; }
+.clique-pixels img, .pixel-train img { image-rendering: pixelated; display: block; }
+.pixel-train { display: inline-flex; align-items: flex-end; margin: 4px 8px; }
+.clique-note { width: 100%; font-size: 12px; color: #9060b0; margin: 8px; }
+.clique-intro { font-size: 12px; color: #9060b0; margin: 0 0 16px; }
+@media (max-width: 700px) { .clique-list { columns: 1; } }
 
 /* blurb box */
 .clique-blurb {
@@ -125,33 +135,20 @@ body {
 
         <!-- CLIQUES I'VE JOINED -->
         <div class="content-box">
-          <div class="box-title">★ Cliques & Clubs I've Joined</div>
-          <hr><br>
+          <div class="box-title">★ Cliques &amp; Clubs I've Joined</div>
+          <hr>
 
           <div class="clique-group">
             <div class="clique-section-title">// Scented Club</div>
             <div class="clique-group-entries">
-              <a class="clique-entry" href="https://scentedclub.neocities.org/" target="_blank">
-                <img src="assets/scented-img.png" alt="Cotton Candy">
-                <span>Cotton Candy</span>
-              </a>
+              <a class="clique-entry" href="https://scentedclub.neocities.org/" target="_blank" rel="noopener"><img src="assets/scented-img.png" alt="Cotton Candy" loading="lazy"><span>Cotton Candy</span></a>
             </div>
           </div>
 
           <div class="clique-group">
             <div class="clique-section-title">// Sisterhood of the Traveling Journal</div>
             <div class="clique-group-entries">
-              <a class="clique-entry" href="journal/journal.html">
-                <span>✉️ Traveling Journal</span>
-              </a>
-            </div>
-          </div>
-
-          <div class="clique-group">
-            <div class="clique-section-title">// Placeholder Section</div>
-            <div class="clique-group-entries">
-              <span class="clique-placeholder">coming soon~</span>
-              <span class="clique-placeholder">coming soon~</span>
+              <a class="clique-entry" href="journal/journal.html"><span>✉️ Traveling Journal</span></a>
             </div>
           </div>
 
@@ -159,24 +156,94 @@ body {
 
         <!-- CLIQUES I PLAN TO JOIN -->
         <div class="content-box">
-          <div class="box-title">☆ Cliques & Clubs I Plan to Join</div>
-          <hr><br>
+          <div class="box-title">☆ Cliques &amp; Clubs I Plan to Join</div>
+          <hr>
 
           <div class="clique-group">
-            <div class="clique-section-title">// On My List</div>
+            <div class="clique-section-title">// Text cliques</div>
             <div class="clique-group-entries">
-              <span class="clique-placeholder">placeholder</span>
-              <span class="clique-placeholder">placeholder</span>
-              <span class="clique-placeholder">placeholder</span>
-              <span class="clique-placeholder">placeholder</span>
+              <ul class="clique-list">
+                <li><a href="https://cliqued.wings.nu/" target="_blank" rel="noopener">Cliqued!</a> <span>10 text cliques, no form</span></li>
+                <li><a href="https://fan.lysandre.me/starters" target="_blank" rel="noopener">My First Partner Pokémon</a> <span>starter sprite, no form</span></li>
+                <li><a href="https://ac.kuchiki.net/friends.php" target="_blank" rel="noopener">Pixel Friends</a> <span>Animal Crossing villager</span></li>
+                <li><a href="https://aromatic.wings.nu/" target="_blank" rel="noopener">AROMATiC</a> <span>pick a scent</span></li>
+                <li><a href="https://cliques.windsprite.nu/element/codes.php" target="_blank" rel="noopener">What Element Are You?</a> <span>earth, fire, water or air</span></li>
+                <li><a href="https://pkmn.aquarel.nu/" target="_blank" rel="noopener">I Choose You!</a> <span>a Pokémon and a Pokéball</span></li>
+                <li><a href="https://prism.tenoh.org/codes.php" target="_blank" rel="noopener">PRISM POWER</a> <span>Sailor Moon</span></li>
+                <li><a href="https://callmemanatee.neocities.org/who_clique" target="_blank" rel="noopener">Companions</a> <span>Doctor Who</span></li>
+              </ul>
             </div>
           </div>
 
           <div class="clique-group">
-            <div class="clique-section-title">// Maybe Someday</div>
+            <div class="clique-section-title">// Barbieland</div>
             <div class="clique-group-entries">
-              <span class="clique-placeholder">placeholder</span>
-              <span class="clique-placeholder">placeholder</span>
+              <a class="clique-entry" href="https://fan.sanguineroyal.com/cli/barbieland/" target="_blank" rel="noopener"><img src="pixels/cliques/80x50-aelyn.gif" alt="Barbieland button" loading="lazy"><span>This Barbie is…</span></a>
+            </div>
+          </div>
+
+          <div class="clique-group">
+            <div class="clique-section-title">// Sticker Sheet Club</div>
+            <div class="clique-group-entries">
+              <a class="clique-entry" href="https://stickersheetclub.neocities.org/" target="_blank" rel="noopener"><img src="pixels/cliques/stickersheetclubbutton.gif" alt="Sticker Sheet Club button" loading="lazy"><span>stickers 60×60 or smaller</span></a>
+            </div>
+          </div>
+
+          <div class="clique-group">
+            <div class="clique-section-title">// Afternoon Tea</div>
+            <div class="clique-group-entries">
+              <div class="clique-pixels">
+                <a href="https://artwork.neocities.org" target="_blank" rel="noopener"><img src="pixels/cliques/artworkteakeroppi.gif" alt="Keroppi teacup" loading="lazy"></a>
+                <a href="https://gifcities.org/" target="_blank" rel="noopener"><img src="pixels/cliques/gifcities (59).gif" alt="frog teacup" loading="lazy"></a>
+                <a href="https://gifcities.org/" target="_blank" rel="noopener"><img src="pixels/cliques/gifcities (60).gif" alt="hamster teacup" loading="lazy"></a>
+                <a href="https://jeith.com/" target="_blank" rel="noopener"><img src="pixels/cliques/jeithcom.gif" alt="paw print teacup" loading="lazy"></a>
+                <a href="https://mostlypixels.com/" target="_blank" rel="noopener"><img src="pixels/cliques/mostlypixelscom.gif" alt="honey teacup" loading="lazy"></a>
+                <a href="https://pixel.vivarism.net/" target="_blank" rel="noopener"><img src="pixels/cliques/pixel.vivarism.net.gif" alt="sunrise teacup" loading="lazy"></a>
+                <a href="https://thegardenofmadeline.neocities.org/" target="_blank" rel="noopener"><img src="pixels/cliques/thegardenofmadeline.neocities.org.gif" alt="tulip frog teacup" loading="lazy"></a>
+              </div>
+              <p class="clique-note"><a href="https://lostletters.neocities.org/afternoontea/" target="_blank" rel="noopener">Afternoon Tea</a> teacups by other members</p>
+            </div>
+          </div>
+
+          <div class="clique-group">
+            <div class="clique-section-title">// Kindness Rocks</div>
+            <div class="clique-group-entries">
+              <div class="clique-pixels">
+                <a href="https://divergentrays.com/rock" target="_blank" rel="noopener"><img src="pixels/cliques/rockfact.gif" alt="fact rock" loading="lazy"></a>
+                <a href="https://divergentrays.com/rock" target="_blank" rel="noopener"><img src="pixels/cliques/rockkeroppi.gif" alt="Keroppi rock" loading="lazy"></a>
+                <a href="https://divergentrays.com/rock" target="_blank" rel="noopener"><img src="pixels/cliques/rockrabbit.gif" alt="rabbit rock" loading="lazy"></a>
+                <a href="https://divergentrays.com/rock" target="_blank" rel="noopener"><img src="pixels/cliques/rocksoot.gif" alt="soot sprite rock" loading="lazy"></a>
+                <a href="https://divergentrays.com/rock" target="_blank" rel="noopener"><img src="pixels/cliques/rocktotoro.gif" alt="Totoro rock" loading="lazy"></a>
+              </div>
+              <p class="clique-note"><a href="https://divergentrays.com/rock" target="_blank" rel="noopener">Kindness Rocks</a> from the Pixel Revival</p>
+            </div>
+          </div>
+
+          <div class="clique-group">
+            <div class="clique-section-title">// More pixel clubs</div>
+            <div class="clique-group-entries">
+              <ul class="clique-list">
+                <li><a href="https://lavalounge.neocities.org/new/" target="_blank" rel="noopener">Lava Lounge</a> <span>lava lamp</span></li>
+                <li><a href="https://divergentrays.com/pocket" target="_blank" rel="noopener">Pocket Town</a> <span>a little building</span></li>
+                <li><a href="https://rosedryad.com/tinygarden" target="_blank" rel="noopener">Tiny Garden</a> <span>50×50 garden</span></li>
+                <li><a href="https://charmbracelets.xandra.cc/members" target="_blank" rel="noopener">Charm Bracelets</a> <span>32px charm</span></li>
+                <li><a href="https://keysklubhouse.com/pixelcliques/teenytowers" target="_blank" rel="noopener">Teeny Towers</a> <span>a room</span></li>
+                <li><a href="https://fizzsea.net/extra/fizzyvendor.html" target="_blank" rel="noopener">Fizzy Vendor</a> <span>a drink</span></li>
+                <li><a href="https://divergentrays.com/kitty" target="_blank" rel="noopener">Kitty Friends</a> <span>a kitty</span></li>
+                <li><a href="https://solaria.neocities.org/pixelclubs/bunnygarden/" target="_blank" rel="noopener">Bunny Garden</a> <span>a bunny</span></li>
+                <li><a href="https://radiant-sky.neocities.org/quiltv2" target="_blank" rel="noopener">Radiant Sky Quilt</a> <span>a quilt patch</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="clique-group">
+            <div class="clique-section-title">// Virtual pets</div>
+            <div class="clique-group-entries">
+              <ul class="clique-list">
+                <li><a href="https://gify.pet/" target="_blank" rel="noopener">GifyPet</a></li>
+                <li><a href="https://tamanotchi.world/" target="_blank" rel="noopener">tamaNOTchi</a></li>
+                <li><a href="https://www.pokeplushies.com/" target="_blank" rel="noopener">PokePlushies</a></li>
+              </ul>
             </div>
           </div>
 
@@ -186,33 +253,36 @@ body {
         <div class="content-box">
           <div class="box-title">✧ Old Cliques I've Found</div>
           <hr>
-          <p style="font-size:12px;color:#9060b0;margin:10px 0 16px;font-style:italic;">
-            Defunct cliques from the old web — preserved here as little fossils of internet history. ♡
-          </p>
+          <p class="clique-intro">Defunct cliques from the old web, kept here as little fossils of internet history ♡</p>
 
           <div class="clique-group">
-            <div class="clique-section-title">// Fandom & Interests</div>
+            <div class="clique-section-title">// The Pixel Train</div>
             <div class="clique-group-entries">
-              <span class="clique-placeholder">placeholder</span>
-              <span class="clique-placeholder">placeholder</span>
-              <span class="clique-placeholder">placeholder</span>
+              <a class="pixel-train" href="https://web.archive.org/web/2004/http://www.angelic-network.com/pixeltrain/" target="_blank" rel="noopener" title="The Pixel Train">
+                <img src="pixels/cliques/train/driver.gif" alt="The Pixel Train engine" loading="lazy"><img src="pixels/cliques/train/carlinha634.gif" alt="flower wagon" loading="lazy"><img src="pixels/cliques/train/OLLJBQJLCV4YZ2E3CGXHLVCMHCYP2NDM.gif" alt="cactus wagon" loading="lazy"><img src="pixels/cliques/train/thx4nominating.gif" alt="thank you wagon" loading="lazy">
+              </a>
+              <p class="clique-note">A link exchange where every friend adds a wagon, from angelic-network.com (2003)</p>
             </div>
           </div>
 
           <div class="clique-group">
-            <div class="clique-section-title">// Web Culture</div>
+            <div class="clique-section-title">// I love kao-anis</div>
             <div class="clique-group-entries">
-              <span class="clique-placeholder">placeholder</span>
-              <span class="clique-placeholder">placeholder</span>
+              <a class="clique-entry" href="https://web.archive.org/web/20090831205410/http://geocities.com/lkclique/" target="_blank" rel="noopener"><img src="pixels/cliques/index.gif" alt="I love kao-anis The Clique" loading="lazy"><span>I love kao-anis</span></a>
+              <a class="clique-entry" href="https://web.archive.org/web/20090901201106/http://geocities.com/lkclique/layout.html" target="_blank" rel="noopener"><img src="pixels/cliques/codea.gif" alt="I heart kao-anis" loading="lazy"><span>clique code</span></a>
             </div>
           </div>
 
           <div class="clique-group">
-            <div class="clique-section-title">// Personality & Life</div>
+            <div class="clique-section-title">// More from the archive</div>
             <div class="clique-group-entries">
-              <span class="clique-placeholder">placeholder</span>
-              <span class="clique-placeholder">placeholder</span>
-              <span class="clique-placeholder">placeholder</span>
+              <ul class="clique-list">
+                <li><a href="https://web.archive.org/web/20041128154409/http://geocities.com/chibiprincessclique/" target="_blank" rel="noopener">Chibi*Princess Clique</a></li>
+                <li><a href="https://web.archive.org/web/20080703053205/http://www.neonlove.net/lani/" target="_blank" rel="noopener">YUMYUM SUMMERTIME</a> <span>by lani, who started Pocket Town</span></li>
+                <li><a href="https://web.archive.org/web/20050910210233/http://jenova.org/adopt/veggie/" target="_blank" rel="noopener">veggie! adoptables</a></li>
+                <li><a href="https://web.archive.org/web/20040806124433/http://www.mauvesheep.com/ddr/" target="_blank" rel="noopener">DDR Clique</a></li>
+                <li><a href="https://web.archive.org/web/20090831051115/http://geocities.com/cyberbeanz/SailorMoon.html" target="_blank" rel="noopener">cyberbeanz Sailor Moon</a></li>
+              </ul>
             </div>
           </div>
 

@@ -38,7 +38,10 @@
       tinyx[i]=0; tinyy[i]=0;
     }
     set_height();
-    document.addEventListener('mousemove',function(e){ x=e.clientX; y=e.clientY; wake(); },{passive:true});
+    document.addEventListener('mousemove',function(e){
+      if(document.documentElement.classList.contains('frozen')) return;
+      x=e.clientX; y=e.clientY; wake();
+    },{passive:true});
     window.addEventListener('resize',set_height);
   }
 
