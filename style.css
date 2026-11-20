@@ -1,0 +1,354 @@
+/* ============================================================
+   GLOBAL RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { min-height: 100vh; width: 100%; }
+
+body {
+  font-family: 'Nunito', 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #222;
+  min-height: 100vh;
+  background-image: url('assets/wall.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+hr { border: none; height: 1px; margin: 0; padding: 0; background: rgba(255,255,255,0.4); }
+#layout-footer { margin-top: auto; width: 100%; }
+footer { text-align: center; padding: 16px 0 12px; }
+.row { display: flex; flex-wrap: wrap; justify-content: center; }
+.row img { image-rendering: pixelated; margin: 4px; }
+
+
+/* ============================================================
+   PAGE WRAP & BODY LAYOUT
+   ============================================================ */
+.page-wrap {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.body-layout {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+/* Main content area (right of sidebar) */
+.main-content {
+  flex: 1;
+  min-width: 0;
+}
+
+
+/* ============================================================
+   SITE TITLE (injected by layout.js into #layout-header)
+   ============================================================ */
+.top-header { padding: 6px 0 4px; margin: 0; text-align: center; }
+.top-header svg { display: block; overflow: visible; }
+
+.site-title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  letter-spacing: 1px;
+  padding: 10px 0 6px;
+  align-items: center;
+  justify-content: center;
+}
+.site-title a {
+  text-decoration: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  align-items: center;
+  justify-content: center;
+}
+.site-title span {
+  display: inline-block;
+  text-shadow: 2px 0 #000,-2px 0 #000,0 2px #000,0 -2px #000,
+               1px 1px #000,-1px -1px #000,1px -1px #000,-1px 1px #000;
+}
+.site-title span:nth-child(6n+1) { color: #ff8fab }
+.site-title span:nth-child(6n+2) { color: #ffd166 }
+.site-title span:nth-child(6n+3) { color: #caffbf }
+.site-title span:nth-child(6n+4) { color: #9bf6ff }
+.site-title span:nth-child(6n+5) { color: #bdb2ff }
+.site-title span:nth-child(6n+6) { color: #ffc6ff }
+
+
+/* ============================================================
+   LEFT SIDEBAR (injected by layout.js into #layout-sidebar)
+   ============================================================ */
+.sidebar {
+  width: 190px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: sticky;
+  top: 10px;
+}
+
+.sidebar-card {
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 16px;
+  padding: 12px 10px;
+  color: #4a2060;
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.sidebar-card h3 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 1px 1px 0 #000,-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000;
+  margin-bottom: 8px;
+}
+
+.sidebar-card img { width: 100%; image-rendering: pixelated; margin-bottom: 6px; }
+
+/* Nav list inside sidebar */
+.sidebar-card ul { list-style: none; padding: 0; }
+.sidebar-card li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 11.5px;
+  line-height: 1.8;
+}
+.sidebar-card li::before {
+  content: "★";
+  position: absolute;
+  left: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  text-shadow: 1px 0 #000,-1px 0 #000,0 1px #000,0 -1px #000;
+}
+.sidebar-card li:nth-child(6n+1)::before { color: #ff8fab }
+.sidebar-card li:nth-child(6n+2)::before { color: #ffd166 }
+.sidebar-card li:nth-child(6n+3)::before { color: #caffbf }
+.sidebar-card li:nth-child(6n+4)::before { color: #9bf6ff }
+.sidebar-card li:nth-child(6n+5)::before { color: #bdb2ff }
+.sidebar-card li:nth-child(6n+6)::before { color: #ffc6ff }
+
+.sidebar-card a {
+  text-decoration: none;
+  color: #3a1850;
+  transition: color 0.15s;
+}
+.sidebar-card a:hover { color: #9040c0; text-decoration: underline; }
+
+/* Non-list links (Clubs, Other Links) */
+.sidebar-links { display: flex; flex-direction: column; gap: 4px; }
+.sidebar-links a {
+  font-size: 11.5px;
+  color: #3a1850;
+  text-decoration: none;
+  line-height: 1.6;
+}
+.sidebar-links a:hover { color: #9040c0; text-decoration: underline; }
+.sidebar-links img { width: auto; height: 12px; vertical-align: middle; image-rendering: pixelated; margin-bottom: 0; }
+.sidebar-links img.club-button { width: 88px; height: 31px; }
+
+/* Top link */
+.sidebar-top-link { text-align: center; margin-top: 4px; }
+.sidebar-top-link a {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 9px;
+  color: #3a1850;
+  text-decoration: none;
+}
+.sidebar-top-link a:hover { color: #9040c0; }
+
+
+/* ============================================================
+   CONTENT BOXES (frosted glass)
+   ============================================================ */
+.page-container,
+.content-box {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  border: 1px solid rgba(255,255,255,0.65);
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #4a2060;
+  text-align: center;
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+/* ============================================================
+   SECTION TITLE (bouncing rainbow letters)
+   ============================================================ */
+.section-title { text-align: center; margin-bottom: 8px; }
+
+.section-title span, .letter {
+  display: inline-block;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+  text-shadow: 2px 0 #000,-2px 0 #000,0 2px #000,0 -2px #000,
+               1px 1px #000,-1px -1px #000,1px -1px #000,-1px 1px #000;
+  animation: letterBounce 1.2s ease forwards infinite;
+  animation-delay: calc(var(--i) * 0.12s);
+}
+.section-title span:nth-child(6n+1), .letter:nth-child(6n+1) { color: #ff8fab }
+.section-title span:nth-child(6n+2), .letter:nth-child(6n+2) { color: #ffd166 }
+.section-title span:nth-child(6n+3), .letter:nth-child(6n+3) { color: #caffbf }
+.section-title span:nth-child(6n+4), .letter:nth-child(6n+4) { color: #9bf6ff }
+.section-title span:nth-child(6n+5), .letter:nth-child(6n+5) { color: #bdb2ff }
+.section-title span:nth-child(6n+6), .letter:nth-child(6n+6) { color: #ffc6ff }
+
+@keyframes letterBounce {
+  0%   { transform: translateY(0); }
+  20%  { transform: translateY(-8px); }
+  40%  { transform: translateY(2px); }
+  60%  { transform: translateY(0); }
+  100% { transform: translateY(0); }
+}
+
+
+/* ============================================================
+   PAGE H2 TITLES
+   ============================================================ */
+.page-container h2, .content-box h2 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 1.4;
+  text-align: center;
+  color: #fff;
+  text-shadow: 2px 0 #000,-2px 0 #000,0 2px #000,0 -2px #000,
+               1px 1px #000,-1px -1px #000,1px -1px #000,-1px 1px #000;
+  margin-bottom: 8px;
+}
+
+
+/* ============================================================
+   STARS & CLOUDS ANIMATION (pages that use them)
+   ============================================================ */
+@keyframes twinkle {
+  0%,100% { opacity: var(--lo,0.3); transform: scale(1); }
+  50%      { opacity: var(--hi,1);  transform: scale(1.4); }
+}
+@keyframes floatCloud {
+  from { transform: translateX(var(--start,110vw)); }
+  to   { transform: translateX(-400px); }
+}
+
+#stars, #clouds {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 0;
+}
+
+
+/* ============================================================
+   BLINKIE GRID
+   ============================================================ */
+.blinkie-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 16px; }
+.blinkie-col  { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+.blinkie-col a { display: block; text-align: center; }
+.blinkie-col img { max-width: 100%; height: auto; }
+.col-title {
+  display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 1px;
+  color: #fff; padding: 2px 8px; border-radius: 8px; margin-bottom: 4px;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
+}
+.tag-pink   { background: #ff8fab; }
+.tag-yellow { background: #f9b931; }
+.tag-mint   { background: #52c192; }
+.tag-blue   { background: #5ab4d6; }
+.tag-purple { background: #a78bfa; }
+.tag-peach  { background: #ff9a76; }
+
+
+/* ============================================================
+   KAO ANI PAGE
+   ============================================================ */
+.kao-body-text {
+  font-size: 14px; line-height: 1.8; text-align: left;
+  max-width: 70ch; margin: 0 auto 12px auto; color: #333;
+}
+.refs-list { list-style: none; padding: 0; text-align: left; max-width: 70ch; margin: 0 auto; }
+.refs-list li { font-size: 13px; padding: 6px 0 6px 20px; position: relative; border-bottom: 1px dashed #eee; }
+.refs-list li::before { content: "★"; position: absolute; left: 0; font-size: 14px; }
+.refs-list li:nth-child(6n+1)::before { color: #ff8fab }
+.refs-list li:nth-child(6n+2)::before { color: #ffd166 }
+.refs-list li:nth-child(6n+3)::before { color: #caffbf }
+.refs-list li:nth-child(6n+4)::before { color: #9bf6ff }
+.refs-list li:nth-child(6n+5)::before { color: #bdb2ff }
+.refs-list li:nth-child(6n+6)::before { color: #ffc6ff }
+.refs-list a { color: #4a6cf7; font-weight: 600; }
+.refs-list .ref-note { display: block; font-size: 11px; color: #888; margin-top: 2px; }
+
+
+/* ============================================================
+   INDEX PAGE — welcome & guestbook
+   ============================================================ */
+.welcome-title { font-family: 'Pacifico',cursive; font-size: 20px; color: #b060d0; margin-bottom: 12px; }
+.welcome-text  { font-size: 13.5px; line-height: 1.8; color: #5a2a80; }
+.welcome-text a { color: #c060e0; }
+.imood-block { margin-top: 12px; font-size: 12px; color: #7a40a0; }
+.imood-block a { color: #9060c0; text-decoration: none; }
+.imood-block a:hover { text-decoration: underline; }
+
+.guestbook-title { font-family: 'Pacifico',cursive; font-size: 17px; color: #b060d0; margin-bottom: 14px; }
+.guestbook-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.guestbook-left {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: rgba(255,200,240,0.2); border-radius: 14px; padding: 22px 12px;
+  border: 1px dashed rgba(200,130,230,0.38); text-align: center;
+}
+.leave-msg { font-family: 'Pacifico',cursive; font-size: 16px; color: #c060d0; line-height: 1.5; margin-bottom: 6px; }
+.guestbook-left .sub { font-size: 11px; color: #a080b0; }
+.guestbook-right {
+  background: rgba(255,200,240,0.15); border-radius: 14px; padding: 12px;
+  border: 1px solid rgba(200,160,230,0.25);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.goodday-stamp { text-align: center; padding-top: 16px; }
+.goodday-stamp img { image-rendering: pixelated; }
+
+/* People page */
+.page-header-img img { max-width: 100%; image-rendering: pixelated; margin: 8px 0; }
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 700px) {
+  .body-layout { flex-direction: column; }
+  .sidebar { width: 100%; position: static; }
+  .guestbook-inner { grid-template-columns: 1fr; }
+  .blinkie-row { grid-template-columns: 1fr; }
+}

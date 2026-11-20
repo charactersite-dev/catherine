@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CallMeCatherine ~ Outer Space</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pacifico&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+body {
+  background-image: url('assets/starsbg.gif') !important;
+  background-repeat: repeat !important;
+  background-size: auto !important;
+  background-attachment: fixed !important;
+  color: #e0d0ff;
+}
+a { color: #a080ff; text-decoration: underline; }
+.page-container{background:rgba(10,0,40,0.6);border-color:rgba(100,80,200,0.4);color:#e0d0ff;}
+.page-container h2{color:#c0a0ff;}
+.sidebar-card{background:rgba(10,0,40,0.6);border-color:rgba(100,80,200,0.4);color:#e0d0ff;}
+.sidebar-card h3{color:#c0a0ff;}
+.sidebar-card a, .sidebar-links a { color: #d0c0ff; }
+.sidebar-card a:hover, .sidebar-links a:hover { color: #ffffff; }
+</style>
+</head>
+<body>
+<span id="page-top"></span>
+
+<div class="page-wrap">
+  <div id="layout-header"></div>
+
+  <div class="body-layout">
+    <div id="layout-sidebar"></div>
+    <div class="main-content">
+
+      <div class="page-container">
+        <main id="main-content">
+          <section><h2>Outer Space</h2><hr><br></section>
+          <div class="row" id="space-shelf"></div>
+        </main>
+      </div>
+
+    </div><!-- end main-content -->
+  </div><!-- end body-layout -->
+
+  <div id="layout-footer"></div>
+</div>
+
+<script src="sparkle.js"></script>
+<script src="layout.js"></script>
+<script>
+var spaceItems=[
+  {href:"https://artwork.neocities.org",src:"pixels/space/bedtime-star.gif",alt:"star"},
+  {href:"https://artwork.neocities.org",src:"pixels/space/moon-nighttime.gif",alt:"moon"},
+  {href:"https://artwork.neocities.org",src:"pixels/space/minisol.gif",alt:"sun"},
+  {href:"https://artwork.neocities.org",src:"pixels/space/i4.gif",alt:"stars"},
+  {href:"https://artwork.neocities.org",src:"pixels/space/c9dda7c7.gif",alt:"planet"},
+  {href:"https://artwork.neocities.org",src:"pixels/space/artworkneocities (15).gif",alt:"space"},
+  {href:"https://artwork.neocities.org",src:"pixels/space/1ESPLOSIONstaradopt.gif",alt:"star burst"},
+  {href:"https://pixel-world.tumblr.com",src:"pixels/space/pixel-worldTUMBLR (1).webp",alt:"space"},
+  {href:"https://pixel-world.tumblr.com",src:"pixels/space/pixel-worldTUMBLR (13).webp",alt:"space"},
+  {href:"https://pixel-world.tumblr.com",src:"pixels/space/pixel-worldTUMBLR (14).webp",alt:"space"},
+  {href:"https://pixel-world.tumblr.com",src:"pixels/space/pixel-worldTUMBLR (15).webp",alt:"space"},
+  {href:"https://pixel-world.tumblr.com",src:"pixels/space/pixel-worldTUMBLR (16).webp",alt:"space"},
+  {href:"https://pixelbank.neocities.org",src:"pixels/space/pixelbankneocities (8).gif",alt:"space"},
+  {href:"https://thegardenofmadeline.neocities.org",src:"pixels/space/thegardenofmadeline.gif",alt:"space cat"},
+];
+document.addEventListener('DOMContentLoaded',function(){
+  var shelf=document.getElementById('space-shelf');
+  spaceItems.forEach(function(item){
+    var a=document.createElement('a');a.href=item.href;a.target='_blank';
+    var img=document.createElement('img');img.src=item.src;img.alt=item.alt;img.loading='lazy';img.style.imageRendering='pixelated';img.style.margin='4px';
+    a.appendChild(img);shelf.appendChild(a);
+  });
+});
+</script>
+</body>
+</html>

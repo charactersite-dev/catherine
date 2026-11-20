@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CallMeCatherine — Dollhouse</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{min-height:100%;width:100%;}
+body{
+  font-family:'Nunito',sans-serif;
+  background:#1a0a04;
+  min-height:100vh;
+  position:relative;
+  overflow-x:hidden;
+}
+@keyframes lampPulse{0%,100%{opacity:0.55;}50%{opacity:0.82;}}
+/* The dollhouse frame is decorative and fixed behind content */
+#dollhouse{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:0;}
+.page-content{position:relative;z-index:2;}
+/* Floor ambient glow at very bottom */
+#floorGlow{position:fixed;bottom:0;left:0;width:100%;height:80px;background:linear-gradient(0deg,rgba(255,160,40,0.12),transparent);pointer-events:none;z-index:1;}
+</style>
+</head>
+<body>
+
+<div id="dollhouse">
+  <!-- Rendered by JS as a large centered cutaway dollhouse -->
+</div>
+<div id="floorGlow"></div>
+
+<div class="page-content">
+  <!-- YOUR PAGE CONTENT GOES HERE -->
+</div>
+
+<script>
+(function(){
+  const dh=document.getElementById('dollhouse');
+  // Build a wider dollhouse that tiles across the screen
+  const totalW=Math.max(window.innerWidth,900);
+  const roomW=220;
+  const roomH=240;
+  const kitchenH=65;
+  const beamW=10;
+  const cols=Math.ceil(totalW/(roomW+beamW))+1;
+
+  dh.style.cssText=`position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;`;
+
+  // Outer shell
+  const shell=document.createElement('div');
+  shell.style.cssText=`position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:${cols*(roomW+beamW)+beamW}px;`;
+  dh.appendChild(shell);
+
+  const wallColors=[
+    {wall:'#7a2e18',stripe:'rgba(255,160,80,0.18)',floor:'repeating-linear-gradient(90deg,#8a4818 0px,#8a4818 13px,#6a3408 13px,#6a3408 26px)'},
+    {wall:'#3a1438',stripe:'rgba(220,100,180,0.15)',floor:'#201018'},
+    {wall:'#183828',stripe:'rgba(80,200,100,0.12)',floor:'#143020'},
+    {wall:'#1a1c40',stripe:'rgba(100,140,255,0.12)',floor:'#101228'},
+  ];
+
+  for(let i=0;i<cols;i++){
+    const palette=wallColors[i%wallColors.length];
+    const col=document.createElement('div');
+    col.style.cssText=`position:absolute;top:0;left:${i*(roomW+beamW)+beamW}px;width:${roomW}px;`;
+
+    // Upper room
+    const upperRoom=document.createElement('div');
+    upperRoom.style.cssText=`width:${roomW}px;height:${roomH}px;background:${palette.wall};overflow:hidden;position:relative;`;
+    upperRoom.innerHTML=`
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,${palette.stripe} 0px,${palette.stripe} 7px,transparent 7px,transparent 18px);"></div>
+      <div style="position:absolute;bottom:0;left:0;width:100%;height:32px;background:${palette.floor};"></div>
+      <div style="position:absolute;width:110px;height:110px;background:radial-gradient(circle,rgba(255,210,80,0.7),transparent);top:60px;left:55px;border-radius:50%;animation:lampPulse ${2.5+i*0.4}s ease-in-out infinite ${-i*0.7}s;"></div>
+      <div style="position:absolute;bottom:32px;left:${50+i*10}px;width:5px;height:65px;background:rgba(0,0,0,0.4);"></div>
+      <div style="position:absolute;bottom:94px;left:${35+i*10}px;width:38px;height:15px;background:#e09020;border-radius:8px 8px 0 0;"></div>
+      <div style="position:absolute;top:22px;right:28px;width:44px;height:54px;background:rgba(0,0,0,0.5);border-radius:3px;border:3px solid rgba(255,255,255,0.15);"></div>
+      <div style="position:absolute;top:24px;right:38px;width:14px;height:16px;background:rgba(200,220,255,0.45);border-radius:50%;filter:blur(5px);"></div>`;
+    col.appendChild(upperRoom);
+
+    // Horizontal beam
+    const hBeam=document.createElement('div');
+    hBeam.style.cssText=`width:${roomW}px;height:${beamW}px;background:#0e0603;`;
+    col.appendChild(hBeam);
+
+    // Kitchen strip
+    const kitchen=document.createElement('div');
+    kitchen.style.cssText=`width:${roomW}px;height:${kitchenH}px;background:#1a3820;overflow:hidden;position:relative;`;
+    kitchen.innerHTML=`
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(80,200,100,0.1) 0px,rgba(80,200,100,0.1) 7px,transparent 7px,transparent 18px);"></div>
+      <div style="position:absolute;bottom:0;left:0;width:100%;height:24px;background:#2a5830;"></div>
+      <div style="position:absolute;bottom:24px;left:16px;width:36px;height:16px;background:#183a20;border-radius:2px 2px 0 0;border-top:2px solid #70e090;"></div>
+      <div style="position:absolute;width:90px;height:55px;background:radial-gradient(circle,rgba(255,220,80,0.55),transparent);top:-10px;left:${60+i*15}px;border-radius:50%;animation:lampPulse ${3+i*0.3}s ease-in-out infinite ${-i*0.5}s;"></div>`;
+    col.appendChild(kitchen);
+
+    shell.appendChild(col);
+
+    // Vertical beam after each room
+    const vBeam=document.createElement('div');
+    vBeam.style.cssText=`position:absolute;top:0;left:${i*(roomW+beamW)}px;width:${beamW}px;height:${roomH+beamW+kitchenH}px;background:#0e0603;`;
+    shell.appendChild(vBeam);
+  }
+  // Final right beam
+  const lastBeam=document.createElement('div');
+  lastBeam.style.cssText=`position:absolute;top:0;left:${cols*(roomW+beamW)}px;width:${beamW}px;height:${roomH+beamW+kitchenH}px;background:#0e0603;`;
+  shell.appendChild(lastBeam);
+  // Top beam
+  const topBeam=document.createElement('div');
+  topBeam.style.cssText=`position:absolute;top:0;left:0;width:100%;height:${beamW}px;background:#0e0603;z-index:5;`;
+  shell.appendChild(topBeam);
+})();
+</script>
+</body>
+</html>

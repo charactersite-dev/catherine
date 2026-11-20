@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CallMeCatherine — People</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{min-height:100%;width:100%;}
+body{
+  font-family:'Nunito',sans-serif;
+  background:linear-gradient(180deg,#4a2810 0%,#7a4820 35%,#9a5c28 65%,#7a4010 100%);
+  min-height:100vh;
+  position:relative;
+  overflow-x:hidden;
+}
+@keyframes rainFall{from{transform:translateY(-20px);opacity:0;}to{transform:translateY(110vh);opacity:0.65;}}
+@keyframes lampPulse{0%,100%{opacity:0.55;}50%{opacity:0.82;}}
+#cafelayer{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+.page-content{position:relative;z-index:2;}
+</style>
+</head>
+<body>
+<div id="cafelayer"></div>
+<div class="page-content">
+  <!-- YOUR PAGE CONTENT GOES HERE -->
+</div>
+<script>
+(function(){
+  const layer=document.getElementById('cafelayer');
+  const vw=window.innerWidth;
+  const vh=window.innerHeight;
+
+  // Tiled windows across the width
+  const windowCount=Math.max(2,Math.floor(vw/320));
+  const spacing=vw/windowCount;
+
+  for(let i=0;i<windowCount;i++){
+    const cx=spacing*i+spacing*0.5;
+    const winW=180;
+    const winH=Math.round(vh*0.55);
+
+    // Window glass
+    const win=document.createElement('div');
+    win.style.cssText=`position:absolute;left:${cx-winW/2}px;top:${Math.round(vh*0.05)}px;width:${winW}px;height:${winH}px;background:linear-gradient(180deg,#3868a0,#5888c0,#88b0d8,#b8d0f0);border-radius:6px 6px 0 0;overflow:hidden;`;
+
+    // Rain inside window
+    const rainWrap=document.createElement('div');
+    rainWrap.style.cssText='position:absolute;inset:0;overflow:hidden;';
+    for(let r=0;r<22;r++){
+      const rd=document.createElement('div');
+      const h=8+Math.random()*14;
+      rd.style.cssText=`position:absolute;width:1px;height:${h}px;background:rgba(180,210,255,0.7);left:${Math.random()*100}%;top:-${h}px;animation:rainFall ${0.4+Math.random()*0.7}s linear infinite ${-Math.random()*1.5}s;`;
+      rainWrap.appendChild(rd);
+    }
+    win.appendChild(rainWrap);
+
+    // City silhouette
+    const city=document.createElement('div');
+    city.style.cssText=`position:absolute;bottom:0;left:0;width:100%;height:${Math.round(winH*0.45)}px;background:rgba(12,18,40,0.55);`;
+    win.appendChild(city);
+    // Building cutouts
+    [[10,55,22],[36,75,30],[70,48,20],[95,65,26],[124,52,18]].forEach(b=>{
+      const bd=document.createElement('div');
+      bd.style.cssText=`position:absolute;bottom:0;left:${b[0]}px;width:${b[2]}px;height:${b[1]}px;background:rgba(12,18,40,0.5);`;
+      win.appendChild(bd);
+      // Lit windows on buildings
+      for(let w=0;w<3;w++){
+        if(Math.random()>0.5){
+          const lw=document.createElement('div');
+          lw.style.cssText=`position:absolute;bottom:${10+w*18}px;left:${b[0]+4+Math.floor(w*4)}px;width:5px;height:5px;background:rgba(255,230,100,${0.5+Math.random()*0.4});`;
+          win.appendChild(lw);
+        }
+      }
+    });
+
+    // Warm reflection
+    const refl=document.createElement('div');
+    refl.style.cssText='position:absolute;inset:0;background:linear-gradient(90deg,transparent 55%,rgba(255,160,60,0.1));pointer-events:none;';
+    win.appendChild(refl);
+    layer.appendChild(win);
+
+    // Window frame
+    const frame=document.createElement('div');
+    frame.style.cssText=`position:absolute;left:${cx-winW/2-4}px;top:${Math.round(vh*0.05)-4}px;width:${winW+8}px;height:${winH+8}px;border:5px solid #5a2e0c;border-radius:8px 8px 0 0;pointer-events:none;`;
+    layer.appendChild(frame);
+
+    // Cross panes
+    const hPane=document.createElement('div');
+    hPane.style.cssText=`position:absolute;left:${cx-winW/2-4}px;top:${Math.round(vh*0.05)+winH*0.45}px;width:${winW+8}px;height:5px;background:#5a2e0c;`;
+    layer.appendChild(hPane);
+    const vPane=document.createElement('div');
+    vPane.style.cssText=`position:absolute;left:${cx+2}px;top:${Math.round(vh*0.05)-4}px;width:5px;height:${winH+8}px;background:#5a2e0c;`;
+    layer.appendChild(vPane);
+
+    // Curtains
+    const curtL=document.createElement('div');
+    curtL.style.cssText=`position:absolute;left:${cx-winW/2-4}px;top:${Math.round(vh*0.05)-4}px;width:28px;height:${winH+8}px;background:linear-gradient(90deg,#d04828,#e86030);border-radius:0 0 10px 0;`;
+    layer.appendChild(curtL);
+    const curtR=document.createElement('div');
+    curtR.style.cssText=`position:absolute;right:${vw-(cx+winW/2+8)}px;top:${Math.round(vh*0.05)-4}px;width:28px;height:${winH+8}px;background:linear-gradient(270deg,#d04828,#e86030);border-radius:0 0 0 10px;`;
+    layer.appendChild(curtR);
+
+    // Overhead lamp glow
+    const glow=document.createElement('div');
+    glow.style.cssText=`position:absolute;top:0;left:${cx-60}px;width:120px;height:120px;background:radial-gradient(circle,rgba(255,200,80,0.4),transparent);border-radius:50%;animation:lampPulse 3s ease-in-out infinite ${-i*0.8}s;`;
+    layer.appendChild(glow);
+  }
+
+  // Table running along the bottom
+  const table=document.createElement('div');
+  table.style.cssText=`position:absolute;bottom:0;left:0;width:100%;height:22px;background:#5a2c0c;`;
+  layer.appendChild(table);
+
+  // Coffee cups scattered on table
+  [0.2,0.5,0.78].forEach((xPct,i)=>{
+    const cupWrap=document.createElement('div');
+    cupWrap.style.cssText=`position:absolute;bottom:22px;left:${xPct*100}%;`;
+    cupWrap.innerHTML=`
+      <div style="width:34px;height:7px;background:#ddd0b8;border-radius:50%;"></div>
+      <div style="width:26px;height:24px;background:#f0e0c8;border-radius:3px 3px 6px 6px;margin:0 4px;position:relative;">
+        <div style="width:100%;height:9px;background:#7a3810;border-radius:3px 3px 0 0;"></div>
+        <div style="position:absolute;right:-8px;top:4px;width:9px;height:11px;border:2px solid #ddd0b8;border-radius:0 5px 5px 0;"></div>
+      </div>
+      <div style="position:absolute;left:7px;top:-9px;width:5px;height:10px;background:rgba(255,255,255,0.35);border-radius:50%;animation:lampPulse ${1.8+i*0.4}s ease-in-out infinite;"></div>
+      <div style="position:absolute;left:14px;top:-12px;width:5px;height:10px;background:rgba(255,255,255,0.28);border-radius:50%;animation:lampPulse ${2.2+i*0.3}s ease-in-out infinite 0.4s;"></div>`;
+    layer.appendChild(cupWrap);
+  });
+
+  // Wall texture
+  const tex=document.createElement('div');
+  tex.style.cssText='position:absolute;inset:0;background:repeating-linear-gradient(180deg,rgba(255,160,60,0.03) 0px,rgba(255,160,60,0.03) 20px,transparent 20px,transparent 40px);pointer-events:none;';
+  layer.appendChild(tex);
+})();
+</script>
+</body>
+</html>

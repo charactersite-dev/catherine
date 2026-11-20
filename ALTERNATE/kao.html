@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CallmeCatherine ~ All About Kaoani</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <script type="text/javascript">
+// <![CDATA[
+var colour="random";
+var sparkles=50;
+var x=ox=400;
+var y=oy=300;
+var swide=800;
+var shigh=600;
+var sleft=sdown=0;
+var tiny=new Array();
+var star=new Array();
+var starv=new Array();
+var starx=new Array();
+var stary=new Array();
+var tinyx=new Array();
+var tinyy=new Array();
+var tinyv=new Array();
+
+window.onload=function() { if (document.getElementById) {
+  var i, rats, rlef, rdow;
+  for (var i=0; i<sparkles; i++) {
+    var rats=createDiv(3, 3);
+    rats.style.visibility="hidden";
+    rats.style.zIndex="999";
+    document.body.appendChild(tiny[i]=rats);
+    starv[i]=0;
+    tinyv[i]=0;
+    var rats=createDiv(5, 5);
+    rats.style.backgroundColor="transparent";
+    rats.style.visibility="hidden";
+    rats.style.zIndex="999";
+    var rlef=createDiv(1, 5);
+    var rdow=createDiv(5, 1);
+    rats.appendChild(rlef);
+    rats.appendChild(rdow);
+    rlef.style.top="2px";
+    rlef.style.left="0px";
+    rdow.style.top="0px";
+    rdow.style.left="2px";
+    document.body.appendChild(star[i]=rats);
+  }
+  set_width();
+  sparkle();
+}}
+
+function sparkle() {
+  var c;
+  if (Math.abs(x-ox)>1 || Math.abs(y-oy)>1) {
+    ox=x; oy=y;
+    for (c=0; c<sparkles; c++) if (!starv[c]) {
+      star[c].style.left=(starx[c]=x)+"px";
+      star[c].style.top=(stary[c]=y+1)+"px";
+      star[c].style.clip="rect(0px, 5px, 5px, 0px)";
+      star[c].childNodes[0].style.backgroundColor=star[c].childNodes[1].style.backgroundColor=(colour=="random")?newColour():colour;
+      star[c].style.visibility="visible";
+      starv[c]=50;
+      break;
+    }
+  }
+  for (c=0; c<sparkles; c++) {
+    if (starv[c]) update_star(c);
+    if (tinyv[c]) update_tiny(c);
+  }
+  setTimeout("sparkle()", 40);
+}
+
+function update_star(i) {
+  if (--starv[i]==25) star[i].style.clip="rect(1px, 4px, 4px, 1px)";
+  if (starv[i]) {
+    stary[i]+=1+Math.random()*3;
+    starx[i]+=(i%5-2)/5;
+    if (stary[i]<shigh+sdown) {
+      star[i].style.top=stary[i]+"px";
+      star[i].style.left=starx[i]+"px";
+    } else {
+      star[i].style.visibility="hidden";
+      starv[i]=0; return;
+    }
+  } else {
+    tinyv[i]=50;
+    tiny[i].style.top=(tinyy[i]=stary[i])+"px";
+    tiny[i].style.left=(tinyx[i]=starx[i])+"px";
+    tiny[i].style.width="2px";
+    tiny[i].style.height="2px";
+    tiny[i].style.backgroundColor=star[i].childNodes[0].style.backgroundColor;
+    star[i].style.visibility="hidden";
+    tiny[i].style.visibility="visible";
+  }
+}
+
+function update_tiny(i) {
+  if (--tinyv[i]==25) {
+    tiny[i].style.width="1px";
+    tiny[i].style.height="1px";
+  }
+  if (tinyv[i]) {
+    tinyy[i]+=1+Math.random()*3;
+    tinyx[i]+=(i%5-2)/5;
+    if (tinyy[i]<shigh+sdown) {
+      tiny[i].style.top=tinyy[i]+"px";
+      tiny[i].style.left=tinyx[i]+"px";
+    } else {
+      tiny[i].style.visibility="hidden";
+      tinyv[i]=0; return;
+    }
+  } else tiny[i].style.visibility="hidden";
+}
+
+document.onmousemove=mouse;
+function mouse(e) {
+  if (e) { y=e.pageY; x=e.pageX; }
+  else { set_scroll(); y=event.y+sdown; x=event.x+sleft; }
+}
+
+window.onscroll=set_scroll;
+function set_scroll() {
+  if (typeof(self.pageYOffset)=='number') { sdown=self.pageYOffset; sleft=self.pageXOffset; }
+  else if (document.body && (document.body.scrollTop || document.body.scrollLeft)) { sdown=document.body.scrollTop; sleft=document.body.scrollLeft; }
+  else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) { sleft=document.documentElement.scrollLeft; sdown=document.documentElement.scrollTop; }
+  else { sdown=0; sleft=0; }
+}
+
+window.onresize=set_width;
+function set_width() {
+  var sw_min=999999; var sh_min=999999;
+  if (document.documentElement && document.documentElement.clientWidth) {
+    if (document.documentElement.clientWidth>0) sw_min=document.documentElement.clientWidth;
+    if (document.documentElement.clientHeight>0) sh_min=document.documentElement.clientHeight;
+  }
+  if (typeof(self.innerWidth)=='number' && self.innerWidth) {
+    if (self.innerWidth>0 && self.innerWidth<sw_min) sw_min=self.innerWidth;
+    if (self.innerHeight>0 && self.innerHeight<sh_min) sh_min=self.innerHeight;
+  }
+  if (document.body.clientWidth) {
+    if (document.body.clientWidth>0 && document.body.clientWidth<sw_min) sw_min=document.body.clientWidth;
+    if (document.body.clientHeight>0 && document.body.clientHeight<sh_min) sh_min=document.body.clientHeight;
+  }
+  if (sw_min==999999 || sh_min==999999) { sw_min=800; sh_min=600; }
+  swide=sw_min; shigh=sh_min;
+}
+
+function createDiv(height, width) {
+  var div=document.createElement("div");
+  div.style.position="absolute";
+  div.style.height=height+"px";
+  div.style.width=width+"px";
+  div.style.overflow="hidden";
+  return (div);
+}
+
+function newColour() {
+  var c=new Array();
+  c[0]=255;
+  c[1]=Math.floor(Math.random()*256);
+  c[2]=Math.floor(Math.random()*(256-c[1]/2));
+  c.sort(function(){return (0.5 - Math.random());});
+  return ("rgb("+c[0]+", "+c[1]+", "+c[2]+")");
+}
+// ]]>
+</script>
+
+<style>
+.page-wrapper {
+  margin: 0 auto;
+  max-width: 1000px;
+  width: calc(100% - 240px);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 20px 20px 0 20px;
+  box-sizing: border-box;
+}
+.content-box {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  border: 5px solid transparent;
+  background:
+    linear-gradient(white, white) padding-box,
+    linear-gradient(90deg, #ff8fab, #ffd166, #caffbf, #9bf6ff, #bdb2ff, #ffc6ff, #ff8fab) border-box;
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+}
+
+.kao-body-text {
+  font-size: 14px;
+  line-height: 1.8;
+  text-align: left;
+  max-width: 70ch;
+  margin: 0 auto 12px auto;
+  color: #333;
+}
+
+.refs-list {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  max-width: 70ch;
+  margin: 0 auto;
+}
+.refs-list li {
+  font-size: 13px;
+  padding: 6px 0 6px 20px;
+  position: relative;
+  border-bottom: 1px dashed #eee;
+}
+.refs-list li::before {
+  content: "★";
+  position: absolute;
+  left: 0;
+  font-size: 14px;
+}
+.refs-list li:nth-child(6n+1)::before { color: #ff8fab; }
+.refs-list li:nth-child(6n+2)::before { color: #ffd166; }
+.refs-list li:nth-child(6n+3)::before { color: #caffbf; }
+.refs-list li:nth-child(6n+4)::before { color: #9bf6ff; }
+.refs-list li:nth-child(6n+5)::before { color: #bdb2ff; }
+.refs-list li:nth-child(6n+6)::before { color: #ffc6ff; }
+.refs-list a {
+  color: #4a6cf7;
+  font-weight: 600;
+}
+.refs-list .ref-note {
+  display: block;
+  font-size: 11px;
+  color: #888;
+  margin-top: 2px;
+}
+</style>
+</head>
+<body>
+
+<div id="sidebar-container"></div>
+<script>
+fetch('sidebar.html')
+  .then(r => r.text())
+  .then(d => { document.getElementById('sidebar-container').innerHTML = d; });
+</script>
+
+<div class="page-wrapper" id="main-content">
+
+  <!-- ── Title / intro box ── -->
+  <div class="content-box">
+    <div class="section-title" id="title-letters"></div>
+    <hr><br>
+    <img src="pixels/trinkets/kao/b_gpork030_welcome.gif">
+<br><br>
+    <p class="kao-body-text">
+   Kaoani (顔アニ) are small animated pixel-art emoticons that originated on the Japanese web. The name combines kao (顔), meaning “face,” with an informal shortening of “animation.” They may also have been referred to as puffs, blobs, or reversed: anikao.
+</p>
+    <p class="kao-body-text">
+They typically feature looping motions like bouncing or floating, with simple, rounded designs resembling blobs, animals, or food.
+</p>
+    <p class="kao-body-text">
+They spread internationally through anime and web communities in the late 1990s and early 2000s, appearing in forum signatures, messaging platforms, and personal homepages. Many were distributed as sozai (素材)—free web materials shared by creators, usually with conditions such as linking back for credit. Because they were widely copied and reposted, many original sources have been lost.
+    </p><br>
+    <img src="pixels/trinkets/kao/line_bread001.gif">
+<br>
+  </div>
+
+  <!-- ── Collection box ── -->
+  <div class="content-box">
+    <div class="section-title" id="collectionsection-letters"></div>
+    <hr><br>
+    <Img src="pixels/trinkets/kao/hk.geocities.com-fanfanfannie.gif">
+    <div id="collection-shelf-target"></div>
+  </div>
+
+  <!-- ── References box ── -->
+  <div class="content-box">
+    <div class="section-title" id="refsection-letters"></div>
+    <hr><br>
+    <img src="pixels/trinkets/kao/01090.gif">
+    <ul class="refs-list">
+      <li>
+        <a href="https://neonaut.neocities.org/microblog/2019/11/the-wonderful-world-of-kaoani" target="_blank">neonaut — The Wonderful World of Kaoani</a>
+      </li>
+      <li>
+        <a href="https://nostalgic.neocities.org/adopts/kaoani/kaoani" target="_blank">Nostalgia for the 2000s — Kao-Ani</a>
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Kaoani" target="_blank">Wikipedia — Kaoani</a>
+      </li>
+      <li>
+        <a href="https://gifcities.org" target="_blank">GifCities — Internet Archive Geocities GIF Search</a>
+      </li>
+    </ul>
+  </div>
+
+</div><!-- end .page-wrapper -->
+
+<footer align="center"><br><a href="https://callmecatherine.neocities.org/"><img src="assets/backtohome.gif"></a><br></footer>
+
+<script>
+function makeLetters(label) {
+  return label.split('').map((c, i) =>
+    c === ' '
+      ? `<span style="display:inline-block;width:5px"></span>`
+      : `<span class="letter" style="--i:${i}">${c}</span>`
+  ).join('');
+}
+
+document.getElementById('title-letters').innerHTML             = makeLetters('All About Kaoani');
+document.getElementById('collectionsection-letters').innerHTML = makeLetters('My Collection');
+document.getElementById('refsection-letters').innerHTML        = makeLetters('References');
+
+// ── Path shortcut ──
+const KA = 'pixels/trinkets/kao/';
+
+// ── Common hrefs ──
+const gc = 'https://gifcities.org';
+const aw = 'https://artwork.neocities.org';
+const ci = 'https://cinni.net/?z=/toybox/ani';
+const FF = 'https://web.archive.org/web/20091027060039/http://hk.geocities.com/fanfanfannie/fanstart.htm';
+const baseHref = "https://web.archive.org/web/20071218055335/http://www.anikaos.com/";
+const ik = 'https://kaoani.ikilote.net/english/';
+
+const KAOANI = [
+  { href: baseHref, src: "pixels/trinkets/kao/angelstar-kaos024.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/anime_kitties-9793.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/anime_kitties-9799.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/anime_kitties-9807.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/chikas_blue48.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/code_lyoko_jeremie.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/code_lyoko_yumi_v.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/ino.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/kao_licca_kao-ani_23.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/kao_licca-activities03.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/kao_licca-activities04.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/kao_licca-activities07.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/kao_licca-activities08.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/kao_licca-activities10.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/kao_licca-activities13.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/kao_licca-activities26.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/kao_licca-activities33.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/kao_licca-activities34.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/kao_licca-activities35.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/kao_licca-activities39.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/kao_licca-activities40.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/kaos-bear06.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/kaos-bear08.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/kaos-cactus23.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/kaos-cats05.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/kaos-cats24.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/kaos-crazybunny01.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/kaos-crazybunny04.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/kaos-lemon13.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/kaos-panda12.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/onigiri_fruit.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/onigiri_moon_sleep.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/onigiri_ramen.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/purple-hikahin.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/purple-hikasm.gif", alt: "" },
+  { href: baseHref, src: "pixels/trinkets/kao/temari.gif", alt: "" },
+  { href:FF, src:KA+'white_feeler082.gif',       alt:'white feeler 082' },
+  { href:gc, src:KA+'gifcities (22).gif',        alt:'kaoani-bouquet' },
+  { href:gc, src:KA+'gifcities (21).gif',        alt:'kaoani-bubbles' },
+  { href:gc, src:KA+'gifcities (54).gif',        alt:'kaoani-hamster' },
+  { href:gc, src:KA+'gifcities (24).gif',        alt:'kaoani-orange' },
+  { href:gc, src:KA+'gifcities (23).gif',        alt:'kaoani-pool' },
+  { href:gc, src:KA+'gifcities (41).gif',        alt:'kaoani-princess' },
+  { href:aw, src:KA+'artworkneocities (51).gif', alt:'kaoanicat' },
+  { href:gc, src:KA+'gifcities (55).gif',        alt:'catinPOOL' },
+  { href:gc, src:KA+'blobconfetti_from_mypixelmelody.gif', alt:'Kaoani-hearts' },
+  { href:ik, src:KA+'y-wneu.gif',         alt:'' },
+  { href:ik, src:KA+'y-syabon.gif',       alt:'' },
+  { href:ik, src:KA+'004 (2).gif',        alt:'' },
+  { href:ik, src:KA+'002 (1).gif',        alt:'' },
+  { href:ik, src:KA+'065 (1).gif',        alt:'' },
+  { href:ik, src:KA+'009 (1).gif',        alt:'' },
+  { href:ik, src:KA+'024.gif',            alt:'' },
+  { href:ik, src:KA+'01622.gif',          alt:'' },
+  { href:ik, src:KA+'tama-zzz.gif',       alt:'' },
+  { href:ik, src:KA+'tama-ame.gif',       alt:'' },
+  { href:ik, src:KA+'chib-ame2.gif',      alt:'' },
+  { href:ik, src:KA+'pmu.gif',            alt:'' },
+  { href:ik, src:KA+'oyogi.gif',          alt:'' },
+  { href:ik, src:KA+'skipt.gif',          alt:'' },
+  { href:ik, src:KA+'sarfpt.gif',         alt:'' },
+  { href:ik, src:KA+'momokoipt.gif',      alt:'' },
+  { href:ik, src:KA+'guiOpt.gif',         alt:'' },
+  { href:ik, src:KA+'freept.gif',         alt:'' },
+  { href:ik, src:KA+'fisht.gif',          alt:'' },
+  { href:ik, src:KA+'bycpt.gif',          alt:'' },
+  { href:ik, src:KA+'ba2yOpt.gif',        alt:'' },
+  { href:ik, src:KA+'diving.gif',         alt:'' },
+  { href:ik, src:KA+'011 (1).gif',        alt:'' },
+  { href:ik, src:KA+'017.gif',            alt:'' },
+  { href:ik, src:KA+'003.gif',            alt:'' },
+  { href:ik, src:KA+'001 (2).gif',        alt:'' },
+  { href:ik, src:KA+'018 (1).gif',        alt:'' },
+  { href:ik, src:KA+'004 (1).gif',        alt:'' },
+  { href:ik, src:KA+'002.gif',            alt:'' },
+  { href:ik, src:KA+'026.gif',            alt:'' },
+  { href:ik, src:KA+'005.gif',            alt:'' },
+  { href:ik, src:KA+'2.gif',              alt:'' },
+  { href:ik, src:KA+'001 (1).gif',        alt:'' },
+  { href:ik, src:KA+'004.gif',            alt:'' },
+  { href:ik, src:KA+'008 (1).gif',        alt:'' },
+  { href:ik, src:KA+'029.gif',            alt:'' },
+  { href:ik, src:KA+'013.gif',            alt:'' },
+  { href:ik, src:KA+'034.gif',            alt:'' },
+  { href:ik, src:KA+'033.gif',            alt:'' },
+  { href:ik, src:KA+'032.gif',            alt:'' },
+  { href:ik, src:KA+'027.gif',            alt:'' },
+  { href:ik, src:KA+'065.gif',            alt:'' },
+  { href:ik, src:KA+'039.gif',            alt:'' },
+  { href:ik, src:KA+'g-yakiimo.gif',      alt:'' },
+  { href:ik, src:KA+'g-gar.gif',          alt:'' },
+  { href:ik, src:KA+'flower_amimono.gif', alt:'' },
+  { href:ik, src:KA+'044.gif',            alt:'' },
+  { href:ik, src:KA+'028.gif',            alt:'' },
+  { href:ik, src:KA+'009.gif',            alt:'' },
+  { href:ik, src:KA+'008.gif',            alt:'' },
+  { href:ik, src:KA+'007.gif',            alt:'' },
+  { href:ik, src:KA+'001.gif',            alt:'' },
+  { href:ik, src:KA+'018.gif',            alt:'' },
+  { href:ik, src:KA+'chirup_gust.gif',    alt:'' },
+  { href:ik, src:KA+'b_kasa.gif',         alt:'' },
+  { href:ik, src:KA+'016.gif',            alt:'' },
+  { href:ik, src:KA+'012.gif',            alt:'' },
+  { href:ik, src:KA+'011.gif',            alt:'' },
+  { href:ik, src:KA+'010.gif',            alt:'' },
+  { href:ci, src:KA+'Artist_Kaoani.gif',         alt:'Kaoani' },
+  { href:ci, src:KA+'kittya18.gif',              alt:'Kaoani' },
+  { href:ci, src:KA+'kao.gif',                   alt:'Kaoani' },
+  { href:gc, src:KA+'01092.gif',                 alt:'kao' },
+  { href:gc, src:KA+'05010.gif',                 alt:'kao' },
+  { href:gc, src:KA+'10001.gif',                 alt:'kao' },
+  { href:gc, src:KA+'11080.gif',                 alt:'kao' },
+  { href:gc, src:KA+'12001.gif',                 alt:'kao' },
+  { href:gc, src:KA+'aco3.gif',                  alt:'kao' },
+  { href:gc, src:KA+'anibrownwacky.gif',         alt:'kao' },
+  { href:gc, src:KA+'anifloatcrab3.gif',         alt:'kao' },
+  { href:gc, src:KA+'anijumprope.gif',           alt:'kao' },
+  { href:gc, src:KA+'anikaostripe bob.gif',      alt:'kao' },
+  { href:gc, src:KA+'anipinklove.gif',           alt:'kao' },
+  { href:gc, src:KA+'anipinkqueen.gif',          alt:'kao' },
+  { href:gc, src:KA+'anirabbitjump.gif',         alt:'kao' },
+  { href:gc, src:KA+'anitorch.gif',              alt:'kao' },
+  { href:gc, src:KA+'aniwhitebox.gif',           alt:'kao' },
+  { href:gc, src:KA+'aniwhitejumprope.gif',      alt:'kao' },
+  { href:gc, src:KA+'aniwhitesmoke.gif',         alt:'kao' },
+  { href:gc, src:KA+'aniyalorocket.gif',         alt:'kao' },
+  { href:gc, src:KA+'blob18.gif',                alt:'kao' },
+  { href:gc, src:KA+'chuu.gif',                  alt:'kao' },
+  { href:gc, src:KA+'kao (1).gif',               alt:'kao' },
+  { href:gc, src:KA+'kao (2).gif',               alt:'kao' },
+  { href:gc, src:KA+'kao (3).gif',               alt:'kao' },
+  { href:gc, src:KA+'kao_005.gif',               alt:'kao' },
+  { href:gc, src:KA+'kao_0024.gif',              alt:'kao' },
+  { href:gc, src:KA+'kaoPisces.gif',             alt:'kao' },
+  { href:gc, src:KA+'M028.gif',                  alt:'kao' },
+  { href:gc, src:KA+'m1104.gif',                 alt:'kao' },
+  { href:gc, src:KA+'m1113.gif',                 alt:'kao' },
+  { href:gc, src:KA+'m1404.gif',                 alt:'kao' },
+  { href:gc, src:KA+'puff12.gif',                alt:'kao' },
+  { href:gc, src:KA+'puff51.gif',                alt:'kao' },
+  { href:gc, src:KA+'s1115.gif',                 alt:'kao' },
+  { href:gc, src:KA+'s1116.gif',                 alt:'kao' },
+  { href:gc, src:KA+'u-chu.gif',                 alt:'kao' },
+  { href:gc, src:KA+'val20032.gif',              alt:'kao' },
+  { href:FF, src:KA+'b_bgpork001.gif',           alt:'bgpork' },
+  { href:FF, src:KA+'b_bigear009.gif',           alt:'big ear 009' },
+  { href:FF, src:KA+'b_bigear014.gif',           alt:'big ear 014' },
+  { href:FF, src:KA+'b_blue003_rice.gif',        alt:'blue rice' },
+  { href:FF, src:KA+'b_blue006_ring.gif',        alt:'blue ring' },
+  { href:FF, src:KA+'b_blue008_leaf.gif',        alt:'blue leaf' },
+  { href:FF, src:KA+'b_blue027_brush.gif',       alt:'blue brush' },
+  { href:FF, src:KA+'b_blue028.gif',             alt:'blue 028' },
+  { href:FF, src:KA+'b_blue030.gif',             alt:'blue 030' },
+  { href:FF, src:KA+'b_blue055_home.gif',        alt:'blue home' },
+  { href:FF, src:KA+'b_cure001_listen.gif',      alt:'cure listen' },
+  { href:FF, src:KA+'b_pud005_menu.gif',         alt:'pud menu' },
+  { href:FF, src:KA+'b_pud006_home.gif',         alt:'pud home' },
+  { href:FF, src:KA+'b_wtbun001.gif',            alt:'wtbun 001' },
+  { href:FF, src:KA+'b_wtbun055_blank.gif',      alt:'wtbun blank' },
+  { href:FF, src:KA+'bamboo085.gif',             alt:'bamboo 085' },
+  { href:FF, src:KA+'bdrat001.gif',              alt:'bdrat 001' },
+  { href:FF, src:KA+'ob001.gif',                 alt:'ob 001' },
+  { href:FF, src:KA+'ob004.gif',                 alt:'ob 004' },
+  { href:FF, src:KA+'ob005.gif',                 alt:'ob 005' },
+  { href:FF, src:KA+'white_feeler005.gif',       alt:'white feeler 005' },
+  { href:FF, src:KA+'white_feeler066.gif',       alt:'white feeler 066' },
+  { href:gc, src:KA+'gifcities (25).gif',        alt:'kaoani-angel' },
+      { href:FF, src:KA+'ob008.gif',                 alt:'ob 008' },
+      { href:FF, src:KA+'ob006.gif',                 alt:'ob 006' },
+      { href:FF, src:KA+'ob003.gif',                 alt:'ob 003' },
+];
+
+// ── renderArray without resize ──
+function renderArray(array, containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  let row = document.createElement("div");
+  row.className = "row";
+  container.appendChild(row);
+  array.forEach(item => {
+    if (item.break) {
+      row = document.createElement("div");
+      row.className = "row";
+      container.appendChild(row);
+      return;
+    }
+    const link = document.createElement("a");
+    link.href = item.href || "#";
+    link.target = "_blank";
+    const img = document.createElement("img");
+    img.src = item.src;
+    img.alt = item.alt || "";
+    link.appendChild(img);
+    row.appendChild(link);
+  });
+}
+
+const shelf = document.createElement('div');
+shelf.id = 'shelf-kaoani';
+document.getElementById('collection-shelf-target').appendChild(shelf);
+renderArray(KAOANI, 'shelf-kaoani');
+</script>
+
+</body>
+</html>

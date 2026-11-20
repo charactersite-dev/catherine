@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CallMeCatherine — Home</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700&family=DM+Serif+Display:ital@0;1&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{min-height:100%;width:100%;}
+
+body{
+  font-family:'Nunito',sans-serif;
+  background:linear-gradient(180deg,#7090d8 0%,#9870d0 25%,#c878c0 50%,#e0a0c8 72%,#f0c0d8 90%,#f8d8ec 100%);
+  background-attachment:fixed;
+  min-height:100vh;
+  position:relative;
+  overflow-x:hidden;
+}
+
+@keyframes twinkle{0%,100%{opacity:var(--lo,0.3);transform:scale(1);}50%{opacity:var(--hi,1);transform:scale(1.4);}}
+@keyframes floatCloud{from{transform:translateX(var(--start,110vw));}to{transform:translateX(-400px);}}
+
+/* Fixed background layers */
+#stars,#clouds{
+  position:fixed;top:0;left:0;
+  width:100%;height:100%;
+  pointer-events:none;
+}
+#stars{z-index:0;}
+#clouds{z-index:1;}
+
+/* Page layout */
+.page-wrap{
+  position:relative;
+  z-index:2;
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 24px 60px;
+}
+
+/* ===== BANNER ===== */
+.banner{
+  width:100%;
+  padding:18px 0 10px;
+  text-align:center;
+}
+.banner svg{display:block;margin:0 auto;overflow:visible;}
+
+/* ===== BODY LAYOUT ===== */
+.body-layout{
+  display:flex;
+  gap:18px;
+  align-items:flex-start;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+  width:195px;
+  flex-shrink:0;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.sidebar-card{
+  background:rgba(255,255,255,0.5);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.65);
+  border-radius:18px;
+  padding:14px 12px;
+  color:#4a2060;
+}
+
+.sidebar-card h3{
+  font-family:'Pacifico',cursive;
+  font-size:13px;
+  color:#b060d0;
+  margin-bottom:10px;
+  text-align:center;
+}
+
+.mood-badge{
+  display:inline-block;
+  background:linear-gradient(90deg,#ffb3de,#c89fff);
+  border-radius:20px;
+  padding:3px 11px;
+  font-size:11px;
+  font-weight:700;
+  color:#fff;
+  letter-spacing:0.04em;
+}
+
+.nav-list{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.nav-list li a{
+  display:flex;align-items:center;gap:8px;
+  text-decoration:none;
+  color:#5a2a80;
+  font-size:12.5px;font-weight:600;
+  padding:7px 10px;
+  border-radius:12px;
+  background:rgba(200,160,255,0.12);
+  border:1px solid rgba(200,160,255,0.22);
+  transition:background 0.18s;
+}
+.nav-list li a:hover{background:rgba(200,160,255,0.3);}
+.nav-list li a.active{
+  background:linear-gradient(90deg,rgba(255,150,210,0.35),rgba(180,130,255,0.35));
+  border-color:rgba(220,160,255,0.5);
+  color:#7a20a0;
+}
+.nav-icon{width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+
+.club-pill{
+  display:block;font-size:11px;color:#7a40a0;
+  padding:4px 8px;margin-bottom:4px;
+  background:rgba(200,160,255,0.12);
+  border-radius:8px;text-decoration:none;
+  border:1px solid rgba(200,160,255,0.2);
+  transition:background 0.15s;
+}
+.club-pill:hover{background:rgba(200,160,255,0.3);}
+
+.ext-link{
+  display:block;font-size:11.5px;color:#9060c0;
+  text-decoration:none;padding:3px 0;
+}
+.ext-link:hover{color:#5a2a80;text-decoration:underline;}
+
+/* ===== MAIN CONTENT ===== */
+.main-content{
+  flex:1;min-width:0;
+  display:flex;flex-direction:column;gap:16px;
+}
+
+.content-card{
+  background:rgba(255,255,255,0.5);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.65);
+  border-radius:22px;
+  padding:24px 26px;
+  color:#4a2060;
+}
+
+.welcome-title{
+  font-family:'Pacifico',cursive;
+  font-size:20px;
+  color:#b060d0;
+  margin-bottom:12px;
+}
+
+.welcome-text{
+  font-size:13.5px;line-height:1.8;color:#5a2a80;
+}
+.welcome-text a{color:#c060e0;}
+
+.guestbook-title{
+  font-family:'Pacifico',cursive;
+  font-size:17px;color:#b060d0;
+  margin-bottom:14px;
+  display:flex;align-items:center;gap:8px;
+}
+
+.guestbook-inner{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.guestbook-left{
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  background:rgba(255,200,240,0.2);
+  border-radius:14px;padding:22px 12px;
+  border:1px dashed rgba(200,130,230,0.38);
+  text-align:center;
+}
+.guestbook-left .leave-msg{
+  font-family:'DM Serif Display',serif;
+  font-style:italic;font-size:17px;
+  color:#c060d0;line-height:1.5;margin-bottom:6px;
+}
+.guestbook-left .sub{font-size:11px;color:#a080b0;}
+
+.guestbook-right{
+  background:rgba(255,200,240,0.15);
+  border-radius:14px;padding:12px;
+  border:1px solid rgba(200,160,230,0.25);
+  min-height:140px;
+  display:flex;flex-direction:column;gap:8px;
+}
+.msg-bubble{background:rgba(255,255,255,0.5);border-radius:10px;padding:8px 10px;}
+.msg-bubble .msg-name{font-weight:700;color:#c060d0;font-size:11px;}
+.msg-bubble .msg-text{color:#5a2a80;margin-top:2px;font-size:12px;}
+.msg-bubble .msg-time{font-size:10px;color:#b090c0;margin-top:3px;}
+.msg-note{font-size:11px;color:#a080b0;font-style:italic;text-align:center;padding:6px 4px;}
+
+/* ===== HAVE A GOOD DAY FOOTER STAMP ===== */
+.footer-stamp{
+  text-align:center;
+  padding-top:4px;
+  padding-bottom:8px;
+}
+.footer-stamp img{
+  image-rendering:pixelated;
+  border:1px solid rgba(200,150,230,0.3);
+  border-radius:4px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:620px){
+  .body-layout{flex-direction:column;}
+  .sidebar{width:100%;}
+  .guestbook-inner{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- Background layers -->
+<div id="stars"></div>
+<div id="clouds"></div>
+
+<div class="page-wrap">
+
+  <!-- BANNER -->
+  <div class="banner">
+    <svg width="100%" viewBox="0 0 860 118" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="#ff8fd4"/>
+          <stop offset="25%"  stop-color="#c97fff"/>
+          <stop offset="50%"  stop-color="#82cfff"/>
+          <stop offset="75%"  stop-color="#ffb3e8"/>
+          <stop offset="100%" stop-color="#ffd97a"/>
+        </linearGradient>
+      </defs>
+      <!-- Main title -->
+      <text x="430" y="78" text-anchor="middle"
+        font-family="'Pacifico', cursive"
+        font-size="52"
+        fill="url(#titleGrad)"
+        style="filter:drop-shadow(0 2px 14px rgba(180,100,230,0.4));">CallMeCatherine</text>
+      <!-- Subtitle -->
+      <text x="430" y="108" text-anchor="middle"
+        font-family="'Nunito', sans-serif"
+        font-size="12"
+        fill="#b080d0"
+        letter-spacing="3"
+        font-weight="600">My Little Corner Of The Web</text>
+    </svg>
+  </div>
+
+  <!-- BODY -->
+  <div class="body-layout">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="sidebar-card" style="text-align:center;">
+        <h3>Hello!</h3>
+        <p style="font-size:12px;color:#7a40a0;margin-bottom:8px;">I'm Catherine aka<br><strong style="color:#c060d0;">GlitterRen</strong> ✨</p>
+        <p style="font-size:11px;color:#a080b0;margin-bottom:8px;">Mood //</p>
+        <span class="mood-badge">🌙 Cozy &amp; Caffeinated</span>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>★ Explore ★</h3>
+        <ul class="nav-list">
+          <li><a href="index.html" class="active"><span class="nav-icon">🏠</span>Home</a></li>
+          <li><a href="aquarium.html"><span class="nav-icon">🐠</span>Aquarium</a></li>
+          <li><a href="dollhouse.html"><span class="nav-icon">🪆</span>Dollhouse</a></li>
+          <li><a href="trinkets.html"><span class="nav-icon">🍬</span>Trinkets</a></li>
+          <li><a href="space.html"><span class="nav-icon">🌌</span>Space</a></li>
+          <li><a href="greenhouse.html"><span class="nav-icon">🌿</span>Greenhouse</a></li>
+          <li><a href="people.html"><span class="nav-icon">🫧</span>People</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Clubs</h3>
+        <a class="club-pill" href="#">🍬 Cotton Candy</a>
+        <a class="club-pill" href="#">✉️ Sisterhood of the Traveling Journal</a>
+        <a class="club-pill" href="#">→ Next</a>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Other Links</h3>
+        <a class="ext-link" href="#">↗ My OCs</a>
+        <a class="ext-link" href="#">↗ External 2</a>
+      </div>
+
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main-content">
+
+      <div class="content-card">
+        <div class="welcome-title">★ Welcome!</div>
+        <p class="welcome-text">
+          My name is Catherine, aka <strong style="color:#c060d0;">GlitterRen</strong>.
+          I started learning HTML on Neopets and <a href="#">My Geocities</a>, and the fact
+          that Neocities exists makes me so happy. Now I can make the site I always wanted.
+          And there are cliques, web rings, and clubs too! Whoopee! 🎉
+        </p>
+      </div>
+
+      <div class="content-card">
+        <div class="guestbook-title">♡ Guestbook</div>
+        <div class="guestbook-inner">
+          <div class="guestbook-left">
+            <div style="font-size:28px;margin-bottom:10px;">💌</div>
+            <div class="leave-msg">Leave me a message!<br>♡ Catherine</div>
+            <div class="sub">Drop a note and say hello ~</div>
+          </div>
+          <div class="guestbook-right">
+            <!-- Paste your Cbox embed code here -->
+            <div class="msg-bubble">
+              <div class="msg-name">Catherine</div>
+              <div class="msg-text">Testing!! 🔴🔵</div>
+              <div class="msg-time">2 weeks ago</div>
+            </div>
+            <div class="msg-note">Paste your Cbox embed here ♡</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- "Have a good day" gif stamp — replace src with your actual gif path -->
+      <div class="footer-stamp">
+        <img src="https://kaoani.ikilote.net/nav/haveagoodday.gif" alt="Have a good day!" height="32">
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script>
+(function(){
+  const stars = document.getElementById('stars');
+  const clouds = document.getElementById('clouds');
+
+  // Twinkling stars — plain white circles only
+  for(let i=0;i<28;i++){
+    const s=document.createElement('div');
+    const sz=1.5+Math.random()*2.5;
+    const lo=0.2+Math.random()*0.35;
+    s.style.cssText=`position:absolute;width:${sz}px;height:${sz}px;border-radius:50%;background:white;left:${Math.random()*100}%;top:${Math.random()*45}%;--lo:${lo};--hi:1;animation:twinkle ${2+Math.random()*3}s ease-in-out infinite ${-Math.random()*4}s;`;
+    stars.appendChild(s);
+  }
+
+  // Bottom clouds only, drifting left
+  const cloudDefs=[
+    {sz:140,bot:0,  dur:32,delay:0,   op:0.82},
+    {sz:100,bot:0,  dur:26,delay:-10, op:0.72},
+    {sz:170,bot:0,  dur:40,delay:-20, op:0.78},
+    {sz:80, bot:14, dur:22,delay:-6,  op:0.65},
+    {sz:120,bot:6,  dur:36,delay:-28, op:0.70},
+    {sz:95, bot:10, dur:29,delay:-14, op:0.68},
+  ];
+  cloudDefs.forEach((c,i)=>{
+    const startX=220+i*200;
+    const w=document.createElement('div');
+    w.style.cssText=`position:absolute;bottom:${c.bot}px;left:0;--start:${startX}px;animation:floatCloud ${c.dur}s linear infinite ${c.delay}s;opacity:${c.op};`;
+    const sz=c.sz;
+    w.innerHTML=`<div style="position:relative;display:inline-block;">
+      <div style="width:${sz}px;height:${Math.round(sz*0.36)}px;background:rgba(255,255,255,0.78);border-radius:50px;position:relative;">
+        <div style="width:${Math.round(sz*0.46)}px;height:${Math.round(sz*0.46)}px;background:rgba(255,255,255,0.78);border-radius:50%;position:absolute;top:${-Math.round(sz*0.23)}px;left:${Math.round(sz*0.12)}px;"></div>
+        <div style="width:${Math.round(sz*0.36)}px;height:${Math.round(sz*0.36)}px;background:rgba(255,255,255,0.78);border-radius:50%;position:absolute;top:${-Math.round(sz*0.18)}px;left:${Math.round(sz*0.45)}px;"></div>
+      </div>
+    </div>`;
+    clouds.appendChild(w);
+  });
+})();
+</script>
+</body>
+</html>

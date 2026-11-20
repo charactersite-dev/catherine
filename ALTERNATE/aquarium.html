@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CallmeCatherine ~ Pixel Aquarium</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script type="text/javascript">
+// <![CDATA[
+var colour="random";
+var sparkles=50;
+var x=ox=400;
+var y=oy=300;
+var swide=800;
+var shigh=600;
+var sleft=sdown=0;
+var tiny=new Array();
+var star=new Array();
+var starv=new Array();
+var starx=new Array();
+var stary=new Array();
+var tinyx=new Array();
+var tinyy=new Array();
+var tinyv=new Array();
+
+window.onload=function() { if (document.getElementById) {
+  var i, rats, rlef, rdow;
+  for (var i=0; i<sparkles; i++) {
+    var rats=createDiv(3, 3);
+    rats.style.visibility="hidden";
+    rats.style.zIndex="999";
+    document.body.appendChild(tiny[i]=rats);
+    starv[i]=0;
+    tinyv[i]=0;
+    var rats=createDiv(5, 5);
+    rats.style.backgroundColor="transparent";
+    rats.style.visibility="hidden";
+    rats.style.zIndex="999";
+    var rlef=createDiv(1, 5);
+    var rdow=createDiv(5, 1);
+    rats.appendChild(rlef);
+    rats.appendChild(rdow);
+    rlef.style.top="2px";
+    rlef.style.left="0px";
+    rdow.style.top="0px";
+    rdow.style.left="2px";
+    document.body.appendChild(star[i]=rats);
+  }
+  set_width();
+  sparkle();
+}}
+
+function sparkle() {
+  var c;
+  if (Math.abs(x-ox)>1 || Math.abs(y-oy)>1) {
+    ox=x; oy=y;
+    for (c=0; c<sparkles; c++) if (!starv[c]) {
+      star[c].style.left=(starx[c]=x)+"px";
+      star[c].style.top=(stary[c]=y+1)+"px";
+      star[c].style.clip="rect(0px, 5px, 5px, 0px)";
+      star[c].childNodes[0].style.backgroundColor=star[c].childNodes[1].style.backgroundColor=(colour=="random")?newColour():colour;
+      star[c].style.visibility="visible";
+      starv[c]=50;
+      break;
+    }
+  }
+  for (c=0; c<sparkles; c++) {
+    if (starv[c]) update_star(c);
+    if (tinyv[c]) update_tiny(c);
+  }
+  setTimeout("sparkle()", 40);
+}
+
+function update_star(i) {
+  if (--starv[i]==25) star[i].style.clip="rect(1px, 4px, 4px, 1px)";
+  if (starv[i]) {
+    stary[i]+=1+Math.random()*3;
+    starx[i]+=(i%5-2)/5;
+    if (stary[i]<shigh+sdown) {
+      star[i].style.top=stary[i]+"px";
+      star[i].style.left=starx[i]+"px";
+    } else {
+      star[i].style.visibility="hidden";
+      starv[i]=0; return;
+    }
+  } else {
+    tinyv[i]=50;
+    tiny[i].style.top=(tinyy[i]=stary[i])+"px";
+    tiny[i].style.left=(tinyx[i]=starx[i])+"px";
+    tiny[i].style.width="2px";
+    tiny[i].style.height="2px";
+    tiny[i].style.backgroundColor=star[i].childNodes[0].style.backgroundColor;
+    star[i].style.visibility="hidden";
+    tiny[i].style.visibility="visible";
+  }
+}
+
+function update_tiny(i) {
+  if (--tinyv[i]==25) {
+    tiny[i].style.width="1px";
+    tiny[i].style.height="1px";
+  }
+  if (tinyv[i]) {
+    tinyy[i]+=1+Math.random()*3;
+    tinyx[i]+=(i%5-2)/5;
+    if (tinyy[i]<shigh+sdown) {
+      tiny[i].style.top=tinyy[i]+"px";
+      tiny[i].style.left=tinyx[i]+"px";
+    } else {
+      tiny[i].style.visibility="hidden";
+      tinyv[i]=0; return;
+    }
+  } else tiny[i].style.visibility="hidden";
+}
+
+document.onmousemove=mouse;
+function mouse(e) {
+  if (e) { y=e.pageY; x=e.pageX; }
+  else { set_scroll(); y=event.y+sdown; x=event.x+sleft; }
+}
+
+window.onscroll=set_scroll;
+function set_scroll() {
+  if (typeof(self.pageYOffset)=='number') { sdown=self.pageYOffset; sleft=self.pageXOffset; }
+  else if (document.body && (document.body.scrollTop || document.body.scrollLeft)) { sdown=document.body.scrollTop; sleft=document.body.scrollLeft; }
+  else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) { sleft=document.documentElement.scrollLeft; sdown=document.documentElement.scrollTop; }
+  else { sdown=0; sleft=0; }
+}
+
+window.onresize=set_width;
+function set_width() {
+  var sw_min=999999; var sh_min=999999;
+  if (document.documentElement && document.documentElement.clientWidth) {
+    if (document.documentElement.clientWidth>0) sw_min=document.documentElement.clientWidth;
+    if (document.documentElement.clientHeight>0) sh_min=document.documentElement.clientHeight;
+  }
+  if (typeof(self.innerWidth)=='number' && self.innerWidth) {
+    if (self.innerWidth>0 && self.innerWidth<sw_min) sw_min=self.innerWidth;
+    if (self.innerHeight>0 && self.innerHeight<sh_min) sh_min=self.innerHeight;
+  }
+  if (document.body.clientWidth) {
+    if (document.body.clientWidth>0 && document.body.clientWidth<sw_min) sw_min=document.body.clientWidth;
+    if (document.body.clientHeight>0 && document.body.clientHeight<sh_min) sh_min=document.body.clientHeight;
+  }
+  if (sw_min==999999 || sh_min==999999) { sw_min=800; sh_min=600; }
+  swide=sw_min; shigh=sh_min;
+}
+
+function createDiv(height, width) {
+  var div=document.createElement("div");
+  div.style.position="absolute";
+  div.style.height=height+"px";
+  div.style.width=width+"px";
+  div.style.overflow="hidden";
+  return (div);
+}
+
+function newColour() {
+  var c=new Array();
+  c[0]=255;
+  c[1]=Math.floor(Math.random()*256);
+  c[2]=Math.floor(Math.random()*(256-c[1]/2));
+  c.sort(function(){return (0.5 - Math.random());});
+  return ("rgb("+c[0]+", "+c[1]+", "+c[2]+")");
+}
+// ]]>
+</script>
+</head>
+
+<body>
+
+<div id="sidebar-container"></div>
+<script>
+fetch('sidebar.html')
+  .then(r => r.text())
+  .then(d => { document.getElementById('sidebar-container').innerHTML = d; });
+</script>
+
+<div class="page-container">
+<main id="main-content">
+
+<section>
+<h2>Pixel Aquarium</h2>
+<hr><br>
+</section>
+
+<!-- BEACH -->
+<section>
+<div class="section-title">
+  <span class="letter" style="--i:0">B</span><span class="letter" style="--i:1">E</span><span class="letter" style="--i:2">A</span><span class="letter" style="--i:3">C</span><span class="letter" style="--i:4">H</span>
+</div>
+<div id="beach-container"></div>
+<img src="pixels/dividers/gifcitiesorg1 (47).gif" width="900px">
+</section>
+
+<br><hr><br>
+
+<!-- UNDER THE SEA -->
+<section>
+<div class="section-title">
+  <span class="letter" style="--i:0">U</span><span class="letter" style="--i:1">n</span><span class="letter" style="--i:2">d</span><span class="letter" style="--i:3">e</span><span class="letter" style="--i:4">r</span><span style="display:inline-block;width:5px"></span><span class="letter" style="--i:6">t</span><span class="letter" style="--i:7">h</span><span class="letter" style="--i:8">e</span><span style="display:inline-block;width:5px"></span><span class="letter" style="--i:10">s</span><span class="letter" style="--i:11">e</span><span class="letter" style="--i:12">a</span>
+</div>
+<div id="aquarium-container"></div>
+</section>
+
+<br><hr><br>
+
+<!-- DEEP SEA -->
+<section>
+<div class="section-title">
+  <span class="letter" style="--i:0">D</span><span class="letter" style="--i:1">e</span><span class="letter" style="--i:2">e</span><span class="letter" style="--i:3">p</span><span style="display:inline-block;width:5px"></span><span class="letter" style="--i:5">S</span><span class="letter" style="--i:6">e</span><span class="letter" style="--i:7">a</span>
+</div>
+<div id="deepsea-container"></div>
+</section>
+
+<br><hr><br>
+
+<!-- SEA FLOOR -->
+<section>
+<div class="section-title">
+  <span class="letter" style="--i:0">S</span><span class="letter" style="--i:1">e</span><span class="letter" style="--i:2">a</span><span style="display:inline-block;width:5px"></span><span class="letter" style="--i:4">F</span><span class="letter" style="--i:5">l</span><span class="letter" style="--i:6">o</span><span class="letter" style="--i:7">o</span><span class="letter" style="--i:8">r</span>
+</div>
+<div id="seafloor-container"></div>
+</section>
+
+<div style="display:block; width:100%; text-align:center;">
+  <img src="pixels/dividers/artworkneocities (83).gif" alt="realisticcoral">
+</div>
+
+</main>
+</div>
+
+<footer align="center">
+<br><a href="https://callmecatherine.neocities.org/"><img src="assets/backtohome.gif"></a><br>
+</footer>
+
+<script>
+  // ── Page-level resize settings (min 30 per original comment) ──
+  const PAGE_MAX = 200;
+  const PAGE_MIN = 30;
+
+  function resizeImage(img) {
+    const w = img.naturalWidth, h = img.naturalHeight;
+    if (!w || !h) return;
+    const scaleDown = Math.min(PAGE_MAX/w, PAGE_MAX/h, 1);
+    const scaleUp   = Math.max(PAGE_MIN/w, PAGE_MIN/h, 1);
+    const scale = (w > PAGE_MAX || h > PAGE_MAX) ? scaleDown : (w < PAGE_MIN || h < PAGE_MIN) ? scaleUp : 1;
+    img.style.width  = (w * scale) + "px";
+    img.style.height = (h * scale) + "px";
+  }
+
+  function attachResize(img) {
+    if (img.naturalWidth > 0) { resizeImage(img); }
+    else if (img.complete)    { setTimeout(() => attachResize(img), 50); }
+    else                      { img.onload = () => resizeImage(img); }
+  }
+
+  function renderArray(array, containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    let row = document.createElement("div");
+    row.className = "row";
+    container.appendChild(row);
+    array.forEach(item => {
+      if (item.break) {
+        row = document.createElement("div");
+        row.className = "row";
+        container.appendChild(row);
+        return;
+      }
+      const link = document.createElement("a");
+      link.href = item.href || "#";
+      link.target = "_blank";
+      const img = document.createElement("img");
+      img.src = item.src;
+      img.alt = item.alt || "";
+      attachResize(img);
+      link.appendChild(img);
+      row.appendChild(link);
+    });
+  }
+
+  const sd = "https://sakuradreams.neocities.org/";
+  const aw = "https://artwork.neocities.org";
+  const gc = "https://gifcities.org/";
+  const pg = "https://pixel-garden.tumblr.com";
+
+  const beach = [
+    { href:sd, src:"pixels/aqua/Dolphin05.gif", alt:"" },
+  ];
+
+  const aquarium = [
+
+    { href:sd, src:"pixels/aqua/04.gif",                           alt:"" },
+    { href:sd, src:"pixels/aqua/05.gif",                           alt:"" },
+    { href:sd, src:"pixels/aqua/06.gif",                           alt:"" },
+    { href:sd, src:"pixels/aqua/12.gif",                           alt:"" },
+    { href:sd, src:"pixels/aqua/13.gif",                           alt:"" },
+    { href:aw, src:"pixels/aqua/artworkneocities (67).gif",        alt:"" },
+    { href:aw, src:"pixels/aqua/artworkneocities (98).gif",        alt:"" },
+    { href:aw, src:"pixels/aqua/artworkneocities (10).gif",        alt:"" },
+    { href:sd, src:"pixels/aqua/Fish03.gif",                       alt:"" },
+    { break: true },
+    { href:sd, src:"pixels/aqua/Dolphin03.gif",                    alt:"" },
+    { href:"https://pixel-garden.tumblr.com", src:"pixels/aqua/pixel-gardenTUMBLR (1).gif", alt:"" },
+    { href:gc, src:"pixels/aqua/astronauta1.gif",                  alt:"" },
+  ];
+
+  const deepSea = [
+    { href:"https://canva.com", src:"pixels/aqua/jellyfish.png",   alt:"" },
+    { href:sd, src:"pixels/aqua/Fish06.gif",                       alt:"" },
+    { href:sd, src:"pixels/aqua/Fish05.gif",                       alt:"" },
+  ];
+
+  const seaFloor = [
+    { href:aw, src:"pixels/aqua/artworkneocities (90).gif",        alt:"" },
+    { href:aw, src:"pixels/aqua/artworkneocities (24).gif",        alt:"" },
+    { href:sd, src:"pixels/aqua/Shell04.gif",                      alt:"" },
+    { href:sd, src:"pixels/aqua/Ray01.gif",                        alt:"" },
+  ];
+
+  window.addEventListener("DOMContentLoaded", () => {
+    renderArray(beach,    "beach-container");
+    renderArray(aquarium, "aquarium-container");
+    renderArray(deepSea,  "deepsea-container");
+    renderArray(seaFloor, "seafloor-container");
+  });
+</script>
+
+</body>
+</html>

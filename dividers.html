@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CallMeCatherine ~ Dividers</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pacifico&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<span id="page-top"></span>
+<div id="stars"></div>
+<div id="clouds"></div>
+
+<div class="page-wrap">
+  <div id="layout-header"></div>
+
+  <div class="body-layout">
+    <div id="layout-sidebar"></div>
+    <div class="main-content">
+
+  <div class="page-container">
+    <main id="main-content">
+      <div class="section-title">
+        <span class="letter" style="--i:0">D</span><span class="letter" style="--i:1">i</span><span class="letter" style="--i:2">v</span><span class="letter" style="--i:3">i</span><span class="letter" style="--i:4">d</span><span class="letter" style="--i:5">e</span><span class="letter" style="--i:6">r</span><span class="letter" style="--i:7">s</span>
+      </div>
+      <hr><br>
+      <div id="dividers"></div>
+    </main>
+  </div>
+
+    </div><!-- end main-content -->
+  </div><!-- end body-layout -->
+
+  <div id="layout-footer"></div>
+</div>
+
+<script src="sparkle.js"></script>
+<script src="layout.js"></script>
+<script>
+const gc='https://gifcities.org/',aw='https://artwork.neocities.org',FF='https://web.archive.org/web/20091027060039/http://hk.geocities.com/fanfanfannie/fanstart.htm';
+const dividers=[
+  {href:gc,src:'pixels/dividers/1jin5.gif'},{href:gc,src:'pixels/dividers/hk.geocities.com-shanyeung2000.gif'},
+  {href:'https://whimsical.heartette.net/',src:'pixels/dividers/whimsical.heart.gif'},
+  {href:aw,src:'pixels/dividers/artworkneocDIV.gif'},{href:aw,src:'pixels/dividers/artworkneocities (1).png'},
+  {href:aw,src:'pixels/dividers/artworkneocities (101).gif'},{href:aw,src:'pixels/dividers/artworkneocities (11).gif'},
+  {href:aw,src:'pixels/dividers/artworkneocities (2).gif'},{href:aw,src:'pixels/dividers/artworkneocities (2).png'},
+  {href:aw,src:'pixels/dividers/artworkneocities (20).gif'},{href:aw,src:'pixels/dividers/artworkneocities (3).gif'},
+  {href:aw,src:'pixels/dividers/artworkneocities (31).gif'},{href:aw,src:'pixels/dividers/artworkneocities (37).gif',alt:'Disney Divider'},
+  {href:aw,src:'pixels/dividers/artworkneocities (4).png'},{href:aw,src:'pixels/dividers/artworkneocities (41).gif'},
+  {href:aw,src:'pixels/dividers/artworkneocities (42).gif'},{href:aw,src:'pixels/dividers/artworkneocities (5).png'},
+  {href:aw,src:'pixels/dividers/artworkneocities (53).gif'},{href:aw,src:'pixels/dividers/artworkneocities (58).gif'},
+  {href:aw,src:'pixels/dividers/artworkneocities (60).gif'},{href:aw,src:'pixels/dividers/artworkneocities (62).gif'},
+  {href:aw,src:'pixels/dividers/artworkneocities (72).gif'},{href:aw,src:'pixels/dividers/artworkneocities (8).gif'},
+  {href:aw,src:'pixels/dividers/artworkneocities (95).gif'},{href:aw,src:'pixels/dividers/artworkneocities (96).gif'},
+  {href:aw,src:'pixels/dividers/artworkneocities (99).gif'},
+  {href:gc,src:'pixels/dividers/craziecathie.gif'},{href:gc,src:'pixels/dividers/craziecathie3.gif'},
+  {href:gc,src:'pixels/dividers/cyworld2 (6).gif'},{href:gc,src:'pixels/dividers/blinkies (5).gif'},
+  {href:gc,src:'pixels/dividers/gifcitiesorg1 (27).gif'},{href:gc,src:'pixels/dividers/gifcitiesorg1 (43).gif'},
+  {href:gc,src:'pixels/dividers/gifcitiesorg1 (44).gif'},{href:gc,src:'pixels/dividers/gifcitiesorg1 (45).gif'},
+  {href:gc,src:'pixels/dividers/gifcitiesorg1 (48).gif'},{href:gc,src:'pixels/dividers/gifcitiesorg1 (59).gif'},
+  {href:gc,src:'pixels/dividers/gifcitiesorg1 (74).gif'},{href:gc,src:'pixels/dividers/gifcitiesorg1 (76).gif'},
+  {href:'https://tomomi.neocities.org/',src:'pixels/dividers/div21.gif'},{href:'https://tomomi.neocities.org/',src:'pixels/dividers/div20.gif'},
+  {href:'https://sakuradreams.neocities.org/',src:'pixels/dividers/HK57.gif'},
+  {href:gc,src:'pixels/dividers/bar23.gif'},{href:gc,src:'pixels/dividers/Glitter_stars.gif'},
+  {href:gc,src:'pixels/dividers/gifcitiesorg1 (47).gif',alt:'beach'},
+  {href:aw,src:'pixels/dividers/artworkneocities (59).gif',alt:'twoclams'},{href:aw,src:'pixels/dividers/artworkneocities (83).gif',alt:'realisticcoral'},
+  {href:FF,src:'pixels/dividers/line_ani001_bee1.gif'},{href:FF,src:'pixels/dividers/line_ani008_duck.gif'},
+  {href:FF,src:'pixels/dividers/line_fa004.gif'},{href:FF,src:'pixels/dividers/line_fa005.gif'},
+  {href:FF,src:'pixels/dividers/line_fa006.gif'},{href:FF,src:'pixels/dividers/line_fa008.gif'},
+  {href:FF,src:'pixels/dividers/line_heart003_pk.gif'},{href:FF,src:'pixels/dividers/line_music001.gif'},
+];
+const container=document.getElementById('dividers');
+dividers.forEach(item=>{
+const a=document.createElement('a');
+a.href=item.href||'#';
+a.target='_blank';
+a.style.display='block';
+  const img=document.createElement('img');img.src=item.src;img.alt=item.alt||'';img.loading='lazy';img.style.imageRendering='pixelated';img.style.margin='4px';
+  a.appendChild(img);container.appendChild(a);
+});
+</script>
+<script>
+(function(){
+  var S=document.getElementById('stars'),C=document.getElementById('clouds');
+  for(var i=0;i<28;i++){var s=document.createElement('div');var sz=(1.5+Math.random()*2.5).toFixed(1),lo=(0.2+Math.random()*0.35).toFixed(2);s.style.cssText='position:absolute;width:'+sz+'px;height:'+sz+'px;border-radius:50%;background:white;left:'+(Math.random()*100).toFixed(1)+'%;top:'+(Math.random()*45).toFixed(1)+'%;--lo:'+lo+';--hi:1;animation:twinkle '+(2+Math.random()*3).toFixed(1)+'s ease-in-out infinite '+(-Math.random()*4).toFixed(1)+'s;';S.appendChild(s);}
+  [{sz:220,bot:0,dur:38,dl:0,op:.85},{sz:170,bot:0,dur:28,dl:-10,op:.75},{sz:270,bot:0,dur:46,dl:-22,op:.80},{sz:140,bot:18,dur:24,dl:-6,op:.68},{sz:200,bot:8,dur:40,dl:-30,op:.72},{sz:160,bot:12,dur:32,dl:-16,op:.70}].forEach(function(c,i){var w=document.createElement('div'),sz=c.sz,sx=220+i*200;w.style.cssText='position:absolute;bottom:'+c.bot+'px;left:0;--start:'+sx+'px;animation:floatCloud '+c.dur+'s linear infinite '+c.dl+'s;opacity:'+c.op+';';w.innerHTML='<div style="position:relative;display:inline-block;"><div style="width:'+sz+'px;height:'+Math.round(sz*.36)+'px;background:rgba(255,255,255,0.78);border-radius:50px;position:relative;"><div style="width:'+Math.round(sz*.46)+'px;height:'+Math.round(sz*.46)+'px;background:rgba(255,255,255,0.78);border-radius:50%;position:absolute;top:-'+Math.round(sz*.23)+'px;left:'+Math.round(sz*.12)+'px;"></div><div style="width:'+Math.round(sz*.36)+'px;height:'+Math.round(sz*.36)+'px;background:rgba(255,255,255,0.78);border-radius:50%;position:absolute;top:-'+Math.round(sz*.18)+'px;left:'+Math.round(sz*.45)+'px;"></div></div></div>';C.appendChild(w);});
+})();
+</script>
+</body>
+</html>

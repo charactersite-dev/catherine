@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CallmeCatherine ~ Dollhouse</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script type="text/javascript">
+// <![CDATA[
+var colour="random"; // in addition to "random" can be set to any valid colour eg "#f0f" or "red"
+var sparkles=50;
+
+/****************************
+*  Tinkerbell Magic Sparkle *
+*(c)2005-13 mf2fm web-design*
+*  http://www.mf2fm.com/rv  *
+* DON'T EDIT BELOW THIS BOX *
+****************************/
+var x=ox=400;
+var y=oy=300;
+var swide=800;
+var shigh=600;
+var sleft=sdown=0;
+var tiny=new Array();
+var star=new Array();
+var starv=new Array();
+var starx=new Array();
+var stary=new Array();
+var tinyx=new Array();
+var tinyy=new Array();
+var tinyv=new Array();
+
+window.onload=function() { if (document.getElementById) {
+  var i, rats, rlef, rdow;
+  for (var i=0; i<sparkles; i++) {
+    var rats=createDiv(3, 3);
+    rats.style.visibility="hidden";
+    rats.style.zIndex="999";
+    document.body.appendChild(tiny[i]=rats);
+    starv[i]=0;
+    tinyv[i]=0;
+    var rats=createDiv(5, 5);
+    rats.style.backgroundColor="transparent";
+    rats.style.visibility="hidden";
+    rats.style.zIndex="999";
+    var rlef=createDiv(1, 5);
+    var rdow=createDiv(5, 1);
+    rats.appendChild(rlef);
+    rats.appendChild(rdow);
+    rlef.style.top="2px";
+    rlef.style.left="0px";
+    rdow.style.top="0px";
+    rdow.style.left="2px";
+    document.body.appendChild(star[i]=rats);
+  }
+  set_width();
+  sparkle();
+}}
+
+function sparkle() {
+  var c;
+  if (Math.abs(x-ox)>1 || Math.abs(y-oy)>1) {
+    ox=x;
+    oy=y;
+    for (c=0; c<sparkles; c++) if (!starv[c]) {
+      star[c].style.left=(starx[c]=x)+"px";
+      star[c].style.top=(stary[c]=y+1)+"px";
+      star[c].style.clip="rect(0px, 5px, 5px, 0px)";
+      star[c].childNodes[0].style.backgroundColor=star[c].childNodes[1].style.backgroundColor=(colour=="random")?newColour():colour;
+      star[c].style.visibility="visible";
+      starv[c]=50;
+      break;
+    }
+  }
+  for (c=0; c<sparkles; c++) {
+    if (starv[c]) update_star(c);
+    if (tinyv[c]) update_tiny(c);
+  }
+  setTimeout("sparkle()", 40);
+}
+
+function update_star(i) {
+  if (--starv[i]==25) star[i].style.clip="rect(1px, 4px, 4px, 1px)";
+  if (starv[i]) {
+    stary[i]+=1+Math.random()*3;
+    starx[i]+=(i%5-2)/5;
+    if (stary[i]<shigh+sdown) {
+      star[i].style.top=stary[i]+"px";
+      star[i].style.left=starx[i]+"px";
+    }
+    else {
+      star[i].style.visibility="hidden";
+      starv[i]=0;
+      return;
+    }
+  }
+  else {
+    tinyv[i]=50;
+    tiny[i].style.top=(tinyy[i]=stary[i])+"px";
+    tiny[i].style.left=(tinyx[i]=starx[i])+"px";
+    tiny[i].style.width="2px";
+    tiny[i].style.height="2px";
+    tiny[i].style.backgroundColor=star[i].childNodes[0].style.backgroundColor;
+    star[i].style.visibility="hidden";
+    tiny[i].style.visibility="visible"
+  }
+}
+
+function update_tiny(i) {
+  if (--tinyv[i]==25) {
+    tiny[i].style.width="1px";
+    tiny[i].style.height="1px";
+  }
+  if (tinyv[i]) {
+    tinyy[i]+=1+Math.random()*3;
+    tinyx[i]+=(i%5-2)/5;
+    if (tinyy[i]<shigh+sdown) {
+      tiny[i].style.top=tinyy[i]+"px";
+      tiny[i].style.left=tinyx[i]+"px";
+    }
+    else {
+      tiny[i].style.visibility="hidden";
+      tinyv[i]=0;
+      return;
+    }
+  }
+  else tiny[i].style.visibility="hidden";
+}
+
+document.onmousemove=mouse;
+function mouse(e) {
+  if (e) {
+    y=e.pageY;
+    x=e.pageX;
+  }
+  else {
+    set_scroll();
+    y=event.y+sdown;
+    x=event.x+sleft;
+  }
+}
+
+window.onscroll=set_scroll;
+function set_scroll() {
+  if (typeof(self.pageYOffset)=='number') {
+    sdown=self.pageYOffset;
+    sleft=self.pageXOffset;
+  }
+  else if (document.body && (document.body.scrollTop || document.body.scrollLeft)) {
+    sdown=document.body.scrollTop;
+    sleft=document.body.scrollLeft;
+  }
+  else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) {
+    sleft=document.documentElement.scrollLeft;
+    sdown=document.documentElement.scrollTop;
+  }
+  else {
+    sdown=0;
+    sleft=0;
+  }
+}
+
+window.onresize=set_width;
+function set_width() {
+  var sw_min=999999;
+  var sh_min=999999;
+  if (document.documentElement && document.documentElement.clientWidth) {
+    if (document.documentElement.clientWidth>0) sw_min=document.documentElement.clientWidth;
+    if (document.documentElement.clientHeight>0) sh_min=document.documentElement.clientHeight;
+  }
+  if (typeof(self.innerWidth)=='number' && self.innerWidth) {
+    if (self.innerWidth>0 && self.innerWidth<sw_min) sw_min=self.innerWidth;
+    if (self.innerHeight>0 && self.innerHeight<sh_min) sh_min=self.innerHeight;
+  }
+  if (document.body.clientWidth) {
+    if (document.body.clientWidth>0 && document.body.clientWidth<sw_min) sw_min=document.body.clientWidth;
+    if (document.body.clientHeight>0 && document.body.clientHeight<sh_min) sh_min=document.body.clientHeight;
+  }
+  if (sw_min==999999 || sh_min==999999) {
+    sw_min=800;
+    sh_min=600;
+  }
+  swide=sw_min;
+  shigh=sh_min;
+}
+
+function createDiv(height, width) {
+  var div=document.createElement("div");
+  div.style.position="absolute";
+  div.style.height=height+"px";
+  div.style.width=width+"px";
+  div.style.overflow="hidden";
+  return (div);
+}
+
+function newColour() {
+  var c=new Array();
+  c[0]=255;
+  c[1]=Math.floor(Math.random()*256);
+  c[2]=Math.floor(Math.random()*(256-c[1]/2));
+  c.sort(function(){return (0.5 - Math.random());});
+  return ("rgb("+c[0]+", "+c[1]+", "+c[2]+")");
+}
+// ]]>
+</script>
+</head>
+<body>
+
+  <!-- start loading sidebar -->
+  <div id="sidebar-container"></div>
+  <script>
+    fetch('sidebar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('sidebar-container').innerHTML = data;
+      });
+  </script>
+  <!-- end load-the-sidebar -->
+
+  <!-- main content box -->
+  <div class="page-container">
+    <main id="main-content">
+
+      <section>
+        <h2>Dollhouse</h2>
+        <hr><br>
+      </section>
+
+      <div id="dollhouse-sections"></div>
+
+    </main>
+  </div>
+
+  <footer align="center">
+    <br>
+    <a href="https://callmecatherine.neocities.org/">
+      <img src="assets/backtohome.gif">
+    </a>
+    <br>
+  </footer>
+
+<script>
+function resizeImage(img){
+  const max=200;
+  const min=50;
+  const w=img.naturalWidth, h=img.naturalHeight;
+  if(!w||!h) return;
+  const scaleDown=Math.min(max/w,max/h,1);
+  const scaleUp=Math.max(min/w,min/h,1);
+  const scale=scaleDown<1 ? scaleDown : scaleUp;
+  img.style.width=(w*scale)+"px";
+  img.style.height=(h*scale)+"px";
+}
+
+function attachResize(img) {
+  if (img.naturalWidth > 0) {
+    resizeImage(img);
+  } else if (img.complete) {
+    setTimeout(() => attachResize(img), 50);
+  } else {
+    img.onload = () => resizeImage(img);
+  }
+}
+
+function renderArray(array, containerId){
+  const container = document.getElementById(containerId);
+  let row = document.createElement("div");
+  row.className = "row";
+  container.appendChild(row);
+  array.forEach(item => {
+    if (item.break) {
+      row = document.createElement("div");
+      row.className = "row";
+      container.appendChild(row);
+      return;
+    }
+    const link = document.createElement("a");
+    link.href = item.href;
+    link.target = "_blank";
+    const img = document.createElement("img");
+    img.src = item.src;
+    img.alt = item.alt || "";
+    attachResize(img);
+    link.appendChild(img);
+    row.appendChild(link);
+  });
+}
+
+const gc = "https://gifcities.org";
+const aw = "https://artwork.neocities.org";
+const pg = "https://pixel-garden.tumblr.com";
+const px = "https://p-i-x-e-l-s.tumblr.com";
+const sd = "https://sakuradreams.neocities.org/";
+const mb = "https://myblinkie.holidaycomments.com/gallery";
+
+const dollhouseSections = [
+  {
+    label: "Mermaids",
+    items: [
+      { href:gc,  src:"pixels/dolls/gifcities (69).gif",                    alt:"doll-mermaid-purple" },
+      { href:gc,  src:"pixels/dolls/gifcities (3).gif",                     alt:"mermaid-doll-upsidedown" },
+      { href:aw,  src:"pixels/dolls/people-artworkneocities (27).gif",       alt:"pinkmermaid" },
+      { href:gc,  src:"pixels/dolls/gifcities (1).gif",                     alt:"doll-mermaid-blue" },
+      { href:gc,  src:"pixels/dolls/gifcities (6).gif",                     alt:"doll-unique-mermaid" },
+      { href:aw,  src:"pixels/dolls/people-artworkneocities (17).gif",       alt:"underwater-girl" },
+      { href:aw,  src:"pixels/dolls/people-artworkneocities (25).gif",       alt:"ocean-woman" },
+      { href:"https://cinni.net/?z=/toybox/ani", src:"pixels/dolls/doll-mermaid.gif", alt:"doll-mermaid" },
+      { href:"http://www.pinkland.net/garden.htm", src:"pixels/dolls/pinkland-mermaid-doll.gif", alt:"pinkland-mermaid" },
+    ]
+  },
+  {
+    label: "Fairies",
+    items: [
+      { href:gc, src:"pixels/dolls/gifcities (13).gif",                    alt:"greenfairy2" },
+      { href:gc, src:"pixels/dolls/gifcities (16).gif",                    alt:"greenfairy" },
+      { href:aw, src:"pixels/dolls/people-artworkneocities (18).gif",      alt:"purplefairy-swing" },
+      { href:aw, src:"pixels/dolls/people-artworkneocities (16).gif",      alt:"fairy-in-rain" },
+      { href:gc, src:"pixels/dolls/gifcities (12).gif",                    alt:"redfairy" },
+      { href:gc, src:"pixels/dolls/gifcities (10).gif",                    alt:"redfairy2" },
+      { href:gc, src:"pixels/dolls/gifcities (14).gif",                    alt:"yellowfairy" },
+      { href:gc, src:"pixels/dolls/pixeldreambluefairy.gif",               alt:"bluefairy" },
+      { href:aw, src:"pixels/dolls/mushgirlbyartwork.gif",                 alt:"mushgirl" },
+    ]
+  },
+  {
+    label: "Medieval",
+    items: [
+      { href:gc, src:"pixels/dolls/gifcities (39).gif",                    alt:"doll-queen" },
+      { href:aw, src:"pixels/dolls/people-artworkneocities (23).gif",      alt:"rapunzel" },
+      { href:aw, src:"pixels/dolls/people-artworkneocities (2).gif",       alt:"snow-white" },
+      { href:aw, src:"pixels/dolls/people-artworkneocities (21).gif",      alt:"foreign-princess" },
+        { href: "http://www.pinkland.net/garden.htm", src: "pixels/trinkets/pinkland-princess.gif" }
+    ]
+  },
+  {
+    label: "Forest",
+    items: [
+      { href:aw, src:"pixels/dolls/people-artworkneocities (3).gif",       alt:"moongirl" },
+      { href:aw, src:"pixels/dolls/people-artworkneocities (7).gif",       alt:"sparkle-plant-girl" },
+      { href:aw, src:"pixels/dolls/people-artworkneocities (5).gif",       alt:"blond-flute-rock" },
+      { href:aw, src:"pixels/dolls/people-artworkneocities (6).gif",       alt:"red-flute-log" },
+      { href:aw, src:"pixels/dolls/people-artworkneocities (11).gif",      alt:"maiden-swing" },
+      { href:gc, src:"pixels/dolls/gifcities (62).gif",                    alt:"doll-picnic" },
+    ]
+  },
+  {
+    label: "Modern",
+    items: [
+      { href:aw, src:"pixels/dolls/people-artworkneocities (1).gif",       alt:"girl-with-fruit" },
+      { href:aw, src:"pixels/dolls/people-artworkneocities (13).gif",      alt:"girlonbike" },
+      { href:aw, src:"pixels/dolls/people-artworkneocities (9).gif",       alt:"girlwithballoons" },
+      { href:aw, src:"pixels/dolls/people-artworkneocities (26).gif",      alt:"girlontowel" },
+      { href:aw, src:"pixels/dolls/people-artworkneocities (19).gif",      alt:"citygirl" },
+      { href:aw, src:"pixels/dolls/people-artworkneocities (20).gif",      alt:"city-coffee-girl" },
+      { href:aw, src:"pixels/dolls/people-artworkneocities (22).gif",      alt:"indoor-winter-girl-box" },
+      { href:aw, src:"pixels/dolls/people-artworkneocities (14).gif",      alt:"winter-busstopgirl" },
+      { href:aw, src:"pixels/dolls/people-artworkneocities (8).gif",       alt:"indoors-cozygirl" },
+      { href:aw, src:"pixels/dolls/people-artworkneocities (4).gif",       alt:"indoors-knittinggirl" },
+      { href:aw, src:"pixels/dolls/people-artworkneocities (12).gif",      alt:"girl-with-cats" },
+      { href:aw, src:"pixels/dolls/people-artworkneocities (10).gif",      alt:"happy-toyland-girl" },
+    ]
+  },
+  {
+    label: "Unsorted",
+    items: [
+      // gifcities new
+      { href:gc, src:"pixels/dolls/gifcities (64).gif",                    alt:"doll-unique-withcar" },
+      { href:gc, src:"pixels/dolls/gifcities (66).gif",                    alt:"doll-unique-blond2" },
+      { href:aw, src:"pixels/dolls/people-artworkneocities (24).gif",      alt:"onepiece-pirate" },
+      { href:aw, src:"pixels/dolls/people-artworkneocities (15).gif",      alt:"mermaid-bath" },
+      { href:gc, src:"pixels/dolls/gifcities (17).gif",                    alt:"gifcities-17" },
+      { href:gc, src:"pixels/dolls/gifcities (18).gif",                    alt:"gifcities-18" },
+      { href:gc, src:"pixels/dolls/gifcities (68).gif",                    alt:"gifcities-68" },
+      { href:gc, src:"pixels/dolls/gifcities (71).gif",                    alt:"gifcities-71" },
+      { href:"https://lejlart.com", src:"pixels/dolls/lisa-mermaidonshell.png", alt:"lisa-mermaidonshell" },
+      { href:px, src:"pixels/dolls/p-i-x-e-l-stumblr (20).webp",          alt:"pixel-stumblr-20" },
+      { href:pg, src:"pixels/dolls/pixel-gardenTUMBLR (2).gif",           alt:"pixel-garden-2" },
+      { href:pg, src:"pixels/dolls/pixel-gardenTUMBLR (3).gif",           alt:"pixel-garden-3" },
+      { href:pg, src:"pixels/dolls/pixel-gardenTUMBLR (4).gif",           alt:"pixel-garden-4" },
+      { href:pg, src:"pixels/dolls/pixel-gardenTUMBLR (5).gif",           alt:"pixel-garden-5" },
+      { href:mb, src:"pixels/dolls/toyballerina.gif",                      alt:"toyballerina" },
+      // sakura dreams
+      { href:sd, src:"pixels/dolls/SW14.gif",                              alt:"SW14" },
+      { href:sd, src:"pixels/dolls/SW06.gif",                              alt:"SW06" },
+      { href:sd, src:"pixels/dolls/Aladdin24.gif",                         alt:"Aladdin24" },
+      { href:sd, src:"pixels/dolls/Aladdin25.gif",                         alt:"Aladdin25" },
+      { href:sd, src:"pixels/dolls/LM30.gif",                              alt:"LM30" },
+      { href:sd, src:"pixels/dolls/LM10.gif",                              alt:"LM10" },
+      // cinni / archive
+      { href:"https://cinni.net/?z=/toybox/ani", src:"pixels/dolls/doll-surfer.gif", alt:"doll-surfer" },
+      { href:"https://web.archive.org/web/20190707054400fw_/http://www.u.arizona.edu/", src:"pixels/dolls/avatar01.gif", alt:"avatar01" },
+      { href:"https://web.archive.org/web/20190707054400fw_/http://www.u.arizona.edu/", src:"pixels/dolls/avatar04.gif", alt:"avatar04" },
+      { href:"https://web.archive.org/web/20051023212451/http://gizmo2.dyndns.org/jadedolls/home.htm", src:"pixels/dolls/jadedolls-doll1.gif", alt:"jadedolls-1" },
+      // pinkland
+      { href:"http://www.pinkland.net/garden.htm", src:"pixels/dolls/pinkland-doll-scene.gif",   alt:"pinkland-scene" },
+      { href:"http://www.pinkland.net/garden.htm", src:"pixels/dolls/pinkland-disney-doll.gif",  alt:"pinkland-disney" },
+      { href:"http://www.pinkland.net/garden.htm", src:"pixels/dolls/pinklandbase.gif",           alt:"pinklandbase" },
+      // amarihge dolls
+      { href:gc, src:"pixels/dolls/amarihge-doll1.gif",  alt:"amarihge-1" },
+      { href:gc, src:"pixels/dolls/amarihge-doll2.gif",  alt:"amarihge-2" },
+      { href:gc, src:"pixels/dolls/amarihge-doll3.gif",  alt:"amarihge-3" },
+      { href:gc, src:"pixels/dolls/amarihge-doll4.gif",  alt:"amarihge-4" },
+      { href:gc, src:"pixels/dolls/amarihge-doll5.gif",  alt:"amarihge-5" },
+      { href:gc, src:"pixels/dolls/amarihge-doll6.gif",  alt:"amarihge-6" },
+      { href:gc, src:"pixels/dolls/amarihge-doll7.gif",  alt:"amarihge-7" },
+      { href:gc, src:"pixels/dolls/amarihge-doll8.gif",  alt:"amarihge-8" },
+      { href:gc, src:"pixels/dolls/amarihge-doll9.gif",  alt:"amarihge-9" },
+      // sonias / misc
+      { href:gc, src:"pixels/dolls/soniasdollz-1.gif",             alt:"soniasdollz-1" },
+      { href:gc, src:"pixels/dolls/soniasdollz-2.gif",             alt:"soniasdollz-2" },
+      { href:gc, src:"pixels/dolls/mbladez-dollz.gif",             alt:"mbladez-dollz" },
+      { href:gc, src:"pixels/dolls/dollsbystaceypinkporcelain2.gif", alt:"stacey-porcelain" },
+      { href:gc, src:"pixels/dolls/pixeldreamredrose.gif",         alt:"pixeldream-redrose" },
+      { href:gc, src:"pixels/dolls/cinderella.gif",                alt:"cinderella" },
+      { href:'https://gifcities.org', src:'pixels/dolls/M051.gif',   alt:'' },
+{ href:'https://gifcities.org', src:'pixels/dolls/Jane.gif',   alt:'' },
+{ href:'https://gifcities.org', src:'pixels/dolls/doll030.gif', alt:'' },
+{ href:'https://web.archive.org/web/20060527122705/http://died.altervista.org/
+', src:'pixels/dolls/doll030.gif', alt:'died_lunamoth.gif' },
+
+    ]
+  },
+];
+
+window.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById('dollhouse-sections');
+  dollhouseSections.forEach(({ label, items }, idx) => {
+    if (idx > 0) {
+      const divider = document.createElement('div');
+      divider.innerHTML = '<br><hr><br>';
+      container.appendChild(divider);
+    }
+    const id = 'shelf-' + label.replace(/\W+/g, '-').toLowerCase();
+    const sec = document.createElement('section');
+    const letters = label.split('').map((c, i) =>
+      c === ' ' ? `<span style="display:inline-block;width:5px"></span>`
+                : `<span class="letter" style="--i:${i}">${c}</span>`
+    ).join('');
+    sec.innerHTML = `<div class="section-title">${letters}</div><div id="${id}"></div>`;
+    container.appendChild(sec);
+    renderArray(items, id);
+  });
+});
+</script>
+
+</body>
+</html>

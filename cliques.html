@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CallMeCatherine ~ Cliques & Clubs</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pacifico&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+body {
+  background: repeating-linear-gradient(
+    180deg,
+    #ffb3b3 0px,
+    #ffd6a5 80px,
+    #fffea8 160px,
+    #caffbf 240px,
+    #a5d8ff 320px,
+    #d0b3ff 400px,
+    #ffb3b3 480px
+  ) !important;
+  background-attachment: fixed !important;
+}
+
+/* Clique entry cards within a content box */
+.clique-entry {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255,255,255,0.55);
+  border: 1px solid rgba(255,255,255,0.75);
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin: 6px;
+  font-size: 12px;
+  color: #4a2060;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+  vertical-align: top;
+}
+.clique-entry:hover { background: rgba(255,255,255,0.85); transform: translateY(-2px); }
+.clique-entry img  { max-height: 50px; max-width: 150px; image-rendering: pixelated; }
+.clique-entry span { font-size: 11px; color: #7a40a0; }
+
+.clique-placeholder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px; height: 44px;
+  background: rgba(200,160,255,0.15);
+  border: 1px dashed rgba(180,120,255,0.4);
+  border-radius: 8px;
+  font-size: 10px;
+  color: #9060c0;
+  margin: 6px;
+  font-style: italic;
+}
+
+/* Sub-section header within a content box — plain, no rainbow */
+.clique-section-title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #7030a0;
+  text-align: left;
+  margin: 16px 0 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px dashed rgba(180,120,255,0.35);
+}
+.clique-section-title:first-child { margin-top: 4px; }
+
+.clique-group { text-align: left; }
+.clique-group-entries { display: flex; flex-wrap: wrap; align-items: flex-start; }
+
+/* blurb box */
+.clique-blurb {
+  background: rgba(255,255,255,0.45);
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 14px;
+  padding: 16px 20px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #4a2060;
+  text-align: left;
+  margin-bottom: 4px;
+}
+.clique-blurb strong { color: #8030b0; }
+
+/* box title (non-rainbow) */
+.box-title {
+  font-family: 'Pacifico', cursive;
+  font-size: 18px;
+  color: #7030a0;
+  margin-bottom: 12px;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<span id="page-top"></span>
+<div id="stars"></div>
+<div id="clouds"></div>
+
+<div class="page-wrap">
+  <div id="layout-header"></div>
+
+  <div class="body-layout">
+    <div id="layout-sidebar"></div>
+    <div class="main-content">
+
+      <div class="page-wrapper" id="main-content">
+
+        <!-- WHAT ARE CLIQUES -->
+        <div class="content-box">
+          <div class="section-title">
+            <span style="--i:0">C</span><span style="--i:1">l</span><span style="--i:2">i</span><span style="--i:3">q</span><span style="--i:4">u</span><span style="--i:5">e</span><span style="--i:6">s</span>
+            <span style="display:inline-block;width:8px"></span>
+            <span style="--i:7">&</span>
+            <span style="display:inline-block;width:8px"></span>
+            <span style="--i:8">C</span><span style="--i:9">l</span><span style="--i:10">u</span><span style="--i:11">b</span><span style="--i:12">s</span>
+          </div>
+          <hr><br>
+          <div class="clique-blurb">
+            <strong>What's a web clique?</strong> Back in the Geocities era, a clique was a tiny interest-based club you could join just by copying a snippet of text or a graphic onto your page. No application. No approval committee. Just vibes and a shared interest — "I love cats," "I'm a Pisces," "I make pixel art." They connected strangers across the web through common ground, the same way webrings connected whole sites. Cliques were casual, personal, and a little silly in the best way. They still exist! Neocities brought them back.
+            <br><br>
+            <strong>What's the difference between a clique and a webring?</strong> A webring links a chain of whole websites together (← prev | next →). A clique is just a badge of identity — you display it because it's true about you, not because it routes traffic. Think of webrings as roads and cliques as bumper stickers. ✨
+          </div>
+        </div>
+
+        <!-- CLIQUES I'VE JOINED -->
+        <div class="content-box">
+          <div class="box-title">★ Cliques & Clubs I've Joined</div>
+          <hr><br>
+
+          <div class="clique-group">
+            <div class="clique-section-title">// Scented Club</div>
+            <div class="clique-group-entries">
+              <a class="clique-entry" href="https://scentedclub.neocities.org/" target="_blank">
+                <img src="assets/scented-img.png" alt="Cotton Candy">
+                <span>Cotton Candy</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="clique-group">
+            <div class="clique-section-title">// Sisterhood of the Traveling Journal</div>
+            <div class="clique-group-entries">
+              <a class="clique-entry" href="https://callmecatherine.neocities.org/journal/journal" target="_blank">
+                <span>✉️ Traveling Journal</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="clique-group">
+            <div class="clique-section-title">// Placeholder Section</div>
+            <div class="clique-group-entries">
+              <span class="clique-placeholder">coming soon~</span>
+              <span class="clique-placeholder">coming soon~</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- CLIQUES I PLAN TO JOIN -->
+        <div class="content-box">
+          <div class="box-title">☆ Cliques & Clubs I Plan to Join</div>
+          <hr><br>
+
+          <div class="clique-group">
+            <div class="clique-section-title">// On My List</div>
+            <div class="clique-group-entries">
+              <span class="clique-placeholder">placeholder</span>
+              <span class="clique-placeholder">placeholder</span>
+              <span class="clique-placeholder">placeholder</span>
+              <span class="clique-placeholder">placeholder</span>
+            </div>
+          </div>
+
+          <div class="clique-group">
+            <div class="clique-section-title">// Maybe Someday</div>
+            <div class="clique-group-entries">
+              <span class="clique-placeholder">placeholder</span>
+              <span class="clique-placeholder">placeholder</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- OLD CLIQUES I'VE FOUND -->
+        <div class="content-box">
+          <div class="box-title">🕰️ Old Cliques I've Found</div>
+          <hr>
+          <p style="font-size:12px;color:#9060b0;margin:10px 0 16px;font-style:italic;">
+            Defunct cliques from the old web — preserved here as little fossils of internet history. ♡
+          </p>
+
+          <div class="clique-group">
+            <div class="clique-section-title">// Fandom & Interests</div>
+            <div class="clique-group-entries">
+              <span class="clique-placeholder">placeholder</span>
+              <span class="clique-placeholder">placeholder</span>
+              <span class="clique-placeholder">placeholder</span>
+            </div>
+          </div>
+
+          <div class="clique-group">
+            <div class="clique-section-title">// Web Culture</div>
+            <div class="clique-group-entries">
+              <span class="clique-placeholder">placeholder</span>
+              <span class="clique-placeholder">placeholder</span>
+            </div>
+          </div>
+
+          <div class="clique-group">
+            <div class="clique-section-title">// Personality & Life</div>
+            <div class="clique-group-entries">
+              <span class="clique-placeholder">placeholder</span>
+              <span class="clique-placeholder">placeholder</span>
+              <span class="clique-placeholder">placeholder</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div><!-- end page-wrapper -->
+    </div><!-- end main-content -->
+  </div><!-- end body-layout -->
+
+  <div id="layout-footer"></div>
+</div>
+
+<script src="sparkle.js"></script>
+<script src="layout.js"></script>
+<script>
+// Stars
+(function(){
+  var S=document.getElementById('stars');
+  for(var i=0;i<28;i++){
+    var s=document.createElement('div');
+    var sz=(1.5+Math.random()*2.5).toFixed(1),lo=(0.2+Math.random()*0.35).toFixed(2);
+    s.style.cssText='position:absolute;width:'+sz+'px;height:'+sz+'px;border-radius:50%;background:white;left:'+(Math.random()*100).toFixed(1)+'%;top:'+(Math.random()*45).toFixed(1)+'%;--lo:'+lo+';--hi:1;animation:twinkle '+(2+Math.random()*3).toFixed(1)+'s ease-in-out infinite '+(-Math.random()*4).toFixed(1)+'s;';
+    S.appendChild(s);
+  }
+})();
+// Clouds
+(function(){
+  var C=document.getElementById('clouds');
+  [{sz:220,bot:0,dur:38,dl:0,op:.85},{sz:170,bot:0,dur:28,dl:-10,op:.75},{sz:270,bot:0,dur:46,dl:-22,op:.80},{sz:140,bot:18,dur:24,dl:-6,op:.68},{sz:200,bot:8,dur:40,dl:-30,op:.72},{sz:160,bot:12,dur:32,dl:-16,op:.70}].forEach(function(c,i){
+    var w=document.createElement('div'),sz=c.sz,sx=220+i*200;
+    w.style.cssText='position:absolute;bottom:'+c.bot+'px;left:0;--start:'+sx+'px;animation:floatCloud '+c.dur+'s linear infinite '+c.dl+'s;opacity:'+c.op+';';
+    w.innerHTML='<div style="position:relative;display:inline-block;"><div style="width:'+sz+'px;height:'+Math.round(sz*.36)+'px;background:rgba(255,255,255,0.78);border-radius:50px;position:relative;"><div style="width:'+Math.round(sz*.46)+'px;height:'+Math.round(sz*.46)+'px;background:rgba(255,255,255,0.78);border-radius:50%;position:absolute;top:-'+Math.round(sz*.23)+'px;left:'+Math.round(sz*.12)+'px;"></div><div style="width:'+Math.round(sz*.36)+'px;height:'+Math.round(sz*.36)+'px;background:rgba(255,255,255,0.78);border-radius:50%;position:absolute;top:-'+Math.round(sz*.18)+'px;left:'+Math.round(sz*.45)+'px;"></div></div></div>';
+    C.appendChild(w);
+  });
+})();
+</script>
+</body>
+</html>

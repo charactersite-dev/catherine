@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CallMeCatherine ~ Blinkies</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pacifico&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<span id="page-top"></span>
+<div id="stars"></div>
+<div id="clouds"></div>
+
+<div class="page-wrap">
+  <div id="layout-header"></div>
+
+  <div class="body-layout">
+    <div id="layout-sidebar"></div>
+    <div class="main-content">
+
+  <div class="page-wrapper">
+
+    <div class="content-box">
+      <div class="section-title">
+        <span class="letter" style="--i:0">B</span><span class="letter" style="--i:1">L</span><span class="letter" style="--i:2">I</span><span class="letter" style="--i:3">N</span><span class="letter" style="--i:4">K</span><span style="display:inline-block;width:6px"></span><span class="letter" style="--i:5">I</span><span class="letter" style="--i:6">E</span><span class="letter" style="--i:7">S</span>
+      </div>
+      <hr><br>
+      <div class="blinkie-row">
+        <div class="blinkie-col"><span class="col-title tag-pink">Fandom</span><div id="col-fandom"></div></div>
+        <div class="blinkie-col"><span class="col-title tag-yellow">Personal</span><div id="col-personal"></div></div>
+        <div class="blinkie-col"><span class="col-title tag-mint">Hobbies</span><div id="col-hobbies"></div></div>
+      </div>
+      <br><br>
+      <div class="blinkie-row">
+        <div class="blinkie-col"><span class="col-title tag-blue">Web &amp; Site</span><div id="col-web"></div></div>
+        <div class="blinkie-col"><span class="col-title tag-purple">Vibes</span><div id="col-vibes"></div></div>
+        <div class="blinkie-col"><span class="col-title tag-peach">Other</span><div id="col-other"></div></div>
+      </div>
+    </div>
+
+    <div class="content-box">
+      <div class="section-title">
+        <span class="letter" style="--i:0">N</span><span class="letter" style="--i:1">E</span><span class="letter" style="--i:2">W</span>
+      </div>
+      <hr><br>
+      <div class="blinkie-row">
+        <div class="blinkie-col"><div id="col-new"></div></div>
+      </div>
+    </div>
+
+    <div class="content-box">
+      <div class="section-title">
+        <span class="letter" style="--i:0">T</span><span class="letter" style="--i:1">E</span><span class="letter" style="--i:2">M</span><span class="letter" style="--i:3">P</span><span class="letter" style="--i:4">L</span><span class="letter" style="--i:5">A</span><span class="letter" style="--i:6">T</span><span class="letter" style="--i:7">E</span><span class="letter" style="--i:8">S</span>
+      </div>
+      <hr><br>
+      <div class="blinkie-row">
+        <div class="blinkie-col"><span class="col-title tag-pink">Category</span><div id="col-tmpl-1"></div></div>
+        <div class="blinkie-col"><span class="col-title tag-mint">Category</span><div id="col-tmpl-2"></div></div>
+        <div class="blinkie-col"><span class="col-title tag-blue">Category</span><div id="col-tmpl-3"></div></div>
+      </div>
+    </div>
+
+  </div>
+
+    </div><!-- end main-content -->
+  </div><!-- end body-layout -->
+
+  <div id="layout-footer"></div>
+</div>
+
+<script src="sparkle.js"></script>
+<script src="layout.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  function renderColumn(arr,id){
+    const c=document.getElementById(id);if(!c)return;
+    arr.forEach(item=>{
+      if(!item.src)return;
+      const a=document.createElement('a');a.href=item.href||'#';a.target='_blank';
+      const img=document.createElement('img');img.src=item.src;img.alt=item.alt||'';img.loading='lazy';
+      a.appendChild(img);c.appendChild(a);
+    });
+  }
+
+  const BB='https://web.archive.org/web/20071011013554/http://www.blinkiebee.com/index.php';
+  const TP='pixels/blinkies/';
+  const mb='https://myblinkie.holidaycomments.com/gallery';
+  const aw='https://artwork.neocities.org';
+  const gc='https://gifcities.org/';
+  const pp='https://petrapixel.neocities.org/';
+  const br='https://brillitos.neocities.org/';
+  const cl='http://www.carrielynnesworld.com/';
+
+  const fandom=[
+    {href:mb,src:TP+'blinkies (1).gif',alt:'I heart disney'},
+    {href:mb,src:TP+'little-mermaid.gif',alt:'little mermaid fandom'},
+    {href:mb,src:TP+'think-think-think.gif',alt:'DISNEY winnie'},
+    {href:mb,src:TP+'lisa-frank.gif',alt:'Lisa Frank fandom'},
+    {href:gc,src:TP+'gifcities (67).gif',alt:'rainbow brite and unicorn'},
+    {href:aw,src:TP+'artworkneocities (85).gif',alt:'sanrio'},
+    {href:aw,src:TP+'artworkneocities (71).gif',alt:'hello kitty'},
+    {href:'http://komettails.net/brushes/all/',src:TP+'inubounce.gif',alt:'Inuyasha fandom'},
+    {href:mb,src:TP+'im-ready-spongebob.gif',alt:"I'm ready spongebob"},
+    {href:aw,src:TP+'artworkneocities (4).gif',alt:'Bluey fandom'},
+  ];
+  const personal=[
+    {href:aw,src:TP+'artworkneocities (46).gif',alt:'ancient internet creature'},
+    {href:aw,src:TP+'artworkneocities (5).gif',alt:'introvert'},
+    {href:aw,src:TP+'artworkneocities (75).gif',alt:"I'm trying my best"},
+    {href:mb,src:TP+'such-worry-wart.gif',alt:"I'm such a worry wart"},
+    {href:mb,src:TP+'whats-a-life.gif',alt:"a life what's that"},
+    {href:aw,src:TP+'89.gif',alt:'fighting depression'},
+    {href:aw,src:TP+'artworkneocities (32).gif',alt:'I gaze at the stars'},
+    {href:mb,src:TP+'heart-online-friends.gif',alt:'I heart my online friends'},
+    {href:mb,src:TP+'spring-in-the-air.gif',alt:'spring is in the air'},
+    {href:mb,src:TP+'peace-on-earth.gif',alt:'peace on earth'},
+    {href:gc,src:TP+'make-lemonaide.gif',alt:'when life hands you lemons'},
+  ];
+  const hobbies=[
+    {href:aw,src:TP+'artworkneocities (1).gif',alt:'artist palette'},
+    {href:aw,src:TP+'artworkneocities (52).gif',alt:'crayola'},
+    {href:mb,src:TP+'i-love-making-graphics.gif',alt:'I love making graphics'},
+    {href:aw,src:TP+'artworkneocities (74).gif',alt:'I heart pixels'},
+    {href:aw,src:TP+'artworkneocities (48).gif',alt:'bookworm'},
+    {href:gc,src:TP+'gifcitiesorg1 (46).gif',alt:'I heart to read'},
+    {href:mb,src:TP+'love-bookstorea.gif',alt:'I heart book stores'},
+    {href:mb,src:TP+'mm-eat-chocolate.gif',alt:'eat chocolate'},
+    {href:mb,src:TP+'i-love-weekends.gif',alt:'I love weekends'},
+    {href:mb,src:TP+'want-cats-life.gif',alt:"I want my cat's life"},
+  ];
+  const website=[
+    {href:mb,src:TP+'blinkies (2).gif',alt:'www wings'},
+    {href:aw,src:TP+'artworkneocities (43).gif',alt:'loading hearts'},
+    {href:mb,src:TP+'home-sweet-home.gif',alt:'home sweet home'},
+    {href:aw,src:TP+'artworkneocities (73).gif',alt:'homesweethome'},
+    {href:aw,src:TP+'artworkneocities (78).gif',alt:'aim addict'},
+    {href:aw,src:TP+'artworkneocities (105).gif',alt:'bad website design'},
+    {href:mb,src:TP+'blinkies (4).gif',alt:'guestbook'},
+    {href:mb,src:TP+'blinkies (6).gif',alt:'stuff'},
+  ];
+  const vibes=[
+    {href:aw,src:TP+'artworkneocities (29).gif',alt:'kisses'},
+    {href:aw,src:TP+'artworkneocities (28).gif',alt:'I love you'},
+    {href:mb,src:TP+'i-love-you.gif',alt:'I love you'},
+    {href:mb,src:TP+'thankies.gif',alt:'thankies'},
+    {href:mb,src:TP+'have-a-good-day.gif',alt:'have a good day'},
+    {href:aw,src:TP+'artworkneocities (7).gif',alt:'cya later alligator'},
+    {href:mb,src:TP+'blinkies (3).gif',alt:'blinkies'},
+    {href:aw,src:TP+'artworkneocities (45).gif',alt:'blinkie crazy'},
+  ];
+  const other=[
+    {href:gc,src:TP+'disney01.gif',alt:'blinkie-disney'},
+    {href:gc,src:TP+'bluesblink.gif',alt:'blinkie-blues'},
+    {href:gc,src:TP+'vdayheartslovea8.gif',alt:'blinkie-vday'},
+    {href:gc,src:TP+'wwwbutton.gif',alt:'blinkie-www'},
+    {href:gc,src:TP+'yop.gif',alt:'blinkie-yop'},
+    {href:gc,src:TP+'cn_moretime.gif',alt:'blinkie-cn-moretime'},
+    {href:gc,src:TP+'cn_glamgirl.gif',alt:'blinkie-cn-glamgirl'},
+    {href:gc,src:TP+'smooch.gif',alt:'blinkie-smooch'},
+    {href:gc,src:TP+'old-skool.gif',alt:'blinkie-old-skool'},
+    {href:gc,src:TP+'dork_blink.gif',alt:'blinkie-dork'},
+    {href:gc,src:TP+'crazycatlady.gif',alt:'blinkie-crazycatlady'},
+    {href:gc,src:TP+'blinkiebug.gif',alt:'blinkie-bug'},
+    {href:gc,src:TP+'geocities-kathy_5969(2).gif',alt:'blinkie-geocities'},
+    {href:gc,src:TP+'geocities-kathy_5969.gif',alt:'blinkie-geocities2'},
+    {href:gc,src:TP+'br.geocities.com-nete.lago-imagens.gif',alt:'blinkie-geocities-br'},
+  ];
+  const newBlinkies=[
+    {href:gc,src:TP+'gifcities (24).gif',alt:''},
+    {href:gc,src:TP+'gifcities (16).gif',alt:''},
+    {href:gc,src:TP+'gifcities (44).gif',alt:''},
+    {href:gc,src:TP+'gifcities (50).gif',alt:''},
+    {href:gc,src:TP+'gifcities (36).gif',alt:''},
+    {href:pp,src:TP+'petrapixel-neocities (2).png',alt:''},
+    {href:pp,src:TP+'petrapixel-neocities (1).jpg',alt:''},
+    {href:pp,src:TP+'petrapixel-neocities (1).png',alt:''},
+    {href:pp,src:TP+'petrapixel-neocities (1).gif',alt:''},
+    {href:br,src:TP+'brillitos-neocities (6).gif',alt:''},
+    {href:cl,src:TP+'carrielynnesworld (1).gif',alt:''},
+    {href:cl,src:TP+'carrielynnesworld (2).gif',alt:''},
+    {href:cl,src:TP+'carrielynnesworld (3).gif',alt:''},
+    {href:'#',src:TP+'pixelmyspacecom (1).gif',alt:''},
+    {href:'#',src:TP+'totallylayouts.gif',alt:''},
+  ];
+  const tmpl1=[
+    {href:BB,src:TP+'10beach_lora.gif',alt:'10beach lora'},{href:BB,src:TP+'18.gif',alt:'18'},
+    {href:BB,src:TP+'4ltpinkgloss.gif',alt:'4lt pink gloss'},{href:BB,src:TP+'51yccj.gif',alt:'51yccj'},
+    {href:BB,src:TP+'52.gif',alt:'52'},{href:BB,src:TP+'5nmc2c.gif',alt:'5nmc2c'},
+    {href:BB,src:TP+'5nmccx.gif',alt:'5nmccx'},{href:BB,src:TP+'5orangedrink_lora.gif',alt:'5 orange drink lora'},
+    {href:BB,src:TP+'6857qc.gif',alt:'6857qc'},{href:BB,src:TP+'68583t.gif',alt:'68583t'},
+    {href:BB,src:TP+'6cinnamon3_by_lora.gif',alt:'6 cinnamon by lora'},{href:BB,src:TP+'7-blank.gif',alt:'7 blank'},
+    {href:BB,src:TP+'7a308a0c.gif',alt:'7a308a0c'},{href:BB,src:TP+'7cleopatra_by_lora.gif',alt:'7 cleopatra by lora'},
+    {href:BB,src:TP+'87de5ee3.gif',alt:'87de5ee3'},{href:BB,src:TP+'88x01.gif',alt:'88x01'},
+    {href:BB,src:TP+'8cinderella_by_lora.gif',alt:'8 cinderella by lora'},
+  ];
+  const tmpl2=[
+    {href:BB,src:TP+'8flowers_lovelyln27.gif',alt:'8 flowers lovelyln27'},{href:BB,src:TP+'8greengoddess_bylora.gif',alt:'8 green goddess by lora'},
+    {href:BB,src:TP+'8pinkpoodle_by_lora.gif',alt:'8 pink poodle by lora'},{href:BB,src:TP+'8sunflower_lovelyln27.gif',alt:'8 sunflower lovelyln27'},
+    {href:BB,src:TP+'8swingdoll_by_lora.gif',alt:'8 swing doll by lora'},{href:BB,src:TP+'Animation12.gif',alt:'Animation 12'},
+    {href:BB,src:TP+'Animation16.gif',alt:'Animation 16'},{href:BB,src:TP+'balloonsblue8_blinkiebee.gif',alt:'balloons blue blinkiebee'},
+    {href:BB,src:TP+'BeeTemplate2.gif',alt:'Bee Template 2'},{href:BB,src:TP+'blank1.gif',alt:'blank 1'},
+    {href:BB,src:TP+'blinkietemp01.gif',alt:'blinkie temp 01'},{href:BB,src:TP+'boombox7_blinkiebee.gif',alt:'boombox blinkiebee'},
+    {href:BB,src:TP+'candyjar_monikat213.gif',alt:'candy jar monikat'},{href:BB,src:TP+'cutestarthingy.gif',alt:'cute star thingy'},
+    {href:BB,src:TP+'dogs_fpoodle8_blinkiebee.gif',alt:'dogs poodle blinkiebee'},{href:BB,src:TP+'farm_psheep8_blinkiebee.gif',alt:'farm sheep blinkiebee'},
+    {href:BB,src:TP+'farmanimals_ppiggy_titancia.gif',alt:'farm animals piggy titancia'},
+  ];
+  const tmpl3=[
+    {href:BB,src:TP+'flowers_4peach_blinkiebee.gif',alt:'flowers peach blinkiebee'},{href:BB,src:TP+'flowers_rainbowgarden8_blinkiebee.gif',alt:'flowers rainbow garden blinkiebee'},
+    {href:BB,src:TP+'food_glasssundae6_blinkiebee.gif',alt:'food glass sundae blinkiebee'},{href:BB,src:TP+'frog24pq.gif',alt:'frog 24pq'},
+    {href:BB,src:TP+'misc_vanity7_blinkiebee.gif',alt:'misc vanity blinkiebee'},{href:BB,src:TP+'misc_windmill6_blinkiebee.gif',alt:'misc windmill blinkiebee'},
+    {href:BB,src:TP+'mobile_mb_lovelyln27.gif',alt:'mobile lovelyln27'},{href:BB,src:TP+'monikat213.gif',alt:'monikat213'},
+    {href:BB,src:TP+'monkeydrop7_blinkiebee.gif',alt:'monkey drop blinkiebee'},{href:BB,src:TP+'music7_blinkiebee.gif',alt:'music blinkiebee'},
+    {href:BB,src:TP+'RainbowTemplate1.gif',alt:'Rainbow Template 1'},{href:BB,src:TP+'sports_goal10_blinkiebee.gif',alt:'sports goal blinkiebee'},
+    {href:BB,src:TP+'temp5.gif',alt:'temp5'},{href:BB,src:TP+'Theatresphynx37.gif',alt:'Theatre sphinx 37'},
+    {href:BB,src:TP+'xylophoneblinkie_by_lora.gif',alt:'xylophone blinkie by lora'},{href:BB,src:TP+'zunicorn7_blinkiebee.gif',alt:'zunicorn blinkiebee'},
+  ];
+
+  renderColumn(fandom,'col-fandom');renderColumn(personal,'col-personal');renderColumn(hobbies,'col-hobbies');
+  renderColumn(website,'col-web');renderColumn(vibes,'col-vibes');renderColumn(other,'col-other');
+  renderColumn(newBlinkies,'col-new');
+  renderColumn(tmpl1,'col-tmpl-1');renderColumn(tmpl2,'col-tmpl-2');renderColumn(tmpl3,'col-tmpl-3');
+});
+</script>
+<script>
+(function(){
+  var S=document.getElementById('stars'),C=document.getElementById('clouds');
+  for(var i=0;i<28;i++){var s=document.createElement('div');var sz=(1.5+Math.random()*2.5).toFixed(1),lo=(0.2+Math.random()*0.35).toFixed(2);s.style.cssText='position:absolute;width:'+sz+'px;height:'+sz+'px;border-radius:50%;background:white;left:'+(Math.random()*100).toFixed(1)+'%;top:'+(Math.random()*45).toFixed(1)+'%;--lo:'+lo+';--hi:1;animation:twinkle '+(2+Math.random()*3).toFixed(1)+'s ease-in-out infinite '+(-Math.random()*4).toFixed(1)+'s;';S.appendChild(s);}
+  [{sz:220,bot:0,dur:38,dl:0,op:.85},{sz:170,bot:0,dur:28,dl:-10,op:.75},{sz:270,bot:0,dur:46,dl:-22,op:.80},{sz:140,bot:18,dur:24,dl:-6,op:.68},{sz:200,bot:8,dur:40,dl:-30,op:.72},{sz:160,bot:12,dur:32,dl:-16,op:.70}].forEach(function(c,i){var w=document.createElement('div'),sz=c.sz,sx=220+i*200;w.style.cssText='position:absolute;bottom:'+c.bot+'px;left:0;--start:'+sx+'px;animation:floatCloud '+c.dur+'s linear infinite '+c.dl+'s;opacity:'+c.op+';';w.innerHTML='<div style="position:relative;display:inline-block;"><div style="width:'+sz+'px;height:'+Math.round(sz*.36)+'px;background:rgba(255,255,255,0.78);border-radius:50px;position:relative;"><div style="width:'+Math.round(sz*.46)+'px;height:'+Math.round(sz*.46)+'px;background:rgba(255,255,255,0.78);border-radius:50%;position:absolute;top:-'+Math.round(sz*.23)+'px;left:'+Math.round(sz*.12)+'px;"></div><div style="width:'+Math.round(sz*.36)+'px;height:'+Math.round(sz*.36)+'px;background:rgba(255,255,255,0.78);border-radius:50%;position:absolute;top:-'+Math.round(sz*.18)+'px;left:'+Math.round(sz*.45)+'px;"></div></div></div>';C.appendChild(w);});
+})();
+</script>
+</body>
+</html>

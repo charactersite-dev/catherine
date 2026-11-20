@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CallMeCatherine ~ Greenhouse</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pacifico&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+body{background:linear-gradient(180deg,#b8e4f8 0%,#d4f0c0 55%,#a8d870 80%,#78b840 100%) !important;background-attachment:fixed !important;}
+.page-container{background:rgba(255,255,255,0.5);border-color:rgba(120,200,80,0.4);}
+#blossoms{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:-1;overflow:hidden;}
+@keyframes fallPetal{
+  0%{transform:translate(0,-60px) rotate(0deg);opacity:.85;}
+  20%{transform:translate(calc(var(--drift,90px)*0.4),17vh) rotate(calc(var(--spin,360deg)*0.2));}
+  45%{transform:translate(calc(var(--drift,90px)*-0.3),45vh) rotate(calc(var(--spin,360deg)*0.5));opacity:.75;}
+  70%{transform:translate(calc(var(--drift,90px)*0.65),72vh) rotate(calc(var(--spin,360deg)*0.8));}
+  100%{transform:translate(var(--drift,90px),110vh) rotate(var(--spin,360deg));opacity:.3;}
+}
+.petal{position:absolute;top:-40px;width:var(--pw,7px);height:var(--ph,17px);background:linear-gradient(160deg, rgba(255,255,255,0.45) 0%, var(--pc,#ff7aa2) 55%);border-radius:50% 50% 50% 0%;animation:fallPetal var(--dur,8s) linear infinite var(--del,0s);}
+</style>
+</head>
+<body>
+<span id="page-top"></span>
+<div id="blossoms"></div>
+
+<div class="page-wrap">
+  <div id="layout-header"></div>
+
+  <div class="body-layout">
+    <div id="layout-sidebar"></div>
+    <div class="main-content">
+
+  <div class="page-container">
+    <main id="main-content">
+      <section><h2>Greenhouse</h2><hr><br></section>
+      <div id="greenhouse-sections"></div>
+    </main>
+  </div>
+
+    </div><!-- end main-content -->
+  </div><!-- end body-layout -->
+
+  <div id="layout-footer"></div>
+</div>
+
+<script src="sparkle.js"></script>
+<script src="layout.js"></script>
+<script>
+// Cherry blossom petals
+(function(){
+  var c=document.getElementById('blossoms');
+  var colors=['#ff6f9c','#ff4f81','#ff8fab','#fb6f92','#ffa3c4','#e0507a','#d6336c','#e8638a','#d94f87','#ff7aa2'];
+  for(var i=0;i<28;i++){
+    var p=document.createElement('div');p.className='petal';
+    var pw=5+Math.random()*6,ph=pw*2.1+Math.random()*5;
+    var drift=(50+Math.random()*130)+'px';
+    var spin=(180+Math.random()*360)*(Math.random()>.5?1:-1)+'deg';
+    p.style.cssText='--pw:'+pw+'px;--ph:'+ph+'px;--pc:'+colors[Math.floor(Math.random()*colors.length)]+';--dur:'+(6+Math.random()*9)+'s;--del:'+(-Math.random()*15)+'s;--drift:'+drift+';--spin:'+spin+';left:'+(Math.random()*110-5)+'%;';
+    c.appendChild(p);
+  }
+})();
+
+var MAX=200,MIN=50;
+function resizeImg(img){var w=img.naturalWidth,h=img.naturalHeight;if(!w||!h)return;var sd=Math.min(MAX/w,MAX/h,1),su=Math.max(MIN/w,MIN/h,1),sc=(w>MAX||h>MAX)?sd:(w<MIN||h<MIN)?su:1;img.style.width=w*sc+'px';img.style.height=h*sc+'px';}
+function attachR(img){if(img.naturalWidth>0)resizeImg(img);else if(img.complete)setTimeout(function(){attachR(img);},50);else img.onload=function(){resizeImg(img);};}
+function renderArray(arr,id){
+  var c=document.getElementById(id);if(!c)return;
+  var row=document.createElement('div');row.className='row';c.appendChild(row);
+  arr.forEach(function(item){
+    if(item.break){row=document.createElement('div');row.className='row';c.appendChild(row);return;}
+    var a=document.createElement('a');a.href=item.href||'#';a.target='_blank';
+    var img=document.createElement('img');img.src=item.src;img.alt=item.alt||'';img.loading='lazy';
+    attachR(img);a.appendChild(img);row.appendChild(a);
+  });
+}
+
+var aw='https://artwork.neocities.org',gh='https://gifcities.org/',pb='https://pixelbank.neocities.org',pw='https://pixel-world.tumblr.com',mb='https://myblinkie.holidaycomments.com/gallery';
+var BASE='pixels/greenhouse/';
+
+// fromFiles only processes strings; objects with their own href/src are passed through directly
+function fromFiles(files,href){
+  return files.map(function(f){
+    if(typeof f==='object') return f;
+    return {href:href,src:BASE+f,alt:f.replace(/\.[^.]+$/,'')};
+  });
+}
+
+var flowers=fromFiles([
+  'divflowera16.gif','lacroixdaisy.gif','lacroixtulip.gif','tulip2.gif','rosa.gif',
+  'ikflower08-pinkrose.gif','carnations.png','miniflorzinha.gif','mini066.gif','mini132.gif',
+  'mini2.gif','artworkneocities (21).gif','artworkneocities (30).gif','artworkneocities (63).gif',
+  'artworkneocities (64).gif','artworkneocities (68).gif','artworkneocities (70).gif',
+  'artworkneocities (76).gif','artworkneocities (77).gif','artworkneocities (84).gif',
+  'p-i-x-e-l-stumblr (11).gif','p-i-x-e-l-stumblr (12).gif','p-i-x-e-l-stumblr (17).gif',
+  'p-i-x-e-l-stumblr (7).gif','p-i-x-e-l-stumblr (9).gif','darosamaple_sm.png','flower_crate.png',
+  {href:'https://web.archive.org/web/20060527122705/http://died.altervista.org/',src:'pixels/dolls/doll030.gif',alt:'died_rosarossa'},
+],aw);
+
+var potted=fromFiles([
+  '0coinplant.png','0monstera.png','4peacelily.png','4violet.png','artworkneocities (3).png',
+  'plant1-1.png','artworksucculent.gif','2plant1.gif','2plant5.gif','miniverdura.gif',
+  'planta.gif','sprout4.gif','PothosVineTop.png','pixel-worldTUMBLR (2).webp',
+  'pixel-worldTUMBLR (3).webp','pixel-worldTUMBLR (4).webp','pixel-worldTUMBLR (5).webp',
+  'pixel-worldTUMBLR (6).webp','pixel-worldTUMBLR (7).webp','pixel-worldTUMBLR (8).webp','pixel-worldTUMBLR (9).webp',
+],pw);
+
+var trees=fromFiles([
+  'bonsai3.gif','TreeStump.gif','grass1.gif',
+  'd9kfjom-ccb129ee-45b2-49bc-a37f-c9031b84a77e.png',
+  'tumblr_c014b7436bf6af14fb7caf5aca144b46_8173e5b9_250.png',
+  'tumblr_da47253757e47d0c0ca6647ee67acf3a_0ff5346c_250.png',
+  'tumblr_inline_o9aoelzNQU1reem51_100.png',
+  'd4zkzjc-1c8e16c8-d1f7-4b68-a54a-4fc25a494073.gif',
+  'pixelbankneocities (24).gif','pixelbankneocities (47).gif','dalunamoth_sm.png',
+],pb);
+
+var bugs=fromFiles([
+  'butterfly.gif','butterfly_l1_hunny_dot_sunnyday_dot.gif','borbo.gif','bee.gif',
+  'bee_001.gif','caracol.gif','2sCaterpillar.gif','garden-frog-lily-pad.gif','196.gif','27.gif',
+],aw);
+
+var mushrooms=[
+  {href:mb, src:BASE+'mushroom.gif',   alt:'mushroomingrass'},
+  {href:aw, src:BASE+'kinoko16.gif',   alt:'kinoko16'},
+  {href:aw, src:BASE+'th_mini108.gif', alt:'th_mini108'},
+  {href:aw, src:BASE+'th_mini065.gif', alt:'th_mini065'},
+];
+
+var veggies=fromFiles([
+  'corn.gif','potato.gif','turnip.gif','garlic1.gif','icon-carrot.gif',
+  '2blueberries.png','watermelon.gif','water_can.gif','gnome2.gif','gnome3.gif','sign2.gif','sign4.gif',
+],aw);
+
+var sections=[
+  {label:"Flowers & Blooms",  items:flowers},
+  {label:"Potted Plants",     items:potted},
+  {label:"Trees & Greenery",  items:trees},
+  {label:"Bugs & Critters",   items:bugs},
+  {label:"Mushrooms & Fungi", items:mushrooms},
+  {label:"Veggie Garden",     items:veggies},
+  {label:"Unsorted", items:[
+    {href:"https://cinni.net/?z=/toybox/ani",src:BASE+'neskaya.net_strawb13.gif',alt:''},
+    {href:"https://cinni.net/?z=/toybox/ani",src:BASE+'neskaya.net_frog5.gif',alt:''},
+    {href:"https://web.archive.org/web/20100419011152/http://neskaya.net/pixels.php?",src:BASE+'pix (2).gif',alt:''},
+    {href:gh,src:BASE+'adoptedpixelredapple.gif',alt:''},
+  ]},
+];
+
+function makeLetters(label){
+  return label.split('').map(function(c,i){
+    return c===' '?'<span style="display:inline-block;width:5px"></span>':'<span class="letter" style="--i:'+i+'">'+c+'</span>';
+  }).join('');
+}
+
+window.addEventListener('DOMContentLoaded',function(){
+  var container=document.getElementById('greenhouse-sections');
+  sections.forEach(function(s,idx){
+    if(idx>0){var d=document.createElement('div');d.innerHTML='<br><hr><br>';container.appendChild(d);}
+    var id='shelf-'+s.label.replace(/\W+/g,'-').toLowerCase();
+    var sec=document.createElement('section');
+    sec.innerHTML='<div class="section-title">'+makeLetters(s.label)+'</div><div id="'+id+'"></div>';
+    container.appendChild(sec);
+    renderArray(s.items,id);
+  });
+});
+</script>
+</body>
+</html>

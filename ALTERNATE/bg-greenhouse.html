@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CallMeCatherine — Greenhouse</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{min-height:100%;width:100%;}
+body{
+  font-family:'Nunito',sans-serif;
+  background:linear-gradient(180deg,#7ad4ff 0%,#a8e8ff 30%,#c8f4e8 60%,#90d878 82%,#58b840 100%);
+  min-height:100vh;
+  position:relative;
+  overflow-x:hidden;
+}
+@keyframes gcFloat{from{transform:translateX(var(--start,110vw));}to{transform:translateX(-350px);}}
+@keyframes leafDrift{from{transform:translateX(var(--start,110vw)) rotate(0deg);opacity:0.9;}to{transform:translateX(-60px) rotate(360deg);opacity:0;}}
+#clouds,#treelayer,#leaves{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;}
+#clouds{z-index:1;}
+#treelayer{z-index:2;}
+#leaves{z-index:3;}
+.grass{position:fixed;bottom:0;left:0;width:100%;height:48px;background:linear-gradient(180deg,#5cb84a,#3a8a28);z-index:4;pointer-events:none;}
+.page-content{position:relative;z-index:5;}
+</style>
+</head>
+<body>
+<div id="clouds"></div>
+<div id="treelayer"></div>
+<div id="leaves"></div>
+<div class="grass"></div>
+<div class="page-content">
+  <!-- YOUR PAGE CONTENT GOES HERE -->
+</div>
+<script>
+(function(){
+  const vw=window.innerWidth;
+
+  // Clouds
+  const gcLayer=document.getElementById('clouds');
+  [{sz:100,top:15,dur:20,delay:0},{sz:70,top:38,dur:26,delay:-11},{sz:130,top:8,dur:34,delay:-18},{sz:85,top:55,dur:22,delay:-7}].forEach((c,i)=>{
+    const w=document.createElement('div');
+    const start=vw+50+i*200;
+    w.style.cssText=`position:absolute;top:${c.top}px;left:0;--start:${start}px;animation:gcFloat ${c.dur}s linear infinite ${c.delay}s;opacity:0.88;`;
+    const sz=c.sz;
+    w.innerHTML=`<div style="position:relative;display:inline-block;">
+      <div style="width:${sz}px;height:${Math.round(sz*0.35)}px;background:rgba(255,255,255,0.9);border-radius:50px;position:relative;">
+        <div style="width:${Math.round(sz*0.46)}px;height:${Math.round(sz*0.46)}px;background:rgba(255,255,255,0.9);border-radius:50%;position:absolute;top:${-Math.round(sz*0.23)}px;left:${Math.round(sz*0.12)}px;"></div>
+        <div style="width:${Math.round(sz*0.36)}px;height:${Math.round(sz*0.36)}px;background:rgba(255,255,255,0.9);border-radius:50%;position:absolute;top:${-Math.round(sz*0.18)}px;left:${Math.round(sz*0.45)}px;"></div>
+      </div>
+    </div>`;
+    gcLayer.appendChild(w);
+  });
+
+  // Trees — trunk bottom, foliage on top
+  const treeLayer=document.getElementById('treelayer');
+  const treeData=[
+    {xPct:3,trunkH:45,trunkW:11,fW:55,fH:68,c:'#2a7a18',c2:'#1e6010'},
+    {xPct:10,trunkH:32,trunkW:9,fW:40,fH:52,c:'#38901e',c2:'#2a7015'},
+    {xPct:18,trunkH:55,trunkW:13,fW:65,fH:78,c:'#228014',c2:'#186010'},
+    {xPct:72,trunkH:40,trunkW:10,fW:50,fH:62,c:'#309020',c2:'#247018'},
+    {xPct:82,trunkH:50,trunkW:12,fW:60,fH:72,c:'#1e7010',c2:'#145008'},
+    {xPct:91,trunkH:35,trunkW:9,fW:44,fH:55,c:'#2a8020',c2:'#1e6018'},
+  ];
+  treeData.forEach(t=>{
+    const el=document.createElement('div');
+    el.style.cssText=`position:absolute;left:${t.xPct}%;bottom:48px;display:flex;flex-direction:column;align-items:center;`;
+    el.innerHTML=`
+      <div style="width:${t.fW}px;height:${Math.round(t.fH*0.45)}px;background:${t.c};border-radius:50%;margin-bottom:-10px;"></div>
+      <div style="width:${Math.round(t.fW*0.82)}px;height:${Math.round(t.fH*0.52)}px;background:${t.c2};border-radius:50% 50% 40% 40%;"></div>
+      <div style="width:${t.trunkW}px;height:${t.trunkH}px;background:#6a3810;"></div>`;
+    treeLayer.appendChild(el);
+  });
+
+  // Drifting leaves
+  const leavesLayer=document.getElementById('leaves');
+  for(let i=0;i<10;i++){
+    const l=document.createElement('div');
+    const sz=7+Math.random()*7;
+    const start=vw+20+i*120;
+    l.style.cssText=`position:absolute;top:${60+Math.random()*55}%;width:${sz}px;height:${sz}px;background:#58c030;border-radius:50% 0;--start:${start}px;animation:leafDrift ${5+Math.random()*8}s linear infinite ${-Math.random()*8}s;opacity:0.85;`;
+    leavesLayer.appendChild(l);
+  }
+})();
+</script>
+</body>
+</html>

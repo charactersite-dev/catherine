@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CallMeCatherine — Home</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{min-height:100%;width:100%;}
+body{
+  font-family:'Nunito',sans-serif;
+  background:linear-gradient(180deg,#7090d8 0%,#9870d0 25%,#c878c0 50%,#e0a0c8 72%,#f0c0d8 90%,#f8d8ec 100%);
+  min-height:100vh;
+  position:relative;
+  overflow-x:hidden;
+}
+@keyframes twinkle{0%,100%{opacity:var(--lo,0.3);transform:scale(1);}50%{opacity:var(--hi,1);transform:scale(1.4);}}
+@keyframes floatCloud{from{transform:translateX(var(--start,110vw));}to{transform:translateX(-350px);}}
+#stars,#clouds{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+#clouds{z-index:1;}
+.page-content{position:relative;z-index:2;}
+</style>
+</head>
+<body>
+<div id="stars"></div>
+<div id="clouds"></div>
+<div class="page-content">
+  <!-- YOUR PAGE CONTENT GOES HERE -->
+</div>
+<script>
+(function(){
+  const stars=document.getElementById('stars');
+  for(let i=0;i<28;i++){
+    const s=document.createElement('div');
+    const sz=1.5+Math.random()*2.5;
+    const lo=0.25+Math.random()*0.35;
+    s.style.cssText=`position:absolute;width:${sz}px;height:${sz}px;border-radius:50%;background:white;left:${Math.random()*100}%;top:${Math.random()*45}%;--lo:${lo};--hi:1;animation:twinkle ${2+Math.random()*3}s ease-in-out infinite ${-Math.random()*4}s;`;
+    stars.appendChild(s);
+  }
+  // pixel 4-point stars
+  for(let i=0;i<6;i++){
+    const s=document.createElement('div');
+    const sz=6+Math.random()*6;
+    s.style.cssText=`position:absolute;width:${sz}px;height:${sz}px;background:white;clip-path:polygon(50% 0%,55% 45%,100% 50%,55% 55%,50% 100%,45% 55%,0% 50%,45% 45%);left:${Math.random()*95}%;top:${Math.random()*40}%;--lo:0.3;--hi:0.9;animation:twinkle ${2.5+Math.random()*2}s ease-in-out infinite ${-Math.random()*3}s;`;
+    stars.appendChild(s);
+  }
+
+  const clouds=document.getElementById('clouds');
+  const sizes=[
+    {sz:140,bot:0,dur:32,delay:0,op:0.82},
+    {sz:100,bot:0,dur:26,delay:-10,op:0.72},
+    {sz:170,bot:0,dur:40,delay:-20,op:0.78},
+    {sz:80,bot:12,dur:22,delay:-6,op:0.65},
+    {sz:120,bot:5,dur:36,delay:-28,op:0.70},
+    {sz:90,bot:8,dur:29,delay:-14,op:0.68},
+  ];
+  sizes.forEach((c,i)=>{
+    const startX=200+i*180;
+    const w=document.createElement('div');
+    w.style.cssText=`position:absolute;bottom:${c.bot}px;left:0;--start:${startX}px;animation:floatCloud ${c.dur}s linear infinite ${c.delay}s;opacity:${c.op};`;
+    const sz=c.sz;
+    w.innerHTML=`<div style="position:relative;display:inline-block;">
+      <div style="width:${sz}px;height:${Math.round(sz*0.36)}px;background:rgba(255,255,255,0.78);border-radius:50px;position:relative;">
+        <div style="width:${Math.round(sz*0.46)}px;height:${Math.round(sz*0.46)}px;background:rgba(255,255,255,0.78);border-radius:50%;position:absolute;top:${-Math.round(sz*0.23)}px;left:${Math.round(sz*0.12)}px;"></div>
+        <div style="width:${Math.round(sz*0.36)}px;height:${Math.round(sz*0.36)}px;background:rgba(255,255,255,0.78);border-radius:50%;position:absolute;top:${-Math.round(sz*0.18)}px;left:${Math.round(sz*0.45)}px;"></div>
+      </div>
+    </div>`;
+    clouds.appendChild(w);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CallmeCatherine ~ Blinkies</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<script type="text/javascript">
+// <![CDATA[
+var colour="random";
+var sparkles=50;
+var x=ox=400;
+var y=oy=300;
+var swide=800;
+var shigh=600;
+var sleft=sdown=0;
+var tiny=new Array();
+var star=new Array();
+var starv=new Array();
+var starx=new Array();
+var stary=new Array();
+var tinyx=new Array();
+var tinyy=new Array();
+var tinyv=new Array();
+
+window.onload=function() { if (document.getElementById) {
+  var i, rats, rlef, rdow;
+  for (var i=0; i<sparkles; i++) {
+    var rats=createDiv(3, 3);
+    rats.style.visibility="hidden";
+    rats.style.zIndex="999";
+    document.body.appendChild(tiny[i]=rats);
+    starv[i]=0;
+    tinyv[i]=0;
+    var rats=createDiv(5, 5);
+    rats.style.backgroundColor="transparent";
+    rats.style.visibility="hidden";
+    rats.style.zIndex="999";
+    var rlef=createDiv(1, 5);
+    var rdow=createDiv(5, 1);
+    rats.appendChild(rlef);
+    rats.appendChild(rdow);
+    rlef.style.top="2px";
+    rlef.style.left="0px";
+    rdow.style.top="0px";
+    rdow.style.left="2px";
+    document.body.appendChild(star[i]=rats);
+  }
+  set_width();
+  sparkle();
+}}
+
+function sparkle() {
+  var c;
+  if (Math.abs(x-ox)>1 || Math.abs(y-oy)>1) {
+    ox=x; oy=y;
+    for (c=0; c<sparkles; c++) if (!starv[c]) {
+      star[c].style.left=(starx[c]=x)+"px";
+      star[c].style.top=(stary[c]=y+1)+"px";
+      star[c].style.clip="rect(0px, 5px, 5px, 0px)";
+      star[c].childNodes[0].style.backgroundColor=star[c].childNodes[1].style.backgroundColor=(colour=="random")?newColour():colour;
+      star[c].style.visibility="visible";
+      starv[c]=50;
+      break;
+    }
+  }
+  for (c=0; c<sparkles; c++) {
+    if (starv[c]) update_star(c);
+    if (tinyv[c]) update_tiny(c);
+  }
+  setTimeout("sparkle()", 40);
+}
+
+function update_star(i) {
+  if (--starv[i]==25) star[i].style.clip="rect(1px, 4px, 4px, 1px)";
+  if (starv[i]) {
+    stary[i]+=1+Math.random()*3;
+    starx[i]+=(i%5-2)/5;
+    if (stary[i]<shigh+sdown) {
+      star[i].style.top=stary[i]+"px";
+      star[i].style.left=starx[i]+"px";
+    } else {
+      star[i].style.visibility="hidden";
+      starv[i]=0; return;
+    }
+  } else {
+    tinyv[i]=50;
+    tiny[i].style.top=(tinyy[i]=stary[i])+"px";
+    tiny[i].style.left=(tinyx[i]=starx[i])+"px";
+    tiny[i].style.width="2px";
+    tiny[i].style.height="2px";
+    tiny[i].style.backgroundColor=star[i].childNodes[0].style.backgroundColor;
+    star[i].style.visibility="hidden";
+    tiny[i].style.visibility="visible";
+  }
+}
+
+function update_tiny(i) {
+  if (--tinyv[i]==25) {
+    tiny[i].style.width="1px";
+    tiny[i].style.height="1px";
+  }
+  if (tinyv[i]) {
+    tinyy[i]+=1+Math.random()*3;
+    tinyx[i]+=(i%5-2)/5;
+    if (tinyy[i]<shigh+sdown) {
+      tiny[i].style.top=tinyy[i]+"px";
+      tiny[i].style.left=tinyx[i]+"px";
+    } else {
+      tiny[i].style.visibility="hidden";
+      tinyv[i]=0; return;
+    }
+  } else tiny[i].style.visibility="hidden";
+}
+
+document.onmousemove=mouse;
+function mouse(e) {
+  if (e) { y=e.pageY; x=e.pageX; }
+  else { set_scroll(); y=event.y+sdown; x=event.x+sleft; }
+}
+
+window.onscroll=set_scroll;
+function set_scroll() {
+  if (typeof(self.pageYOffset)=='number') { sdown=self.pageYOffset; sleft=self.pageXOffset; }
+  else if (document.body && (document.body.scrollTop || document.body.scrollLeft)) { sdown=document.body.scrollTop; sleft=document.body.scrollLeft; }
+  else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) { sleft=document.documentElement.scrollLeft; sdown=document.documentElement.scrollTop; }
+  else { sdown=0; sleft=0; }
+}
+
+window.onresize=set_width;
+function set_width() {
+  var sw_min=999999; var sh_min=999999;
+  if (document.documentElement && document.documentElement.clientWidth) {
+    if (document.documentElement.clientWidth>0) sw_min=document.documentElement.clientWidth;
+    if (document.documentElement.clientHeight>0) sh_min=document.documentElement.clientHeight;
+  }
+  if (typeof(self.innerWidth)=='number' && self.innerWidth) {
+    if (self.innerWidth>0 && self.innerWidth<sw_min) sw_min=self.innerWidth;
+    if (self.innerHeight>0 && self.innerHeight<sh_min) sh_min=self.innerHeight;
+  }
+  if (document.body.clientWidth) {
+    if (document.body.clientWidth>0 && document.body.clientWidth<sw_min) sw_min=document.body.clientWidth;
+    if (document.body.clientHeight>0 && document.body.clientHeight<sh_min) sh_min=document.body.clientHeight;
+  }
+  if (sw_min==999999 || sh_min==999999) { sw_min=800; sh_min=600; }
+  swide=sw_min; shigh=sh_min;
+}
+
+function createDiv(height, width) {
+  var div=document.createElement("div");
+  div.style.position="absolute";
+  div.style.height=height+"px";
+  div.style.width=width+"px";
+  div.style.overflow="hidden";
+  return (div);
+}
+
+function newColour() {
+  var c=new Array();
+  c[0]=255;
+  c[1]=Math.floor(Math.random()*256);
+  c[2]=Math.floor(Math.random()*(256-c[1]/2));
+  c.sort(function(){return (0.5 - Math.random());});
+  return ("rgb("+c[0]+", "+c[1]+", "+c[2]+")");
+}
+// ]]>
+</script>
+
+<style>
+/* ── page wrapper ── */
+.page-wrapper {
+  margin: 0 auto;
+  max-width: 1000px;
+  width: calc(100% - 240px);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 20px 20px 0 20px;
+  box-sizing: border-box;
+}
+
+/* ── shared content box ── */
+.content-box {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  border: 5px solid transparent;
+  background:
+    linear-gradient(white, white) padding-box,
+    linear-gradient(90deg,
+      #ff8fab, #ffd166, #caffbf,
+      #9bf6ff, #bdb2ff, #ffc6ff, #ff8fab) border-box;
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+}
+
+/* ── 3-column blinkie grid ── */
+.blinkie-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 12px;
+}
+
+/* ── soft divider between the two blinkie rows ── */
+.blinkie-divider {
+  border: none;
+  border-top: 1px dashed #ddd;
+  margin: 20px 0 8px 0;
+}
+
+.blinkie-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.blinkie-col a {
+  display: block;
+  text-align: center;
+}
+
+.blinkie-col img {
+  max-width: 100%;
+  height: auto;
+  width: auto;
+  object-fit: contain;
+  min-height: 28px;
+}
+
+/* ── column title: pixel stamp tags ── */
+.col-title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 7px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 5px 10px 6px 10px;
+  border-radius: 3px;
+  margin-bottom: 8px;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 2px 0 rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.25);
+  display: inline-block;
+}
+
+.col-title.tag-pink   { background: #ff8fab; }
+.col-title.tag-yellow { background: #f9b931; }
+.col-title.tag-mint   { background: #52c192; }
+.col-title.tag-blue   { background: #5ab4d6; }
+.col-title.tag-purple { background: #a78bfa; }
+.col-title.tag-peach  { background: #ff9a76; }
+
+/* ── small note text ── */
+.box-note {
+  font-size: 12px;
+  text-align: center;
+  margin: 6px 0 0 0;
+  color: #555;
+}
+</style>
+</head>
+
+<body>
+
+<!-- sidebar -->
+<div id="sidebar-container"></div>
+<script>
+fetch('sidebar.html')
+  .then(r => r.text())
+  .then(d => document.getElementById('sidebar-container').innerHTML = d);
+</script>
+
+<div class="page-wrapper">
+
+  <!-- ══════════════════════════════════════
+       BOX 1 — Page heading
+  ══════════════════════════════════════ -->
+  <div class="content-box">
+    <div class="section-title">
+      <span class="letter" style="--i:0">B</span><span class="letter" style="--i:1">L</span><span class="letter" style="--i:2">I</span><span class="letter" style="--i:3">N</span><span class="letter" style="--i:4">K</span><span style="display:inline-block;width:6px"></span><span class="letter" style="--i:5">I</span><span class="letter" style="--i:6">E</span><span class="letter" style="--i:7">S</span>
+    </div>
+    <hr><br>
+  <!-- ══════════════════════════════════════
+       BOX 2 — All 6 blinkie columns (2 rows of 3)
+  ══════════════════════════════════════ -->
+
+    <!-- Row 1: Fandom · Personal · Hobbies -->
+    <div class="blinkie-row">
+      <div class="blinkie-col">
+        <span class="col-title tag-pink">Fandom</span>
+        <div id="col-fandom"></div>
+      </div>
+      <div class="blinkie-col">
+        <span class="col-title tag-yellow">Personal</span>
+        <div id="col-personal"></div>
+      </div>
+      <div class="blinkie-col">
+        <span class="col-title tag-mint">Hobbies</span>
+        <div id="col-hobbies"></div>
+      </div>
+    </div>
+
+<br><br>
+
+    <!-- Row 2: Web & Site · Vibes · Other -->
+    <div class="blinkie-row">
+      <div class="blinkie-col">
+        <span class="col-title tag-blue">Web &amp; Site</span>
+        <div id="col-web"></div>
+      </div>
+      <div class="blinkie-col">
+        <span class="col-title tag-purple">Vibes</span>
+        <div id="col-vibes"></div>
+      </div>
+      <div class="blinkie-col">
+        <span class="col-title tag-peach">Other</span>
+        <div id="col-other"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════
+       BOX 3 — Templates
+  ══════════════════════════════════════ -->
+  <div class="content-box">
+    <div class="section-title">
+      <span class="letter" style="--i:0">T</span><span class="letter" style="--i:1">E</span><span class="letter" style="--i:2">M</span><span class="letter" style="--i:3">P</span><span class="letter" style="--i:4">L</span><span class="letter" style="--i:5">A</span><span class="letter" style="--i:6">T</span><span class="letter" style="--i:7">E</span><span class="letter" style="--i:8">S</span>
+    </div>
+    <hr><br>
+
+    <div class="blinkie-row">
+      <div class="blinkie-col">
+        <span class="col-title tag-pink">Category</span>
+        <div id="col-tmpl-1"></div>
+      </div>
+      <div class="blinkie-col">
+        <span class="col-title tag-mint">Category</span>
+        <div id="col-tmpl-2"></div>
+      </div>
+      <div class="blinkie-col">
+        <span class="col-title tag-blue">Category</span>
+        <div id="col-tmpl-3"></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end .page-wrapper -->
+
+<footer align="center">
+  <br>
+  <a href="https://callmecatherine.neocities.org/">
+    <img src="assets/backtohome.gif">
+  </a>
+  <br>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  /* ── Render helper — skips entries with no src ── */
+  function renderColumn(arr, containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    arr.forEach(item => {
+      if (!item.src) return;
+      const a = document.createElement("a");
+      a.href = item.href || "#";
+      a.target = "_blank";
+      const img = document.createElement("img");
+      img.src = item.src;
+      img.alt = item.alt || "";
+      a.appendChild(img);
+      container.appendChild(a);
+    });
+  }
+
+  /* ════════════════════════════════════════
+     BLINKIE DATA
+  ════════════════════════════════════════ */
+
+  const fandom = [
+    { href:"https://myblinkie.holidaycomments.com/gallery", src:"pixels/blinkies/blinkies (1).gif",          alt:"I heart disney" },
+    { href:"https://myblinkie.holidaycomments.com/gallery", src:"pixels/blinkies/little-mermaid.gif",        alt:"little mermaid fandom" },
+    { href:"https://myblinkie.holidaycomments.com/gallery", src:"pixels/blinkies/think-think-think.gif",     alt:"DISNEY winnie" },
+    { href:"https://myblinkie.holidaycomments.com/gallery", src:"pixels/blinkies/lisa-frank.gif",            alt:"Lisa Frank fandom" },
+    { href:"https://gifcities.org",                         src:"pixels/blinkies/gifcities (67).gif",        alt:"rainbow brite and unicorn" },
+    { href:"https://artwork.neocities.org",                 src:"pixels/blinkies/artworkneocities (85).gif", alt:"sanrio" },
+    { href:"https://artwork.neocities.org",                 src:"pixels/blinkies/artworkneocities (71).gif", alt:"hello kitty" },
+    { href:"http://komettails.net/brushes/all/",            src:"pixels/blinkies/inubounce.gif",             alt:"Inuyasha fandom" },
+    { href:"https://myblinkie.holidaycomments.com/gallery", src:"pixels/blinkies/im-ready-spongebob.gif",   alt:"I'm ready spongebob" },
+    { href:"https://artwork.neocities.org",                 src:"pixels/blinkies/artworkneocities (4).gif",  alt:"Bluey fandom" },
+  ];
+
+  const personal = [
+    { href:"https://artwork.neocities.org",                 src:"pixels/blinkies/artworkneocities (46).gif", alt:"ancient internet creature" },
+    { href:"https://artwork.neocities.org",                 src:"pixels/blinkies/artworkneocities (5).gif",  alt:"introvert" },
+    { href:"https://artwork.neocities.org",                 src:"pixels/blinkies/artworkneocities (75).gif", alt:"I'm trying my best" },
+    { href:"https://myblinkie.holidaycomments.com/gallery", src:"pixels/blinkies/such-worry-wart.gif",       alt:"I'm such a worry wart" },
+    { href:"https://myblinkie.holidaycomments.com/gallery", src:"pixels/blinkies/whats-a-life.gif",          alt:"a life what's that" },
+    { href:"https://artwork.neocities.org",                 src:"pixels/blinkies/89.gif",                    alt:"fighting depression" },
+    { href:"https://artwork.neocities.org",                 src:"pixels/blinkies/artworkneocities (32).gif", alt:"I gaze at the stars" },
+    { href:"https://myblinkie.holidaycomments.com/gallery", src:"pixels/blinkies/heart-online-friends.gif",  alt:"I heart my online friends" },
+    { href:"https://myblinkie.holidaycomments.com/gallery", src:"pixels/blinkies/spring-in-the-air.gif",    alt:"spring is in the air" },
+    { href:"https://myblinkie.holidaycomments.com/gallery", src:"pixels/blinkies/peace-on-earth.gif",       alt:"peace on earth" },
+    { href:"https://gifcities.org/",                        src:"pixels/blinkies/make-lemonaide.gif",        alt:"when life hands you lemons" },
+  ];
+
+  const hobbies = [
+    { href:"https://artwork.neocities.org",                 src:"pixels/blinkies/artworkneocities (1).gif",   alt:"artist palette" },
+    { href:"https://artwork.neocities.org",                 src:"pixels/blinkies/artworkneocities (52).gif",  alt:"crayola" },
+    { href:"https://myblinkie.holidaycomments.com/gallery", src:"pixels/blinkies/i-love-making-graphics.gif", alt:"I love making graphics" },
+    { href:"https://artwork.neocities.org",                 src:"pixels/blinkies/artworkneocities (74).gif",  alt:"I heart pixels" },
+    { href:"https://artwork.neocities.org",                 src:"pixels/blinkies/artworkneocities (48).gif",  alt:"bookworm" },
+    { href:"https://gifcities.org/",                        src:"pixels/blinkies/gifcitiesorg1 (46).gif",     alt:"I heart to read" },
+    { href:"https://myblinkie.holidaycomments.com/gallery", src:"pixels/blinkies/love-bookstorea.gif",        alt:"I heart book stores" },
+    { href:"https://myblinkie.holidaycomments.com/gallery", src:"pixels/blinkies/mm-eat-chocolate.gif",       alt:"eat chocolate" },
+    { href:"https://myblinkie.holidaycomments.com/gallery", src:"pixels/blinkies/i-love-weekends.gif",        alt:"I love weekends" },
+    { href:"https://myblinkie.holidaycomments.com/gallery", src:"pixels/blinkies/want-cats-life.gif",         alt:"I want my cat's life" },
+  ];
+
+  const website = [
+    { href:"https://myblinkie.holidaycomments.com/gallery", src:"pixels/blinkies/blinkies (2).gif",           alt:"www wings" },
+    { href:"https://artwork.neocities.org",                 src:"pixels/blinkies/artworkneocities (43).gif",  alt:"loading hearts" },
+    { href:"https://myblinkie.holidaycomments.com/gallery", src:"pixels/blinkies/home-sweet-home.gif",        alt:"home sweet home" },
+    { href:"https://artwork.neocities.org",                 src:"pixels/blinkies/artworkneocities (73).gif",  alt:"homesweethome" },
+    { href:"https://artwork.neocities.org",                 src:"pixels/blinkies/artworkneocities (78).gif",  alt:"aim addict" },
+    { href:"https://artwork.neocities.org",                 src:"pixels/blinkies/artworkneocities (105).gif", alt:"bad website design" },
+    { href:"https://myblinkie.holidaycomments.com/gallery", src:"pixels/blinkies/blinkies (4).gif",           alt:"guestbook" },
+    { href:"https://myblinkie.holidaycomments.com/gallery", src:"pixels/blinkies/blinkies (6).gif",           alt:"stuff" },
+  ];
+
+  const vibes = [
+    { href:"https://artwork.neocities.org",                 src:"pixels/blinkies/artworkneocities (29).gif", alt:"kisses" },
+    { href:"https://artwork.neocities.org",                 src:"pixels/blinkies/artworkneocities (28).gif", alt:"I love you" },
+    { href:"https://myblinkie.holidaycomments.com/gallery", src:"pixels/blinkies/i-love-you.gif",            alt:"I love you" },
+    { href:"https://myblinkie.holidaycomments.com/gallery", src:"pixels/blinkies/thankies.gif",              alt:"thankies" },
+    { href:"https://myblinkie.holidaycomments.com/gallery", src:"pixels/blinkies/have-a-good-day.gif",       alt:"have a good day" },
+    { href:"https://artwork.neocities.org",                 src:"pixels/blinkies/artworkneocities (7).gif",  alt:"cya later alligator" },
+    { href:"https://myblinkie.holidaycomments.com/gallery", src:"pixels/blinkies/blinkies (3).gif",          alt:"blinkies" },
+    { href:"https://artwork.neocities.org",                 src:"pixels/blinkies/artworkneocities (45).gif", alt:"blinkie crazy" },
+  ];
+
+  /* ── Other — expanded hrefs to match pattern of other arrays ── */
+  const other = [
+    { href:"https://gifcities.org/",                        src:"pixels/blinkies/disney01.gif",                           alt:"blinkie-disney" },
+    { href:"https://gifcities.org/",                        src:"pixels/blinkies/bluesblink.gif",                         alt:"blinkie-blues" },
+    { href:"https://gifcities.org/",                        src:"pixels/blinkies/vdayheartslovea8.gif",                   alt:"blinkie-vday" },
+    { href:"https://gifcities.org/",                        src:"pixels/blinkies/wwwbutton.gif",                          alt:"blinkie-www" },
+    { href:"https://gifcities.org/",                        src:"pixels/blinkies/yop.gif",                                alt:"blinkie-yop" },
+    { href:"https://gifcities.org/",                        src:"pixels/blinkies/cn_moretime.gif",                        alt:"blinkie-cn-moretime" },
+    { href:"https://gifcities.org/",                        src:"pixels/blinkies/cn_glamgirl.gif",                        alt:"blinkie-cn-glamgirl" },
+    { href:"https://gifcities.org/",                        src:"pixels/blinkies/smooch.gif",                             alt:"blinkie-smooch" },
+    { href:"https://gifcities.org/",                        src:"pixels/blinkies/old-skool.gif",                          alt:"blinkie-old-skool" },
+    { href:"https://gifcities.org/",                        src:"pixels/blinkies/dork_blink.gif",                         alt:"blinkie-dork" },
+    { href:"https://gifcities.org/",                        src:"pixels/blinkies/crazycatlady.gif",                       alt:"blinkie-crazycatlady" },
+    { href:"https://gifcities.org/",                        src:"pixels/blinkies/blinkiebug.gif",                         alt:"blinkie-bug" },
+    { href:"https://gifcities.org/",                        src:"pixels/blinkies/geocities-kathy_5969(2).gif",            alt:"blinkie-geocities" },
+    { href:"https://gifcities.org/",                        src:"pixels/blinkies/geocities-kathy_5969.gif",               alt:"blinkie-geocities2" },
+    { href:"https://gifcities.org/",                        src:"pixels/blinkies/br.geocities.com-nete.lago-imagens.gif", alt:"blinkie-geocities-br" },
+  ];
+
+const BB = "https://web.archive.org/web/20071011013554/http://www.blinkiebee.com/index.php";
+  const TP = "pixels/blinkies/";
+
+  /* ── Templates — sorted alphabetically, split evenly ── */
+  const tmpl1 = [
+    { href:BB, src:TP+"10beach_lora.gif",                        alt:"10beach lora" },
+    { href:BB, src:TP+"18.gif",                                  alt:"18" },
+    { href:BB, src:TP+"4ltpinkgloss.gif",                        alt:"4lt pink gloss" },
+    { href:BB, src:TP+"51yccj.gif",                              alt:"51yccj" },
+    { href:BB, src:TP+"52.gif",                                  alt:"52" },
+    { href:BB, src:TP+"5nmc2c.gif",                              alt:"5nmc2c" },
+    { href:BB, src:TP+"5nmccx.gif",                              alt:"5nmccx" },
+    { href:BB, src:TP+"5orangedrink_lora.gif",                   alt:"5 orange drink lora" },
+    { href:BB, src:TP+"6857qc.gif",                              alt:"6857qc" },
+    { href:BB, src:TP+"68583t.gif",                              alt:"68583t" },
+    { href:BB, src:TP+"6cinnamon3_by_lora.gif",                  alt:"6 cinnamon by lora" },
+    { href:BB, src:TP+"7-blank.gif",                             alt:"7 blank" },
+    { href:BB, src:TP+"7a308a0c.gif",                            alt:"7a308a0c" },
+    { href:BB, src:TP+"7cleopatra_by_lora.gif",                  alt:"7 cleopatra by lora" },
+    { href:BB, src:TP+"87de5ee3.gif",                            alt:"87de5ee3" },
+    { href:BB, src:TP+"88x01.gif",                               alt:"88x01" },
+    { href:BB, src:TP+"8cinderella_by_lora.gif",                 alt:"8 cinderella by lora" },
+  ];
+
+  const tmpl2 = [
+    { href:BB, src:TP+"8flowers_lovelyln27.gif",                 alt:"8 flowers lovelyln27" },
+    { href:BB, src:TP+"8greengoddess_bylora.gif",                alt:"8 green goddess by lora" },
+    { href:BB, src:TP+"8pinkpoodle_by_lora.gif",                 alt:"8 pink poodle by lora" },
+    { href:BB, src:TP+"8sunflower_lovelyln27.gif",               alt:"8 sunflower lovelyln27" },
+    { href:BB, src:TP+"8swingdoll_by_lora.gif",                  alt:"8 swing doll by lora" },
+    { href:BB, src:TP+"Animation12.gif",                         alt:"Animation 12" },
+    { href:BB, src:TP+"Animation16.gif",                         alt:"Animation 16" },
+    { href:BB, src:TP+"balloonsblue8_blinkiebee.gif",            alt:"balloons blue blinkiebee" },
+    { href:BB, src:TP+"BeeTemplate2.gif",                        alt:"Bee Template 2" },
+    { href:BB, src:TP+"blank1.gif",                              alt:"blank 1" },
+    { href:BB, src:TP+"blinkietemp01.gif",                       alt:"blinkie temp 01" },
+    { href:BB, src:TP+"boombox7_blinkiebee.gif",                 alt:"boombox blinkiebee" },
+    { href:BB, src:TP+"candyjar_monikat213.gif",                 alt:"candy jar monikat" },
+    { href:BB, src:TP+"cutestarthingy.gif",                      alt:"cute star thingy" },
+    { href:BB, src:TP+"dogs_fpoodle8_blinkiebee.gif",            alt:"dogs poodle blinkiebee" },
+    { href:BB, src:TP+"farm_psheep8_blinkiebee.gif",             alt:"farm sheep blinkiebee" },
+    { href:BB, src:TP+"farmanimals_ppiggy_titancia.gif",         alt:"farm animals piggy titancia" },
+  ];
+
+  const tmpl3 = [
+    { href:BB, src:TP+"flowers_4peach_blinkiebee.gif",           alt:"flowers peach blinkiebee" },
+    { href:BB, src:TP+"flowers_rainbowgarden8_blinkiebee.gif",   alt:"flowers rainbow garden blinkiebee" },
+    { href:BB, src:TP+"food_glasssundae6_blinkiebee.gif",        alt:"food glass sundae blinkiebee" },
+    { href:BB, src:TP+"frog24pq.gif",                            alt:"frog 24pq" },
+    { href:BB, src:TP+"misc_vanity7_blinkiebee.gif",             alt:"misc vanity blinkiebee" },
+    { href:BB, src:TP+"misc_windmill6_blinkiebee.gif",           alt:"misc windmill blinkiebee" },
+    { href:BB, src:TP+"mobile_mb_lovelyln27.gif",                alt:"mobile lovelyln27" },
+    { href:BB, src:TP+"monikat213.gif",                          alt:"monikat213" },
+    { href:BB, src:TP+"monkeydrop7_blinkiebee.gif",              alt:"monkey drop blinkiebee" },
+    { href:BB, src:TP+"music7_blinkiebee.gif",                   alt:"music blinkiebee" },
+    { href:BB, src:TP+"RainbowTemplate1.gif",                    alt:"Rainbow Template 1" },
+    { href:BB, src:TP+"sports_goal10_blinkiebee.gif",            alt:"sports goal blinkiebee" },
+    { href:BB, src:TP+"temp5.gif",                               alt:"temp5" },
+    { href:BB, src:TP+"Theatresphynx37.gif",                     alt:"Theatre sphinx 37" },
+    { href:BB, src:TP+"xylophoneblinkie_by_lora.gif",            alt:"xylophone blinkie by lora" },
+    { href:BB, src:TP+"zunicorn7_blinkiebee.gif",                alt:"zunicorn blinkiebee" },
+  ];
+
+  /* ── Render all ── */
+  renderColumn(fandom,   "col-fandom");
+  renderColumn(personal, "col-personal");
+  renderColumn(hobbies,  "col-hobbies");
+  renderColumn(website,  "col-web");
+  renderColumn(vibes,    "col-vibes");
+  renderColumn(other,    "col-other");
+  renderColumn(tmpl1,    "col-tmpl-1");
+  renderColumn(tmpl2,    "col-tmpl-2");
+  renderColumn(tmpl3,    "col-tmpl-3");
+
+}); // end DOMContentLoaded
+</script>
+
+</body>
+</html>

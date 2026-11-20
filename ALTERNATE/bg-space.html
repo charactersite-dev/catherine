@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CallMeCatherine — Space</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{min-height:100%;width:100%;}
+body{
+  font-family:'Nunito',sans-serif;
+  background:linear-gradient(180deg,#020210 0%,#05051a 30%,#080525 60%,#100528 100%);
+  min-height:100vh;
+  position:relative;
+  overflow-x:hidden;
+}
+@keyframes twinkle{0%,100%{opacity:var(--lo,0.2);transform:scale(1);}50%{opacity:var(--hi,0.9);transform:scale(1.4);}}
+@keyframes shootRL{
+  0%{transform:translateX(0) scaleX(0);opacity:0;}
+  10%{opacity:1;}
+  50%{transform:translateX(-80px) scaleX(1);opacity:1;}
+  100%{transform:translateX(-160px) scaleX(0.1);opacity:0;}
+}
+#stars,#nebulae,#comets{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;}
+#nebulae{z-index:0;}
+#stars{z-index:1;}
+#comets{z-index:2;overflow:hidden;}
+.page-content{position:relative;z-index:3;}
+</style>
+</head>
+<body>
+<div id="nebulae"></div>
+<div id="stars"></div>
+<div id="comets"></div>
+<div class="page-content">
+  <!-- YOUR PAGE CONTENT GOES HERE -->
+</div>
+<script>
+(function(){
+  const vw=window.innerWidth;
+  const vh=window.innerHeight;
+
+  // Nebula blobs
+  const neb=document.getElementById('nebulae');
+  [{col:'#4020a0',w:200,h:130,t:0.08,l:0.05},{col:'#a02050',w:260,h:170,t:0.15,l:0.3},{col:'#1850a0',w:180,h:120,t:0.05,l:0.7},{col:'#602090',w:220,h:140,t:0.4,l:0.55}].forEach(n=>{
+    const el=document.createElement('div');
+    el.style.cssText=`position:absolute;width:${n.w}px;height:${n.h}px;background:${n.col};border-radius:50%;top:${n.t*100}%;left:${n.l*100}%;filter:blur(40px);opacity:0.2;`;
+    neb.appendChild(el);
+  });
+
+  // Stars
+  const starLayer=document.getElementById('stars');
+  for(let i=0;i<80;i++){
+    const s=document.createElement('div');
+    const sz=0.8+Math.random()*2.4;
+    const lo=0.1+Math.random()*0.3;
+    s.style.cssText=`position:absolute;width:${sz}px;height:${sz}px;border-radius:50%;background:white;left:${Math.random()*100}%;top:${Math.random()*100}%;--lo:${lo};--hi:${0.6+Math.random()*0.4};animation:twinkle ${1.5+Math.random()*3}s ease-in-out infinite ${-Math.random()*4}s;`;
+    starLayer.appendChild(s);
+  }
+  // Pixel star shapes
+  for(let i=0;i<12;i++){
+    const s=document.createElement('div');
+    const sz=4+Math.random()*5;
+    s.style.cssText=`position:absolute;width:${sz}px;height:${sz}px;background:white;clip-path:polygon(50% 0%,55% 42%,100% 50%,55% 58%,50% 100%,45% 58%,0% 50%,45% 42%);left:${Math.random()*98}%;top:${Math.random()*98}%;--lo:0.15;--hi:0.8;animation:twinkle ${2+Math.random()*3}s ease-in-out infinite ${-Math.random()*4}s;`;
+    starLayer.appendChild(s);
+  }
+
+  // Comets — right to left
+  const cometLayer=document.getElementById('comets');
+  [
+    {top:0.08,rightPct:0.05,w:100,dur:5,delay:0},
+    {top:0.18,rightPct:0.25,w:75,dur:7,delay:-2.5},
+    {top:0.32,rightPct:0.08,w:120,dur:9,delay:-5},
+    {top:0.55,rightPct:0.35,w:85,dur:6,delay:-3.5},
+    {top:0.70,rightPct:0.12,w:95,dur:8,delay:-1.8},
+  ].forEach(c=>{
+    const el=document.createElement('div');
+    el.style.cssText=`position:absolute;top:${c.top*100}%;right:${c.rightPct*100}%;width:${c.w}px;height:2px;background:linear-gradient(270deg,rgba(255,255,255,0.9),transparent);animation:shootRL ${c.dur}s linear infinite ${c.delay}s;transform-origin:right center;border-radius:2px;`;
+    cometLayer.appendChild(el);
+  });
+})();
+</script>
+</body>
+</html>

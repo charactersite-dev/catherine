@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CallMeCatherine ~ Pixel Aquarium</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pacifico&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+body{background:linear-gradient(180deg,#a8e4f0 0%,#5ab8d8 20%,#2a8ab8 45%,#1060a0 70%,#083878 100%) !important;background-attachment:fixed !important;}
+.page-container{background:rgba(0,40,80,0.45);border-color:rgba(100,200,255,0.35);color:#d0f0ff;}
+.page-container h2{color:#80d8ff;}
+hr{background:rgba(100,200,255,0.2) !important;}
+#bubbles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:-1;overflow:hidden;}
+@keyframes riseUp{0%{transform:translateY(0) translateX(0);opacity:.8;}50%{transform:translateY(-50vh) translateX(var(--sway,8px));opacity:.6;}100%{transform:translateY(-110vh) translateX(0);opacity:0;}}
+.bubble{position:absolute;bottom:-40px;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.7),rgba(160,220,255,0.2));border:1px solid rgba(255,255,255,0.5);animation:riseUp var(--dur,8s) ease-in infinite var(--del,0s);}
+</style>
+</head>
+<body>
+<span id="page-top"></span>
+<div id="bubbles"></div>
+
+<div class="page-wrap">
+  <div id="layout-header"></div>
+
+  <div class="body-layout">
+    <div id="layout-sidebar"></div>
+    <div class="main-content">
+
+  <div class="page-container">
+    <main id="main-content">
+      <section><h2>Pixel Aquarium</h2><hr><br>
+      <img src="pixels/aqua/gifcities22 (8).gif">
+      </section>
+
+      <section>
+        <div class="section-title"><span style="--i:0">B</span><span style="--i:1">E</span><span style="--i:2">A</span><span style="--i:3">C</span><span style="--i:4">H</span></div>
+        <div id="beach-container"></div>
+        <img src="pixels/dividers/gifcitiesorg1 (47).gif" style="max-width:100%;image-rendering:pixelated;">
+      </section>
+      <br><hr><br>
+      <section>
+        <div class="section-title"><span style="--i:0">U</span><span style="--i:1">n</span><span style="--i:2">d</span><span style="--i:3">e</span><span style="--i:4">r</span><span style="display:inline-block;width:5px"></span><span style="--i:6">t</span><span style="--i:7">h</span><span style="--i:8">e</span><span style="display:inline-block;width:5px"></span><span style="--i:10">S</span><span style="--i:11">e</span><span style="--i:12">a</span></div>
+        <div id="aquarium-container"></div>
+      </section>
+      <br><hr><br>
+      <section>
+        <div class="section-title"><span style="--i:0">D</span><span style="--i:1">e</span><span style="--i:2">e</span><span style="--i:3">p</span><span style="display:inline-block;width:5px"></span><span style="--i:5">S</span><span style="--i:6">e</span><span style="--i:7">a</span></div>
+        <div id="deepsea-container"></div>
+      </section>
+      <br><hr><br>
+      <section>
+        <div class="section-title"><span style="--i:0">S</span><span style="--i:1">e</span><span style="--i:2">a</span><span style="display:inline-block;width:5px"></span><span style="--i:4">F</span><span style="--i:5">l</span><span style="--i:6">o</span><span style="--i:7">o</span><span style="--i:8">r</span></div>
+        <div id="seafloor-container"></div>
+      </section>
+      <div style="text-align:center;"><img src="pixels/dividers/artworkneocities (83).gif" alt="" style="image-rendering:pixelated;"></div>
+    </main>
+  </div>
+
+    </div><!-- end main-content -->
+  </div><!-- end body-layout -->
+
+  <div id="layout-footer"></div>
+</div>
+
+<script src="sparkle.js"></script>
+<script src="layout.js"></script>
+<script>
+// Bubbles
+(function(){
+  var c=document.getElementById('bubbles');
+  for(var i=0;i<22;i++){
+    var b=document.createElement('div');b.className='bubble';
+    var sz=4+Math.random()*18;
+    b.style.cssText='width:'+sz+'px;height:'+sz+'px;left:'+(Math.random()*100)+'%;--dur:'+(5+Math.random()*10)+'s;--del:'+(-Math.random()*12)+'s;--sway:'+(Math.random()*20-10)+'px;';
+    c.appendChild(b);
+  }
+})();
+
+var sd="https://sakuradreams.neocities.org/",aw="https://artwork.neocities.org",gc="https://gifcities.org/",pg="https://pixel-garden.tumblr.com";
+var MAX=200,MIN=30;
+function resizeImg(img){var w=img.naturalWidth,h=img.naturalHeight;if(!w||!h)return;var sd2=Math.min(MAX/w,MAX/h,1),su=Math.max(MIN/w,MIN/h,1),sc=(w>MAX||h>MAX)?sd2:(w<MIN||h<MIN)?su:1;img.style.width=w*sc+'px';img.style.height=h*sc+'px';}
+function attachR(img){if(img.naturalWidth>0)resizeImg(img);else if(img.complete)setTimeout(function(){attachR(img);},50);else img.onload=function(){resizeImg(img);};}
+function renderArray(arr,id){
+  var c=document.getElementById(id);if(!c)return;
+  var row=document.createElement('div');row.className='row';c.appendChild(row);
+  arr.forEach(function(item){
+    if(item.break){row=document.createElement('div');row.className='row';c.appendChild(row);return;}
+    var a=document.createElement('a');a.href=item.href||'#';a.target='_blank';
+    var img=document.createElement('img');img.src=item.src;img.alt=item.alt||'';img.loading='lazy';
+    attachR(img);a.appendChild(img);row.appendChild(a);
+  });
+}
+var beach=[{href:gc,src:"pixels/aqua/gifcities22 (6).gif",alt:""},{href:sd,src:"pixels/aqua/Dolphin05.gif",alt:""}];
+var aquarium=[
+  {href:sd,src:"pixels/aqua/04.gif",alt:""},{href:sd,src:"pixels/aqua/05.gif",alt:""},{href:sd,src:"pixels/aqua/06.gif",alt:""},{href:sd,src:"pixels/aqua/12.gif",alt:""},{href:sd,src:"pixels/aqua/13.gif",alt:""},
+  {href:aw,src:"pixels/aqua/artworkneocities (67).gif",alt:""},{href:aw,src:"pixels/aqua/artworkneocities (98).gif",alt:""},{href:aw,src:"pixels/aqua/artworkneocities (10).gif",alt:""},{href:sd,src:"pixels/aqua/Fish03.gif",alt:""},
+  {break:true},
+  {href:sd,src:"pixels/aqua/Dolphin03.gif",alt:""},{href:pg,src:"pixels/aqua/pixel-gardenTUMBLR (1).gif",alt:""},{href:gc,src:"pixels/aqua/astronauta1.gif",alt:""},{href:gc,src:"pixels/aqua/gifcities22 (15).gif",alt:""},
+];
+var deepSea=[{href:"https://canva.com",src:"pixels/aqua/jellyfish.png",alt:""},{href:sd,src:"pixels/aqua/Fish06.gif",alt:""},{href:sd,src:"pixels/aqua/Fish05.gif",alt:""}];
+var seaFloor=[{href:gc,src:"pixels/aqua/pinterest2 (11).jpg",alt:""},{href:gc,src:"pixels/aqua/gifcities22 (5).gif",alt:""},{href:gc,src:"pixels/aqua/gifcities22 (7).gif",alt:""},{href:aw,src:"pixels/aqua/artworkneocities (90).gif",alt:""},{href:aw,src:"pixels/aqua/artworkneocities (24).gif",alt:""},{href:sd,src:"pixels/aqua/Shell04.gif",alt:""},{href:sd,src:"pixels/aqua/Ray01.gif",alt:""}];
+window.addEventListener('DOMContentLoaded',function(){
+  renderArray(beach,'beach-container');renderArray(aquarium,'aquarium-container');renderArray(deepSea,'deepsea-container');renderArray(seaFloor,'seafloor-container');
+});
+</script>
+</body>
+</html>
