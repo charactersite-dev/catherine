@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="../pixel-map.js"></script>
+  <meta charset="UTF-8">
+  <title>CallmeCatherine ~ People</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script type="text/javascript">
+// <![CDATA[
+var colour="random"; // in addition to "random" can be set to any valid colour eg "#f0f" or "red"
+var sparkles=50;
+
+/****************************
+*  Tinkerbell Magic Sparkle *
+*(c)2005-13 mf2fm web-design*
+*  http://www.mf2fm.com/rv  *
+* DON'T EDIT BELOW THIS BOX *
+****************************/
+var x=ox=400;
+var y=oy=300;
+var swide=800;
+var shigh=600;
+var sleft=sdown=0;
+var tiny=new Array();
+var star=new Array();
+var starv=new Array();
+var starx=new Array();
+var stary=new Array();
+var tinyx=new Array();
+var tinyy=new Array();
+var tinyv=new Array();
+
+window.onload=function() { if (document.getElementById) {
+  var i, rats, rlef, rdow;
+  for (var i=0; i<sparkles; i++) {
+    var rats=createDiv(3, 3);
+    rats.style.visibility="hidden";
+    rats.style.zIndex="999";
+    document.body.appendChild(tiny[i]=rats);
+    starv[i]=0;
+    tinyv[i]=0;
+    var rats=createDiv(5, 5);
+    rats.style.backgroundColor="transparent";
+    rats.style.visibility="hidden";
+    rats.style.zIndex="999";
+    var rlef=createDiv(1, 5);
+    var rdow=createDiv(5, 1);
+    rats.appendChild(rlef);
+    rats.appendChild(rdow);
+    rlef.style.top="2px";
+    rlef.style.left="0px";
+    rdow.style.top="0px";
+    rdow.style.left="2px";
+    document.body.appendChild(star[i]=rats);
+  }
+  set_width();
+  sparkle();
+}}
+
+function sparkle() {
+  var c;
+  if (Math.abs(x-ox)>1 || Math.abs(y-oy)>1) {
+    ox=x;
+    oy=y;
+    for (c=0; c<sparkles; c++) if (!starv[c]) {
+      star[c].style.left=(starx[c]=x)+"px";
+      star[c].style.top=(stary[c]=y+1)+"px";
+      star[c].style.clip="rect(0px, 5px, 5px, 0px)";
+      star[c].childNodes[0].style.backgroundColor=star[c].childNodes[1].style.backgroundColor=(colour=="random")?newColour():colour;
+      star[c].style.visibility="visible";
+      starv[c]=50;
+      break;
+    }
+  }
+  for (c=0; c<sparkles; c++) {
+    if (starv[c]) update_star(c);
+    if (tinyv[c]) update_tiny(c);
+  }
+  setTimeout("sparkle()", 40);
+}
+
+function update_star(i) {
+  if (--starv[i]==25) star[i].style.clip="rect(1px, 4px, 4px, 1px)";
+  if (starv[i]) {
+    stary[i]+=1+Math.random()*3;
+    starx[i]+=(i%5-2)/5;
+    if (stary[i]<shigh+sdown) {
+      star[i].style.top=stary[i]+"px";
+      star[i].style.left=starx[i]+"px";
+    }
+    else {
+      star[i].style.visibility="hidden";
+      starv[i]=0;
+      return;
+    }
+  }
+  else {
+    tinyv[i]=50;
+    tiny[i].style.top=(tinyy[i]=stary[i])+"px";
+    tiny[i].style.left=(tinyx[i]=starx[i])+"px";
+    tiny[i].style.width="2px";
+    tiny[i].style.height="2px";
+    tiny[i].style.backgroundColor=star[i].childNodes[0].style.backgroundColor;
+    star[i].style.visibility="hidden";
+    tiny[i].style.visibility="visible"
+  }
+}
+
+function update_tiny(i) {
+  if (--tinyv[i]==25) {
+    tiny[i].style.width="1px";
+    tiny[i].style.height="1px";
+  }
+  if (tinyv[i]) {
+    tinyy[i]+=1+Math.random()*3;
+    tinyx[i]+=(i%5-2)/5;
+    if (tinyy[i]<shigh+sdown) {
+      tiny[i].style.top=tinyy[i]+"px";
+      tiny[i].style.left=tinyx[i]+"px";
+    }
+    else {
+      tiny[i].style.visibility="hidden";
+      tinyv[i]=0;
+      return;
+    }
+  }
+  else tiny[i].style.visibility="hidden";
+}
+
+document.onmousemove=mouse;
+function mouse(e) {
+  if (e) {
+    y=e.pageY;
+    x=e.pageX;
+  }
+  else {
+    set_scroll();
+    y=event.y+sdown;
+    x=event.x+sleft;
+  }
+}
+
+window.onscroll=set_scroll;
+function set_scroll() {
+  if (typeof(self.pageYOffset)=='number') {
+    sdown=self.pageYOffset;
+    sleft=self.pageXOffset;
+  }
+  else if (document.body && (document.body.scrollTop || document.body.scrollLeft)) {
+    sdown=document.body.scrollTop;
+    sleft=document.body.scrollLeft;
+  }
+  else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) {
+    sleft=document.documentElement.scrollLeft;
+    sdown=document.documentElement.scrollTop;
+  }
+  else {
+    sdown=0;
+    sleft=0;
+  }
+}
+
+window.onresize=set_width;
+function set_width() {
+  var sw_min=999999;
+  var sh_min=999999;
+  if (document.documentElement && document.documentElement.clientWidth) {
+    if (document.documentElement.clientWidth>0) sw_min=document.documentElement.clientWidth;
+    if (document.documentElement.clientHeight>0) sh_min=document.documentElement.clientHeight;
+  }
+  if (typeof(self.innerWidth)=='number' && self.innerWidth) {
+    if (self.innerWidth>0 && self.innerWidth<sw_min) sw_min=self.innerWidth;
+    if (self.innerHeight>0 && self.innerHeight<sh_min) sh_min=self.innerHeight;
+  }
+  if (document.body.clientWidth) {
+    if (document.body.clientWidth>0 && document.body.clientWidth<sw_min) sw_min=document.body.clientWidth;
+    if (document.body.clientHeight>0 && document.body.clientHeight<sh_min) sh_min=document.body.clientHeight;
+  }
+  if (sw_min==999999 || sh_min==999999) {
+    sw_min=800;
+    sh_min=600;
+  }
+  swide=sw_min;
+  shigh=sh_min;
+}
+
+function createDiv(height, width) {
+  var div=document.createElement("div");
+  div.style.position="absolute";
+  div.style.height=height+"px";
+  div.style.width=width+"px";
+  div.style.overflow="hidden";
+  return (div);
+}
+
+function newColour() {
+  var c=new Array();
+  c[0]=255;
+  c[1]=Math.floor(Math.random()*256);
+  c[2]=Math.floor(Math.random()*(256-c[1]/2));
+  c.sort(function(){return (0.5 - Math.random());});
+  return ("rgb("+c[0]+", "+c[1]+", "+c[2]+")");
+}
+// ]]>
+</script>
+</head>
+<!-- archived layout: see ../index.html -->
+<body>
+<a class="old-banner" href="../index.html" style="position:fixed;left:8px;bottom:8px;z-index:99999;font:700 11px/1 sans-serif;background:#fff;color:#7030a0;padding:6px 10px;border-radius:12px;text-decoration:none;box-shadow:0 1px 6px rgba(0,0,0,.2)">✦ old layout · back to the site history</a>
+
+  <!-- start loading sidebar -->
+  <div id="sidebar-container"></div>
+  <script>
+    fetch('sidebar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('sidebar-container').innerHTML = data;
+      });
+  </script>
+  <!-- end load-the-sidebar -->
+
+  <!-- main content box -->
+  <div class="page-container">
+    <main id="main-content">
+
+      <section>
+        <h2>People</h2>
+        <div class="page-header-img"><img src="../../assets/cyworld.webp" alt="Cyworld header"></div>
+      </section>
+
+      <section id="people-sections"></section>
+
+    </main>
+  </div>
+
+  <footer align="center"><br><a href="../../index.html"><img src="../../assets/backtohome.gif"></a><br></footer>
+
+  <script>
+  const cy = "https://web.archive.org/web/20190202221518/http://cy.cyworld.com/cyMain";
+  const aw = "https://artwork.neocities.org";
+  const mb = "https://myblinkie.holidaycomments.com/gallery";
+
+  const scenes = {
+     'Beach & Water': [[cy,"../../pixels/people/PPL-cyworld (12).gif","girl-beach-tube"],[cy,"../../pixels/people/PPL-cyworld (24).gif","girl-beach-reading"],[aw,"../../pixels/people/artworkneocitiesPEOPLE (18).gif","girlatbeach"],[aw,"../../pixels/people/artworkneocitiesPEOPLE (24).gif","familyatbeach"],[cy,"../../pixels/people/PPL-cyworld (40).gif","boy-beachball"],[cy,"../../pixels/people/PPL-cyworld (41).gif","boy-watermelon"],[cy,"../../pixels/people/PPL-cyworld (60).gif","man-beach"],[cy,"../../pixels/people/PPL-cyworld (67).gif","womanatbeach"],[cy,"../../pixels/people/PPL-cyworld (29).gif","couple-beach"],[cy,"../../pixels/people/PPL-cyworld (10).gif","couple-swanboat"],[aw,"../../pixels/people/artworkneocitiesPEOPLE (26).gif","couple-boat"],[cy,"../../pixels/people/PPL-cyworld (69).gif","boy-underwater"],[aw,"../../pixels/people/artworkneocitiesPEOPLE (14).gif","kid-pool"],[cy,"../../pixels/people/PPL-cyworld (39).gif","toddler-water"],[cy,"../../pixels/people/PPL-cyworld (13).gif","hawaiiangirl"],[cy,"../../pixels/people/PPL-cyworld (62).gif","sleeping-woman-pool"]],
+    'Winter & Snow': [[cy,"../../pixels/people/PPL-cyworld (21).gif","boy-snow"],[cy,"../../pixels/people/PPL-cyworld (2).gif","boy-fishing-winter"],[cy,"../../pixels/people/PPL-cyworld (50).gif","kids-snow"],[cy,"../../pixels/people/PPL-cyworld (20).gif","girl-snowman"],[cy,"../../pixels/people/PPL-cyworld (19).gif","girl-winter-jump"],[cy,"../../pixels/people/PPL-cyworld (30).gif","winter-girljump"],[cy,"../../pixels/people/PPL-cyworld (31).gif","winter-girl-clapping"],[cy,"../../pixels/people/PPL-cyworld (76).gif","girlknitting"],[aw,"../../pixels/people/artworkneocitiesPEOPLE (20).gif","girlknitting-winter"],[cy,"../../pixels/people/PPL-cyworld (68).gif","couple-knitting"]],
+    'Garden & Outdoors': [[aw,"../../pixels/people/artworkneocitiesPEOPLE (25).gif","girlwatering"],[aw,"../../pixels/people/artworkneocitiespeople2 (2).gif","girlflowers"],[cy,"../../pixels/people/PPL-cyworld (9).gif","girlwithflowers"],[cy,"../../pixels/people/PPL-cyworld (65).gif","girl-flowerbasket"],[aw,"../../pixels/people/artworkneocitiesPEOPLE (21).gif","dadkid-autumn"],[aw,"../../pixels/people/artworkneocitiesPEOPLE (8).gif","girl-autumn"],[aw,"../../pixels/people/artworkneocitiespeople2 (1).gif","bicycle-autumn"],[cy,"../../pixels/people/PPL-cyworld (55).gif","woman-bouquet"],[cy,"../../pixels/people/PPL-cyworld (57).gif","woman-gardener"],[cy,"../../pixels/people/PPL-cyworld (23).gif","boy-bouquet"],[cy,"../../pixels/people/PPL-cyworld (36).gif","boymowing"],[cy,"../../pixels/people/PPL-cyworld (74).gif","boy-kite"],[cy,"../../pixels/people/PPL-cyworld (8).gif","two-kids-garden"]],
+    'Music & Dancing': [[cy,"../../pixels/people/PPL-cyworld (44).gif","DJs"],[aw,"../../pixels/people/artworkneocitiesPEOPLE (9).gif","guitarsinger"],[aw,"../../pixels/people/artworkneocitiesPEOPLE (4).gif","trumpet"],[cy,"../../pixels/people/PPL-cyworld (71).gif","drummer"],[cy,"../../pixels/people/PPL-cyworld (47).gif","woman-singer"],[cy,"../../pixels/people/PPL-cyworld (45).gif","womandancing"],[cy,"../../pixels/people/PPL-cyworld (46).gif","guydancing"],[cy,"../../pixels/people/PPL-cyworld (63).gif","disco-couple"],[cy,"../../pixels/people/PPL-cyworld (26).gif","man-disco"],[cy,"../../pixels/people/PPL-cyworld (52).gif","couple-dancing"],[aw,"../../pixels/people/artworkneocitiesPEOPLE (1).gif","hawaiiangirls-music"]],
+    'Couples & Romance': [[cy,"../../pixels/people/PPL-cyworld (5).gif","couple-kiss"],[cy,"../../pixels/people/PPL-cyworld (77).gif","couple-date"],[aw,"../../pixels/people/artworkneocitiesPEOPLE (23).gif","old-couple"],[cy,"../../pixels/people/PPL-cyworld (15).gif","couple-sitting"],[cy,"../../pixels/people/PPL-cyworld (16).gif","couple-hug"],[aw,"../../pixels/people/artworkneocitiesPEOPLE (17).gif","couple-grass"],[cy,"../../pixels/people/PPL-cyworld (58).gif","couple-summer"],[cy,"../../pixels/people/PPL-cyworld (4).gif","couple-candles"],[cy,"../../pixels/people/PPL-cyworld (70).gif","couple-clapping"],[cy,"../../pixels/people/PPL-cyworld (75).gif","wedding"],[cy,"../../pixels/people/PPL-cyworld (11).gif","wedding-2"]],
+    'Kids & Babies': [[mb,"../../pixels/dolls/PPL-baby.gif","baby"],[mb,"../../pixels/people/ppl-buggy-baby.gif","baby-stroller"],[aw,"../../pixels/people/artworkneocitiesPEOPLE (13).gif","dad-baby"],[aw,"../../pixels/people/artworkneocitiesPEOPLE (15).gif","dad-kid-fishing"],[aw,"../../pixels/people/artworkneocitiesPEOPLE (22).gif","kids-on-log"],[aw,"../../pixels/people/artworkneocitiesPEOPLE (7).gif","toddlers-dogs"],[cy,"../../pixels/people/PPL-cyworld (7).gif","kid-bunny"],[cy,"../../pixels/people/PPL-cyworld (1).gif","kid-balloons"],[cy,"../../pixels/people/PPL-cyworld (56).gif","kid-bee"],[cy,"../../pixels/people/PPL-cyworld (48).gif","boy-toycar"],[cy,"../../pixels/people/PPL-cyworld (54).gif","boy-sparklers"],[aw,"../../pixels/people/artworkneocitiesPEOPLE (2).gif","pillow-fight"],[cy,"../../pixels/people/PPL-cyworld (49).gif","girl-present"]],
+    'Everyday Life': [[cy,"../../pixels/people/PPL-cyworld (37).gif","boycleaning"],[cy,"../../pixels/people/PPL-cyworld (34).gif","boycleaningwall"],[cy,"../../pixels/people/PPL-cyworld (35).gif","girl-vacuum"],[cy,"../../pixels/people/PPL-cyworld (25).gif","girl-dog"],[cy,"../../pixels/people/PPL-cyworld (61).gif","girl-wind"],[aw,"../../pixels/people/artworkneocitiesPEOPLE (3).gif","girl-fan"],[mb,"../../pixels/people/artist-girl.gif","girl-artist"],[aw,"../../pixels/people/artworkneocitiesPEOPLE (5).gif","girl-drawing"],[aw,"../../pixels/people/artworkneocitiesPEOPLE (10).gif","girl-chalk"],[cy,"../../pixels/people/PPL-cyworld (64).gif","cameraman"],[cy,"../../pixels/people/PPL-cyworld (73).gif","lazyman"],[cy,"../../pixels/people/PPL-cyworld (79).gif","indoors"]],
+    'Rain & Cozy Days': [[cy,"../../pixels/people/PPL-cyworld (6).gif","girl-dog-rain"],[aw,"../../pixels/people/artworkneocitiesPEOPLE (6).gif","girl-blanket"],[aw,"../../pixels/people/artworkneocitiesPEOPLE (12).gif","girl-headphones"],[cy,"../../pixels/people/PPL-cyworld (14).gif","girl-fanning"],[cy,"../../pixels/people/PPL-cyworld (38).gif","girl-icecream"],[cy,"../../pixels/people/PPL-cyworld (3).gif","woman-drink"]],
+    'Celebrations & Dress-up': [[cy,"../../pixels/people/PPL-cyworld (28).gif","girl-balloon"],[mb,"../../pixels/trinkets/girl-hot-air-balloon.gif","girl-hotairballoon"],[cy,"../../pixels/people/PPL-cyworld (27).gif","woman-heartballon"],[cy,"../../pixels/people/PPL-cyworld (43).gif","girl-cloak"],[cy,"../../pixels/people/PPL-cyworld (78).gif","girl-present"]],
+'Unsorted': [
+  [cy,"../../pixels/people/PPL-cyworld (22).gif","cyw-22"],
+  [cy,"../../pixels/people/PPL-cyworld (33).gif","cyw-33"],
+  [cy,"../../pixels/people/PPL-cyworld (53).gif","cyw-53"],
+  [cy,"../../pixels/people/PPL-cyworld (59).gif","cyw-59"],
+  [aw,"../../pixels/people/artworkneocitiesPEOPLE (16).gif","art-16"],
+  [aw,"../../pixels/people/artworkneocitiesPEOPLE (19).gif","art-19"],
+  [aw,"../../pixels/people/a_nome.gif","a-nome"],
+  [aw,"../../pixels/people/artworkneocities (25).gif","art-25"],
+  [cy,"../../pixels/people/cyworld2 (2).gif","cyw2-2"],
+
+  ["https://cinni.net/?z=/toybox/ani","../../pixels/people/girl-and-flower.gif","girl-and-flower"],
+  ["https://cinni.net/?z=/toybox/ani","../../pixels/people/ppl-womanatbeach.gif","womanatbeach"],
+  ["https://cinni.net/?z=/toybox/ani","../../pixels/people/ppl-gardener.gif","gardener"],
+  ["https://cinni.net/?z=/toybox/ani","../../pixels/people/ppl-countrysinger.gif","country-singer"],
+  ["https://cinni.net/?z=/toybox/ani","../../pixels/people/babyinabubble.gif","baby-bubble"]
+]
+  };
+
+  const container = document.getElementById('people-sections');
+  let pplIdx = 0;
+  for (const [label, items] of Object.entries(scenes)) {
+    if (pplIdx > 0) {
+      const divider = document.createElement('div');
+      divider.innerHTML = '<br><hr><br>';
+      container.appendChild(divider);
+    }
+    pplIdx++;
+    const sec = document.createElement('section');
+    const letters = label.split('').map((c, i) =>
+      c === ' ' ? `<span style="display:inline-block;width:5px"></span>`
+                : `<span class="letter" style="--i:${i}">${c}</span>`
+    ).join('');
+    sec.innerHTML = `<div class="section-title">${letters}</div><div></div>`;
+    container.appendChild(sec);
+    const shelf = sec.querySelector('div:last-child');
+    items.forEach(([href, src, alt]) => {
+      const a = document.createElement('a');
+      a.href = href; a.target = '_blank'; a.rel = 'noopener';
+      const img = document.createElement('img');
+      img.src = src; img.alt = alt; img.loading = 'lazy';
+      img.onerror = () => img.parentElement.style.display = 'none';
+      a.appendChild(img); shelf.appendChild(a);
+    });
+  }
+
+  function resizeImage(img) {
+    const max = 300;
+    const min = 30;
+    const w = img.naturalWidth;
+    const h = img.naturalHeight;
+    if (!w || !h) return;
+    const scaleDown = Math.min(max / w, max / h, 1);
+    const scaleUp = Math.max(min / w, min / h, 1);
+    let scale = 1;
+    if (w > max || h > max) { scale = scaleDown; }
+    if (w < min || h < min) { scale = scaleUp; }
+    img.style.width = (w * scale) + "px";
+    img.style.height = (h * scale) + "px";
+  }
+  window.addEventListener("load", () => {
+    document.querySelectorAll("img").forEach(img => {
+      if (img.complete) { resizeImage(img); } else { img.onload = () => resizeImage(img); }
+    });
+  });
+  </script>
+</body>
+</html>

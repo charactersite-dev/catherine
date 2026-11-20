@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<script src="../pixel-map.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trinkets Shelf</title>
+
+    <!-- Pixel font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        background-image: url("https://i.postimg.cc/1zyWCXyd/wall-(22).png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        cursor: url("../../pixels/artworkneocities (54).gif"), auto;
+        font-family: "Press Start 2P", system-ui, sans-serif;
+        -webkit-font-smoothing: none;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: geometricPrecision;
+      }
+
+      *,
+      *::before,
+      *::after {
+        cursor: url("../../pixels/artworkneocities (54).gif"), auto !important;
+        box-sizing: border-box;
+        font-family: inherit;
+      }
+
+      .container {
+        max-width: 1078px;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      .trinket-gallery {
+        margin-top: 100px;
+      }
+
+      .grid {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+      }
+
+      .grid .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        justify-content: center;
+        align-items: flex-end;
+        margin: 0 0 5px 0;
+      }
+
+      .grid a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        padding: 5px;
+        text-decoration: none;
+        flex: 0 0 auto;
+      }
+
+      .grid img.tile {
+        display: block;
+        image-rendering: pixelated;
+        object-fit: contain;
+        width: auto;
+        height: auto;
+        min-width: 50px;
+        min-height: 50px;
+        max-width: 200px;
+        max-height: 200px;
+      }
+
+      .wall-top {
+        background-image: url("https://i.postimg.cc/ZRb5584W/wall-(2).png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100px;
+      }
+
+      .grid .standalone {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 14px 0;
+        width: 100%;
+      }
+
+      .grid .standalone img.hr {
+        display: block;
+        height: 100px;
+        width: auto;
+        max-width: 95%;
+        image-rendering: pixelated;
+      }
+
+      .section {
+        width: 100%;
+      }
+
+      .section-title {
+        width: 100%;
+        text-align: center;
+        margin: 12px 0 8px;
+        font-size: 18px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        line-height: 1.2;
+        text-shadow:
+          -2px -2px 0 #000,
+           2px -2px 0 #000,
+          -2px  2px 0 #000,
+           2px  2px 0 #000,
+           0px  3px 0 #000;
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        gap: 5px;
+      }
+
+      .section-title .letter {
+        display: inline-block;
+        animation: bounce 1s infinite, color-animation 4s infinite;
+        animation-timing-function: ease-in-out, linear;
+        animation-delay: calc(.08s * var(--i)), 0s;
+      }
+
+      @keyframes bounce {
+        0%, 40%, 100% { transform: translateY(0); }
+        20% { transform: translateY(-10px); }
+      }
+
+      @keyframes color-animation {
+        0%    { color: var(--color-1); }
+        32%   { color: var(--color-1); }
+        33%   { color: var(--color-2); }
+        65%   { color: var(--color-2); }
+        66%   { color: var(--color-3); }
+        99%   { color: var(--color-3); }
+        100%  { color: var(--color-1); }
+      }
+
+      .title-word-1 { --color-1:#ff004d; --color-2:#00eaff; --color-3:#ffe600; }
+      .title-word-2 { --color-1:#ff7a00; --color-2:#7cff00; --color-3:#8a2be2; }
+      .title-word-3 { --color-1:#00ff6a; --color-2:#ff2bd6; --color-3:#00b3ff; }
+      .title-word-4 { --color-1:#ffe600; --color-2:#ff004d; --color-3:#00ffea; }
+      .title-word-5 { --color-1:#8a2be2; --color-2:#ff7a00; --color-3:#7cff00; }
+      .title-word-6 { --color-1:#00b3ff; --color-2:#ffe600; --color-3:#ff2bd6; }
+      .title-word-7 { --color-1:#7cff00; --color-2:#00ffea; --color-3:#ff7a00; }
+      .title-word-8 { --color-1:#ff2bd6; --color-2:#00b3ff; --color-3:#ffe600; }
+      .title-word-9 { --color-1:#00ffea; --color-2:#8a2be2; --color-3:#ff004d; }
+      .title-word-10{ --color-1:#ff004d; --color-2:#7cff00; --color-3:#00b3ff; }
+
+      @media (prefers-reduced-motion: reduce) {
+        .section-title .letter {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+
+  <!-- archived layout: see ../index.html -->
+<body>
+<a class="old-banner" href="../index.html" style="position:fixed;left:8px;bottom:8px;z-index:99999;font:700 11px/1 sans-serif;background:#fff;color:#7030a0;padding:6px 10px;border-radius:12px;text-decoration:none;box-shadow:0 1px 6px rgba(0,0,0,.2)">✦ old layout · back to the site history</a>
+    <div class="container">
+      <div class="wall-top"></div>
+
+      <section class="trinket-gallery">
+
+        <div class="group">
+          <div class="grid">
+
+            <!-- KAOANI -->
+            <div class="section">
+              <div class="section-title title-word-1" aria-label="KAOANI">
+                <span class="letter" style="--i:1">K</span>
+                <span class="letter" style="--i:2">A</span>
+                <span class="letter" style="--i:3">O</span>
+                <span class="letter" style="--i:4">A</span>
+                <span class="letter" style="--i:5">N</span>
+                <span class="letter" style="--i:6">I</span>
+              </div>
+              <div class="row">
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/kao/artworkneocities (51).gif" alt="kaoanicat"></a>
+              </div>
+              <div class="standalone">
+                <img class="hr" src="../../pixels/dividers/artworkneocities (37).gif" alt="disney">
+              </div>
+            </div>
+
+            <!-- DISNEY -->
+            <div class="section">
+              <div class="section-title title-word-2" aria-label="DISNEY">
+                <span class="letter" style="--i:1">D</span>
+                <span class="letter" style="--i:2">I</span>
+                <span class="letter" style="--i:3">S</span>
+                <span class="letter" style="--i:4">N</span>
+                <span class="letter" style="--i:5">E</span>
+                <span class="letter" style="--i:6">Y</span>
+              </div>
+              <div class="row">
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/artworkneocities (35).gif" alt="tinkerbell"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/artworkneocities (38).gif" alt="tinkerbell"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/artworkneocities (36).gif" alt="mickeyminnie"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/artworkneocities (102).gif" alt="ariel"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/artworkneocities (56).gif" alt="roseglass"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/artworkneocities (97).gif" alt="roseglass2"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (2).gif" alt="DOLLsnowwhitedisney"></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/aqua/disneyflounder.gif" alt=""></a>
+              </div>
+            </div>
+
+            <!-- CAREBEARS -->
+            <div class="section">
+              <div class="section-title title-word-3" aria-label="CAREBEARS">
+                <span class="letter" style="--i:1">C</span>
+                <span class="letter" style="--i:2">A</span>
+                <span class="letter" style="--i:3">R</span>
+                <span class="letter" style="--i:4">E</span>
+                <span class="letter" style="--i:5">B</span>
+                <span class="letter" style="--i:6">E</span>
+                <span class="letter" style="--i:7">A</span>
+                <span class="letter" style="--i:8">R</span>
+                <span class="letter" style="--i:9">S</span>
+              </div>
+              <div class="row">
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/care-bear-yello.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/green-care-bear.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/pink-care-bear.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/care-bear-blue.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/blue-care-bear.gif" alt=""></a>
+              </div>
+            </div>
+
+            <!-- SANRIO -->
+            <div class="section">
+              <div class="section-title title-word-4" aria-label="SANRIO">
+                <span class="letter" style="--i:1">S</span>
+                <span class="letter" style="--i:2">A</span>
+                <span class="letter" style="--i:3">N</span>
+                <span class="letter" style="--i:4">R</span>
+                <span class="letter" style="--i:5">I</span>
+                <span class="letter" style="--i:6">O</span>
+              </div>
+              <div class="row">
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/hello-kitty-bow.gif" alt=""></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/artworkneocities (13).gif" alt="hellokittyBOOK"></a>
+              </div>
+            </div>
+
+            <!-- POKEMON -->
+            <div class="section">
+              <div class="section-title title-word-5" aria-label="POKEMON">
+                <span class="letter" style="--i:1">P</span>
+                <span class="letter" style="--i:2">O</span>
+                <span class="letter" style="--i:3">K</span>
+                <span class="letter" style="--i:4">E</span>
+                <span class="letter" style="--i:5">M</span>
+                <span class="letter" style="--i:6">O</span>
+                <span class="letter" style="--i:7">N</span>
+              </div>
+              <div class="row">
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/artworkneocities (81).gif" alt="pikachu"></a>
+                <a href="https://en.wikipedia.org/wiki/GeoCities"><img class="tile" src="../../pixels/trinkets/webarchive (4).gif" alt="jigglypuffsinging"></a>
+              </div>
+              <div class="standalone">
+                <img class="hr" src="../../pixels/dividers/artworkneocities (96).gif" alt="mario">
+              </div>
+            </div>
+
+            <!-- MARIO -->
+            <div class="section">
+              <div class="section-title title-word-6" aria-label="MARIO">
+                <span class="letter" style="--i:1">M</span>
+                <span class="letter" style="--i:2">A</span>
+                <span class="letter" style="--i:3">R</span>
+                <span class="letter" style="--i:4">I</span>
+                <span class="letter" style="--i:5">O</span>
+              </div>
+              <div class="row">
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/pixelbankneocities (28).gif" alt="mariocoin"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/pixelbankneocities (12).gif" alt="godzilla"></a>
+              </div>
+            </div>
+
+            <!-- STORYBOOK -->
+            <div class="section">
+              <div class="section-title title-word-7" aria-label="STORYBOOK">
+                <span class="letter" style="--i:1">S</span>
+                <span class="letter" style="--i:2">T</span>
+                <span class="letter" style="--i:3">O</span>
+                <span class="letter" style="--i:4">R</span>
+                <span class="letter" style="--i:5">Y</span>
+                <span class="letter" style="--i:6">B</span>
+                <span class="letter" style="--i:7">O</span>
+                <span class="letter" style="--i:8">O</span>
+                <span class="letter" style="--i:9">K</span>
+              </div>
+              <div class="row">
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/purple-dragon.gif" alt=""></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (23).gif" alt="Dollrapunzelkiss"></a>
+              </div>
+            </div>
+
+            <!-- LISA FRANK -->
+            <div class="section">
+              <div class="section-title title-word-8" aria-label="LISA FRANK">
+                <span class="letter" style="--i:1">L</span>
+                <span class="letter" style="--i:2">I</span>
+                <span class="letter" style="--i:3">S</span>
+                <span class="letter" style="--i:4">A</span>
+                <span class="letter" style="--i:5"> </span>
+                <span class="letter" style="--i:6">F</span>
+                <span class="letter" style="--i:7">R</span>
+                <span class="letter" style="--i:8">A</span>
+                <span class="letter" style="--i:9">N</span>
+                <span class="letter" style="--i:10">K</span>
+              </div>
+              <div class="row">
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (50).gif" alt="pinkdolphin"></a>
+                <a href="https://lejlart.com"><img class="tile" src="../../pixels/trinkets/lejlart.com.png" alt="lisafranktiger"></a>
+                <a href="https://lejlart.com"><img class="tile" src="../../pixels/trinkets/lejlart.com2.png" alt="lisafrankdog"></a>
+                <a href="https://lejlart.com"><img class="tile" src="../../pixels/trinkets/lejlartcom.gif" alt="lisafrankcat"></a>
+              </div>
+            </div>
+
+            <!-- GIRLY STUFF -->
+            <div class="section">
+              <div class="section-title title-word-9" aria-label="GIRLY STUFF">
+                <span class="letter" style="--i:1">G</span>
+                <span class="letter" style="--i:2">I</span>
+                <span class="letter" style="--i:3">R</span>
+                <span class="letter" style="--i:4">L</span>
+                <span class="letter" style="--i:5">Y</span>
+                <span class="letter" style="--i:6"> </span>
+                <span class="letter" style="--i:7">S</span>
+                <span class="letter" style="--i:8">T</span>
+                <span class="letter" style="--i:9">U</span>
+                <span class="letter" style="--i:10">F</span>
+                <span class="letter" style="--i:11">F</span>
+              </div>
+              <div class="row">
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/castle-love.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/glitter-scribble-heart.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/glitterrainbow.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/gold-heart-locket.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/parfume.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/purple-purse.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/rainbow.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/teddybear-couple.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/unicorn.gif" alt=""></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (43).gif" alt="bearOK"></a>
+                <a href="https://lovetinypixel.blogspot.com"><img class="tile" src="../../pixels/other/lovetinypixelblogspot.gif" alt="pixelhouse"></a>
+                <a href="https://allyratworld.neocities.org"><img class="tile" src="../../pixels/trinkets/allyratworldneocities (5).gif" alt="pollypocket"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/artworkneocities (19).gif" alt="rainbow"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/pixelbankneocities (16).gif" alt="roseblackbow"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/pixelbankneocities (58).gif" alt="goldbow"></a>
+                <a href="https://allyratworld.neocities.org"><img class="tile" src="../../pixels/trinkets/allyratworldneocities (3).gif" alt="magicKEY"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/pixelbankneocities (18).gif" alt="lovekey"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/pixelbankneocities (22).gif" alt="flowerkey"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/pixelbankneocities (31).gif" alt="goldcrown"></a>
+                <a href="https://allyratworld.neocities.org"><img class="tile" src="../../pixels/trinkets/allyratworldneocities (1).gif" alt="tiara"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (38).gif" alt="pearl"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (42).gif" alt="diamond"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (45).gif" alt="purplegem"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (5).gif" alt="rainbowdiamond"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (46).gif" alt="fireworks"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (61).gif" alt="hearts"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (66).gif" alt="heart2"></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/a-trophy.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/dolls/toyballerina.gif" alt="tallballerina"></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/fixed-ballerina.gif" alt="smallballerina"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (3).gif" alt="DOLLrainbowmoonharpist"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (10).gif" alt="Dolldancingonpianorainbow"></a>
+              </div>
+            </div>
+
+            <!-- BED TIME -->
+            <div class="section">
+              <div class="section-title title-word-10" aria-label="BED TIME">
+                <span class="letter" style="--i:1">B</span>
+                <span class="letter" style="--i:2">E</span>
+                <span class="letter" style="--i:3">D</span>
+                <span class="letter" style="--i:4"> </span>
+                <span class="letter" style="--i:5">T</span>
+                <span class="letter" style="--i:6">I</span>
+                <span class="letter" style="--i:7">M</span>
+                <span class="letter" style="--i:8">E</span>
+              </div>
+              <div class="row">
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/space/bedtime-star.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/space/moon-nighttime.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/night-bear-on-blanket.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/sleeping-teddybear.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/sleepingBEAR.gif" alt=""></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/artworkneocities (100).gif" alt="sleeppenguin"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiesPEOPLE (2).gif" alt="PPLpillowfight"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiesPEOPLE (6).gif" alt="PPLinblanket"></a>
+              </div>
+            </div>
+
+            <!-- PETS -->
+            <div class="section">
+              <div class="section-title title-word-1" aria-label="PETS">
+                <span class="letter" style="--i:1">P</span>
+                <span class="letter" style="--i:2">E</span>
+                <span class="letter" style="--i:3">T</span>
+                <span class="letter" style="--i:4">S</span>
+              </div>
+              <div class="row">
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/cute-dogplush.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/dog-enjoys-meal.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/lamb.gif" alt=""></a>
+                <a href="https://lovetinypixel.blogspot.com"><img class="tile" src="../../pixels/trinkets/lovetinypixel.blogspot.png" alt="catpaw"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/artworkneocities (9).gif" alt="bird"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (55).gif" alt="yellowbird2"></a>
+                <a href="https://en.wikipedia.org/wiki/GeoCities"><img class="tile" src="../../pixels/webarchive (1).gif" alt="hamster2"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (36).gif" alt="hamster"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (39).gif" alt="catrun"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (48).gif" alt="shitzudog"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (52).gif" alt="dog"></a>
+                <a href="https://en.wikipedia.org/wiki/GeoCities"><img class="tile" src="../../pixels/trinkets/webarchive (2).gif" alt="catwithballon"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiesPEOPLE (7).gif" alt="PPLwithdogs"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (12).gif" alt="Dollwithcats"></a>
+              </div>
+            </div>
+
+            <!-- WILD ANIMALS -->
+            <div class="section">
+              <div class="section-title title-word-2" aria-label="WILD ANIMALS">
+                <span class="letter" style="--i:1">W</span>
+                <span class="letter" style="--i:2">I</span>
+                <span class="letter" style="--i:3">L</span>
+                <span class="letter" style="--i:4">D</span>
+                <span class="letter" style="--i:5"> </span>
+                <span class="letter" style="--i:6">A</span>
+                <span class="letter" style="--i:7">N</span>
+                <span class="letter" style="--i:8">I</span>
+                <span class="letter" style="--i:9">M</span>
+                <span class="letter" style="--i:10">A</span>
+                <span class="letter" style="--i:11">L</span>
+                <span class="letter" style="--i:12">S</span>
+              </div>
+              <div class="row">
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/animals-dancing.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/fat-pink-fly.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/giraffe-jr.gif" alt=""></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/pixelbankneocities (25).gif" alt="pinksheep"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (34).gif" alt="sheep"></a>
+              </div>
+            </div>
+
+            <!-- RAINY LAKE -->
+            <div class="section">
+              <div class="section-title title-word-3" aria-label="RAINY LAKE">
+                <span class="letter" style="--i:1">R</span>
+                <span class="letter" style="--i:2">A</span>
+                <span class="letter" style="--i:3">I</span>
+                <span class="letter" style="--i:4">N</span>
+                <span class="letter" style="--i:5">Y</span>
+                <span class="letter" style="--i:6"> </span>
+                <span class="letter" style="--i:7">L</span>
+                <span class="letter" style="--i:8">A</span>
+                <span class="letter" style="--i:9">K</span>
+                <span class="letter" style="--i:10">E</span>
+              </div>
+              <div class="row">
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/artworkneocities (12).gif" alt="frog"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/artworkneocities (92).gif" alt="duck"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (53).gif" alt="swan"></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/greenhouse/garden-frog-lily-pad.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/rain-puddle-bears.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/rain-umbrella-seat.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/umbrella-rain.gif" alt=""></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiesPEOPLE (26).gif" alt="PPLcoupleinboatonwater"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiesPEOPLE (15).gif" alt="PPLfishinginwater"></a>
+              </div>
+              <div class="standalone">
+                <img class="hr" src="../../pixels/dividers/artworkneocities (2).png" alt="fish">
+              </div>
+            </div>
+
+            <!-- UNDERWATER -->
+            <div class="section">
+              <div class="section-title title-word-4" aria-label="UNDERWATER">
+                <span class="letter" style="--i:1">U</span>
+                <span class="letter" style="--i:2">N</span>
+                <span class="letter" style="--i:3">D</span>
+                <span class="letter" style="--i:4">E</span>
+                <span class="letter" style="--i:5">R</span>
+                <span class="letter" style="--i:6">W</span>
+                <span class="letter" style="--i:7">A</span>
+                <span class="letter" style="--i:8">T</span>
+                <span class="letter" style="--i:9">E</span>
+                <span class="letter" style="--i:10">R</span>
+              </div>
+              <div class="row">
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/aqua/artworkneocities (66).gif" alt="yellowfish"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/aqua/artworkneocities (67).gif" alt="purplefish"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/artworkneocities (98).gif" alt="pinkfish"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/pixelbankneocities (10).gif" alt="angelfish"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/aqua/artworkneocities (10).gif" alt="fish"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/aqua/pixelbankneocities (4).gif" alt="sunfish"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/aqua/artworkneocities (90).gif" alt="hermitcrab"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/aqua/artworkneocities (24).gif" alt="oyster"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (51).gif" alt="octopus"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (17).gif" alt="Dollunderwater"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (27).gif" alt="Dollpinkmermaid"></a>
+              </div>
+            </div>
+
+            <!-- BEACH -->
+            <div class="section">
+              <div class="section-title title-word-5" aria-label="BEACH">
+                <span class="letter" style="--i:1">B</span>
+                <span class="letter" style="--i:2">E</span>
+                <span class="letter" style="--i:3">A</span>
+                <span class="letter" style="--i:4">C</span>
+                <span class="letter" style="--i:5">H</span>
+              </div>
+              <div class="row">
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/beach-duck-girl.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/beach-duck.gif" alt=""></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/pixelbankneocities (32).gif" alt="dolphin"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiesPEOPLE (18).gif" alt="PPLatbeach"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiesPEOPLE (24).gif" alt="PPLfamilyatbeach"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (15).gif" alt="Dollatbeach"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (24).gif" alt="Dollpirateonbeach"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (25).gif" alt="Dollonwater"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (26).gif" alt="Dollonbeach"></a>
+              </div>
+            </div>
+
+            <!-- OUTER SPACE -->
+            <div class="section">
+              <div class="section-title title-word-6" aria-label="OUTER SPACE">
+                <span class="letter" style="--i:1">O</span>
+                <span class="letter" style="--i:2">U</span>
+                <span class="letter" style="--i:3">T</span>
+                <span class="letter" style="--i:4">E</span>
+                <span class="letter" style="--i:5">R</span>
+                <span class="letter" style="--i:6"> </span>
+                <span class="letter" style="--i:7">S</span>
+                <span class="letter" style="--i:8">P</span>
+                <span class="letter" style="--i:9">A</span>
+                <span class="letter" style="--i:10">C</span>
+                <span class="letter" style="--i:11">E</span>
+              </div>
+              <div class="row">
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/space/artworkneocities (15).gif" alt="earth"></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/space/moon-nighttime.gif" alt=""></a>
+                <a href="https://thegardenofmadeline.neocities.org"><img class="tile" src="../../pixels/space/thegardenofmadeline.gif" alt="alienspacecat"></a>
+              </div>
+            </div>
+
+            <!-- FOOD -->
+            <div class="section">
+              <div class="section-title title-word-7" aria-label="FOOD">
+                <span class="letter" style="--i:1">F</span>
+                <span class="letter" style="--i:2">O</span>
+                <span class="letter" style="--i:3">O</span>
+                <span class="letter" style="--i:4">D</span>
+              </div>
+              <div class="row">
+                <a href="https://pixel.vivarism.net"><img class="tile" src="../../pixels/cliques/pixel.vivarism.net.gif" alt="suninteacup"></a>
+                <a href="https://mutterbutter.neocities.org"><img class="tile" src="../../pixels/trinkets/mutterbutter.neocities.org.gif" alt="catinteacup"></a>
+                <a href="https://thegardenofmadeline.neocities.org"><img class="tile" src="../../pixels/cliques/thegardenofmadeline.neocities.org.gif" alt="froginteacup"></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/food/ice-cream-cone.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/food/ice-cream.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/food/wedding-cake.gif" alt=""></a>
+                <a href="https://allyratworld.neocities.org"><img class="tile" src="../../pixels/trinkets/food/allyratworldneocities (4).gif" alt="strawbMilk"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/food/artworkneocities (44).gif" alt="parfait"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/food/pixelbankneocities (20).gif" alt="lovecoffeemug"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (40).gif" alt="martini"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (56).gif" alt="martini2"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/food/pixelbankneocities (59).gif" alt="boba"></a>
+              </div>
+              <div class="standalone">
+                <img class="hr" src="../../pixels/dividers/artworkneocities (62).gif" alt="fruit">
+              </div>
+            </div>
+
+            <!-- FRUIT -->
+            <div class="section">
+              <div class="section-title title-word-8" aria-label="FRUIT">
+                <span class="letter" style="--i:1">F</span>
+                <span class="letter" style="--i:2">R</span>
+                <span class="letter" style="--i:3">U</span>
+                <span class="letter" style="--i:4">I</span>
+                <span class="letter" style="--i:5">T</span>
+              </div>
+              <div class="row">
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/food/artworkneocities (65).gif" alt="chocstrawb"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/food/artworkneocities (17).gif" alt="strawberry"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/food/artworkneocities (23).gif" alt="pear"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/food/artworkneocities (50).gif" alt="apple"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/food/artworkneocities (93).gif" alt="grapes"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (1).gif" alt="DOLLwithfruit"></a>
+              </div>
+              <div class="standalone">
+                <img class="hr" src="../../pixels/dividers/artworkneocities (5).png" alt="flowers">
+              </div>
+            </div>
+
+            <!-- SPRING GARDEN -->
+            <div class="section">
+              <div class="section-title title-word-9" aria-label="SPRING GARDEN">
+                <span class="letter" style="--i:1">S</span>
+                <span class="letter" style="--i:2">P</span>
+                <span class="letter" style="--i:3">R</span>
+                <span class="letter" style="--i:4">I</span>
+                <span class="letter" style="--i:5">N</span>
+                <span class="letter" style="--i:6">G</span>
+                <span class="letter" style="--i:7"> </span>
+                <span class="letter" style="--i:8">G</span>
+                <span class="letter" style="--i:9">A</span>
+                <span class="letter" style="--i:10">R</span>
+                <span class="letter" style="--i:11">D</span>
+                <span class="letter" style="--i:12">E</span>
+                <span class="letter" style="--i:13">N</span>
+              </div>
+              <div class="row">
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/greenhouse/butterfly.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/greenhouse/mushroom.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/pretty-girly-GLITTERrose.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/windmill.gif" alt=""></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/greenhouse/artworkneocities (76).gif" alt="flowervaseblue"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/greenhouse/artworkneocities (77).gif" alt="flowervaseyellow"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/greenhouse/artworkneocities (30).gif" alt="sakurablossom"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/greenhouse/pixelbankneocities (47).gif" alt="bee"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/artworkneocities (6).gif" alt="squirrel"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/artwork.neocitiesBunny.png" alt="storybookbunny1"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/other/artworkneocities (49).gif" alt="storybookbunny2"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/greenhouse/artworkneocities (18).gif" alt="weeds"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/greenhouse/artworkneocities (21).gif" alt="mushrooms"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/other/artworkneocities (82).gif" alt="stump"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/greenhouse/artworkneocities (16).gif" alt="butterfly"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/greenhouse/pixelbankneocities (24).gif" alt="pinkbutterfly2"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (44).gif" alt="rainbowbutterfly"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/greenhouse/artworkneocities (70).gif" alt="sprout"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocities (25).gif" alt="PPLgardener"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/greenhouse/artworkneocities (64).gif" alt="flowercart"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/greenhouse/artworkneocities (68).gif" alt="pinkrose"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/greenhouse/artworkneocities (84).gif" alt="pinkrose2"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/greenhouse/artworkneocities (63).gif" alt="flowerpatch"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiesPEOPLE (17).gif" alt="PPLingarden"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiespeople2 (2).gif" alt="PPLgirllookingatpottedflowers"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (7).gif" alt="Dollingarden"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (13).gif" alt="Dollonbikewithflowers"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (21).gif" alt="Dollchinesespring"></a>
+              </div>
+            </div>
+
+            <!-- FOREST -->
+            <div class="section">
+              <div class="section-title title-word-10" aria-label="FOREST">
+                <span class="letter" style="--i:1">F</span>
+                <span class="letter" style="--i:2">O</span>
+                <span class="letter" style="--i:3">R</span>
+                <span class="letter" style="--i:4">E</span>
+                <span class="letter" style="--i:5">S</span>
+                <span class="letter" style="--i:6">T</span>
+              </div>
+              <div class="row">
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/other/artworkneocities (40).gif" alt="animalcamp"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiesPEOPLE (22).gif" alt="PPLkidsonlogingrass"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (5).gif" alt="Dollplayingharpinforest"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (6).gif" alt="Dollplayingfluteinforest"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (16).gif" alt="Dollinforestplayingflute2"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (11).gif" alt="Dollswinginginforest"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (18).gif" alt="Dollswinginginforest3"></a>
+              </div>
+            </div>
+
+            <!-- SUMMER -->
+            <div class="section">
+              <div class="section-title title-word-1" aria-label="SUMMER">
+                <span class="letter" style="--i:1">S</span>
+                <span class="letter" style="--i:2">U</span>
+                <span class="letter" style="--i:3">M</span>
+                <span class="letter" style="--i:4">M</span>
+                <span class="letter" style="--i:5">E</span>
+                <span class="letter" style="--i:6">R</span>
+              </div>
+              <div class="row">
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiesPEOPLE (1).gif" alt="PPLhawaiianguitar"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiesPEOPLE (3).gif" alt="PPLlayingbyfaninsummer"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiesPEOPLE (14).gif" alt="PPLplayinginpool"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiesPEOPLE (25).gif" alt="PPLkidinrain"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (4).gif" alt="DOLLknittingsummer"></a>
+              </div>
+            </div>
+
+            <!-- AUTUMN -->
+            <div class="section">
+              <div class="section-title title-word-2" aria-label="AUTUMN">
+                <span class="letter" style="--i:1">A</span>
+                <span class="letter" style="--i:2">U</span>
+                <span class="letter" style="--i:3">T</span>
+                <span class="letter" style="--i:4">U</span>
+                <span class="letter" style="--i:5">M</span>
+                <span class="letter" style="--i:6">N</span>
+              </div>
+              <div class="row">
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/artworkneocities (94).gif" alt="autumnleaves"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiesPEOPLE (8).gif" alt="PPLinautumnleaves"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiesPEOPLE (21).gif" alt="PPLdadkidAUTUMN"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiespeople2 (1).gif" alt="PPLbicyclegirlwithAUTUMNleaves"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (8).gif" alt="DollcozyinchairAUTUMN"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (19).gif" alt="DollincityAUTUMN"></a>
+              </div>
+            </div>
+
+            <!-- WINTER -->
+            <div class="section">
+              <div class="section-title title-word-3" aria-label="WINTER">
+                <span class="letter" style="--i:1">W</span>
+                <span class="letter" style="--i:2">I</span>
+                <span class="letter" style="--i:3">N</span>
+                <span class="letter" style="--i:4">T</span>
+                <span class="letter" style="--i:5">E</span>
+                <span class="letter" style="--i:6">R</span>
+              </div>
+              <div class="row">
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/winter-bunny-snowman.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/winter-PPL-ski.gif" alt=""></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiesPEOPLE (19).gif" alt="PPLcutegirlWINTER"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiesPEOPLE (20).gif" alt="PPLknittingWINTER"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (14).gif" alt="Dollwinterwithluggage"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (20).gif" alt="Dollincitywinter2"></a>
+              </div>
+            </div>
+
+            <!-- MUSIC -->
+            <div class="section">
+              <div class="section-title title-word-4" aria-label="MUSIC">
+                <span class="letter" style="--i:1">M</span>
+                <span class="letter" style="--i:2">U</span>
+                <span class="letter" style="--i:3">S</span>
+                <span class="letter" style="--i:4">I</span>
+                <span class="letter" style="--i:5">C</span>
+              </div>
+              <div class="row">
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/pink-juke-box.gif" alt=""></a>
+                <a href="https://allyratworld.neocities.org"><img class="tile" src="../../pixels/trinkets/allyratworldneocities (2).gif" alt="bunny ipod"></a>
+                <a href="https://en.wikipedia.org/wiki/GeoCities"><img class="tile" src="../../pixels/trinkets/webarchive (3).gif" alt="boombox"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (67).gif" alt="musicnoteheart"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/artworkneocities (33).gif" alt="CD"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiesPEOPLE (4).gif" alt="PPLtrumpetplayer"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiesPEOPLE (9).gif" alt="PPLguitarsinger"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiesPEOPLE (12).gif" alt="PPLlisteningtoheadphones"></a>
+              </div>
+            </div>
+
+            <!-- PEOPLE -->
+            <div class="section">
+              <div class="section-title title-word-5" aria-label="PEOPLE">
+                <span class="letter" style="--i:1">P</span>
+                <span class="letter" style="--i:2">E</span>
+                <span class="letter" style="--i:3">O</span>
+                <span class="letter" style="--i:4">P</span>
+                <span class="letter" style="--i:5">L</span>
+                <span class="letter" style="--i:6">E</span>
+              </div>
+              <div class="row">
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/artist-girl.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/girl-hot-air-balloon.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/dolls/PPL-baby.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/people/ppl-buggy-baby.gif" alt=""></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiesPEOPLE (5).gif" alt="PPLdrawing"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiesPEOPLE (10).gif" alt="PPLdrawingchalk"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiesPEOPLE (13).gif" alt="PPLdadbaby"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/people/artworkneocitiesPEOPLE (23).gif" alt="PPLoldcouplekiss"></a>
+              </div>
+            </div>
+
+            <!-- OBJECTS (MOVED TO END) -->
+            <div class="section">
+              <div class="section-title title-word-6" aria-label="OBJECTS">
+                <span class="letter" style="--i:1">O</span>
+                <span class="letter" style="--i:2">B</span>
+                <span class="letter" style="--i:3">J</span>
+                <span class="letter" style="--i:4">E</span>
+                <span class="letter" style="--i:5">C</span>
+                <span class="letter" style="--i:6">T</span>
+                <span class="letter" style="--i:7">S</span>
+              </div>
+              <div class="row">
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/airplaneinclouds.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/pink-car.gif" alt=""></a>
+                <a href="https://myblinkie.holidaycomments.com/gallery"><img class="tile" src="../../pixels/trinkets/pink-tub.gif" alt=""></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/artworkneocities (103).gif" alt="tv"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/artworkneocities (107).gif" alt="tv"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/trinkets/artworkneocities (55).gif" alt="tv"></a>
+                <a href="https://artwork.neocities.org"><img class="tile" src="../../pixels/dolls/people-artworkneocities (9).gif" alt="Dollwithbaloonsonbike"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (7).gif" alt="cellphone"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/space/pixelbankneocities (8).gif" alt="lightbulb"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (62).gif" alt="lightbulb2"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/pixelbankneocities (23).gif" alt="camera"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/pixelbankneocities (27).gif" alt="pinkpresent"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/pixelbankneocities (26).gif" alt="pink3ds"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (33).gif" alt="pink3ds2"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (35).gif" alt="pinkPC"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (37).gif" alt="bearIDEA"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (49).gif" alt="balloons"></a>
+                <a href="https://pixelbank.neocities.org"><img class="tile" src="../../pixels/trinkets/pixelbankneocities (65).gif" alt="bearballoon"></a>
+              </div>
+              <div class="standalone">
+                <img class="hr" src="../../pixels/dividers/artworkneocities (42).gif" alt="veggies">
+              </div>
+                         <div class="standalone">
+                    <a href="https://scentedclub.neocities.org/" target="_blank" rel="noopener noreferrer" style="background:linear-gradient(120deg,#ff6eb4,#ffdd00,#00cfff,#ff6eb4);border:1.5px solid rgba(255,100,180,0.5);border-radius:8px;font-family:sans-serif;font-size:0.78rem;font-weight:700;color:#fff;text-decoration:none;"> Scented // Box of Crayons</a>
+                    </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

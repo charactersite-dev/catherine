@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="../pixel-map.js"></script>
+<meta charset="UTF-8">
+<meta name="description" content="A pixel space — tiny sprites floating among the stars.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Outer Space Pixels</title>
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<!-- archived layout: see ../index.html -->
+<body class="page-space">
+<a class="old-banner" href="../index.html" style="position:fixed;left:8px;bottom:8px;z-index:99999;font:700 11px/1 sans-serif;background:#fff;color:#7030a0;padding:6px 10px;border-radius:12px;text-decoration:none;box-shadow:0 1px 6px rgba(0,0,0,.2)">✦ old layout · back to the site history</a>
+<div id="top"></div>
+
+<nav id="pixel-nav">
+  <div id="pixel-nav-links">
+    <a href="../../index.html">🏠 Home</a>
+    <a href="https://callmecatherine.neocities.org/aquarium">🐠 Aquarium</a>
+    <a href="https://callmecatherine.neocities.org/dollhouse">🏡 Dollhouse</a>
+    <a href="https://callmecatherine.neocities.org/greenhouse">🌸 Greenhouse</a>
+    <a href="https://callmecatherine.neocities.org/journal/journal">📓 Journal</a>
+    <a href="https://callmecatherine.neocities.org/people">👥 People</a>
+    <a href="https://callmecatherine.neocities.org/space">🌙 Space</a>
+    <a href="https://callmecatherine.neocities.org/trinkets">✨ Trinkets</a>
+  </div>
+  <button id="pixel-nav-toggle" aria-label="Navigation">☰ nav</button>
+</nav>
+
+<header>
+  <h1>Outer Space Pixels</h1>
+</header>
+
+<div id="spriteField"></div>
+
+<div style="flex:1;pointer-events:none"></div>
+<a id="scented-footer" href="https://scentedclub.neocities.org/" target="_blank" rel="noopener">🌌 Scented // Ozone</a>
+
+<script>
+// ── SPRITES
+const BASE = '../../pixels/space/';
+const sprites = [
+  ['1ESPLOSIONstaradopt.gif',    64],
+  ['artworkneocities (15).gif',  56],
+  ['bedtime-star.gif',           72],
+  ['c9dda7c7.gif',               56],
+  ['i4.gif',                     56],
+  ['minisol.gif',                56],
+  ['moon-nighttime.gif',         96],
+  ['pixel-worldTUMBLR (1).webp', 64],
+  ['pixel-worldTUMBLR (13).webp',56],
+  ['pixel-worldTUMBLR (14).webp',56],
+  ['pixel-worldTUMBLR (15).webp',56],
+  ['pixel-worldTUMBLR (16).webp',64],
+  ['pixelbankneocities (8).gif', 56],
+  ['thegardenofmadeline.gif',    64],
+];
+
+function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i+1)); [a[i],a[j]] = [a[j],a[i]]; } return a; }
+shuffle(sprites);
+
+const field = document.getElementById('spriteField');
+const placed = [];
+function noOverlap(a, b) { return a.x + a.w + 10 < b.x || b.x + b.w + 10 < a.x || a.y + a.h + 10 < b.y || b.y + b.h + 10 < a.y; }
+
+sprites.forEach(([src, h]) => {
+  const el = document.createElement('img');
+  el.src = BASE + src;
+  el.style.height = h + 'px';
+  el.title = src;
+  el.onload = function() {
+    const w = el.offsetWidth || h;
+    const vw = innerWidth, vh = innerHeight;
+    let tx, ty, found = false;
+    for (let i = 0; i < 80; i++) {
+      tx = Math.round((0.04 + Math.random() * 0.88) * (vw - w));
+      ty = Math.round((0.06 + Math.random() * 0.80) * (vh - h));
+      const box = {x:tx, y:ty, w, h};
+      if (placed.every(p => noOverlap(box, p))) { placed.push(box); found = true; break; }
+    }
+    if (!found) { tx = Math.round(Math.random() * (vw - w)); ty = Math.round(Math.random() * (vh - h)); }
+    el.style.left = tx + 'px';
+    el.style.top = ty + 'px';
+  };
+  field.appendChild(el);
+});
+
+document.getElementById('pixel-nav-toggle').addEventListener('click', function() {
+  document.getElementById('pixel-nav').classList.toggle('open');
+});
+
+(function() {
+  var cur = window.location.pathname.replace(/\/$/, '').split('/').pop() || 'index';
+  document.querySelectorAll('#pixel-nav-links a').forEach(function(a) {
+    var page = (a.getAttribute('href') || '').replace(/\/$/, '').split('/').pop() || 'index';
+    if (page === cur) { a.style.background = 'rgba(96,64,192,.35)'; a.style.fontWeight = '700'; }
+  });
+})();
+</script>
+</body>
+</html>
