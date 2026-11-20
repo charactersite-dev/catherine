@@ -493,3 +493,19 @@ a:focus-visible { outline: 2px dashed #b060d0; outline-offset: 2px; border-radiu
 .linkback-code { width: 100%; max-width: 440px; font: 12px/1.5 ui-monospace, Menlo, Consolas, monospace; color: #4a2060; background: rgba(255,255,255,0.6); border: 1px solid rgba(200,160,230,0.5); border-radius: 8px; padding: 8px; resize: none; }
 .linkback-copy { font: 700 12px 'Nunito', sans-serif; color: #fff; background: #b060d0; border: 0; border-radius: 16px; padding: 6px 16px; cursor: pointer; transition: background-color .2s ease; }
 .linkback-copy:hover { background: #9040c0; }
+
+/* Guestbook page: open book */
+.book { position: relative; width: 100%; aspect-ratio: 1312 / 776; background: url('assets/guestbook-book.webp') center / 100% 100% no-repeat; margin-top: 8px; }
+.book-page { position: absolute; top: 6%; bottom: 13%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.book-left { left: 6%; right: 54%; padding: 0 4%; gap: 12px; }
+.book-right { left: 53%; right: 5%; }
+.book-right iframe { width: 100%; height: 100%; border: 0; border-radius: 8px; }
+.book-title { font-family: 'Pacifico', cursive; font-size: 24px; color: #b060d0; }
+.book-text { font-size: 14px; line-height: 1.8; color: #5a2a80; }
+.book-sign { font-family: 'Pacifico', cursive; font-size: 16px; color: #c060d0; }
+.book-deco { image-rendering: pixelated; }
+@media (max-width: 700px) {
+  .book { aspect-ratio: auto; background: none; }
+  .book-page { position: static; padding: 8px 0; }
+  .book-right iframe { height: 450px; }
+}

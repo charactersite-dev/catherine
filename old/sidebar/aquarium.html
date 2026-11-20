@@ -205,10 +205,60 @@ function newColour() {
 }
 // ]]>
 </script>
+<style>
+/* Aquarium background from ALTERNATE/bg-aquarium.html */
+body{background:linear-gradient(180deg,#0a2a5e 0%,#0d3d7a 20%,#0e5090 45%,#0d6aaa 70%,#0c80c0 100%) fixed !important;min-height:100vh;}
+@keyframes rise{from{transform:translateY(0);opacity:0.65;}to{transform:translateY(-100vh);opacity:0;}}
+@keyframes sway{0%,100%{transform:rotate(-10deg);}50%{transform:rotate(10deg);}}
+#bubbles,#seabed{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;}
+#bubbles{z-index:0;}#seabed{z-index:0;}
+.page-container{position:relative;z-index:2;}
+</style>
 </head>
 
 <!-- archived layout: see ../index.html -->
 <body>
+<div id="bubbles"></div>
+<div id="seabed"></div>
+<script>
+(function(){
+  // Bubbles
+  const bubCont=document.getElementById('bubbles');
+  for(let i=0;i<22;i++){
+    const b=document.createElement('div');
+    const sz=2+Math.random()*5;
+    b.style.cssText=`position:absolute;width:${sz}px;height:${sz}px;border-radius:50%;border:1px solid rgba(255,255,255,0.5);left:${Math.random()*100}%;bottom:${Math.random()*20}%;animation:rise ${4+Math.random()*6}s linear infinite ${-Math.random()*9}s;`;
+    bubCont.appendChild(b);
+  }
+  // Sandy bottom
+  const seabed=document.getElementById('seabed');
+  const sand=document.createElement('div');
+  sand.style.cssText='position:absolute;bottom:0;left:0;width:100%;height:48px;background:linear-gradient(180deg,#d4a84b,#b8882a);border-radius:6px 6px 0 0;';
+  seabed.appendChild(sand);
+  // Coral shapes
+  const coralData=[
+    {x:'5%',col:'#e06080',h:55},{x:'12%',col:'#ff8040',h:42},
+    {x:'72%',col:'#ff6090',h:60},{x:'82%',col:'#e05050',h:48},
+    {x:'90%',col:'#ff7060',h:38},{x:'55%',col:'#e08050',h:44},
+  ];
+  coralData.forEach(c=>{
+    const el=document.createElement('div');
+    el.style.cssText=`position:absolute;bottom:44px;left:${c.x};width:14px;height:${c.h}px;background:${c.col};border-radius:8px 8px 3px 3px;`;
+    // branch tips
+    el.innerHTML=`
+      <div style="position:absolute;top:0;left:-8px;width:10px;height:${Math.round(c.h*0.45)}px;background:${c.col};border-radius:6px 6px 0 0;transform:rotate(-20deg);transform-origin:bottom center;"></div>
+      <div style="position:absolute;top:0;right:-8px;width:10px;height:${Math.round(c.h*0.45)}px;background:${c.col};border-radius:6px 6px 0 0;transform:rotate(20deg);transform-origin:bottom center;"></div>`;
+    seabed.appendChild(el);
+  });
+  // Seaweed
+  [8,20,35,65,88].forEach(x=>{
+    const sw=document.createElement('div');
+    const h=50+Math.random()*40;
+    sw.style.cssText=`position:absolute;bottom:44px;left:${x}%;width:8px;height:${h}px;background:#20a050;border-radius:4px 4px 0 0;animation:sway ${2+Math.random()*2}s ease-in-out infinite ${-Math.random()*2}s;transform-origin:bottom center;`;
+    seabed.appendChild(sw);
+  });
+})();
+</script>
 <a class="old-banner" href="../index.html" style="position:fixed;left:8px;bottom:8px;z-index:99999;font:700 11px/1 sans-serif;background:#fff;color:#7030a0;padding:6px 10px;border-radius:12px;text-decoration:none;box-shadow:0 1px 6px rgba(0,0,0,.2)">✦ old layout · back to the site history</a>
 
 <div id="sidebar-container"></div>

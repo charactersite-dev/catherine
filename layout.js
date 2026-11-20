@@ -43,6 +43,7 @@
           <img src="assets/artworkneocDIVcrop.gif" alt="">
           <ul>
             <li><a href="index.html">Home</a></li>
+            <li><a href="guestbook.html">Guestbook</a></li>
             <li><a href="blinkies.html">Blinkies</a></li>
             <li><a href="dividers.html">Dividers</a></li>
             <li><a href="trinkets.html">Trinkets</a></li>
@@ -55,6 +56,7 @@
             <li><a href="scenes.html">Pixel Scenes</a></li>
             <li><a href="avatars.html">Avatars</a></li>
             <li><a href="cliques.html">Cliques &amp; Clubs</a></li>
+            <li><a href="old/index.html">Old Layouts</a></li>
           </ul>
         </nav>
 
@@ -71,9 +73,10 @@
           <h3>My Other Links</h3>
           <img src="assets/artworkneocDIVcrop.gif" alt="">
           <div class="sidebar-links">
-            <a href="https://penningmermaid.neocities.org/">My OCs</a>
-            <a href="old/index.html">Old Layouts</a>
-            <a href="#">External 2</a>
+            <a href="https://chararchive.pages.dev/#/">Character Archive</a>
+            <a href="https://scrivener-f20.pages.dev/">Scrivener</a>
+            <a href="https://recipes-2ss.pages.dev/recipes/">Recipes</a>
+            <a href="https://mediatracker-cgg.pages.dev/#library">Media Tracker</a>
           </div>
         </div>
 
