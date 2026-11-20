@@ -99,101 +99,6 @@
   // ════════════════════════════════════════════════════
   // FAVORITES
   // ════════════════════════════════════════════════════
-  // New arrivals (Nov 2026) — not sorted yet; move them into their boxes when you're ready
-  const NEW_ARRIVALS = [
-    { src:T+'010 (1).gif', alt:'' },
-    { src:T+'014.gif', alt:'' },
-    { href:'https://web.archive.org/web/2009/http://www.geocities.com/ashleyaunt1996/', src:T+'ashleyaunt1996-geocities (1).gif', alt:'' },
-    { href:'https://web.archive.org/web/2009/http://www.geocities.com/ashleyaunt1996/', src:T+'ashleyaunt1996-geocities (3).gif', alt:'' },
-    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (10).gif', alt:'' },
-    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (12).gif', alt:'' },
-    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (18).gif', alt:'' },
-    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (21).gif', alt:'' },
-    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (23).gif', alt:'' },
-    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (25).gif', alt:'' },
-    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (26).gif', alt:'' },
-    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (31).gif', alt:'' },
-    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (4).gif', alt:'' },
-    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (5).gif', alt:'' },
-    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (6).gif', alt:'' },
-    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (8).gif', alt:'' },
-    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (9).gif', alt:'' },
-    { href:'https://www.pinterest.com/', src:T+'fromPINTEREST (1).jpg', alt:'' },
-    { href:'https://www.pinterest.com/', src:T+'fromPINTEREST (2).gif', alt:'' },
-    { href:'https://www.pinterest.com/', src:T+'fromPINTEREST (2).jpg', alt:'' },
-    { href:'https://www.pinterest.com/', src:T+'fromPINTEREST (3).jpg', alt:'' },
-    { href:'https://www.pinterest.com/', src:T+'fromPINTEREST (4).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (1).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (12).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (13).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (14).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (15).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (17).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (18).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (19).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (2).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (20).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (25).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (26).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (28).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (3).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (31).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (32).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (33).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (34).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (35).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (39).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (4).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (40).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (41).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (43).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (46).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (47).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (49).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (5).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (52).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (53).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (54).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (55b).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (56b).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (57b).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (6).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (8).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities (9).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities22 (10).gif', alt:'' },
-    { href:'https://gifcities.org/', src:T+'gifcities22 (2).gif', alt:'' },
-    { href:'https://lazer-bunny.neocities.org/', src:T+'lazer-bunny-neocities.png', alt:'' },
-    { href:'https://www.pinterest.com/', src:T+'pinterest2 (1).gif', alt:'' },
-    { href:'https://www.pinterest.com/', src:T+'pinterest2 (10).jpg', alt:'' },
-    { href:'https://www.pinterest.com/', src:T+'pinterest2 (3).jpg', alt:'' },
-    { href:'https://www.pinterest.com/', src:T+'pinterest2 (4).jpg', alt:'' },
-    { href:'https://www.pinterest.com/', src:T+'pinterest2 (6).jpg', alt:'' },
-    { href:'https://www.pinterest.com/', src:T+'pinterest2 (8).jpg', alt:'' },
-    { href:'https://pixalina.neocities.org/', src:T+'pixalina-neocities.png', alt:'' },
-    { href:'https://web.archive.org/web/2009/http://www.pixelmyspace.com/', src:T+'pixelmyspacecom (2).gif', alt:'' },
-    { href:'https://web.archive.org/web/2009/http://www.pixelmyspace.com/', src:T+'pixelmyspacecom (3).gif', alt:'' },
-    { href:'https://web.archive.org/web/2009/http://www.pixelmyspace.com/', src:T+'pixelmyspacecom (4).gif', alt:'' },
-    { href:'https://web.archive.org/web/2009/http://www.pixelmyspace.com/', src:T+'pixelmyspacecom (5).gif', alt:'' },
-    { href:'https://web.archive.org/web/2009/http://www.pixelmyspace.com/', src:T+'pixelmyspacecom (6).gif', alt:'' },
-    { href:'https://web.archive.org/web/2009/http://www.pixelmyspace.com/', src:T+'pixelmyspacecom (8).gif', alt:'' },
-    { href:'https://web.archive.org/web/2009/http://www.pixelmyspace.com/', src:T+'pixelmyspacecom (9).gif', alt:'' },
-    { href:'http://it.geocities.com/vanillina88/gif_pucciose1.htm', src:T+'pucoisse (3).gif', alt:'' },
-    { href:'http://it.geocities.com/vanillina88/gif_pucciose1.htm', src:T+'pucoisse (4).gif', alt:'' },
-    { href:'http://it.geocities.com/vanillina88/gif_pucciose1.htm', src:T+'pucoisse (5).gif', alt:'' },
-    { href:'https://stephology.ca/', src:T+'stephology (1).gif', alt:'' },
-    { href:'https://stephology.ca/', src:T+'stephology (3).gif', alt:'' },
-    { href:'https://stephology.ca/', src:T+'stephology (4).gif', alt:'' },
-    { href:'https://stephology.ca/', src:T+'stephology (6).gif', alt:'' },
-    { href:'https://stephology.ca/', src:T+'stephology (7).gif', alt:'' },
-    { href:'https://stephology.ca/', src:T+'stephology (8).gif', alt:'' },
-    { href:'https://web.archive.org/web/20060506205737/http://www.yumestudio.it/', src:T+'yumestudio-it (11).gif', alt:'' },
-    { href:'https://web.archive.org/web/20060506205737/http://www.yumestudio.it/', src:T+'yumestudio-it (15).gif', alt:'' },
-    { href:'https://web.archive.org/web/20060506205737/http://www.yumestudio.it/', src:T+'yumestudio-it (16).gif', alt:'' },
-    { href:'https://web.archive.org/web/20060506205737/http://www.yumestudio.it/', src:T+'yumestudio-it (3).gif', alt:'' },
-    { href:'https://web.archive.org/web/20060506205737/http://www.yumestudio.it/', src:T+'yumestudio-it (5).gif', alt:'' },
-    { href:'https://web.archive.org/web/20060506205737/http://www.yumestudio.it/', src:T+'yumestudio-it (9).gif', alt:'' },
-  ];
-
   const FAVORITES = [
     { href:aw,  src:T+'artworkneocities (56).gif',               alt:'roseglass' },
     { href:geo, src:T+'sugarberryiconFROMgeocities-kajikan3.gif', alt:'mylittlepony3' },
@@ -205,7 +110,6 @@
     { href:'https://mutterbutter.neocities.org', src:T+'mutterbutter.neocities.org.gif', alt:'catinteacup' },
     { href:gc,  src:T+'gifcities (72).gif',                      alt:'hamsterinjar' },
     { href:geo, src:T+'love_potion.gif',                         alt:'lovepotion' },
-    { href:mb,  src:T+'rainbow.gif',                             alt:'rainbow' },
     { href:scr, src:T+'CraneGame1.png',                          alt:'cranegame' },
     { href:mb,  src:T+'a-trophy.gif',                            alt:'trophy' },
     { href:aw2, src:T+'allyratworldneocities (1).gif',           alt:'tiara' },
@@ -215,6 +119,7 @@
     { href:lj,  src:T+'lejlart.com.png',                         alt:'lisafranktiger' },
     { href:lj,  src:T+'lejlart.com2.png',                        alt:'lisafrankdog' },
     { href:lj,  src:T+'lejlartcom.gif',                          alt:'lisafrankcat' },
+    { href:mb,  src:T+'rainbow.gif',                             alt:'rainbow' },
   ];
 
   // ════════════════════════════════════════════════════
@@ -236,19 +141,32 @@
 
   // Care Bears
   const FANDOMS_CAREBEARS = [
+    { href:aw, src:T+'carebedtimebear.gif',  alt:'carebear-sm' },
+    { href:aw, src:T+'caregramsbear.gif',    alt:'carebear-sm' },
+    { href:gc,  src:T+'blue-care-bear.gif',  alt:'' },
+    { href:gc,  src:T+'caregrumpybear.gif',  alt:'' },
+    { href:gc,  src:T+'carelovealotbear.gif',  alt:'' },
+    { href:gc,  src:T+'caretenderheartbear.gif',  alt:'' },
     { href:mb, src:T+'care-bear-blue.gif',   alt:'carebear-blue' },
     { href:mb, src:T+'green-care-bear.gif',  alt:'carebear-green' },
     { href:mb, src:T+'pink-care-bear.gif',   alt:'carebear-pink' },
     { href:mb, src:T+'care-bear-yello.gif',  alt:'carebear-yellow' },
-    { href:aw, src:T+'carebedtimebear.gif',  alt:'carebear-sm' },
-    { href:aw, src:T+'caregramsbear.gif',    alt:'carebear-sm' },
   ];
 
   // Disney
   const FANDOMS_DISNEY = [
-    { href:aw, src:'pixels/dividers/artworkneocities (37).gif', alt:'Disney Divider' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (12).gif', alt:'' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (18).gif', alt:'' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (21).gif', alt:'' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (23).gif', alt:'' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (4).gif', alt:'' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (5).gif', alt:'' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (6).gif', alt:'' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (8).gif', alt:'' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (9).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (12).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (31).gif', alt:'' },
     { href:aw, src:T+'artworkneocities (36).gif',          alt:'mickeyminnie' },
-    { href:gc, src:T+'gifcities (19).gif',                 alt:'mickeymousebook' },
     { href:sd, src:'pixels/trinkets/Eeyore12.gif',         alt:'' },
     { href:sd, src:'pixels/trinkets/Eeyore13.gif',         alt:'' },
     { href:sd, src:'pixels/trinkets/Tigger19.gif',         alt:'' },
@@ -263,34 +181,61 @@
     { href:aw, src:T+'artworkneocities (97).gif',          alt:'disney-b&B-rose' },
     { href:geo,src:T+'splendid1.gif',                      alt:'disneyjasmine' },
     { href:sd, src:'pixels/trinkets/Aladdin39.gif',        alt:'' },
-    { href:gc, src:T+'gifcities (18).gif',                 alt:'doll-tinkerbell' },
     { href:aw, src:T+'artworkneocities (35).gif',          alt:'tinkerbell' },
     { href:aw, src:T+'artworkneocities (38).gif',          alt:'tinkerbell2' },
     { href:aw, src:T+'000ARIEL.gif',                       alt:'disney-ariel' },
     { href:sd, src:'pixels/aqua/LM08.gif',                 alt:'ariel in clam' },
     { href:aw, src:T+'000BELLE.gif',                       alt:'disney-belle' },
     { href:aw, src:T+'000CINDY.gif',                       alt:'disney-cindy' },
+    { href:gc,  src:'pixels/trinkets/adoptedpixelcarriagefairytale.gif', alt:'Cinderella carriage' },
+    { href:gc,  src:'pixels/trinkets/adoptedpixelshoefairytale.gif',     alt:'Cinderella-shoe' },
+    { href:gc,  src:'pixels/trinkets/amarihge-pixel1.gif', alt:'' },
+    { href:gc,  src:'pixels/trinkets/amarihge-pixel2.gif', alt:'' },
+    { href:gc,  src:T+'000JAZZ.gif',  alt:'' },
+    { href:gc,  src:T+'000SNOW.gif',  alt:'' },
+    { href:gc,  src:T+'D-aladdin.gif',  alt:'' },
+    { href:gc,  src:T+'Pooh52.gif',  alt:'' },
+    { href:gc,  src:T+'tumblr_lkl6ckCx0N1qfamg6.gif',  alt:'' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (10).gif', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'pinterest2 (6).jpg', alt:'' },
+    { href:aw, src:'pixels/dividers/artworkneocities (37).gif', alt:'Disney Divider' },
   ];
 
   // Hello Kitty & Sanrio
   const FANDOMS_SANRIO = [
-    { href:mb, src:T+'hello-kitty-bow.gif',                alt:'hellokitty-bow' },
     { href:aw, src:T+'artworkneocities (13).gif',          alt:'hellokittyBOOK' },
     { href:aw, src:T+'3dancingpurin.gif',                  alt:'sanrio-purin' },
     { href:aw, src:T+'CinnamorollBalloon.gif',             alt:'sanrio-cinna' },
+    { href:'https://web.archive.org/web/20100419011152/http://neskaya.net/pixels.php?', src:'pixels/trinkets/pixel (17).gif', alt:'Sanrio with food' },
+    { href:gc,  src:'pixels/trinkets/tri.gif',             alt:'' },
+    { href:gc,  src:'pixels/trinkets/294.gif',             alt:'' },
+    { href:gc,  src:T+'0jeith.gif',  alt:'' },
+    { href:gc,  src:T+'0nyan1.png',  alt:'' },
+    { href:gc,  src:T+'2sFrog.gif',  alt:'' },
+    { href:gc,  src:T+'7pompompurineo6.gif',  alt:'' },
+    { href:gc,  src:T+'HK160.gif',  alt:'' },
+    { href:gc,  src:T+'IMG_2455.png',  alt:'' },
+    { href:gc,  src:T+'IMG_2456.png',  alt:'' },
+    { href:gc,  src:T+'minikitty.gif',  alt:'' },
+    { href:gc,  src:T+'sapinhu3.gif',  alt:'' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (25).gif', alt:'' },
+    { href:mb, src:T+'hello-kitty-bow.gif',                alt:'hellokitty-bow' },
+    { href:gc,  src:T+'HK60.gif',  alt:'' },
   ];
 
   // Mario
   const FANDOMS_MARIO = [
-    { href:aw,  src:'pixels/dividers/artworkneocities (96).gif', alt:'Mario Divider' },
-    { href:gc,  src:T+'gifcities (33).gif',            alt:'mario-climb' },
-    { href:gc,  src:T+'gifcities (28).gif',            alt:'mario-coin0' },
-    { href:gc,  src:T+'gifcities (35).gif',            alt:'mario-peach' },
     { href:gc,  src:T+'gifcities (75).gif',            alt:'mariostar-bottle' },
+    { href:gc,  src:T+'172.gif',  alt:'' },
+    { href:gc,  src:T+'tumblr_lkl64lxvRu1qfamg6.gif',  alt:'' },
+    { href:gc,  src:T+'tumblr_ll7wi9Eeow1qi6qow.gif',  alt:'' },
+    { href:'https://web.archive.org/web/20060506205737/http://www.yumestudio.it/', src:T+'yumestudio-it (9).gif', alt:'' },
+    { href:aw,  src:'pixels/dividers/artworkneocities (96).gif', alt:'Mario Divider' },
   ];
 
   // My Little Pony
   const FANDOMS_MLP = [
+    { href:'https://web.archive.org/web/20060506205737/http://www.yumestudio.it/', src:T+'yumestudio-it (5).gif', alt:'' },
     { href:aw,  src:T+'2starflower.gif',                           alt:'mylittlepony-star' },
     { href:geo, src:T+'sugarberryiconFROMgeocities-kajikan.gif',   alt:'mylittlepony' },
     { href:geo, src:T+'sugarberryiconFROMgeocities-kajikan3.gif',  alt:'mylittlepony3' },
@@ -301,24 +246,30 @@
   const FANDOMS_NEOPETS = [
     { href:scr, src:T+'Pixel150.png',      alt:'neopets' },
     { href:scr, src:T+'PixelBlink8.gif',   alt:'neopets5' },
+    { href:gc,  src:T+'mazzew0dc.gif',  alt:'' },
   ];
 
   // Pokemon & Digimon
   const FANDOMS_POKEMON = [
+    { href:'https://gifcities.org/', src:T+'gifcities (46).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (56b).gif', alt:'' },
+    { href:'https://lazer-bunny.neocities.org/', src:T+'lazer-bunny-neocities.png', alt:'' },
     { href:arc, src:T+'webarchive (4).gif',            alt:'jigglypuffsinging' },
-    { href:gc,  src:T+'gifcities (8).gif',             alt:'pikachu' },
     { href:gc,  src:T+'gifcities (65).gif',            alt:'pikachu-grapes' },
     { href:aw,  src:T+'artworkneocities (81).gif',     alt:'pikachuball1' },
-    { href:gc,  src:T+'gifcities (9).gif',             alt:'pikachuball2' },
     { href:geo, src:T+'pika5.gif',                     alt:'pikachuSM' },
+    { href:tq,  src:T+'mac-nursejoy.gif',                      alt:'Pokemon-Joy' },
+    { href:gc,  src:T+'12thembypikachu.png',  alt:'' },
+    { href:gc,  src:T+'ash.gif',  alt:'' },
+    { href:gc,  src:'pixels/trinkets/pikaz.gif',           alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'fromPINTEREST (2).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (47).gif', alt:'' },
   ];
 
   // Sailor Moon
   const FANDOMS_SAILORMOON = [
     { href:aw,  src:T+'sm5.gif',                               alt:'sailormoon-small' },
-    { href:gc,  src:T+'gifcities (43).gif',                    alt:'sailormoon-usagi2' },
     { href:geo, src:T+'mikaruromansu.gif',                     alt:'sailormooncouple' },
-    { href:gc,  src:T+'gifcities (46).gif',                    alt:'sailormoongroup1' },
     { href:tq,  src:T+'misc-cerecere.gif',                     alt:'Sailormoon-villains' },
     { href:tq,  src:T+'misc-junjun.gif',                       alt:'Sailormoon-villains' },
     { href:tq,  src:T+'misc-pallapalla.gif',                   alt:'Sailormoon-villains' },
@@ -327,6 +278,7 @@
     { href:tq,  src:T+'item-brooch1.gif',                      alt:'Sailormoon' },
     { href:tq,  src:T+'item-brooch3.gif',                      alt:'Sailormoon' },
     { href:tq,  src:T+'item-brooch4.gif',                      alt:'Sailormoon' },
+    { href:gc,  src:T+'SM25.gif',  alt:'' },
   ];
 
   // Other fandoms
@@ -336,13 +288,31 @@
     { href:aw,  src:T+'0000ARNOLD.gif',                        alt:'cartoon' },
     { href:aw,  src:T+'0000HELGA.gif',                         alt:'cartoon' },
     { href:aw,  src:T+'3sw.png',                               alt:'nintendoswitch' },
-    { href:tq,  src:T+'mac-nursejoy.gif',                      alt:'Pokemon-Joy' },
+    { href:ci,  src:'pixels/trinkets/a9.gif',              alt:'Hamtaro' },
+    { href:gc,  src:T+'1hamu.gif',  alt:'' },
+    { href:gc,  src:T+'a12.gif',  alt:'' },
+    { href:gc,  src:T+'a2.gif',  alt:'' },
+    { href:gc,  src:T+'a23.gif',  alt:'' },
+    { href:gc,  src:T+'a8.gif',  alt:'' },
+    { href:gc,  src:T+'adopt05.gif',  alt:'' },
+    { href:gc,  src:T+'artsticker1.png',  alt:'' },
+    { href:gc,  src:T+'kouenli1.gif',  alt:'' },
+    { href:gc,  src:T+'nonanime-buttercup02.gif',  alt:'' },
+    { href:gc,  src:T+'nonanime-fezzik.gif',  alt:'' },
+    { href:gc,  src:T+'nonanime-inigomontoya.gif',  alt:'' },
+    { href:gc,  src:T+'nonanime-westley03.gif',  alt:'' },
+    { href:gc,  src:T+'rabbit1.gif',  alt:'' },
+    { href:gc,  src:T+'rugrat4.gif',  alt:'' },
+    { href:gc,  src:T+'veryhungrycaterpillarr.png',  alt:'' },
   ];
 
   // ════════════════════════════════════════════════════
   // FOOD
   // ════════════════════════════════════════════════════
   const FOOD = [
+    { href:'https://stephology.ca/', src:T+'stephology (1).gif', alt:'' },
+    { href:'https://stephology.ca/', src:T+'stephology (6).gif', alt:'' },
+    { href:'https://stephology.ca/', src:T+'stephology (8).gif', alt:'' },
     { href:aw,  src:F+'artworkneocities (50).gif',        alt:'apple' },
     { href:gc,  src:F+'gifcities (51).gif',               alt:'apple2' },
     { href:scr, src:FA+'Pixel112.png',                    alt:'bananasplit' },
@@ -382,12 +352,49 @@
     { href:aw,  src:FA+'0sloth_orange.gif',               alt:'sloth-orange' },
     { href:aw,  src:FA+'1lollipop_1.gif',                 alt:'lollipop-hamster' },
     { href:aw,  src:FA+'7apple-3.gif',                    alt:'apple-worm' },
+    { href:gc,  src:'pixels/trinkets/adoptedpixelcupcake.gif',           alt:'Cupcake' },
+    { href:gc,  src:'pixels/trinkets/087.gif',             alt:'' },
+    { href:gc,  src:T+'Animation35-1.gif',  alt:'' },
+    { href:gc,  src:T+'pixelbankneocities (40).gif',  alt:'' },
+    { href:gc,  src:T+'pixelbankneocities (56).gif',  alt:'' },
+    { href:gc,  src:T+'tumblr_lmt0e9tqPq1qfel73.gif',  alt:'' },
+    { href:gc,  src:T+'tumblr_lmt0ecaCaZ1qfel73.gif',  alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'fromPINTEREST (2).jpg', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'pinterest2 (10).jpg', alt:'' },
   ];
 
   // ════════════════════════════════════════════════════
   // ANIMALS
   // ════════════════════════════════════════════════════
   const ANIMALS = [
+    { href:'https://gifcities.org/', src:T+'gifcities (1).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (15).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (18).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (19).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (2).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (20).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (26).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (3).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (32).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (33).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (34).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (35).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (43).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (49).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (5).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (52).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (54).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (55b).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (57b).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (6).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (8).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities22 (10).gif', alt:'' },
+    { href:'https://web.archive.org/web/2009/http://www.pixelmyspace.com/', src:T+'pixelmyspacecom (4).gif', alt:'' },
+    { href:'https://web.archive.org/web/2009/http://www.pixelmyspace.com/', src:T+'pixelmyspacecom (5).gif', alt:'' },
+    { href:'https://web.archive.org/web/2009/http://www.pixelmyspace.com/', src:T+'pixelmyspacecom (6).gif', alt:'' },
+    { href:'https://stephology.ca/', src:T+'stephology (3).gif', alt:'' },
+    { href:'https://stephology.ca/', src:T+'stephology (7).gif', alt:'' },
+    { href:'https://web.archive.org/web/20060506205737/http://www.yumestudio.it/', src:T+'yumestudio-it (3).gif', alt:'' },
     { href:aw,  src:T+'1catboy4.png',                       alt:'cat-cowboy' },
     { href:mb,  src:T+'animals-dancing.gif',                alt:'animals-dancing' },
     { href:aw,  src:T+'artworkneocities (9).gif',           alt:'bird' },
@@ -400,9 +407,7 @@
     { href:gc,  src:T+'gifcities (57).gif',                 alt:'GROUPofhams' },
     { href:gc,  src:T+'gifcities (58).gif',                 alt:'GROUPofhams2' },
     { href:pb,  src:T+'pixelbankneocities (36).gif',        alt:'hamster' },
-    { href:gc,  src:T+'gifcities (53).gif',                 alt:'hamster' },
     { href:gc,  src:T+'gifcities (72).gif',                 alt:'hamsterinjar' },
-    { href:gc,  src:T+'gifcities (56).gif',                 alt:'hamtaroGROUPofhams' },
     { href:mb,  src:T+'lamb.gif',                           alt:'lamb' },
     { href:geo, src:T+'k022.gif',                           alt:'lion' },
     { href:geo, src:T+'pippsbaloon-celestial-sodapop-net-juna.gif', alt:'panda' },
@@ -426,53 +431,140 @@
     { href:aw,  src:T+'artworkneocities (12).gif',          alt:'frog' },
     { href:mb,  src:T+'rain-umbrella-seat.gif',             alt:'rain-umbrella-BUNNY' },
     { href:pb,  src:T+'pixelbankneocities (53).gif',        alt:'swan' },
-    { href:mb,  src:T+'umbrella-rain.gif',                  alt:'umbrella-rain' },
     { href:aw,  src:T+'mailbear.gif',                       alt:'bearpostman' },
-    { href:aw,  src:T+'OldClowningAround.gif',              alt:'bear-clown' },
+    { href:'https://web.archive.org/web/20100419011152/http://neskaya.net/pixels.php?', src:'pixels/trinkets/new (17).gif', alt:'Bunnies-in-grass' },
+    { href:sd,  src:'pixels/trinkets/Cat138.gif',          alt:'Cat in grass' },
+    { href:sd,  src:'pixels/trinkets/Cat123.gif',          alt:'Beautiful white cat' },
+    { href:gc,  src:'pixels/trinkets/ugo-piyo.gif',        alt:'' },
+    { href:gc,  src:'pixels/trinkets/tarepanda.gif',       alt:'' },
+    { href:gc,  src:T+'000fawnbyartwork.gif',  alt:'' },
+    { href:gc,  src:T+'029.gif',  alt:'' },
+    { href:gc,  src:T+'0artworkcat.gif',  alt:'' },
+    { href:gc,  src:T+'0bunnymushroom.png',  alt:'' },
+    { href:gc,  src:T+'0keeyumfish.gif',  alt:'' },
+    { href:gc,  src:T+'0keeyummouse.gif',  alt:'' },
+    { href:gc,  src:T+'0keeyumspot.gif',  alt:'' },
+    { href:gc,  src:T+'14a.gif',  alt:'' },
+    { href:gc,  src:T+'1mousie.gif',  alt:'' },
+    { href:gc,  src:T+'2lucky_cat.gif',  alt:'' },
+    { href:gc,  src:T+'3cat.png',  alt:'' },
+    { href:gc,  src:T+'3gary.png',  alt:'' },
+    { href:gc,  src:T+'3minisanx4.gif',  alt:'' },
+    { href:gc,  src:T+'3nk.png',  alt:'' },
+    { href:gc,  src:T+'42bot.gif',  alt:'' },
+    { href:gc,  src:T+'4cheetah.gif',  alt:'' },
+    { href:gc,  src:T+'8bluebear.gif',  alt:'' },
+    { href:gc,  src:T+'aajohn.gif',  alt:'' },
+    { href:gc,  src:T+'aaslp.gif',  alt:'' },
+    { href:gc,  src:T+'artworkneocities (22).gif',  alt:'' },
+    { href:gc,  src:T+'artworkneocities (6).gif',  alt:'' },
+    { href:gc,  src:T+'Bunny05.gif',  alt:'' },
+    { href:gc,  src:T+'Cat139.gif',  alt:'' },
+    { href:gc,  src:T+'gifcities (55).gif',  alt:'' },
+    { href:gc,  src:T+'icons19-1.gif',  alt:'' },
+    { href:gc,  src:T+'Koala25.gif',  alt:'' },
+    { href:gc,  src:T+'m_2.gif',  alt:'' },
+    { href:gc,  src:T+'m_3.gif',  alt:'' },
+    { href:gc,  src:T+'m_7.gif',  alt:'' },
+    { href:gc,  src:T+'mbirdie1.gif',  alt:'' },
+    { href:gc,  src:T+'mbirdie2.gif',  alt:'' },
+    { href:gc,  src:T+'mini050.gif',  alt:'' },
+    { href:gc,  src:T+'mini133.gif',  alt:'' },
+    { href:gc,  src:T+'mini158.gif',  alt:'' },
+    { href:gc,  src:T+'minicoelho.gif',  alt:'' },
+    { href:gc,  src:T+'mouse.png',  alt:'' },
+    { href:gc,  src:T+'ooz3.gif',  alt:'' },
+    { href:gc,  src:T+'Owl26.gif',  alt:'' },
+    { href:gc,  src:T+'p_buzz.png',  alt:'' },
+    { href:gc,  src:T+'pet3.gif',  alt:'' },
+    { href:gc,  src:T+'pet6.gif',  alt:'' },
+    { href:gc,  src:T+'Pixel110.png',  alt:'' },
+    { href:gc,  src:T+'pixelbankneocities (48).gif',  alt:'' },
+    { href:gc,  src:T+'PixelBlink10.gif',  alt:'' },
+    { href:gc,  src:T+'racoon.png',  alt:'' },
+    { href:gc,  src:T+'th_love_bird.gif',  alt:'' },
+    { href:gc,  src:T+'tumblr_inline_nu0si9Ax7F1reem51_100.png',  alt:'' },
+    { href:gc,  src:T+'tumblr_lkl6vcElNG1qfamg6.gif',  alt:'' },
+    { href:gc,  src:T+'tumblr_lkl6vh7giB1qfamg6.gif',  alt:'' },
+    { href:gc,  src:T+'webarchive (2).gif',  alt:'' },
+    { href:gc,  src:T+'wjcactusdog2.gif',  alt:'' },
+    { href:gc,  src:T+'yupio_1.gif',  alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'fromPINTEREST (1).jpg', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'fromPINTEREST (3).jpg', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'fromPINTEREST (4).gif', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'pinterest2 (4).jpg', alt:'' },
+    { href:gc,  src:T+'gifcities (56).gif',                 alt:'hamtaroGROUPofhams' },
+    { href:'https://web.archive.org/web/20100419011152/http://neskaya.net/pixels.php?', src:'pixels/trinkets/new (39).gif', alt:'Bears Plushies' },
   ];
 
   // ════════════════════════════════════════════════════
   // FANTASY
   // ════════════════════════════════════════════════════
   const FANTASY = [
+    { href:'http://it.geocities.com/vanillina88/gif_pucciose1.htm', src:T+'pucoisse (5).gif', alt:'' },
+    { href:aw,  src:T+'OldClowningAround.gif',              alt:'bear-clown' },
     { href:mb,  src:T+'castle-love.gif',                    alt:'castle' },
     { href:mb,  src:T+'purple-dragon.gif',                  alt:'dragon' },
     { href:geo, src:T+'love_potion.gif',                    alt:'lovepotion' },
     { href:geo, src:T+'FROMatp-boo-jp5.gif',                alt:'treasurechest' },
     { href:mb,  src:T+'unicorn.gif',                        alt:'unicorn' },
     { href:aw,  src:T+'ikalva-2.gif',                       alt:'tiny-fairy' },
+    { href:gc,  src:'pixels/trinkets/Reddragon.gif',       alt:'Red Dragon' },
+    { href:gc,  src:'pixels/trinkets/adoptedpixelfrogfairytale.gif',     alt:'Fantasy-frog' },
+    { href:rd,  src:'pixels/trinkets/neopetsfairy1.png',   alt:'Neopets fairy' },
+    { href:gc,  src:'pixels/trinkets/shinyexe.neocities.png', alt:'' },
+    { href:gc,  src:T+'0fairydoll3.png',  alt:'' },
+    { href:gc,  src:T+'2queenfrostine.gif',  alt:'' },
+    { href:gc,  src:T+'Aladdin30.gif',  alt:'' },
+    { href:gc,  src:T+'FROMatp-boo-jp8.gif',  alt:'' },
+    { href:gc,  src:T+'pinkland-princess.gif',  alt:'' },
+    { href:gc,  src:T+'Pixel304.gif',  alt:'' },
+    { href:gc,  src:T+'Pixel317.gif',  alt:'' },
+    { href:gc,  src:T+'usul10045-tripod-com (1).gif',  alt:'' },
+    { href:gc,  src:T+'usul10045-tripod-com (2).gif',  alt:'' },
+    { href:gc,  src:T+'usul10045-tripod-com (3).gif',  alt:'' },
+    { href:gc,  src:T+'usul10045-tripod-com (4).gif',  alt:'' },
+    { href:gc,  src:T+'usul10045-tripod-com (5).gif',  alt:'' },
+    { href:gc,  src:T+'usul10045-tripod-com (6).gif',  alt:'' },
+    { href:'https://web.archive.org/web/20060506205737/http://www.yumestudio.it/', src:T+'yumestudio-it (15).gif', alt:'' },
+    { href:gc,  src:'pixels/trinkets/unicornhors1.gif',    alt:'' },
   ];
 
   // ════════════════════════════════════════════════════
   // OBJECTS
   // ════════════════════════════════════════════════════
   const OBJECTS = [
+    { src:T+'010 (1).gif', alt:'' },
+    { href:'https://web.archive.org/web/2009/http://www.geocities.com/ashleyaunt1996/', src:T+'ashleyaunt1996-geocities (3).gif', alt:'' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (31).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (13).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (17).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (39).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (53).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities22 (2).gif', alt:'' },
+    { href:'https://pixalina.neocities.org/', src:T+'pixalina-neocities.png', alt:'' },
+    { href:'https://web.archive.org/web/2009/http://www.pixelmyspace.com/', src:T+'pixelmyspacecom (8).gif', alt:'' },
+    { href:'https://web.archive.org/web/2009/http://www.pixelmyspace.com/', src:T+'pixelmyspacecom (9).gif', alt:'' },
     { href:mb,  src:T+'airplaneinclouds.gif',               alt:'airplane' },
     { href:pb,  src:T+'pixelbankneocities (49).gif',        alt:'balloons' },
-    { href:gc,  src:T+'gifcities (49).gif',                 alt:'balloons2' },
     { href:geo, src:T+'k00-fromannezca-com.gif',            alt:'candle' },
     { href:pb,  src:T+'pixelbankneocities (7).gif',         alt:'cellphone' },
     { href:pb,  src:T+'pixelbankneocities (42).gif',        alt:'diamond' },
     { href:pb,  src:T+'pixelbankneocities (46).gif',        alt:'fireworks' },
-    { href:mb,  src:T+'glitterrainbow.gif',                 alt:'glitterrainbow' },
     { href:pb,  src:T+'pixelbankneocities (66).gif',        alt:'heart2' },
     { href:mb,  src:T+'gold-heart-locket.gif',              alt:'heartlocket' },
-    { href:gc,  src:T+'gifcities (4).gif',                  alt:'jarofheart-girly' },
     { href:gc,  src:T+'gifcities (74).gif',                 alt:'jarofhearts' },
-    { href:aw2, src:T+'allyratworldneocities (3).gif',      alt:'magicKEY' },
     { href:mb,  src:T+'parfume.gif',                        alt:'perfume' },
     { href:geo, src:T+'mall_char14.gif',                    alt:'pinkJOURNAL' },
     { href:pb,  src:T+'pixelbankneocities (35).gif',        alt:'pinkPC' },
     { href:mb,  src:T+'pink-tub.gif',                       alt:'pinktub' },
     { href:pb,  src:T+'pixelbankneocities (45).gif',        alt:'purplegem' },
     { href:mb,  src:T+'purple-purse.gif',                   alt:'purplepurse' },
-    { href:mb,  src:T+'rainbow.gif',                        alt:'rainbow' },
     { href:pb,  src:T+'pixelbankneocities (5).gif',         alt:'rainbowdiamond' },
     { href:aw2, src:T+'allyratworldneocities (1).gif',      alt:'tiara' },
     { href:aw,  src:T+'jar-fireflies.gif',                  alt:'jaroffireflies' },
     { href:aw,  src:T+'jar-mush.gif',                       alt:'jarofmushroom' },
     { href:aw,  src:T+'jar-soot.gif',                       alt:'jarofsoot' },
-    { href:aw,  src:T+'jarshelf.gif',                       alt:'shelffullofjars' },
     { href:aw,  src:T+'jarstars.png',                       alt:'jarofstars' },
     { href:aw,  src:T+'jbox.png',                           alt:'jewelrybox' },
     { href:aw,  src:T+'Boombox.gif',                        alt:'boombox' },
@@ -481,37 +573,118 @@
     { href:aw,  src:T+'1MakeUpBuddies1.gif',                alt:'makeup' },
     { href:aw,  src:T+'1MakeUpBuddies2.gif',                alt:'makeup' },
     { href:gc,  src:'pixels/aqua/myjar4.gif',               alt:'fish-jar' },
+    { href:gc,  src:'pixels/trinkets/Pixel_heat_wings.gif', alt:'heart with wings' },
+    { href:gc,  src:'pixels/trinkets/sparklyheart.gif',    alt:'' },
+    { href:gc,  src:'pixels/trinkets/rew.gif',             alt:'' },
+    { href:gc,  src:T+'0keeyumcrayons.gif',  alt:'' },
+    { href:gc,  src:T+'7tel.gif',  alt:'' },
+    { href:gc,  src:T+'artworkneocities (19).gif',  alt:'' },
+    { href:gc,  src:T+'artworkposter1.png',  alt:'' },
+    { href:gc,  src:T+'artworkposter2.png',  alt:'' },
+    { href:gc,  src:T+'artworkposter3.png',  alt:'' },
+    { href:gc,  src:T+'artworkposter4.png',  alt:'' },
+    { href:gc,  src:T+'artworkposter5.png',  alt:'' },
+    { href:gc,  src:T+'FROMatp-boo-jp9.gif',  alt:'' },
+    { href:gc,  src:T+'HK137.gif',  alt:'' },
+    { href:gc,  src:T+'k010-fromannezca-com.gif',  alt:'' },
+    { href:gc,  src:T+'kouenli4.png',  alt:'' },
+    { href:gc,  src:T+'lovetinypixel.blogspot.png',  alt:'' },
+    { href:gc,  src:T+'milk03.gif',  alt:'' },
+    { href:gc,  src:T+'mini012.gif',  alt:'' },
+    { href:gc,  src:T+'mini051.gif',  alt:'' },
+    { href:gc,  src:T+'mini053.gif',  alt:'' },
+    { href:gc,  src:T+'mini117.gif',  alt:'' },
+    { href:gc,  src:T+'minichave.gif',  alt:'' },
+    { href:gc,  src:T+'paintbrush.png',  alt:'' },
+    { href:gc,  src:T+'pixelbankneocities (38).gif',  alt:'' },
+    { href:gc,  src:T+'pixelbankneocities (50).gif',  alt:'' },
+    { href:gc,  src:T+'pixelbankneocities (61).gif',  alt:'' },
+    { href:gc,  src:T+'pixelbankneocities (62).gif',  alt:'' },
+    { href:gc,  src:T+'th_mini018.gif',  alt:'' },
+    { href:gc,  src:T+'th_mini020.gif',  alt:'' },
+    { href:gc,  src:T+'th_mini024.gif',  alt:'' },
+    { href:gc,  src:T+'th_mini062.gif',  alt:'' },
+    { href:gc,  src:T+'th_mini063.gif',  alt:'' },
+    { href:gc,  src:T+'th_mini092.gif',  alt:'' },
+    { href:gc,  src:T+'th_mini096.gif',  alt:'' },
+    { href:gc,  src:T+'th_mini097.gif',  alt:'' },
+    { href:gc,  src:T+'th_mini112.gif',  alt:'' },
+    { href:gc,  src:T+'th_mini124.gif',  alt:'' },
+    { href:gc,  src:T+'thmini148.gif',  alt:'' },
+    { href:gc,  src:T+'tumblr_lkl5p4GxXx1qfamg6.gif',  alt:'' },
+    { href:gc,  src:T+'tumblr_lkl5qsmYcP1qfamg6.gif',  alt:'' },
+    { href:gc,  src:T+'tumblr_ll7xs2LGNL1qi6qow.gif',  alt:'' },
+    { href:gc,  src:T+'tumblr_lm6r9oVFgE1qfoi4t.gif',  alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (9).gif', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'pinterest2 (8).jpg', alt:'' },
+    { href:mb,  src:T+'glitterrainbow.gif',                 alt:'glitterrainbow' },
+    { href:aw2, src:T+'allyratworldneocities (3).gif',      alt:'magicKEY' },
+    { href:mb,  src:T+'rainbow.gif',                        alt:'rainbow' },
+    { href:aw,  src:T+'jarshelf.gif',                       alt:'shelffullofjars' },
     { href:gc,  src:'pixels/aqua/acuario.webp',             alt:'aquarium' },
-    { href:gc,  src:'pixels/aqua/pecera.gif',               alt:'fishbowl' },
+    { href:gc,  src:T+'Cat137.gif',  alt:'' },
+    { href:gc,  src:T+'girl-hot-air-balloon.gif',  alt:'' },
+    { href:gc,  src:T+'glitter-scribble-heart.gif',  alt:'' },
   ];
 
   // ════════════════════════════════════════════════════
   // SEASONS & NATURE
   // ════════════════════════════════════════════════════
   const SEASONS = [
+    { href:'https://web.archive.org/web/2009/http://www.geocities.com/ashleyaunt1996/', src:T+'ashleyaunt1996-geocities (1).gif', alt:'' },
+    { href:'https://web.archive.org/web/2009/http://www.pixelmyspace.com/', src:T+'pixelmyspacecom (2).gif', alt:'' },
+    { href:'https://stephology.ca/', src:T+'stephology (4).gif', alt:'' },
+    { href:mb,  src:T+'umbrella-rain.gif',                  alt:'umbrella-rain' },
+    { href:gc,  src:'pixels/aqua/pecera.gif',               alt:'fishbowl' },
     { href:aw,  src:T+'artworkneocities (94).gif',          alt:'autumnleaves' },
     { href:mb,  src:T+'night-bear-on-blanket.gif',          alt:'bear-blanket' },
     { href:mb,  src:T+'winter-bunny-snowman.gif',           alt:'bunny-snowman' },
     { href:mb,  src:T+'windmill.gif',                       alt:'pinwheel' },
     { href:pb,  src:T+'pixelbankneocities (44).gif',        alt:'rainbowbutterfly' },
+    { href:gc,  src:'pixels/trinkets/297.gif',             alt:'' },
+    { href:gc,  src:T+'blob01.gif',  alt:'' },
+    { href:gc,  src:T+'mini014.gif',  alt:'' },
+    { href:gc,  src:T+'minigirl.gif',  alt:'' },
+    { href:gc,  src:T+'minigirl2.gif',  alt:'' },
+    { href:gc,  src:T+'mmb-celestial-sodapop-net-juna.gif',  alt:'' },
+    { href:gc,  src:T+'Squirrel19.gif',  alt:'' },
+    { href:gc,  src:T+'th_mini023.gif',  alt:'' },
+    { href:gc,  src:T+'thundercloud.png',  alt:'' },
+    { href:gc,  src:T+'tsuyu.gif',  alt:'' },
+    { href:gc,  src:T+'tumblr_lkl5rnvWUn1qfamg6.gif',  alt:'' },
+    { href:gc,  src:T+'tumblr_lkl6pacjpJ1qfamg6.gif',  alt:'' },
+    { href:gc,  src:T+'tumblr_lkl6s45IGK1qfamg6.gif',  alt:'' },
+    { href:gc,  src:T+'tumblr_lkl6sexe8R1qfamg6.gif',  alt:'' },
+    { href:gc,  src:T+'tumblr_llsx1frbg81qg9aa7.gif',  alt:'' },
+    { href:gc,  src:T+'tumblr_lumf2k2DXA1qibcty.gif',  alt:'' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (26).gif', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'pinterest2 (1).gif', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'pinterest2 (3).jpg', alt:'' },
+    { href:gc,  src:T+'pretty-girly-GLITTERrose.gif',  alt:'' },
   ];
 
   // ════════════════════════════════════════════════════
   // MISCELLANEOUS
   // ════════════════════════════════════════════════════
   const MISC = [
+    { href:'https://web.archive.org/web/2009/http://www.pixelmyspace.com/', src:T+'pixelmyspacecom (3).gif', alt:'' },
+    { href:'http://it.geocities.com/vanillina88/gif_pucciose1.htm', src:T+'pucoisse (3).gif', alt:'' },
+    { href:'http://it.geocities.com/vanillina88/gif_pucciose1.htm', src:T+'pucoisse (4).gif', alt:'' },
     { href:arc, src:T+'webarchive (3).gif',                 alt:'boombox' },
     { href:aw2, src:T+'allyratworldneocities (2).gif',      alt:'bunny-ipod' },
     { href:pb,  src:T+'pixelbankneocities (67).gif',        alt:'musicnoteheart' },
     { href:mb,  src:T+'pink-juke-box.gif',                  alt:'pinkjukebox' },
     { href:aw,  src:T+'mbuilding.gif',                      alt:'building' },
     { href:aw,  src:T+'mbuilding2.gif',                     alt:'building' },
+    { href:gc,  src:'pixels/trinkets/house6.gif',          alt:'' },
+    { href:gc,  src:T+'lowlygif.gif',  alt:'' },
   ];
 
   // ════════════════════════════════════════════════════
   // TOYS
   // ════════════════════════════════════════════════════
   const TOYS = [
+    { href:'https://gifcities.org/', src:T+'gifcities (40).gif', alt:'' },
     { href:pb,  src:T+'pixelbankneocities (65).gif',        alt:'bearballoon' },
     { href:pb,  src:T+'pixelbankneocities (37).gif',        alt:'bearIDEA' },
     { href:pb,  src:T+'pixelbankneocities (43).gif',        alt:'bearOK' },
@@ -536,372 +709,257 @@
     { href:aw,  src:T+'anitv1.gif',                         alt:'cat-tv' },
     { href:aw,  src:T+'bear11.gif',                         alt:'plushie-bear' },
     { href:aw,  src:T+'BearPlush2.png',                     alt:'bear-plushie' },
+    { href:gc,  src:'pixels/trinkets/adoptedpixeldigitalpet.gif',        alt:'Tamagotchi' },
+    { href:gc,  src:T+'0keeyumcorduroy.gif',  alt:'' },
+    { href:gc,  src:T+'0Pinkgoat.gif',  alt:'' },
+    { href:gc,  src:T+'191bot.gif',  alt:'' },
+    { href:gc,  src:T+'1partyura.png',  alt:'' },
+    { href:gc,  src:T+'anitv5.gif',  alt:'' },
+    { href:gc,  src:T+'babypinkunazukin_adoptable.gif',  alt:'' },
+    { href:gc,  src:T+'Bixo_roxinhu_com_core.gif',  alt:'' },
+    { href:gc,  src:T+'grumpy-teddybear.gif',  alt:'' },
+    { href:gc,  src:T+'jb4.gif',  alt:'' },
+    { href:gc,  src:T+'Panda34.gif',  alt:'' },
+    { href:gc,  src:T+'th_mini109.gif',  alt:'' },
+    { href:gc,  src:T+'wjcactusdog1.gif',  alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (41).gif', alt:'' },
+    { href:gc,  src:'pixels/trinkets/trainpink.gif',       alt:'Pink train cars' },
   ];
 
   // ════════════════════════════════════════════════════
   // UNSORTED
   // ════════════════════════════════════════════════════
   const UNSORTED = [
-    { href:ci,  src:'pixels/trinkets/a9.gif',              alt:'Hamtaro' },
-    { href:ci,  src:'pixels/trinkets/neopets-fairy.gif',   alt:'Neopets-fairy-bottle' },
-    { href:'https://web.archive.org/web/20100419011152/http://neskaya.net/pixels.php?', src:'pixels/trinkets/new (17).gif', alt:'Bunnies-in-grass' },
-    { href:'https://web.archive.org/web/20100419011152/http://neskaya.net/pixels.php?', src:'pixels/trinkets/new (39).gif', alt:'Bears Plushies' },
-    { href:'https://web.archive.org/web/20100419011152/http://neskaya.net/pixels.php?', src:'pixels/trinkets/pixel (17).gif', alt:'Sanrio with food' },
-    { href:sd,  src:'pixels/trinkets/Cat138.gif',          alt:'Cat in grass' },
-    { href:sd,  src:'pixels/trinkets/Cat123.gif',          alt:'Beautiful white cat' },
-    { href:gc,  src:'pixels/trinkets/Pixel_heat_wings.gif', alt:'heart with wings' },
-    { href:gc,  src:'pixels/trinkets/trainpink.gif',       alt:'Pink train cars' },
-    { href:gc,  src:'pixels/trinkets/Reddragon.gif',       alt:'Red Dragon' },
-    { href:gc,  src:'pixels/trinkets/adoptedpixelcarriagefairytale.gif', alt:'Cinderella carriage' },
-    { href:gc,  src:'pixels/trinkets/adoptedpixelcupcake.gif',           alt:'Cupcake' },
-    { href:gc,  src:'pixels/trinkets/adoptedpixeldigitalpet.gif',        alt:'Tamagotchi' },
-    { href:gc,  src:'pixels/trinkets/adoptedpixelfrogfairytale.gif',     alt:'Fantasy-frog' },
-    { href:gc,  src:'pixels/trinkets/adoptedpixelshoefairytale.gif',     alt:'Cinderella-shoe' },
-    { href:gc,  src:'pixels/trinkets/amarihge-pixel1.gif', alt:'' },
-    { href:gc,  src:'pixels/trinkets/amarihge-pixel2.gif', alt:'' },
-    { href:rd,  src:'pixels/trinkets/neopetsfairy1.png',   alt:'Neopets fairy' },
-    { href:gc,  src:'pixels/trinkets/tri.gif',             alt:'' },
-    { href:gc,  src:'pixels/trinkets/297.gif',             alt:'' },
-    { href:gc,  src:'pixels/trinkets/294.gif',             alt:'' },
-    { href:gc,  src:'pixels/trinkets/sparklyheart.gif',    alt:'' },
-    { href:gc,  src:'pixels/trinkets/rew.gif',             alt:'' },
-    { href:gc,  src:'pixels/trinkets/ugo-piyo.gif',        alt:'' },
-    { href:gc,  src:'pixels/trinkets/pikaz.gif',           alt:'' },
-    { href:gc,  src:'pixels/trinkets/unicornhors1.gif',    alt:'' },
-    { href:gc,  src:'pixels/trinkets/shinyexe.neocities.png', alt:'' },
-    { href:gc,  src:'pixels/trinkets/tarepanda.gif',       alt:'' },
-    { href:gc,  src:'pixels/trinkets/087.gif',             alt:'' },
-    { href:gc,  src:'pixels/trinkets/house6.gif',          alt:'' },
-    // ── newly added: files present in folder but not yet placed ──
-    { href:gc,  src:T+'000fawnbyartwork.gif',  alt:'' },
-    { href:gc,  src:T+'000JAZZ.gif',  alt:'' },
-    { href:gc,  src:T+'000SNOW.gif',  alt:'' },
+    { src:T+'014.gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (14).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (25).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (28).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (4).gif', alt:'' },
+    { href:'https://web.archive.org/web/20060506205737/http://www.yumestudio.it/', src:T+'yumestudio-it (16).gif', alt:'' },
     { href:gc,  src:T+'00toki1.png',  alt:'' },
     { href:gc,  src:T+'00toki2.png',  alt:'' },
-    { href:gc,  src:T+'029.gif',  alt:'' },
-    { href:gc,  src:T+'0artworkcat.gif',  alt:'' },
-    { href:gc,  src:T+'0bunnymushroom.png',  alt:'' },
     { href:gc,  src:T+'0cmh3.png',  alt:'' },
-    { href:gc,  src:T+'0fairydoll3.png',  alt:'' },
-    { href:gc,  src:T+'0jeith.gif',  alt:'' },
-    { href:gc,  src:T+'0keeyumcorduroy.gif',  alt:'' },
-    { href:gc,  src:T+'0keeyumcrayons.gif',  alt:'' },
-    { href:gc,  src:T+'0keeyumfish.gif',  alt:'' },
-    { href:gc,  src:T+'0keeyummouse.gif',  alt:'' },
-    { href:gc,  src:T+'0keeyumspot.gif',  alt:'' },
-    { href:gc,  src:T+'0nyan1.png',  alt:'' },
-    { href:gc,  src:T+'0Pinkgoat.gif',  alt:'' },
     { href:gc,  src:T+'12.gif',  alt:'' },
-    { href:gc,  src:T+'12thembypikachu.png',  alt:'' },
-    { href:gc,  src:T+'14a.gif',  alt:'' },
-    { href:gc,  src:T+'172.gif',  alt:'' },
-    { href:gc,  src:T+'191bot.gif',  alt:'' },
-    { href:gc,  src:T+'1hamu.gif',  alt:'' },
-    { href:gc,  src:T+'1mousie.gif',  alt:'' },
-    { href:gc,  src:T+'1partyura.png',  alt:'' },
-    { href:gc,  src:T+'2lucky_cat.gif',  alt:'' },
-    { href:gc,  src:T+'2queenfrostine.gif',  alt:'' },
-    { href:gc,  src:T+'2sFrog.gif',  alt:'' },
     { href:gc,  src:T+'33eu91u.gif',  alt:'' },
-    { href:gc,  src:T+'3cat.png',  alt:'' },
-    { href:gc,  src:T+'3gary.png',  alt:'' },
-    { href:gc,  src:T+'3minisanx4.gif',  alt:'' },
-    { href:gc,  src:T+'3nk.png',  alt:'' },
-    { href:gc,  src:T+'42bot.gif',  alt:'' },
-    { href:gc,  src:T+'4cheetah.gif',  alt:'' },
-    { href:gc,  src:T+'7pompompurineo6.gif',  alt:'' },
-    { href:gc,  src:T+'7tel.gif',  alt:'' },
-    { href:gc,  src:T+'8bluebear.gif',  alt:'' },
-    { href:gc,  src:T+'a12.gif',  alt:'' },
-    { href:gc,  src:T+'a2.gif',  alt:'' },
-    { href:gc,  src:T+'a23.gif',  alt:'' },
-    { href:gc,  src:T+'a8.gif',  alt:'' },
-    { href:gc,  src:T+'aajohn.gif',  alt:'' },
-    { href:gc,  src:T+'aaslp.gif',  alt:'' },
-    { href:gc,  src:T+'adopt05.gif',  alt:'' },
-    { href:gc,  src:T+'Aladdin30.gif',  alt:'' },
-    { href:gc,  src:T+'Animation35-1.gif',  alt:'' },
-    { href:gc,  src:T+'anitv5.gif',  alt:'' },
-    { href:gc,  src:T+'artsticker1.png',  alt:'' },
-    { href:gc,  src:T+'artwork.neocitiesBunny.png',  alt:'' },
-    { href:gc,  src:T+'artworkneocities (19).gif',  alt:'' },
-    { href:gc,  src:T+'artworkneocities (22).gif',  alt:'' },
-    { href:gc,  src:T+'artworkneocities (6).gif',  alt:'' },
-    { href:gc,  src:T+'artworkposter1.png',  alt:'' },
-    { href:gc,  src:T+'artworkposter2.png',  alt:'' },
-    { href:gc,  src:T+'artworkposter3.png',  alt:'' },
-    { href:gc,  src:T+'artworkposter4.png',  alt:'' },
-    { href:gc,  src:T+'artworkposter5.png',  alt:'' },
-    { href:gc,  src:T+'ash.gif',  alt:'' },
     { href:gc,  src:T+'aurora.gif',  alt:'' },
-    { href:gc,  src:T+'babypinkunazukin_adoptable.gif',  alt:'' },
-    { href:gc,  src:T+'Bixo_roxinhu_com_core.gif',  alt:'' },
-    { href:gc,  src:T+'blob01.gif',  alt:'' },
-    { href:gc,  src:T+'blue-care-bear.gif',  alt:'' },
-    { href:gc,  src:T+'Bunny05.gif',  alt:'' },
-    { href:gc,  src:T+'caregrumpybear.gif',  alt:'' },
-    { href:gc,  src:T+'carelovealotbear.gif',  alt:'' },
-    { href:gc,  src:T+'caretenderheartbear.gif',  alt:'' },
-    { href:gc,  src:T+'Cat137.gif',  alt:'' },
-    { href:gc,  src:T+'Cat139.gif',  alt:'' },
-    { href:gc,  src:T+'Cheetah01.gif',  alt:'' },
-    { href:gc,  src:T+'D-aladdin.gif',  alt:'' },
-    { href:gc,  src:T+'FROMatp-boo-jp8.gif',  alt:'' },
-    { href:gc,  src:T+'FROMatp-boo-jp9.gif',  alt:'' },
-    { href:gc,  src:T+'gifcities (31).gif',  alt:'' },
-    { href:gc,  src:T+'gifcities (32).gif',  alt:'' },
-    { href:gc,  src:T+'gifcities (41).gif',  alt:'' },
-    { href:gc,  src:T+'gifcities (52).gif',  alt:'' },
-    { href:gc,  src:T+'gifcities (55).gif',  alt:'' },
-    { href:gc,  src:T+'girl-hot-air-balloon.gif',  alt:'' },
-    { href:gc,  src:T+'glitter-scribble-heart.gif',  alt:'' },
-    { href:gc,  src:T+'grumpy-teddybear.gif',  alt:'' },
-    { href:gc,  src:T+'HK137.gif',  alt:'' },
-    { href:gc,  src:T+'HK160.gif',  alt:'' },
-    { href:gc,  src:T+'HK60.gif',  alt:'' },
-    { href:gc,  src:T+'icecream.gif',  alt:'' },
     { href:gc,  src:T+'icone-musica.gif',  alt:'' },
-    { href:gc,  src:T+'icons19-1.gif',  alt:'' },
-    { href:gc,  src:T+'IMG_2455.png',  alt:'' },
-    { href:gc,  src:T+'IMG_2456.png',  alt:'' },
-    { href:gc,  src:T+'jb4.gif',  alt:'' },
-    { href:gc,  src:T+'k010-fromannezca-com.gif',  alt:'' },
-    { href:gc,  src:T+'Koala25.gif',  alt:'' },
-    { href:gc,  src:T+'kouenli1.gif',  alt:'' },
-    { href:gc,  src:T+'kouenli4.png',  alt:'' },
-    { href:gc,  src:T+'lovetinypixel.blogspot.png',  alt:'' },
-    { href:gc,  src:T+'lowlygif.gif',  alt:'' },
-    { href:gc,  src:T+'m_2.gif',  alt:'' },
-    { href:gc,  src:T+'m_3.gif',  alt:'' },
-    { href:gc,  src:T+'m_7.gif',  alt:'' },
-    { href:gc,  src:T+'mazzew0dc.gif',  alt:'' },
-    { href:gc,  src:T+'mbirdie1.gif',  alt:'' },
-    { href:gc,  src:T+'mbirdie2.gif',  alt:'' },
-    { href:gc,  src:T+'milk03.gif',  alt:'' },
-    { href:gc,  src:T+'mini012.gif',  alt:'' },
-    { href:gc,  src:T+'mini014.gif',  alt:'' },
-    { href:gc,  src:T+'mini050.gif',  alt:'' },
-    { href:gc,  src:T+'mini051.gif',  alt:'' },
-    { href:gc,  src:T+'mini053.gif',  alt:'' },
-    { href:gc,  src:T+'mini117.gif',  alt:'' },
-    { href:gc,  src:T+'mini133.gif',  alt:'' },
-    { href:gc,  src:T+'mini142.gif',  alt:'' },
-    { href:gc,  src:T+'mini158.gif',  alt:'' },
-    { href:gc,  src:T+'minichave.gif',  alt:'' },
-    { href:gc,  src:T+'minicoelho.gif',  alt:'' },
-    { href:gc,  src:T+'minigirl.gif',  alt:'' },
-    { href:gc,  src:T+'minigirl2.gif',  alt:'' },
-    { href:gc,  src:T+'minikitty.gif',  alt:'' },
-    { href:gc,  src:T+'mmb-celestial-sodapop-net-juna.gif',  alt:'' },
-    { href:gc,  src:T+'mouse.png',  alt:'' },
-    { href:gc,  src:T+'nonanime-buttercup02.gif',  alt:'' },
-    { href:gc,  src:T+'nonanime-fezzik.gif',  alt:'' },
-    { href:gc,  src:T+'nonanime-inigomontoya.gif',  alt:'' },
-    { href:gc,  src:T+'nonanime-westley03.gif',  alt:'' },
     { href:gc,  src:T+'ooz2.gif',  alt:'' },
-    { href:gc,  src:T+'ooz3.gif',  alt:'' },
-    { href:gc,  src:T+'Owl26.gif',  alt:'' },
-    { href:gc,  src:T+'p_buzz.png',  alt:'' },
-    { href:gc,  src:T+'paintbrush.png',  alt:'' },
-    { href:gc,  src:T+'Panda34.gif',  alt:'' },
-    { href:gc,  src:T+'pet3.gif',  alt:'' },
-    { href:gc,  src:T+'pet6.gif',  alt:'' },
-    { href:gc,  src:T+'pinkland-princess.gif',  alt:'' },
-    { href:gc,  src:T+'Pixel110.png',  alt:'' },
-    { href:gc,  src:T+'Pixel304.gif',  alt:'' },
-    { href:gc,  src:T+'Pixel317.gif',  alt:'' },
     { href:gc,  src:T+'Pixel50.png',  alt:'' },
-    { href:gc,  src:T+'pixelbankneocities (38).gif',  alt:'' },
-    { href:gc,  src:T+'pixelbankneocities (40).gif',  alt:'' },
-    { href:gc,  src:T+'pixelbankneocities (48).gif',  alt:'' },
-    { href:gc,  src:T+'pixelbankneocities (50).gif',  alt:'' },
     { href:gc,  src:T+'pixelbankneocities (51).gif',  alt:'' },
-    { href:gc,  src:T+'pixelbankneocities (56).gif',  alt:'' },
-    { href:gc,  src:T+'pixelbankneocities (61).gif',  alt:'' },
-    { href:gc,  src:T+'pixelbankneocities (62).gif',  alt:'' },
-    { href:gc,  src:T+'PixelBlink10.gif',  alt:'' },
-    { href:gc,  src:T+'Pooh52.gif',  alt:'' },
-    { href:gc,  src:T+'pretty-girly-GLITTERrose.gif',  alt:'' },
-    { href:gc,  src:T+'rabbit1.gif',  alt:'' },
-    { href:gc,  src:T+'racoon.png',  alt:'' },
-    { href:gc,  src:T+'rugrat4.gif',  alt:'' },
-    { href:gc,  src:T+'sapinhu3.gif',  alt:'' },
-    { href:gc,  src:T+'SM25.gif',  alt:'' },
-    { href:gc,  src:T+'Squirrel19.gif',  alt:'' },
     { href:gc,  src:T+'ssc5-candied.gif',  alt:'' },
-    { href:gc,  src:T+'sunday2.GIF',  alt:'' },
     { href:gc,  src:T+'tamz_queenDOLL.gif',  alt:'' },
-    { href:gc,  src:T+'th_love_bird.gif',  alt:'' },
-    { href:gc,  src:T+'th_mini018.gif',  alt:'' },
-    { href:gc,  src:T+'th_mini020.gif',  alt:'' },
-    { href:gc,  src:T+'th_mini023.gif',  alt:'' },
-    { href:gc,  src:T+'th_mini024.gif',  alt:'' },
-    { href:gc,  src:T+'th_mini050.gif',  alt:'' },
-    { href:gc,  src:T+'th_mini051.gif',  alt:'' },
-    { href:gc,  src:T+'th_mini062.gif',  alt:'' },
-    { href:gc,  src:T+'th_mini063.gif',  alt:'' },
-    { href:gc,  src:T+'th_mini092.gif',  alt:'' },
-    { href:gc,  src:T+'th_mini096.gif',  alt:'' },
-    { href:gc,  src:T+'th_mini097.gif',  alt:'' },
-    { href:gc,  src:T+'th_mini109.gif',  alt:'' },
-    { href:gc,  src:T+'th_mini112.gif',  alt:'' },
-    { href:gc,  src:T+'th_mini117.gif',  alt:'' },
-    { href:gc,  src:T+'th_mini124.gif',  alt:'' },
-    { href:gc,  src:T+'thmini148.gif',  alt:'' },
-    { href:gc,  src:T+'thundercloud.png',  alt:'' },
-    { href:gc,  src:T+'tsuyu.gif',  alt:'' },
-    { href:gc,  src:T+'tumblr_inline_nu0si9Ax7F1reem51_100.png',  alt:'' },
-    { href:gc,  src:T+'tumblr_lkl5p4GxXx1qfamg6.gif',  alt:'' },
-    { href:gc,  src:T+'tumblr_lkl5qsmYcP1qfamg6.gif',  alt:'' },
-    { href:gc,  src:T+'tumblr_lkl5rnvWUn1qfamg6.gif',  alt:'' },
-    { href:gc,  src:T+'tumblr_lkl64lxvRu1qfamg6.gif',  alt:'' },
-    { href:gc,  src:T+'tumblr_lkl6ckCx0N1qfamg6.gif',  alt:'' },
-    { href:gc,  src:T+'tumblr_lkl6pacjpJ1qfamg6.gif',  alt:'' },
-    { href:gc,  src:T+'tumblr_lkl6s45IGK1qfamg6.gif',  alt:'' },
-    { href:gc,  src:T+'tumblr_lkl6sexe8R1qfamg6.gif',  alt:'' },
     { href:gc,  src:T+'tumblr_lkl6skkHVM1qfamg6.gif',  alt:'' },
     { href:gc,  src:T+'tumblr_lkl6snqd761qfamg6.gif',  alt:'' },
-    { href:gc,  src:T+'tumblr_lkl6vcElNG1qfamg6.gif',  alt:'' },
-    { href:gc,  src:T+'tumblr_lkl6vh7giB1qfamg6.gif',  alt:'' },
-    { href:gc,  src:T+'tumblr_ll7wi9Eeow1qi6qow.gif',  alt:'' },
-    { href:gc,  src:T+'tumblr_ll7xlagCu71qi6qow.gif',  alt:'' },
-    { href:gc,  src:T+'tumblr_ll7xs2LGNL1qi6qow.gif',  alt:'' },
-    { href:gc,  src:T+'tumblr_llsx1frbg81qg9aa7.gif',  alt:'' },
-    { href:gc,  src:T+'tumblr_lm6r9oVFgE1qfoi4t.gif',  alt:'' },
     { href:gc,  src:T+'tumblr_lmt0dobMrY1qfel73.gif',  alt:'' },
-    { href:gc,  src:T+'tumblr_lmt0e9tqPq1qfel73.gif',  alt:'' },
-    { href:gc,  src:T+'tumblr_lmt0ecaCaZ1qfel73.gif',  alt:'' },
-    { href:gc,  src:T+'tumblr_lumf2k2DXA1qibcty.gif',  alt:'' },
-    { href:gc,  src:T+'usul10045-tripod-com (1).gif',  alt:'' },
-    { href:gc,  src:T+'usul10045-tripod-com (2).gif',  alt:'' },
-    { href:gc,  src:T+'usul10045-tripod-com (3).gif',  alt:'' },
-    { href:gc,  src:T+'usul10045-tripod-com (4).gif',  alt:'' },
-    { href:gc,  src:T+'usul10045-tripod-com (5).gif',  alt:'' },
-    { href:gc,  src:T+'usul10045-tripod-com (6).gif',  alt:'' },
-    { href:gc,  src:T+'veryhungrycaterpillarr.png',  alt:'' },
-    { href:gc,  src:T+'webarchive (2).gif',  alt:'' },
-    { href:gc,  src:T+'wjcactusdog1.gif',  alt:'' },
-    { href:gc,  src:T+'wjcactusdog2.gif',  alt:'' },
-    { href:gc,  src:T+'yupio_1.gif',  alt:'' },
+    { href:'https://web.archive.org/web/20060506205737/http://www.yumestudio.it/', src:T+'yumestudio-it (11).gif', alt:'' },
   ];
 
   // ════════════════════════════════════════════════════
-  // RENDER HELPERS
+  // ONE LIST OF BOXES, THREE WAYS TO SHOW IT
   // ════════════════════════════════════════════════════
+  const BOXES = [
+    { title: 'Favorites', sections: [{ items: FAVORITES }] },
+    { title: 'Fandoms', sections: [
+      { label: 'Lisa Frank',           items: FANDOMS_LISAFRANK },
+      { label: 'Care Bears',           items: FANDOMS_CAREBEARS },
+      { label: 'Disney',               items: FANDOMS_DISNEY },
+      { label: 'Hello Kitty & Sanrio', items: FANDOMS_SANRIO },
+      { label: 'Mario',                items: FANDOMS_MARIO },
+      { label: 'My Little Pony',       items: FANDOMS_MLP },
+      { label: 'Neopets',              items: FANDOMS_NEOPETS },
+      { label: 'Pokemon & Digimon',    items: FANDOMS_POKEMON },
+      { label: 'Sailor Moon',          items: FANDOMS_SAILORMOON },
+      { label: 'Other',                items: FANDOMS_OTHER },
+    ]},
+    { title: 'Food & Drinks',    sections: [{ items: FOOD }] },
+    { title: 'Animals',          sections: [{ items: ANIMALS }] },
+    { title: 'Fantasy',          sections: [{ items: FANTASY }] },
+    { title: 'Objects',          sections: [{ items: OBJECTS }] },
+    { title: 'Seasons & Nature', sections: [{ items: SEASONS }] },
+    { title: 'Miscellaneous',    sections: [{ items: MISC }] },
+    { title: 'Toys',             sections: [{ items: TOYS }] },
+    { title: 'Uncategorized',    sections: [{ items: UNSORTED }] },
+  ];
 
-  function makeLetters(label) {
-    return label.split('').map((c, i) =>
-      c === ' '
-        ? `<span style="display:inline-block;width:5px"></span>`
-        : `<span class="letter" style="--i:${i}">${c}</span>`
-    ).join('');
+  const LAYOUTS = { shelves: 'Shelves', tiles: 'Tile wall', cabinets: 'Cabinets' };
+
+  function el(tag, cls, html) {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html != null) e.innerHTML = html;
+    return e;
+  }
+  function pic(item, cls) {
+    const a = el(item.href ? 'a' : 'span');
+    if (item.href) { a.href = item.href; a.target = '_blank'; a.rel = 'noopener'; }
+    const img = document.createElement('img');
+    img.src = item.src; img.alt = item.alt || ''; img.loading = 'lazy'; img.decoding = 'async';
+    if (cls) img.className = cls;
+    a.appendChild(img);
+    return a;
+  }
+  function titleLetters(text, cls) {
+    const t = el('div', cls);
+    t.setAttribute('aria-label', text);
+    t.innerHTML = makeLetters(text);
+    return t;
   }
 
-  function makeContentBox(titleText) {
-    const box = document.createElement('div');
-    box.className = 'content-box';
-    if (titleText) {
-      const title = document.createElement('div');
-      title.className = 'section-title';
-      title.innerHTML = makeLetters(titleText);
-      box.appendChild(title);
-      const hr = document.createElement('hr');
-      box.appendChild(hr);
-      const br = document.createElement('br');
-      box.appendChild(br);
+  // ── Shelves: the frosted boxes ──
+  function renderShelves(wrapper) {
+    BOXES.forEach(box => {
+      const b = el('div', 'content-box');
+      b.appendChild(titleLetters(box.title, 'section-title'));
+      b.appendChild(el('hr'));
+      box.sections.forEach((sec, i) => {
+        const section = el('section', box.sections.length > 1 ? 'gallery-section' : '');
+        if (sec.label) section.appendChild(titleLetters(sec.label, 'section-title'));
+        const shelf = el('div');
+        shelf.id = 'shelf-' + (sec.label || box.title).toLowerCase().replace(/\W+/g, '-');
+        section.appendChild(shelf);
+        b.appendChild(section);
+        wrapper.appendChild(b);
+        renderArray(sec.items, shelf.id);
+      });
+    });
+  }
+
+  // ── Tile wall: the first trinkets layout ──
+  const TILE_DIVIDERS = ['pixels/dividers/Glitter_stars.gif', 'pixels/dividers/artworkneocities (37).gif', 'pixels/dividers/line_heart003_pk.gif', 'pixels/dividers/artworkneocities (60).gif'];
+  function renderTiles(wrapper) {
+    const wall = el('div', 'tw');
+    wall.appendChild(el('div', 'tw-top'));
+    let n = 0;
+    BOXES.forEach((box, bi) => {
+      box.sections.forEach(sec => {
+        const section = el('div', 'tw-section');
+        section.appendChild(titleLetters(sec.label || box.title, 'tw-title title-word-' + (n++ % 10 + 1)));
+        const row = el('div', 'tw-row');
+        sec.items.forEach(item => row.appendChild(pic(item, 'tile')));
+        section.appendChild(row);
+        wall.appendChild(section);
+      });
+      if (bi < BOXES.length - 1) {
+        const d = el('div', 'tw-divider');
+        const img = document.createElement('img');
+        img.src = TILE_DIVIDERS[bi % TILE_DIVIDERS.length]; img.alt = ''; img.loading = 'lazy';
+        d.appendChild(img);
+        wall.appendChild(d);
+      }
+    });
+    wrapper.appendChild(wall);
+  }
+
+  // ── Cabinets: shadow-box trays, cubbies sized to each picture ──
+  const CELL = 72, GAP = 6;
+  function spansFor(px) { return px <= CELL - 8 ? 1 : 2; }
+  function sizeCubby(img) {
+    const cubby = img.closest('.cubby');
+    let w = img.naturalWidth, h = img.naturalHeight;
+    if (!cubby || !w || !h) return;
+    const MIN = 40, MAX = 2 * CELL + GAP - 12;
+    if (w < MIN && h < MIN) { const k = MIN / Math.max(w, h); w = Math.round(w * k); h = Math.round(h * k); }
+    if (w > MAX || h > MAX) { const k = MAX / Math.max(w, h); w = Math.round(w * k); h = Math.round(h * k); }
+    img.style.width = w + 'px'; img.style.height = h + 'px';
+    cubby.style.gridColumn = 'span ' + spansFor(w);
+    cubby.style.gridRow = 'span ' + spansFor(h);
+  }
+  // After the pictures settle, top up only the last row so each tray is a tidy rectangle
+  function fillLastRow(tray) {
+    tray.querySelectorAll('.cubby-empty').forEach(e => e.remove());
+    // Bigger cubbies first, smaller ones fill in around them (keeps each size in its original order)
+    const area = c => (parseInt((c.style.gridColumn || 'span 1').split(' ')[1], 10) || 1) * (parseInt((c.style.gridRow || 'span 1').split(' ')[1], 10) || 1);
+    [...tray.children].map((c, i) => [c, i]).sort((a, b) => area(b[0]) - area(a[0]) || a[1] - b[1]).forEach(([c]) => tray.appendChild(c));
+    let used = 0;
+    tray.querySelectorAll('.cubby').forEach(c => { used += area(c); });
+    // Try each width that fits and keep the one with the fewest empty cubbies
+    const room = tray.closest('.cab-block').clientWidth - 32 - 12;
+    const maxCols = Math.max(2, Math.floor((room + GAP) / (CELL + GAP)));
+    const minCols = Math.max(2, Math.ceil(maxCols * 0.6));
+    let best = maxCols, bestEmpty = Infinity;
+    for (let c = maxCols; c >= minCols; c--) {
+      tray.style.gridTemplateColumns = 'repeat(' + c + ', ' + CELL + 'px)';
+      const rows = getComputedStyle(tray).gridTemplateRows.split(' ').length;
+      const empty = c * rows - used;
+      if (empty < bestEmpty) { best = c; bestEmpty = empty; }
+      if (empty < c / 3) break;   // last row nearly full: good enough, keep it wide
     }
-    return box;
+    tray.style.gridTemplateColumns = 'repeat(' + best + ', ' + CELL + 'px)';
+    const cols = best;
+    const rows = getComputedStyle(tray).gridTemplateRows.split(' ').length;
+    for (let i = used; i < cols * rows; i++) {
+      tray.appendChild(el('div', 'cubby cubby-empty', '<span class="placeholder-heart">♡</span>'));
+    }
+  }
+  function renderCabinets(wrapper) {
+    const all = [];
+    BOXES.forEach(box => {
+      const block = el('div', 'cab-block');
+      block.appendChild(el('div', 'plaque', box.title.replace(/&/g, '&amp;')));
+      box.sections.forEach(sec => {
+        if (sec.label) block.appendChild(el('div', 'plaque plaque-small', sec.label.replace(/&/g, '&amp;')));
+        const cab = el('div', 'cabinet');
+        const tray = el('div', 'tray');
+        sec.items.forEach(item => {
+          const cubby = el('div', 'cubby');
+          const p = pic(item);
+          cubby.appendChild(p);
+          const img = p.querySelector('img');
+          img.loading = 'eager';
+          img.onload = () => sizeCubby(img);
+          img.onerror = () => cubby.remove();
+          tray.appendChild(cubby);
+        });
+        cab.appendChild(tray);
+        block.appendChild(cab);
+        all.push(tray);
+      });
+      wrapper.appendChild(block);
+    });
+    let t;
+    const settle = () => { clearTimeout(t); t = setTimeout(() => all.forEach(fillLastRow), 150); };
+    wrapper.addEventListener('load', settle, true);
+    window.addEventListener('resize', settle);
+    settle();
   }
 
-  function addSection(container, label, items, shelfId) {
-    const sec = document.createElement('section');
-    const title = document.createElement('div');
-    title.className = 'section-title';
-    title.innerHTML = makeLetters(label);
-    const shelf = document.createElement('div');
-    shelf.id = shelfId;
-    sec.appendChild(title);
-    sec.appendChild(shelf);
-    container.appendChild(sec);
-    renderArray(items, shelfId);
-  }
-
-  function addDivider(container) {
-    const d = document.createElement('div');
-    d.innerHTML = '<br><hr><br>';
-    container.appendChild(d);
-  }
-
-  // ════════════════════════════════════════════════════
-  // BUILD PAGE
-  // ════════════════════════════════════════════════════
-  window.addEventListener('DOMContentLoaded', () => {
+  // ── Switch between layouts (remembered for next visit) ──
+  function render(layout) {
+    if (!LAYOUTS[layout]) layout = 'shelves';
     const wrapper = document.getElementById('trinkets-wrapper');
+    wrapper.innerHTML = '';
+    document.body.dataset.layout = layout;
 
-    // ── Title box ──
-    const titleBox = makeContentBox(null);
-    titleBox.innerHTML = `
-      <h2>Trinkets</h2>
-      <hr>
-    `;
+    const titleBox = el('div', 'content-box');
+    titleBox.innerHTML = '<h2>Trinkets</h2><hr>';
+    const sw = el('div', 'layout-switch');
+    sw.setAttribute('role', 'group');
+    sw.setAttribute('aria-label', 'Layout');
+    Object.entries(LAYOUTS).forEach(([key, name]) => {
+      const btn = el('button', '', name);
+      btn.type = 'button';
+      btn.setAttribute('aria-pressed', key === layout ? 'true' : 'false');
+      btn.addEventListener('click', () => {
+        try { localStorage.setItem('trinketsLayout', key); } catch (e) {}
+        history.replaceState(null, '', key === 'shelves' ? location.pathname : '#' + key);
+        render(key);
+      });
+      sw.appendChild(btn);
+    });
+    titleBox.appendChild(sw);
     wrapper.appendChild(titleBox);
 
-    // ── New arrivals ──
-    const newBox = makeContentBox('New Arrivals');
-    const newShelf = document.createElement('div');
-    newShelf.id = 'shelf-new';
-    newBox.appendChild(newShelf);
-    wrapper.appendChild(newBox);
-    renderArray(NEW_ARRIVALS, 'shelf-new');
+    const body = el('div', 'layout-' + layout);
+    wrapper.appendChild(body);
+    if (layout === 'tiles') renderTiles(body);
+    else if (layout === 'cabinets') renderCabinets(body);
+    else renderShelves(body);
+  }
 
-    // ── Favorites ──
-    const favBox = makeContentBox('Favorites');
-    const favShelf = document.createElement('div');
-    favShelf.id = 'shelf-favorites';
-    favBox.appendChild(favShelf);
-    wrapper.appendChild(favBox);
-    renderArray(FAVORITES, 'shelf-favorites');
-
-    // ── Fandoms (one box, sub-sections inside) ──
-    const fanBox = makeContentBox('Fandoms');
-    wrapper.appendChild(fanBox);
-
-    const fandomSubs = [
-      ['Lisa Frank',           FANDOMS_LISAFRANK,  'shelf-lisafrank'],
-      ['Care Bears',           FANDOMS_CAREBEARS,  'shelf-carebears'],
-      ['Disney',               FANDOMS_DISNEY,     'shelf-disney'],
-      ['Hello Kitty & Sanrio', FANDOMS_SANRIO,     'shelf-sanrio'],
-      ['Mario',                FANDOMS_MARIO,      'shelf-mario'],
-      ['My Little Pony',       FANDOMS_MLP,        'shelf-mlp'],
-      ['Neopets',              FANDOMS_NEOPETS,    'shelf-neopets'],
-      ['Pokemon & Digimon',    FANDOMS_POKEMON,    'shelf-pokemon'],
-      ['Sailor Moon',          FANDOMS_SAILORMOON, 'shelf-sailormoon'],
-      ['Other',                FANDOMS_OTHER,      'shelf-fandoms-other'],
-    ];
-    fandomSubs.forEach(([label, items, id], idx) => {
-      if (idx > 0) addDivider(fanBox);
-      addSection(fanBox, label, items, id);
-    });
-
-    // ── Remaining top-level sections — each its own box ──
-    const topSections = [
-      ['Food & Drinks',    FOOD,     'shelf-food'],
-      ['Animals',          ANIMALS,  'shelf-animals'],
-      ['Fantasy',          FANTASY,  'shelf-fantasy'],
-      ['Objects',          OBJECTS,  'shelf-objects'],
-      ['Seasons & Nature', SEASONS,  'shelf-seasons'],
-      ['Miscellaneous',    MISC,     'shelf-misc'],
-      ['Toys',             TOYS,     'shelf-toys'],
-      ['Unsorted',         UNSORTED, 'shelf-unsorted'],
-    ];
-    topSections.forEach(([label, items, id]) => {
-      const box = makeContentBox(label);
-      const shelf = document.createElement('div');
-      shelf.id = id;
-      box.appendChild(shelf);
-      wrapper.appendChild(box);
-      renderArray(items, id);
-    });
+  window.addEventListener('DOMContentLoaded', () => {
+    let saved = location.hash.slice(1);
+    if (!LAYOUTS[saved]) { try { saved = localStorage.getItem('trinketsLayout'); } catch (e) {} }
+    render(saved);
   });
 </script>
 
