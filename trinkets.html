@@ -873,9 +873,9 @@
     let used = 0;
     tray.querySelectorAll('.cubby').forEach(c => { used += area(c); });
     // Try each width that fits and keep the one with the fewest empty cubbies
-    const room = tray.closest('.cab-block').clientWidth - 32 - 12;
+    const room = document.querySelector('.layout-cabinets').clientWidth - 32 - 12;
     const maxCols = Math.max(2, Math.floor((room + GAP) / (CELL + GAP)));
-    const minCols = Math.max(2, Math.ceil(maxCols * 0.6));
+    const minCols = maxCols;   // every cabinet the same width
     let best = maxCols, bestEmpty = Infinity;
     for (let c = maxCols; c >= minCols; c--) {
       tray.style.gridTemplateColumns = 'repeat(' + c + ', ' + CELL + 'px)';
