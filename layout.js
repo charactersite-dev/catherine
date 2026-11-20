@@ -1,12 +1,19 @@
+/* ============================================================
+   layout.js — shared header, sidebar, footer, back-to-top,
+   bouncing rainbow titles and the stars + clouds sky.
+   Load on every page:  <script src="layout.js"></script>
+   ============================================================ */
 (function(){
+
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ── Header (site title + subtitle) ──
   var header = document.getElementById('layout-header');
   if(header){
     header.innerHTML = `
       <div class="top-header">
-        <a href="index.html" style="text-decoration:none;display:block;">
-          <svg width="100%" viewBox="0 0 860 110" xmlns="http://www.w3.org/2000/svg">
+        <a href="index.html" class="top-header-link" aria-label="CallMeCatherine home">
+          <svg width="100%" viewBox="0 0 860 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <defs>
               <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%"   stop-color="#ff8fd4"/>
@@ -31,10 +38,11 @@
     sidebar.innerHTML = `
       <aside class="sidebar">
 
-        <div class="sidebar-card">
+        <nav class="sidebar-card" aria-label="Explore">
           <h3>Explore</h3>
           <img src="assets/artworkneocDIVcrop.gif" alt="">
           <ul>
+            <li><a href="index.html">Home</a></li>
             <li><a href="blinkies.html">Blinkies</a></li>
             <li><a href="dividers.html">Dividers</a></li>
             <li><a href="trinkets.html">Trinkets</a></li>
@@ -44,16 +52,16 @@
             <li><a href="greenhouse.html">Pixel Garden</a></li>
             <li><a href="people.html">Pixel People</a></li>
             <li><a href="space.html">Pixel Space</a></li>
-            <li><a href="cliques.html">Cliques & Clubs</a></li>
+            <li><a href="cliques.html">Cliques &amp; Clubs</a></li>
           </ul>
-        </div>
+        </nav>
 
         <div class="sidebar-card">
           <h3>Clubs</h3>
           <img src="assets/artworkneocDIVcrop.gif" alt="">
           <div class="sidebar-links">
             <a href="https://scentedclub.neocities.org/"><img src="assets/scented-img.png" alt="" class="club-button"> Cotton Candy</a>
-            <a href="https://callmecatherine.neocities.org/journal/journal">Sisterhood of the Traveling Journal</a>
+            <a href="journal/journal.html">Sisterhood of the Traveling Journal</a>
           </div>
         </div>
 
@@ -67,6 +75,14 @@
         </div>
 
       </aside>`;
+
+    // Mark the page you're on (works with and without ".html" in the URL)
+    var here = (location.pathname.split('/').pop() || 'index').replace(/\.html$/, '') || 'index';
+    sidebar.querySelectorAll('nav a').forEach(function(a){
+      if(a.getAttribute('href').replace(/\.html$/, '') === here){
+        a.setAttribute('aria-current', 'page');
+      }
+    });
   }
 
   // ── Footer ──
@@ -74,47 +90,79 @@
   if(footer){
     footer.innerHTML = `
       <footer>
-        <a href="https://callmecatherine.neocities.org/">
-          <img src="assets/backtohome.gif" alt="Back to Home" style="image-rendering:pixelated;">
+        <a href="index.html">
+          <img src="assets/backtohome.gif" alt="Back to Home">
         </a>
       </footer>`;
   }
 
-})();
+  // ── Bouncing rainbow titles: <div class="section-title" data-letters="Beach"></div> ──
+  window.makeLetters = function(label){
+    var n = 0;
+    return label.split('').map(function(c){
+      if(c === ' ') return '<span class="gap"></span>';
+      return '<span class="letter" style="--i:' + (n++) + '">' + c + '</span>';
+    }).join('');
+  };
+  document.querySelectorAll('[data-letters]').forEach(function(el){
+    el.innerHTML = makeLetters(el.getAttribute('data-letters'));
+    el.setAttribute('aria-label', el.getAttribute('data-letters'));
+  });
 
-// ── Back to top button (fixed, bottom-right, always visible) ──
-(function(){
+  // ── Stars + clouds sky (pages with <div id="stars"> / <div id="clouds">) ──
+  var S = document.getElementById('stars'), C = document.getElementById('clouds');
+  if(S && !S.childElementCount){
+    for(var i = 0; i < 28; i++){
+      var s = document.createElement('div');
+      var sz = (1.5 + Math.random() * 2.5).toFixed(1);
+      s.className = 'sky-star';
+      s.style.cssText = 'width:' + sz + 'px;height:' + sz + 'px;left:' + (Math.random() * 100).toFixed(1) + '%;top:' + (Math.random() * 45).toFixed(1) + '%;--lo:' + (0.2 + Math.random() * 0.35).toFixed(2) + ';animation-duration:' + (2 + Math.random() * 3).toFixed(1) + 's;animation-delay:' + (-Math.random() * 4).toFixed(1) + 's;';
+      S.appendChild(s);
+    }
+  }
+  if(C && !C.childElementCount){
+    [{sz:220,bot:0,dur:38,dl:0,op:.85},{sz:170,bot:0,dur:28,dl:-10,op:.75},{sz:270,bot:0,dur:46,dl:-22,op:.80},
+     {sz:140,bot:18,dur:24,dl:-6,op:.68},{sz:200,bot:8,dur:40,dl:-30,op:.72},{sz:160,bot:12,dur:32,dl:-16,op:.70}]
+    .forEach(function(c, i){
+      var w = document.createElement('div'), sz = c.sz;
+      w.className = 'sky-cloud';
+      w.style.cssText = 'bottom:' + c.bot + 'px;--start:' + (220 + i * 200) + 'px;animation-duration:' + c.dur + 's;animation-delay:' + c.dl + 's;opacity:' + c.op + ';';
+      w.innerHTML = '<div class="puff" style="width:' + sz + 'px;height:' + Math.round(sz * .36) + 'px;">'
+        + '<i style="width:' + Math.round(sz * .46) + 'px;height:' + Math.round(sz * .46) + 'px;top:-' + Math.round(sz * .23) + 'px;left:' + Math.round(sz * .12) + 'px;"></i>'
+        + '<i style="width:' + Math.round(sz * .36) + 'px;height:' + Math.round(sz * .36) + 'px;top:-' + Math.round(sz * .18) + 'px;left:' + Math.round(sz * .45) + 'px;"></i>'
+        + '</div>';
+      C.appendChild(w);
+    });
+  }
+
+  // ── Hide any picture that fails to load (no broken-image icons) ──
+  function hideBroken(img){
+    var link = img.parentElement && img.parentElement.tagName === 'A' ? img.parentElement : null;
+    (link && link.children.length === 1 ? link : img).hidden = true;
+  }
+  document.addEventListener('error', function(e){
+    var img = e.target;
+    if(img && img.tagName === 'IMG' && img.closest('.main-content')) hideBroken(img);
+  }, true);
+  // ...including ones that already failed before this script ran
+  document.querySelectorAll('.main-content img').forEach(function(img){
+    if(img.complete && img.getAttribute('src') && img.naturalWidth === 0) hideBroken(img);
+  });
+
+  // ── Back to top (fixed, bottom-right, shows after scrolling) ──
   var btn = document.createElement('a');
   btn.href = '#';
+  btn.className = 'to-top';
   btn.title = 'Back to top';
-  btn.innerHTML = '↑';
-  btn.style.cssText = [
-    'position:fixed',
-    'bottom:24px',
-    'right:24px',
-    'z-index:9999',
-    'width:40px',
-    'height:40px',
-    'display:flex',
-    'align-items:center',
-    'justify-content:center',
-    'background:rgba(255,255,255,0.7)',
-    'backdrop-filter:blur(8px)',
-    '-webkit-backdrop-filter:blur(8px)',
-    'border:1px solid rgba(255,255,255,0.8)',
-    'border-radius:50%',
-    'text-decoration:none',
-    'color:#7030a0',
-    'font-size:18px',
-    'font-weight:bold',
-    'box-shadow:0 2px 10px rgba(120,60,180,0.2)',
-    'transition:background 0.2s,transform 0.2s'
-  ].join(';');
-  btn.onmouseover = function(){ this.style.background='rgba(255,255,255,0.95)'; this.style.transform='translateY(-3px)'; };
-  btn.onmouseout  = function(){ this.style.background='rgba(255,255,255,0.7)';  this.style.transform='translateY(0)'; };
+  btn.setAttribute('aria-label', 'Back to top');
+  btn.textContent = '↑';
   btn.addEventListener('click', function(e){
     e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
   });
   document.body.appendChild(btn);
+  var onScroll = function(){ btn.classList.toggle('is-visible', window.scrollY > 400); };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
 })();

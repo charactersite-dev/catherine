@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>CallmeCatherine ~ Kao Ani</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CallMeCatherine ~ Kao Ani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Pacifico&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 
   <style>
     .page-wrapper .kao-grid{
@@ -113,7 +116,6 @@ function newColour(){var c=new Array();c[0]=255;c[1]=Math.floor(Math.random()*25
   </script>
 </head>
 <body>
-<span id="page-top"></span>
 
 <div class="page-wrap">
   <div id="layout-header"></div>
@@ -128,9 +130,9 @@ function newColour(){var c=new Array();c[0]=255;c[1]=Math.floor(Math.random()*25
 
           <div class="kao-collection">
             <div class="content-box">
-              <div class="section-title" id="collectionsection-letters"></div>
-              <hr><br>
-              <img src="pixels/trinkets/kao/hk.geocities.com-fanfanfannie.gif">
+              <div class="section-title" data-letters="My Collection"></div>
+              <hr>
+              <img src="pixels/trinkets/kao/hk.geocities.com-fanfanfannie.gif" alt="" class="pixel">
               <div id="collection-shelf-target"></div>
             </div>
           </div>
@@ -138,10 +140,9 @@ function newColour(){var c=new Array();c[0]=255;c[1]=Math.floor(Math.random()*25
           <div class="kao-side">
 
             <div class="content-box">
-              <div class="section-title" id="title-letters"></div>
-              <hr><br>
-              <img src="pixels/trinkets/kao/b_gpork030_welcome.gif">
-              <br><br>
+              <h2>Kao Ani</h2>
+              <hr>
+              <img src="pixels/trinkets/kao/b_gpork030_welcome.gif" alt="Welcome" class="pixel">
               <p class="kao-body-text">
                 Kaoani (顔アニ) are small animated pixel-art emoticons that originated on the Japanese web. The name combines kao (顔), meaning "face," with an informal shortening of "animation." They may also have been referred to as puffs, blobs, or reversed: anikao.
               </p>
@@ -150,14 +151,14 @@ function newColour(){var c=new Array();c[0]=255;c[1]=Math.floor(Math.random()*25
               </p>
               <p class="kao-body-text">
                 They spread internationally through anime and web communities in the late 1990s and early 2000s, appearing in forum signatures, messaging platforms, and personal homepages. Many were distributed as sozai (素材)—free web materials shared by creators, usually with conditions such as linking back for credit. Because they were widely copied and reposted, many original sources have been lost.
-              </p><br>
-              <img src="pixels/trinkets/kao/line_bread001.gif"><br>
+              </p>
+              <img src="pixels/trinkets/kao/line_bread001.gif" alt="" class="pixel">
             </div>
 
             <div class="content-box">
-              <div class="section-title" id="refsection-letters"></div>
-              <hr><br>
-              <img src="pixels/trinkets/kao/01090.gif">
+              <div class="section-title" data-letters="References"></div>
+              <hr>
+              <img src="pixels/trinkets/kao/01090.gif" alt="" class="pixel">
               <ul class="refs-list">
                 <li><a href="https://neonaut.neocities.org/microblog/2019/11/the-wonderful-world-of-kaoani" target="_blank">neonaut — The Wonderful World of Kaoani</a></li>
                 <li><a href="https://nostalgic.neocities.org/adopts/kaoani/kaoani" target="_blank">Nostalgia for the 2000s — Kao-Ani</a></li>
@@ -181,15 +182,6 @@ function newColour(){var c=new Array();c[0]=255;c[1]=Math.floor(Math.random()*25
 <script src="layout.js"></script>
 
 <script>
-function makeLetters(label){
-  return label.split('').map((c,i)=>
-    c===' '?`<span style="display:inline-block;width:5px"></span>`
-           :`<span class="letter" style="--i:${i}">${c}</span>`
-  ).join('');
-}
-document.getElementById('title-letters').innerHTML             = makeLetters('Kao Ani');
-document.getElementById('collectionsection-letters').innerHTML = makeLetters('My Collection');
-document.getElementById('refsection-letters').innerHTML        = makeLetters('References');
 
 const KA = 'pixels/trinkets/kao/';
 const gc = 'https://gifcities.org';

@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>CallMeCatherine ~ People</title>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pacifico&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CallMeCatherine ~ Pixel People</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Pacifico&family=Press+Start+2P&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<span id="page-top"></span>
 <div id="stars"></div>
 <div id="clouds"></div>
 
@@ -20,11 +21,10 @@
     <div class="main-content">
   <div class="page-container">
     <main id="main-content">
-      <section>
-        <h2>People</h2>
-        <div class="page-header-img"><img src="assets/cyworld.png" alt="Cyworld header"></div>
-      </section>
-      <section id="people-sections"></section>
+      <h2>Pixel People</h2>
+      <hr>
+      <div class="page-header-img"><img src="assets/cyworld.webp" alt="Cyworld header"></div>
+      <div id="people-sections"></div>
     </main>
   </div>
     </div><!-- end main-content -->
@@ -35,52 +35,79 @@
 
 <script src="sparkle.js"></script>
 <script src="layout.js"></script>
+<script src="gallery.js"></script>
 <script>
-const cy="https://web.archive.org/web/20190202221518/http://cy.cyworld.com/cyMain";
-const aw="https://artwork.neocities.org";
-const mb="https://myblinkie.holidaycomments.com/gallery";
+// Sorted by what's actually in each picture (Nov 2026)
+var cy="https://web.archive.org/web/20190202221518/http://cy.cyworld.com/cyMain",
+    aw="https://artwork.neocities.org",
+    mb="https://myblinkie.holidaycomments.com/gallery",
+    gc="https://gifcities.org/",
+    ci="https://cinni.net/?z=/toybox/ani",
+    P="pixels/people/";
 
-const scenes={
-  'Beach & Water':[[cy,"pixels/ppl/PPL-cyworld (12).gif","girl-beach-tube"],[cy,"pixels/ppl/PPL-cyworld (24).gif","girl-beach-reading"],[aw,"pixels/ppl/artworkneocitiesPEOPLE (18).gif","girlatbeach"],[aw,"pixels/ppl/artworkneocitiesPEOPLE (24).gif","familyatbeach"],[cy,"pixels/ppl/PPL-cyworld (40).gif","boy-beachball"],[cy,"pixels/ppl/PPL-cyworld (41).gif","boy-watermelon"],[cy,"pixels/ppl/PPL-cyworld (60).gif","man-beach"],[cy,"pixels/ppl/PPL-cyworld (67).gif","womanatbeach"],[cy,"pixels/ppl/PPL-cyworld (29).gif","couple-beach"],[cy,"pixels/ppl/PPL-cyworld (10).gif","couple-swanboat"],[aw,"pixels/ppl/artworkneocitiesPEOPLE (26).gif","couple-boat"],[cy,"pixels/ppl/PPL-cyworld (69).gif","boy-underwater"],[aw,"pixels/ppl/artworkneocitiesPEOPLE (14).gif","kid-pool"],[cy,"pixels/ppl/PPL-cyworld (39).gif","toddler-water"],[cy,"pixels/ppl/PPL-cyworld (13).gif","hawaiiangirl"],[cy,"pixels/ppl/PPL-cyworld (62).gif","sleeping-woman-pool"]],
-  'Winter & Snow':[[cy,"pixels/ppl/PPL-cyworld (21).gif","boy-snow"],[cy,"pixels/ppl/PPL-cyworld (2).gif","boy-fishing-winter"],[cy,"pixels/ppl/PPL-cyworld (50).gif","kids-snow"],[cy,"pixels/ppl/PPL-cyworld (20).gif","girl-snowman"],[cy,"pixels/ppl/PPL-cyworld (19).gif","girl-winter-jump"],[cy,"pixels/ppl/PPL-cyworld (30).gif","winter-girljump"],[cy,"pixels/ppl/PPL-cyworld (31).gif","winter-girl-clapping"],[cy,"pixels/ppl/PPL-cyworld (76).gif","girlknitting"],[aw,"pixels/ppl/artworkneocitiesPEOPLE (20).gif","girlknitting-winter"],[cy,"pixels/ppl/PPL-cyworld (68).gif","couple-knitting"]],
-  'Garden & Outdoors':[[aw,"pixels/ppl/artworkneocitiesPEOPLE (25).gif","girlwatering"],[aw,"pixels/ppl/artworkneocitiespeople2 (2).gif","girlflowers"],[cy,"pixels/ppl/PPL-cyworld (9).gif","girlwithflowers"],[cy,"pixels/ppl/PPL-cyworld (65).gif","girl-flowerbasket"],[aw,"pixels/ppl/artworkneocitiesPEOPLE (21).gif","dadkid-autumn"],[aw,"pixels/ppl/artworkneocitiesPEOPLE (8).gif","girl-autumn"],[aw,"pixels/ppl/artworkneocitiespeople2 (1).gif","bicycle-autumn"],[cy,"pixels/ppl/PPL-cyworld (55).gif","woman-bouquet"],[cy,"pixels/ppl/PPL-cyworld (57).gif","woman-gardener"],[cy,"pixels/ppl/PPL-cyworld (23).gif","boy-bouquet"],[cy,"pixels/ppl/PPL-cyworld (36).gif","boymowing"],[cy,"pixels/ppl/PPL-cyworld (74).gif","boy-kite"],[cy,"pixels/ppl/PPL-cyworld (8).gif","two-kids-garden"]],
-  'Music & Dancing':[[cy,"pixels/ppl/PPL-cyworld (44).gif","DJs"],[aw,"pixels/ppl/artworkneocitiesPEOPLE (9).gif","guitarsinger"],[aw,"pixels/ppl/artworkneocitiesPEOPLE (4).gif","trumpet"],[cy,"pixels/ppl/PPL-cyworld (71).gif","drummer"],[cy,"pixels/ppl/PPL-cyworld (47).gif","woman-singer"],[cy,"pixels/ppl/PPL-cyworld (45).gif","womandancing"],[cy,"pixels/ppl/PPL-cyworld (46).gif","guydancing"],[cy,"pixels/ppl/PPL-cyworld (63).gif","disco-couple"],[cy,"pixels/ppl/PPL-cyworld (26).gif","man-disco"],[cy,"pixels/ppl/PPL-cyworld (52).gif","couple-dancing"],[aw,"pixels/ppl/artworkneocitiesPEOPLE (1).gif","hawaiiangirls-music"]],
-  'Couples & Romance':[[cy,"pixels/ppl/PPL-cyworld (5).gif","couple-kiss"],[cy,"pixels/ppl/PPL-cyworld (77).gif","couple-date"],[aw,"pixels/ppl/artworkneocitiesPEOPLE (23).gif","old-couple"],[cy,"pixels/ppl/PPL-cyworld (15).gif","couple-sitting"],[cy,"pixels/ppl/PPL-cyworld (16).gif","couple-hug"],[aw,"pixels/ppl/artworkneocitiesPEOPLE (17).gif","couple-grass"],[cy,"pixels/ppl/PPL-cyworld (58).gif","couple-summer"],[cy,"pixels/ppl/PPL-cyworld (4).gif","couple-candles"],[cy,"pixels/ppl/PPL-cyworld (70).gif","couple-clapping"],[cy,"pixels/ppl/PPL-cyworld (75).gif","wedding"],[cy,"pixels/ppl/PPL-cyworld (11).gif","wedding-2"]],
-  'Kids & Babies':[[mb,"pixels/ppl/PPL-baby.gif","baby"],[mb,"pixels/ppl/ppl-buggy-baby.gif","baby-stroller"],[aw,"pixels/ppl/artworkneocitiesPEOPLE (13).gif","dad-baby"],[aw,"pixels/ppl/artworkneocitiesPEOPLE (15).gif","dad-kid-fishing"],[aw,"pixels/ppl/artworkneocitiesPEOPLE (22).gif","kids-on-log"],[aw,"pixels/ppl/artworkneocitiesPEOPLE (7).gif","toddlers-dogs"],[cy,"pixels/ppl/PPL-cyworld (7).gif","kid-bunny"],[cy,"pixels/ppl/PPL-cyworld (1).gif","kid-balloons"],[cy,"pixels/ppl/PPL-cyworld (56).gif","kid-bee"],[cy,"pixels/ppl/PPL-cyworld (48).gif","boy-toycar"],[cy,"pixels/ppl/PPL-cyworld (54).gif","boy-sparklers"],[aw,"pixels/ppl/artworkneocitiesPEOPLE (2).gif","pillow-fight"],[cy,"pixels/ppl/PPL-cyworld (49).gif","girl-present"]],
-  'Everyday Life':[[cy,"pixels/ppl/PPL-cyworld (37).gif","boycleaning"],[cy,"pixels/ppl/PPL-cyworld (34).gif","boycleaningwall"],[cy,"pixels/ppl/PPL-cyworld (35).gif","girl-vacuum"],[cy,"pixels/ppl/PPL-cyworld (25).gif","girl-dog"],[cy,"pixels/ppl/PPL-cyworld (61).gif","girl-wind"],[aw,"pixels/ppl/artworkneocitiesPEOPLE (3).gif","girl-fan"],[mb,"pixels/ppl/artist-girl.gif","girl-artist"],[aw,"pixels/ppl/artworkneocitiesPEOPLE (5).gif","girl-drawing"],[aw,"pixels/ppl/artworkneocitiesPEOPLE (10).gif","girl-chalk"],[cy,"pixels/ppl/PPL-cyworld (64).gif","cameraman"],[cy,"pixels/ppl/PPL-cyworld (73).gif","lazyman"],[cy,"pixels/ppl/PPL-cyworld (79).gif","indoors"]],
-  'Rain & Cozy Days':[[cy,"pixels/ppl/PPL-cyworld (6).gif","girl-dog-rain"],[aw,"pixels/ppl/artworkneocitiesPEOPLE (6).gif","girl-blanket"],[aw,"pixels/ppl/artworkneocitiesPEOPLE (12).gif","girl-headphones"],[cy,"pixels/ppl/PPL-cyworld (14).gif","girl-fanning"],[cy,"pixels/ppl/PPL-cyworld (38).gif","girl-icecream"],[cy,"pixels/ppl/PPL-cyworld (3).gif","woman-drink"]],
-  'Celebrations & Dress-up':[[cy,"pixels/ppl/PPL-cyworld (28).gif","girl-balloon"],[mb,"pixels/ppl/girl-hot-air-balloon.gif","girl-hotairballoon"],[cy,"pixels/ppl/PPL-cyworld (27).gif","woman-heartballon"],[cy,"pixels/ppl/PPL-cyworld (43).gif","girl-cloak"],[cy,"pixels/ppl/PPL-cyworld (78).gif","girl-present"]],
-  'Unsorted':[[cy,"pixels/ppl/PPL-cyworld (22).gif","cyw-22"],[cy,"pixels/ppl/PPL-cyworld (33).gif","cyw-33"],[cy,"pixels/ppl/PPL-cyworld (53).gif","cyw-53"],[cy,"pixels/ppl/PPL-cyworld (59).gif","cyw-59"],[aw,"pixels/ppl/artworkneocitiesPEOPLE (16).gif","art-16"],[aw,"pixels/ppl/artworkneocitiesPEOPLE (19).gif","art-19"],[aw,"pixels/ppl/a_nome.gif","a-nome"],[aw,"pixels/ppl/artworkneocities (25).gif","art-25"],[cy,"pixels/ppl/cyworld2 (2).gif","cyw2-2"],["https://cinni.net/?z=/toybox/ani","pixels/ppl/girl-and-flower.gif","girl-and-flower"],["https://cinni.net/?z=/toybox/ani","pixels/ppl/ppl-womanatbeach.gif","womanatbeach"],["https://cinni.net/?z=/toybox/ani","pixels/ppl/ppl-gardener.gif","gardener"],["https://cinni.net/?z=/toybox/ani","pixels/ppl/ppl-countrysinger.gif","country-singer"],["https://cinni.net/?z=/toybox/ani","pixels/ppl/babynabubble.gif","baby-bubble"]],
-};
+Gallery.sections('people-sections',[
+  {label:'Beach & Water', items:[
+    [cy,P+"PPL-cyworld (12).gif","girl with swim ring"], [aw,P+"artworkneocitiesPEOPLE (14).gif","kid in pool ring"], [cy,P+"PPL-cyworld (29).gif","couple swimming"],
+    [cy,P+"PPL-cyworld (70).gif","boy snorkeling"], [cy,P+"PPL-cyworld (24).gif","girl reading in sunglasses"], [aw,P+"artworkneocitiesPEOPLE (18).gif","girl at the beach"],
+    [cy,P+"PPL-cyworld (68).gif","girl napping in sun hat"], [cy,P+"PPL-cyworld (62).gif","lounging by the pool"], [cy,P+"PPL-cyworld (60).gif","man sunbathing"],
+    [cy,P+"PPL-cyworld (40).gif","boy with beachball"], [cy,P+"PPL-cyworld (41).gif","boy with watermelon"], [cy,P+"PPL-cyworld (59).gif","man with watermelon"],
+    [cy,P+"PPL-cyworld (42).gif","man in swim trunks"], [ci,P+"ppl-womanatbeach.gif","woman at the beach"], [aw,P+"artworkneocitiesPEOPLE (24).gif","family beach picnic"],
+    [cy,P+"PPL-cyworld (10).gif","couple in a swan boat"], [aw,P+"artworkneocitiesPEOPLE (26).gif","couple in a rowboat"], [cy,P+"PPL-cyworld (13).gif","hawaiian girl"],
+    [cy,P+"PPL-cyworld (14).gif","hula girl with fan"],
+  ]},
+  {label:'Winter & Snow', items:[
+    [cy,P+"PPL-cyworld (21).gif","boy shoveling snow"], [cy,P+"PPL-cyworld (20).gif","girl building a snowman"], [cy,P+"PPL-cyworld (50).gif","snowball fight"],
+    [cy,P+"PPL-cyworld (19).gif","pink hat girl jumping"], [cy,P+"PPL-cyworld (30).gif","winter girl"], [cy,P+"PPL-cyworld (31).gif","red hat winter girl"],
+    [cy,P+"PPL-cyworld (53).gif","kid in hat and scarf"], [cy,P+"PPL-cyworld (2).gif","ice fishing"], [aw,P+"artworkneocitiesPEOPLE (20).gif","girl knitting by the fire"],
+    [cy,P+"PPL-cyworld (77).gif","girl knitting"], [cy,P+"PPL-cyworld (69).gif","knitting together"],
+  ]},
+  {label:'Garden & Outdoors', items:[
+    [cy,P+"PPL-cyworld (9).gif","girl with flower crown"], [ci,P+"girl-and-flower.gif","girl and flower"], [aw,P+"artworkneocitiespeople2 (2).gif","girl with flowers"],
+    [cy,P+"PPL-cyworld (66).gif","girl with flower basket"], [cy,P+"PPL-cyworld (55).gif","girl with flowers on a chair"], [gc,P+"gifcities (38).gif","sunflower girl"],
+    [cy,P+"PPL-cyworld (67).gif","lying in the grass with a flower"], [cy,P+"PPL-cyworld (57).gif","girl with watering can"], [aw,P+"artworkneocities (25).gif","girl watering plants"],
+    [ci,P+"ppl-gardener.gif","gardener"], [cy,P+"PPL-cyworld (8).gif","two kids planting"], [cy,P+"PPL-cyworld (36).gif","boy mowing"],
+    [cy,P+"PPL-cyworld (61).gif","girl in sun hat"], [aw,P+"artworkneocitiespeople2 (1).gif","bicycle ride"], [cy,P+"PPL-cyworld (75).gif","kid with kite"],
+    [aw,P+"artworkneocitiesPEOPLE (8).gif","autumn leaves"],
+  ]},
+  {label:'Music & Dancing', items:[
+    [aw,P+"artworkneocitiesPEOPLE (9).gif","guitar singer"], [ci,P+"ppl-countrysinger.gif","country singer"], [aw,P+"artworkneocitiesPEOPLE (4).gif","trumpet player"],
+    [cy,P+"PPL-cyworld (71).gif","drummer"], [cy,P+"PPL-cyworld (72).gif","kid drummer"], [cy,P+"PPL-cyworld (44).gif","DJs"],
+    [cy,P+"PPL-cyworld (47).gif","woman singing"], [cy,P+"PPL-cyworld (45).gif","woman dancing"], [cy,P+"PPL-cyworld (46).gif","guy dancing"],
+    [cy,P+"PPL-cyworld (26).gif","disco man"], [cy,P+"PPL-cyworld (63).gif","disco dancer"], [cy,P+"PPL-cyworld (64).gif","dancer in red dress"],
+    [cy,P+"PPL-cyworld (52).gif","couple dancing"], [aw,P+"artworkneocitiesPEOPLE (1).gif","hula trio"],
+  ]},
+  {label:'Couples & Romance', items:[
+    [cy,P+"PPL-cyworld (5).gif","couple hugging"], [cy,P+"PPL-cyworld (15).gif","couple sitting"], [cy,P+"PPL-cyworld (16).gif","couple cuddling"],
+    [cy,P+"PPL-cyworld (33).gif","couple standing"], [cy,P+"PPL-cyworld (58).gif","couple with drinks"], [aw,P+"artworkneocitiesPEOPLE (17).gif","couple in flowers"],
+    [aw,P+"artworkneocitiesPEOPLE (23).gif","old couple"], [cy,P+"PPL-cyworld (4).gif","couple in a ring of candles"], [cy,P+"PPL-cyworld (78).gif","couple with roses"],
+    [cy,P+"PPL-cyworld (23).gif","boy with giant bouquet"], [cy,P+"PPL-cyworld (11).gif","wedding couple"], [cy,P+"PPL-cyworld (76).gif","wedding"],
+  ]},
+  {label:'Kids & Babies', items:[
+    [mb,P+"PPL-baby.gif","baby"], [mb,P+"ppl-buggy-baby.gif","baby in a stroller"], [ci,P+"babyinabubble.gif","baby in a bubble"],
+    [cy,P+"PPL-cyworld (39).gif","baby in water"], [aw,P+"artworkneocitiesPEOPLE (13).gif","dad and kid"], [aw,P+"artworkneocitiesPEOPLE (21).gif","kid on dad's shoulders"],
+    [aw,P+"artworkneocitiesPEOPLE (15).gif","dad and kid fishing"], [aw,P+"artworkneocitiesPEOPLE (22).gif","kids on a log"], [aw,P+"artworkneocitiesPEOPLE (7).gif","toddlers with dogs"],
+    [cy,P+"PPL-cyworld (48).gif","boy with toy car"], [aw,P+"artworkneocitiesPEOPLE (2).gif","balloon friends"],
+  ]},
+  {label:'Everyday Life', items:[
+    [cy,P+"PPL-cyworld (34).gif","boy cleaning the wall"], [cy,P+"PPL-cyworld (35).gif","vacuuming with puppy"], [cy,P+"PPL-cyworld (37).gif","boy in bubble bath"],
+    [cy,P+"PPL-cyworld (25).gif","girl walking puppy"], [cy,P+"cyworld2 (2).gif","puppy"], [mb,P+"artist-girl.gif","girl artist"],
+    [aw,P+"artworkneocitiesPEOPLE (5).gif","girl drawing"], [aw,P+"artworkneocitiesPEOPLE (10).gif","girl with chalk"], [aw,P+"artworkneocitiesPEOPLE (16).gif","girl at computer"],
+    [cy,P+"PPL-cyworld (65).gif","cameraman"],
+  ]},
+  {label:'Rain & Cozy Days', items:[
+    [aw,P+"artworkneocitiesPEOPLE (25).gif","frog umbrella in the rain"], [cy,P+"PPL-cyworld (6).gif","raincoat kid with puppy"], [aw,P+"artworkneocitiesPEOPLE (6).gif","girl in blanket"],
+    [aw,P+"artworkneocitiesPEOPLE (12).gif","girl with headphones"], [aw,P+"artworkneocitiesPEOPLE (19).gif","tiny headphones girl"], [cy,P+"PPL-cyworld (22).gif","girl lying with laptop"],
+    [aw,P+"a_nome.gif","girl reading"], [cy,P+"PPL-cyworld (74).gif","boy reading on the floor"], [aw,P+"artworkneocitiesPEOPLE (3).gif","girl by the fan"],
+    [cy,P+"PPL-cyworld (38).gif","girl with a bowl"], [cy,P+"PPL-cyworld (3).gif","glam girl with a drink"],
+  ]},
+  {label:'Celebrations & Dress-up', items:[
+    [cy,P+"PPL-cyworld (49).gif","party hat girl"], [cy,P+"PPL-cyworld (79).gif","girl with present"], [cy,P+"PPL-cyworld (54).gif","boy with sparklers"],
+    [cy,P+"PPL-cyworld (1).gif","giraffe costume with heart balloons"], [cy,P+"PPL-cyworld (28).gif","girl with bunny balloon"], [cy,P+"PPL-cyworld (27).gif","flying with heart balloon"],
+    [mb,P+"girl-hot-air-balloon.gif","girl in a hot air balloon"], [cy,P+"PPL-cyworld (73).gif","parachute adventure"], [cy,P+"PPL-cyworld (7).gif","bunny costume"],
+    [cy,P+"PPL-cyworld (56).gif","bee costume"], [cy,P+"PPL-cyworld (43).gif","red riding hood"],
+  ]},
 
-const peopleContainer=document.getElementById('people-sections');
-let idx=0;
-for(const [label,items] of Object.entries(scenes)){
-  if(idx>0){const d=document.createElement('div');d.innerHTML='<br><hr><br>';peopleContainer.appendChild(d);}
-  idx++;
-  const sec=document.createElement('section');
-  const letters=label.split('').map((c,i)=>c===' '?'<span style="display:inline-block;width:5px"></span>':`<span class="letter" style="--i:${i}">${c}</span>`).join('');
-  sec.innerHTML=`<div class="section-title">${letters}</div><div></div>`;
-  peopleContainer.appendChild(sec);
-  const shelf=sec.querySelector('div:last-child');
-  items.forEach(([href,src,alt])=>{
-    const a=document.createElement('a');a.href=href;a.target='_blank';a.rel='noopener';
-    const img=document.createElement('img');img.src=src;img.alt=alt;img.loading='lazy';
-    img.onerror=()=>img.parentElement.style.display='none';
-    a.appendChild(img);shelf.appendChild(a);
-  });
-}
-
-function resizeImage(img){const max=300,min=30,w=img.naturalWidth,h=img.naturalHeight;if(!w||!h)return;const sd=Math.min(max/w,max/h,1),su=Math.max(min/w,min/h,1);let sc=1;if(w>max||h>max)sc=sd;if(w<min||h<min)sc=su;img.style.width=w*sc+'px';img.style.height=h*sc+'px';}
-window.addEventListener('load',()=>peopleContainer.querySelectorAll('img').forEach(img=>{if(img.complete)resizeImage(img);else img.onload=()=>resizeImage(img);}));
-</script>
-<script>
-// Stars + clouds
-(function(){
-  var S=document.getElementById('stars'),C=document.getElementById('clouds');
-  for(var i=0;i<28;i++){var s=document.createElement('div');var sz=(1.5+Math.random()*2.5).toFixed(1);var lo=(0.2+Math.random()*0.35).toFixed(2);s.style.cssText='position:absolute;width:'+sz+'px;height:'+sz+'px;border-radius:50%;background:white;left:'+(Math.random()*100).toFixed(1)+'%;top:'+(Math.random()*45).toFixed(1)+'%;--lo:'+lo+';--hi:1;animation:twinkle '+(2+Math.random()*3).toFixed(1)+'s ease-in-out infinite '+(-Math.random()*4).toFixed(1)+'s;';S.appendChild(s);}
-  [{sz:220,bot:0,dur:38,dl:0,op:.85},{sz:170,bot:0,dur:28,dl:-10,op:.75},{sz:270,bot:0,dur:46,dl:-22,op:.80},{sz:140,bot:18,dur:24,dl:-6,op:.68},{sz:200,bot:8,dur:40,dl:-30,op:.72},{sz:160,bot:12,dur:32,dl:-16,op:.70}].forEach(function(c,i){var w=document.createElement('div'),sz=c.sz,sx=220+i*200;w.style.cssText='position:absolute;bottom:'+c.bot+'px;left:0;--start:'+sx+'px;animation:floatCloud '+c.dur+'s linear infinite '+c.dl+'s;opacity:'+c.op+';';w.innerHTML='<div style="position:relative;display:inline-block;"><div style="width:'+sz+'px;height:'+Math.round(sz*.36)+'px;background:rgba(255,255,255,0.78);border-radius:50px;position:relative;"><div style="width:'+Math.round(sz*.46)+'px;height:'+Math.round(sz*.46)+'px;background:rgba(255,255,255,0.78);border-radius:50%;position:absolute;top:-'+Math.round(sz*.23)+'px;left:'+Math.round(sz*.12)+'px;"></div><div style="width:'+Math.round(sz*.36)+'px;height:'+Math.round(sz*.36)+'px;background:rgba(255,255,255,0.78);border-radius:50%;position:absolute;top:-'+Math.round(sz*.18)+'px;left:'+Math.round(sz*.45)+'px;"></div></div></div>';C.appendChild(w);});
-})();
+],{max:300,min:30});
 </script>
 </body>
 </html>

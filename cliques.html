@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>CallMeCatherine ~ Cliques & Clubs</title>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pacifico&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CallMeCatherine ~ Cliques &amp; Clubs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Pacifico&family=Press+Start+2P&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
 body {
@@ -98,7 +100,6 @@ body {
 </style>
 </head>
 <body>
-<span id="page-top"></span>
 <div id="stars"></div>
 <div id="clouds"></div>
 
@@ -113,14 +114,8 @@ body {
 
         <!-- WHAT ARE CLIQUES -->
         <div class="content-box">
-          <div class="section-title">
-            <span style="--i:0">C</span><span style="--i:1">l</span><span style="--i:2">i</span><span style="--i:3">q</span><span style="--i:4">u</span><span style="--i:5">e</span><span style="--i:6">s</span>
-            <span style="display:inline-block;width:8px"></span>
-            <span style="--i:7">&</span>
-            <span style="display:inline-block;width:8px"></span>
-            <span style="--i:8">C</span><span style="--i:9">l</span><span style="--i:10">u</span><span style="--i:11">b</span><span style="--i:12">s</span>
-          </div>
-          <hr><br>
+          <h2>Cliques &amp; Clubs</h2>
+          <hr>
           <div class="clique-blurb">
             <strong>What's a web clique?</strong> Back in the Geocities era, a clique was a tiny interest-based club you could join just by copying a snippet of text or a graphic onto your page. No application. No approval committee. Just vibes and a shared interest — "I love cats," "I'm a Pisces," "I make pixel art." They connected strangers across the web through common ground, the same way webrings connected whole sites. Cliques were casual, personal, and a little silly in the best way. They still exist! Neocities brought them back.
             <br><br>
@@ -146,7 +141,7 @@ body {
           <div class="clique-group">
             <div class="clique-section-title">// Sisterhood of the Traveling Journal</div>
             <div class="clique-group-entries">
-              <a class="clique-entry" href="https://callmecatherine.neocities.org/journal/journal" target="_blank">
+              <a class="clique-entry" href="journal/journal.html">
                 <span>✉️ Traveling Journal</span>
               </a>
             </div>
@@ -189,7 +184,7 @@ body {
 
         <!-- OLD CLIQUES I'VE FOUND -->
         <div class="content-box">
-          <div class="box-title">🕰️ Old Cliques I've Found</div>
+          <div class="box-title">✧ Old Cliques I've Found</div>
           <hr>
           <p style="font-size:12px;color:#9060b0;margin:10px 0 16px;font-style:italic;">
             Defunct cliques from the old web — preserved here as little fossils of internet history. ♡
@@ -232,27 +227,5 @@ body {
 
 <script src="sparkle.js"></script>
 <script src="layout.js"></script>
-<script>
-// Stars
-(function(){
-  var S=document.getElementById('stars');
-  for(var i=0;i<28;i++){
-    var s=document.createElement('div');
-    var sz=(1.5+Math.random()*2.5).toFixed(1),lo=(0.2+Math.random()*0.35).toFixed(2);
-    s.style.cssText='position:absolute;width:'+sz+'px;height:'+sz+'px;border-radius:50%;background:white;left:'+(Math.random()*100).toFixed(1)+'%;top:'+(Math.random()*45).toFixed(1)+'%;--lo:'+lo+';--hi:1;animation:twinkle '+(2+Math.random()*3).toFixed(1)+'s ease-in-out infinite '+(-Math.random()*4).toFixed(1)+'s;';
-    S.appendChild(s);
-  }
-})();
-// Clouds
-(function(){
-  var C=document.getElementById('clouds');
-  [{sz:220,bot:0,dur:38,dl:0,op:.85},{sz:170,bot:0,dur:28,dl:-10,op:.75},{sz:270,bot:0,dur:46,dl:-22,op:.80},{sz:140,bot:18,dur:24,dl:-6,op:.68},{sz:200,bot:8,dur:40,dl:-30,op:.72},{sz:160,bot:12,dur:32,dl:-16,op:.70}].forEach(function(c,i){
-    var w=document.createElement('div'),sz=c.sz,sx=220+i*200;
-    w.style.cssText='position:absolute;bottom:'+c.bot+'px;left:0;--start:'+sx+'px;animation:floatCloud '+c.dur+'s linear infinite '+c.dl+'s;opacity:'+c.op+';';
-    w.innerHTML='<div style="position:relative;display:inline-block;"><div style="width:'+sz+'px;height:'+Math.round(sz*.36)+'px;background:rgba(255,255,255,0.78);border-radius:50px;position:relative;"><div style="width:'+Math.round(sz*.46)+'px;height:'+Math.round(sz*.46)+'px;background:rgba(255,255,255,0.78);border-radius:50%;position:absolute;top:-'+Math.round(sz*.23)+'px;left:'+Math.round(sz*.12)+'px;"></div><div style="width:'+Math.round(sz*.36)+'px;height:'+Math.round(sz*.36)+'px;background:rgba(255,255,255,0.78);border-radius:50%;position:absolute;top:-'+Math.round(sz*.18)+'px;left:'+Math.round(sz*.45)+'px;"></div></div></div>';
-    C.appendChild(w);
-  });
-})();
-</script>
 </body>
 </html>

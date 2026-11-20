@@ -19,9 +19,13 @@ body {
 
 hr { border: none; height: 1px; margin: 0; padding: 0; background: rgba(255,255,255,0.4); }
 #layout-footer { margin-top: auto; width: 100%; }
-footer { text-align: center; padding: 16px 0 12px; }
+footer { text-align: center; padding: 24px 0 16px; }
+footer img { image-rendering: pixelated; }
 .row { display: flex; flex-wrap: wrap; justify-content: center; }
 .row img { image-rendering: pixelated; margin: 4px; }
+
+/* Nothing inside a box is ever wider than the box */
+.content-box img, .page-container img { max-width: 100%; height: auto; }
 
 
 /* ============================================================
@@ -54,6 +58,7 @@ footer { text-align: center; padding: 16px 0 12px; }
    ============================================================ */
 .top-header { padding: 6px 0 4px; margin: 0; text-align: center; }
 .top-header svg { display: block; overflow: visible; }
+.top-header-link { display: block; text-decoration: none; }
 
 .site-title {
   font-family: 'Press Start 2P', cursive;
@@ -91,7 +96,7 @@ footer { text-align: center; padding: 16px 0 12px; }
    LEFT SIDEBAR (injected by layout.js into #layout-sidebar)
    ============================================================ */
 .sidebar {
-  width: 190px;
+  width: 200px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
@@ -106,7 +111,7 @@ footer { text-align: center; padding: 16px 0 12px; }
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255,255,255,0.7);
   border-radius: 16px;
-  padding: 12px 10px;
+  padding: 12px;
   color: #4a2060;
   font-size: 12px;
   line-height: 1.6;
@@ -130,7 +135,7 @@ footer { text-align: center; padding: 16px 0 12px; }
 .sidebar-card li {
   position: relative;
   padding-left: 16px;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.8;
 }
 .sidebar-card li::before {
@@ -154,11 +159,12 @@ footer { text-align: center; padding: 16px 0 12px; }
   transition: color 0.15s;
 }
 .sidebar-card a:hover { color: #9040c0; text-decoration: underline; }
+.sidebar-card a[aria-current="page"] { color: #9040c0; font-weight: 700; }
 
 /* Non-list links (Clubs, Other Links) */
 .sidebar-links { display: flex; flex-direction: column; gap: 4px; }
 .sidebar-links a {
-  font-size: 11.5px;
+  font-size: 12px;
   color: #3a1850;
   text-decoration: none;
   line-height: 1.6;
@@ -166,6 +172,7 @@ footer { text-align: center; padding: 16px 0 12px; }
 .sidebar-links a:hover { color: #9040c0; text-decoration: underline; }
 .sidebar-links img { width: auto; height: 12px; vertical-align: middle; image-rendering: pixelated; margin-bottom: 0; }
 .sidebar-links img.club-button { width: 88px; height: 31px; }
+.sidebar-links a:has(.club-button) { white-space: nowrap; }
 
 /* Top link */
 .sidebar-top-link { text-align: center; margin-top: 4px; }
@@ -206,7 +213,8 @@ footer { text-align: center; padding: 16px 0 12px; }
 /* ============================================================
    SECTION TITLE (bouncing rainbow letters)
    ============================================================ */
-.section-title { text-align: center; margin-bottom: 8px; }
+.section-title { text-align: center; margin-bottom: 12px; }
+.section-title .gap { display: inline-block; width: 8px; }
 
 .section-title span, .letter {
   display: inline-block;
@@ -269,13 +277,85 @@ footer { text-align: center; padding: 16px 0 12px; }
   position: fixed; top: 0; left: 0;
   width: 100%; height: 100%;
   pointer-events: none; z-index: 0;
+  overflow: hidden;
 }
+.sky-star {
+  position: absolute; border-radius: 50%; background: #fff;
+  --hi: 1;
+  animation: twinkle 3s ease-in-out infinite;
+}
+.sky-cloud {
+  position: absolute; left: 0;
+  animation: floatCloud 38s linear infinite;
+}
+.sky-cloud .puff, .sky-cloud i {
+  position: relative; display: block;
+  background: rgba(255,255,255,0.78);
+  border-radius: 50px;
+}
+.sky-cloud i { position: absolute; border-radius: 50%; }
+
+/* Page content always sits above the sky */
+.page-wrap { position: relative; z-index: 1; }
+
+
+/* ============================================================
+   GALLERY SHELVES (gallery.js)
+   ============================================================ */
+.shelf { --max: 200px; }
+.shelf .row { align-items: center; }
+.shelf img {
+  width: auto; height: auto;
+  max-width: min(var(--max), 100%);
+  max-height: var(--max);
+  vertical-align: middle;
+}
+.gallery-section + .gallery-section {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.4);
+}
+.content-box h2 + hr, .page-container h2 + hr,
+.section-title + hr { margin-bottom: 20px; }
+img.pixel { display: block; margin: 12px auto; image-rendering: pixelated; }
+
+
+/* ============================================================
+   SPARKLE TRAIL + BACK TO TOP
+   ============================================================ */
+.sparkle-bit {
+  position: fixed; left: 0; top: 0;
+  pointer-events: none; user-select: none;
+  line-height: 1; visibility: hidden;
+  z-index: 999999;
+  will-change: transform, opacity;
+}
+
+.to-top {
+  position: fixed; right: 24px; bottom: 24px; z-index: 9999;
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.8);
+  border-radius: 50%;
+  color: #7030a0; font-size: 18px; font-weight: 700; text-decoration: none;
+  box-shadow: 0 2px 10px rgba(120,60,180,0.2);
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: opacity .2s ease, transform .2s ease, background-color .2s ease, visibility .2s;
+}
+.to-top.is-visible { opacity: 1; visibility: visible; transform: none; }
+.to-top:hover { background: rgba(255,255,255,0.95); transform: translateY(-2px); }
+
+/* Keyboard focus is always visible */
+a:focus-visible { outline: 2px dashed #b060d0; outline-offset: 2px; border-radius: 4px; }
 
 
 /* ============================================================
    BLINKIE GRID
    ============================================================ */
-.blinkie-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 16px; }
+.blinkie-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.blinkie-row + .blinkie-row { margin-top: 40px; }
 .blinkie-col  { display: flex; flex-direction: column; gap: 4px; align-items: center; }
 .blinkie-col a { display: block; text-align: center; }
 .blinkie-col img { max-width: 100%; height: auto; }
@@ -316,11 +396,14 @@ footer { text-align: center; padding: 16px 0 12px; }
    INDEX PAGE — welcome & guestbook
    ============================================================ */
 .welcome-title { font-family: 'Pacifico',cursive; font-size: 20px; color: #b060d0; margin-bottom: 12px; }
-.welcome-text  { font-size: 13.5px; line-height: 1.8; color: #5a2a80; }
+.welcome-text  { font-size: 14px; line-height: 1.8; color: #5a2a80; }
 .welcome-text a { color: #c060e0; }
 .imood-block { margin-top: 12px; font-size: 12px; color: #7a40a0; }
 .imood-block a { color: #9060c0; text-decoration: none; }
 .imood-block a:hover { text-decoration: underline; }
+.imood-img { image-rendering: pixelated; vertical-align: middle; margin-left: 4px; }
+.guestbook-icon { font-size: 28px; margin-bottom: 8px; }
+.guestbook-frame { display: block; border-radius: 8px; }
 
 .guestbook-title { font-family: 'Pacifico',cursive; font-size: 17px; color: #b060d0; margin-bottom: 14px; }
 .guestbook-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -337,7 +420,7 @@ footer { text-align: center; padding: 16px 0 12px; }
   display: flex; flex-direction: column; gap: 8px;
 }
 .goodday-stamp { text-align: center; padding-top: 16px; }
-.goodday-stamp img { image-rendering: pixelated; }
+.goodday-stamp img { image-rendering: pixelated; max-height: 40px; }
 
 /* People page */
 .page-header-img img { max-width: 100%; image-rendering: pixelated; margin: 8px 0; }
@@ -348,7 +431,29 @@ footer { text-align: center; padding: 16px 0 12px; }
    ============================================================ */
 @media (max-width: 700px) {
   .body-layout { flex-direction: column; }
-  .sidebar { width: 100%; position: static; }
+  .sidebar { width: 100%; position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .sidebar-card:first-child { grid-column: 1 / -1; }
+  .sidebar-card:first-child ul { columns: 2; column-gap: 12px; }
+  .sidebar-card li { break-inside: avoid; }
+  .content-box, .page-container { padding: 16px; }
+  .to-top { right: 16px; bottom: 16px; }
   .guestbook-inner { grid-template-columns: 1fr; }
   .blinkie-row { grid-template-columns: 1fr; }
 }
+
+/* ============================================================
+   REDUCED MOTION — everything holds still for people who ask
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  #clouds, #bubbles, #blossoms { display: none; }
+}
+
+/* Dividers page */
+.divider-link { display: block; }
+.divider-link img { image-rendering: pixelated; margin: 4px auto; }
