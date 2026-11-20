@@ -53,6 +53,16 @@
           </div>
         </div>
 
+
+        <div class="content-box">
+          <div class="guestbook-title">★ Link to Me</div>
+          <div class="linkback">
+            <img src="assets/callmecatherine-button.gif" alt="CallMeCatherine button" width="88" height="31" class="linkback-btn">
+            <p>Save my button to your own site, then paste this code</p>
+            <textarea class="linkback-code" readonly rows="3" aria-label="Link-back code">&lt;a href="https://callmecatherine.neocities.org/"&gt;&lt;img src="callmecatherine-button.gif" alt="CallMeCatherine" width="88" height="31"&gt;&lt;/a&gt;</textarea>
+            <button type="button" class="linkback-copy">Copy code</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -62,6 +72,17 @@
 
 <script src="sparkle.js"></script>
 <script src="layout.js"></script>
+<script>
+document.querySelectorAll('.linkback-copy').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var ta = btn.parentElement.querySelector('textarea');
+    ta.select();
+    var done = function(){ btn.textContent = 'Copied ♡'; setTimeout(function(){ btn.textContent = 'Copy code'; }, 1500); };
+    if(navigator.clipboard){ navigator.clipboard.writeText(ta.value).then(done, function(){ document.execCommand('copy'); done(); }); }
+    else { document.execCommand('copy'); done(); }
+  });
+});
+</script>
 
 </body>
 </html>

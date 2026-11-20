@@ -82,6 +82,17 @@ body {
 .clique-pixels img, .pixel-train img { image-rendering: pixelated; display: block; }
 .pixel-train { display: inline-flex; align-items: flex-end; margin: 4px 8px; }
 .clique-note { width: 100%; font-size: 12px; color: #9060b0; margin: 8px; }
+.code-list { list-style: none; padding: 0; margin: 0 8px; width: 100%; font-size: 13px; }
+.code-list li { padding: 4px 0; border-bottom: 1px dashed rgba(180,120,255,0.25); }
+.code-list li:last-child { border-bottom: 0; }
+.code-list .code a { color: #7030a0; font-weight: 600; }
+.code-px { image-rendering: pixelated; vertical-align: middle; }
+.code-btn { vertical-align: middle; image-rendering: pixelated; margin-left: 4px; }
+.choose { background: rgba(255,200,240,0.6); color: #b0408a; border-radius: 4px; padding: 0 4px; font-size: 12px; }
+.code-pick { font-size: 11px; color: #9060b0; margin-left: 4px; white-space: nowrap; }
+.code-note { font-size: 11px; color: #a080b0; }
+.clique-entry.tmpl img { max-height: 64px; }
+.clique-entry .soon { font-size: 10px; color: #b090c8; }
 .clique-intro { font-size: 12px; color: #9060b0; margin: 0 0 16px; }
 @media (max-width: 700px) { .clique-list { columns: 1; } }
 
@@ -152,6 +163,41 @@ body {
             </div>
           </div>
 
+          <div class="clique-group">
+            <div class="clique-section-title">// Text cliques</div>
+            <div class="clique-group-entries">
+              <ul class="code-list">
+                <li><span class="code"><a href="https://aromatic.wings.nu/">aromatic</a> // <span class="choose">[your aroma]</span></span> <a class="code-pick" href="https://aromatic.wings.nu/aromas.php" target="_blank" rel="noopener" title="Open the page to choose">choose ↗</a> <span class="code-note">pick a scent from the aromas list</span></li>
+                <li><span class="code"><a href="http://scented.minty.nu">scented</a> // <span class="choose">[your flavor]</span></span> <a class="code-pick" href="https://scented.minty.nu/flavors.php" target="_blank" rel="noopener" title="Open the page to choose">choose ↗</a> <span class="code-note">a flavor that matches the colors</span></li>
+                <li><span class="code"><a href="http://cliques.windsprite.nu/element">Element</a> // <span class="choose">[earth, fire, water or air]</span></span> <a class="code-pick" href="https://cliques.windsprite.nu/element/codes.php" target="_blank" rel="noopener" title="Open the page to choose">choose ↗</a></li>
+                <li><span class="code"><a href="https://fan.sanguineroyal.com/cli/barbieland/">Barbieland</a> :: This Barbie <span class="choose">[tagline]</span>!</span> <a href="https://fan.sanguineroyal.com/cli/barbieland/" target="_blank" rel="noopener"><img src="pixels/cliques/80x50-aelyn.gif" alt="Barbieland button" class="code-btn" loading="lazy"></a> <a class="code-pick" href="https://fan.sanguineroyal.com/cli/barbieland/" target="_blank" rel="noopener" title="Open the page to choose">choose ↗</a></li>
+                <li><span class="code"><a href="https://pkmn.aquarel.nu">I Choose You!</a> <img src="pixels/cliques/codes/pokeball.png" alt="" class="code-px"> <span class="choose">[Pokémon]</span></span> <a class="code-pick" href="https://pkmn.aquarel.nu/codes" target="_blank" rel="noopener" title="Open the page to choose">choose ↗</a></li>
+                <li><span class="code"><a href="https://fan.lysandre.me/starters">My First Partner!</a> ♥ <span class="choose">[starter Pokémon + its sprite]</span></span> <a class="code-pick" href="https://fan.lysandre.me/starters" target="_blank" rel="noopener" title="Open the page to choose">choose ↗</a> <span class="code-note">the real code is the starter sprite</span></li>
+                <li><span class="code"><a href="https://ac.kuchiki.net/">pixel friends</a> | <span class="choose">[villager + its sprite]</span></span> <a class="code-pick" href="https://ac.kuchiki.net/friends.php" target="_blank" rel="noopener" title="Open the page to choose">choose ↗</a> <span class="code-note">the real code is the villager sprite</span></li>
+                <li><span class="code"><a href="https://prism.tenoh.org">Prism Power</a> &#127769; <span class="choose">[Sailor Senshi]</span></span> <a class="code-pick" href="https://prism.tenoh.org/codes.php" target="_blank" rel="noopener" title="Open the page to choose">choose ↗</a></li>
+                <li><span class="code"><a href="https://callmemanatee.neocities.org/who_clique">Companions</a> <img src="pixels/cliques/codes/two_hearts.png" alt="" class="code-px"> Catherine is a companion of <span class="choose">[your Doctor]</span>.</span> <a class="code-pick" href="https://callmemanatee.neocities.org/who_clique" target="_blank" rel="noopener" title="Open the page to choose">choose ↗</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="clique-group">
+            <div class="clique-section-title">// Cliqued!</div>
+            <div class="clique-group-entries">
+              <ul class="code-list">
+                <li><span class="code"><a href="http://cliqued.wings.nu/"><font color="#FF0000">r</font><font color="#FF8000">a</font><font color="#FFFF00">i</font><font color="#008000">n</font><font color="#0000FF">b</font><font color="#8000FF">o</font><font color="#800080">w</font></a> &#x1F308; <span class="choose">[favourite colour]</span></span> <a class="code-pick" href="https://cliqued.wings.nu/various.php" target="_blank" rel="noopener" title="Open the page to choose">choose ↗</a></li>
+                <li><span class="code"><a href="http://cliqued.wings.nu/">lustre <img src="pixels/cliques/codes/cliqued-lus-pink.png" alt="" class="code-px"></a> <span class="choose">[gemstone]</span></span> <a class="code-pick" href="https://cliqued.wings.nu/various.php" target="_blank" rel="noopener" title="Open the page to choose">choose ↗</a></li>
+                <li><span class="code"><a href="http://cliqued.wings.nu/">NPC <img src="pixels/cliques/codes/cliqued-npc-pink.png" alt="" class="code-px"></a> <span class="choose">[minor character]</span></span> <a class="code-pick" href="https://cliqued.wings.nu/fandom.php" target="_blank" rel="noopener" title="Open the page to choose">choose ↗</a></li>
+                <li><span class="code"><a href="http://cliqued.wings.nu/">OTF <img src="pixels/cliques/codes/cliqued-otf-pink.png" alt="" class="code-px"></a> <span class="choose">[one true fandom]</span></span> <a class="code-pick" href="https://cliqued.wings.nu/fandom.php" target="_blank" rel="noopener" title="Open the page to choose">choose ↗</a></li>
+                <li><span class="code"><a href="http://cliqued.wings.nu/">unexpected song <img src="pixels/cliques/codes/cliqued-us-pink.png" alt="" class="code-px"></a> <span class="choose">[character]</span></span> <a class="code-pick" href="https://cliqued.wings.nu/fandom.php" target="_blank" rel="noopener" title="Open the page to choose">choose ↗</a></li>
+                <li><span class="code"><span class="choose">[character one]</span> <a href="http://cliqued.wings.nu/"><img src="pixels/cliques/codes/cliqued-xtp-pink.png" alt="XTP" class="code-px"></a> <span class="choose">[character two]</span></span> <a class="code-pick" href="https://cliqued.wings.nu/fandom.php" target="_blank" rel="noopener" title="Open the page to choose">choose ↗</a></li>
+                <li><span class="code"><a href="http://cliqued.wings.nu/">rock me</a> <img src="pixels/cliques/codes/cliqued-rm-rockme.png" alt="" class="code-px"> <span class="choose">[musical artist/s]</span></span> <a class="code-pick" href="https://cliqued.wings.nu/music.php" target="_blank" rel="noopener" title="Open the page to choose">choose ↗</a></li>
+                <li><span class="code"><a href="http://cliqued.wings.nu/">my jam!!</a> <img src="pixels/cliques/codes/cliqued-jam-pink.png" alt="" class="code-px"> <span class="choose">[song name]</span></span> <a class="code-pick" href="https://cliqued.wings.nu/music.php" target="_blank" rel="noopener" title="Open the page to choose">choose ↗</a></li>
+                <li><span class="code"><span class="choose">[artist]</span> <a href="http://cliqued.wings.nu/"><img src="pixels/cliques/codes/cliqued-pil-pink.png" alt="Play It LOUD" class="code-px"></a> <span class="choose">[song name]</span></span> <a class="code-pick" href="https://cliqued.wings.nu/music.php" target="_blank" rel="noopener" title="Open the page to choose">choose ↗</a></li>
+              </ul>
+              <p class="clique-note">The <span class="choose">[brackets]</span> are mine to fill in. The little pixels are pink for now; each clique page has other colours.</p>
+            </div>
+          </div>
+
         </div>
 
         <!-- CLIQUES I PLAN TO JOIN -->
@@ -160,27 +206,17 @@ body {
           <hr>
 
           <div class="clique-group">
-            <div class="clique-section-title">// Text cliques</div>
+            <div class="clique-section-title">// Pixel clubs with templates</div>
             <div class="clique-group-entries">
-              <ul class="clique-list">
-                <li><a href="https://cliqued.wings.nu/" target="_blank" rel="noopener">Cliqued!</a> <span>10 text cliques, no form</span></li>
-                <li><a href="https://fan.lysandre.me/starters" target="_blank" rel="noopener">My First Partner Pokémon</a> <span>starter sprite, no form</span></li>
-                <li><a href="https://ac.kuchiki.net/friends.php" target="_blank" rel="noopener">Pixel Friends</a> <span>Animal Crossing villager</span></li>
-                <li><a href="https://aromatic.wings.nu/" target="_blank" rel="noopener">AROMATiC</a> <span>pick a scent</span></li>
-                <li><a href="https://cliques.windsprite.nu/element/codes.php" target="_blank" rel="noopener">What Element Are You?</a> <span>earth, fire, water or air</span></li>
-                <li><a href="https://pkmn.aquarel.nu/" target="_blank" rel="noopener">I Choose You!</a> <span>a Pokémon and a Pokéball</span></li>
-                <li><a href="https://prism.tenoh.org/codes.php" target="_blank" rel="noopener">PRISM POWER</a> <span>Sailor Moon</span></li>
-                <li><a href="https://callmemanatee.neocities.org/who_clique" target="_blank" rel="noopener">Companions</a> <span>Doctor Who</span></li>
-              </ul>
+              <a class="clique-entry tmpl" href="https://rosedryad.com/tinygarden" target="_blank" rel="noopener"><img src="pixels/cliques/templates/tinygarden-template.png" alt="Tiny Garden template" loading="lazy"><span>Tiny Garden · 50×50 garden</span><span class="soon">coming soon</span></a>
+              <a class="clique-entry tmpl" href="https://charmbracelets.xandra.cc/members" target="_blank" rel="noopener"><img src="pixels/cliques/templates/charm-gold-template.png" alt="Charm Bracelets template" loading="lazy"><span>Charm Bracelets · 32px charm</span><span class="soon">coming soon</span></a>
+              <a class="clique-entry tmpl" href="https://lostletters.neocities.org/afternoontea/" target="_blank" rel="noopener"><img src="pixels/cliques/templates/teacup-template.png" alt="Afternoon Tea template" loading="lazy"><span>Afternoon Tea · a teacup</span><span class="soon">coming soon</span></a>
+              <a class="clique-entry tmpl" href="https://fizzsea.net/extra/fizzyvendor.html" target="_blank" rel="noopener"><img src="pixels/cliques/templates/fizzy-template-1.png" alt="Fizzy Vendor template" loading="lazy"><span>Fizzy Vendor · a drink</span><span class="soon">coming soon</span></a>
+              <a class="clique-entry tmpl" href="https://divergentrays.com/kitty" target="_blank" rel="noopener"><img src="pixels/cliques/templates/kitty-template.gif" alt="Kitty Friends template" loading="lazy"><span>Kitty Friends · a kitty</span><span class="soon">coming soon</span></a>
+              <a class="clique-entry tmpl" href="https://keysklubhouse.com/pixelcliques/teenytowers" target="_blank" rel="noopener"><img src="pixels/cliques/templates/teenytowers-template.gif" alt="Teeny Towers template" loading="lazy"><span>Teeny Towers · a room</span><span class="soon">coming soon</span></a>
             </div>
           </div>
 
-          <div class="clique-group">
-            <div class="clique-section-title">// Barbieland</div>
-            <div class="clique-group-entries">
-              <a class="clique-entry" href="https://fan.sanguineroyal.com/cli/barbieland/" target="_blank" rel="noopener"><img src="pixels/cliques/80x50-aelyn.gif" alt="Barbieland button" loading="lazy"><span>This Barbie is…</span></a>
-            </div>
-          </div>
 
           <div class="clique-group">
             <div class="clique-section-title">// Sticker Sheet Club</div>
@@ -225,11 +261,6 @@ body {
               <ul class="clique-list">
                 <li><a href="https://lavalounge.neocities.org/new/" target="_blank" rel="noopener">Lava Lounge</a> <span>lava lamp</span></li>
                 <li><a href="https://divergentrays.com/pocket" target="_blank" rel="noopener">Pocket Town</a> <span>a little building</span></li>
-                <li><a href="https://rosedryad.com/tinygarden" target="_blank" rel="noopener">Tiny Garden</a> <span>50×50 garden</span></li>
-                <li><a href="https://charmbracelets.xandra.cc/members" target="_blank" rel="noopener">Charm Bracelets</a> <span>32px charm</span></li>
-                <li><a href="https://keysklubhouse.com/pixelcliques/teenytowers" target="_blank" rel="noopener">Teeny Towers</a> <span>a room</span></li>
-                <li><a href="https://fizzsea.net/extra/fizzyvendor.html" target="_blank" rel="noopener">Fizzy Vendor</a> <span>a drink</span></li>
-                <li><a href="https://divergentrays.com/kitty" target="_blank" rel="noopener">Kitty Friends</a> <span>a kitty</span></li>
                 <li><a href="https://solaria.neocities.org/pixelclubs/bunnygarden/" target="_blank" rel="noopener">Bunny Garden</a> <span>a bunny</span></li>
                 <li><a href="https://radiant-sky.neocities.org/quiltv2" target="_blank" rel="noopener">Radiant Sky Quilt</a> <span>a quilt patch</span></li>
               </ul>
