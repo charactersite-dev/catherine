@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CallMeCatherine ~ Pixel Scenes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Pacifico&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stars"></div>
+<div id="clouds"></div>
+
+<div class="page-wrap">
+  <div id="layout-header"></div>
+
+  <div class="body-layout">
+    <div id="layout-sidebar"></div>
+    <div class="main-content">
+
+      <div class="page-container">
+        <main id="main-content">
+          <h2>Pixel Scenes</h2>
+          <hr>
+          <div id="scene-sections"></div>
+        </main>
+      </div>
+
+    </div><!-- end main-content -->
+  </div><!-- end body-layout -->
+
+  <div id="layout-footer"></div>
+</div>
+
+<script src="sparkle.js"></script>
+<script src="layout.js"></script>
+<script src="gallery.js"></script>
+<script>
+Gallery.sections('scene-sections',[
+  {label:'Outdoors', items:[
+    {src:"pixels/other/0b45ed154faa4b6cbbd03f00aa0f31fe.gif",alt:"cherry blossom park"},
+    {href:"https://www.pinterest.com/",src:"pixels/other/pinterest (2).gif",alt:"cherry blossom house"},
+    {src:"pixels/other/eaf923432f35f125e00786fb8f4c8bf9.gif",alt:"lake path"},
+    {href:"https://brillitos.neocities.org/",src:"pixels/other/brillitos-neocities (1).gif",alt:"bunny meadow"},
+    {href:"https://www.pinterest.com/",src:"pixels/other/fromPINTEREST (18).gif",alt:"garden path"},
+    {href:"https://www.pinterest.com/",src:"pixels/other/fromPINTEREST (1).gif",alt:"forest path"},
+    {href:"https://www.pinterest.com/",src:"pixels/other/fromPINTEREST (8).gif",alt:"forest"},
+    {href:"https://www.pinterest.com/",src:"pixels/other/fromPINTEREST (16).gif",alt:"waterfall"},
+    {href:"https://www.pinterest.com/",src:"pixels/other/fromPINTEREST (6).gif",alt:"bridge"},
+    {href:"https://www.pinterest.com/",src:"pixels/other/pinterest (1).gif",alt:"cottage"},
+    {href:"https://www.pinterest.com/",src:"pixels/other/fromPINTEREST (9).gif",alt:"camper van"},
+    {href:"https://www.pinterest.com/",src:"pixels/other/fromPINTEREST (15).gif",alt:"autumn treehouse"},
+    {href:"https://www.pinterest.com/",src:"pixels/other/pinterest (3).gif",alt:"lake"},
+    {href:"https://www.pinterest.com/",src:"pixels/other/fromPINTEREST (17).gif",alt:"night lake"},
+    {src:"pixels/other/f538d3ea70d0278f131f3d78f8e33880.jpg",alt:"sunset"},
+  ]},
+  {label:'Seaside', items:[
+    {src:"pixels/other/e360c28fdea892fb0836c7f8ff5a29bf.gif",alt:"beach"},
+    {href:"https://www.pinterest.com/",src:"pixels/other/pinterest (1).jpg",alt:"sailboat"},
+    {href:"https://www.pinterest.com/",src:"pixels/other/pinterest (4).gif",alt:"ocean"},
+    {href:"https://www.pinterest.com/",src:"pixels/other/fromPINTEREST (13).gif",alt:"seaside terrace"},
+  ]},
+  {label:'Dreamy', items:[
+    {href:"https://brillitos.neocities.org/",src:"pixels/other/brillitos-neocities (4).gif",alt:"rainbow castle"},
+    {href:"https://www.pinterest.com/",src:"pixels/other/fromPINTEREST (11).gif",alt:"storybook"},
+    {href:"https://www.pinterest.com/",src:"pixels/other/fromPINTEREST (7).gif",alt:"fruit house"},
+    {href:"https://brillitos.neocities.org/",src:"pixels/other/brillitos-neocities (2).webp",alt:"dolphins"},
+    {href:"https://brillitos.neocities.org/",src:"pixels/other/brillitos-neocities (2).gif",alt:"bubble shell"},
+    {href:"https://www.pinterest.com/",src:"pixels/other/fromPINTEREST (10).gif",alt:"pearl shell"},
+    {href:"https://www.pinterest.com/",src:"pixels/other/fromPINTEREST (4).jpg",alt:"seabed"},
+    {href:"https://brillitos.neocities.org/",src:"pixels/other/brillitos-neocities (5).gif",alt:"shipwreck"},
+  ]},
+  {label:'Indoors', items:[
+    {href:"https://brillitos.neocities.org/",src:"pixels/other/brillitos-neocities (3).gif",alt:"pink bedroom"},
+    {href:"https://www.pinterest.com/",src:"pixels/other/fromPINTEREST (12).gif",alt:"classroom"},
+    {href:"https://www.pinterest.com/",src:"pixels/other/fromPINTEREST (5).gif",alt:"flower shop"},
+    {href:"https://www.pinterest.com/",src:"pixels/other/fromPINTEREST (14).gif",alt:"night balcony"},
+  ]},
+  {label:'Little Extras', items:[
+    {href:"https://gifcities.org/",src:"pixels/other/gifcities22 (11).gif",alt:"lace"},
+    {href:"https://gifcities.org/",src:"pixels/other/gifcities22 (12).gif",alt:"border"},
+    {href:"https://gifcities.org/",src:"pixels/other/gifcities22 (9).gif",alt:"hearts"},
+    {src:"pixels/other/starsbg.gif",alt:"stars"},
+    {src:"pixels/other/starsbg2.gif",alt:"stars"},
+  ]},
+],{max:260});
+</script>
+</body>
+</html>

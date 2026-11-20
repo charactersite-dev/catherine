@@ -58,9 +58,8 @@
         container.appendChild(row);
         return;
       }
-      const link = document.createElement("a");
-      link.href = item.href || "#";
-      link.target = "_blank";
+      const link = document.createElement(item.href ? "a" : "span");
+      if (item.href) { link.href = item.href; link.target = "_blank"; link.rel = "noopener"; }
       const img = document.createElement("img");
       img.src = item.src;
       img.alt = item.alt || "";
@@ -100,6 +99,101 @@
   // ════════════════════════════════════════════════════
   // FAVORITES
   // ════════════════════════════════════════════════════
+  // New arrivals (Nov 2026) — not sorted yet; move them into their boxes when you're ready
+  const NEW_ARRIVALS = [
+    { src:T+'010 (1).gif', alt:'' },
+    { src:T+'014.gif', alt:'' },
+    { href:'https://web.archive.org/web/2009/http://www.geocities.com/ashleyaunt1996/', src:T+'ashleyaunt1996-geocities (1).gif', alt:'' },
+    { href:'https://web.archive.org/web/2009/http://www.geocities.com/ashleyaunt1996/', src:T+'ashleyaunt1996-geocities (3).gif', alt:'' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (10).gif', alt:'' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (12).gif', alt:'' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (18).gif', alt:'' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (21).gif', alt:'' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (23).gif', alt:'' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (25).gif', alt:'' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (26).gif', alt:'' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (31).gif', alt:'' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (4).gif', alt:'' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (5).gif', alt:'' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (6).gif', alt:'' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (8).gif', alt:'' },
+    { href:'https://cantinhodalumad.blogspot.com/2009/02/borboletas.html', src:T+'cantinhodalumad (9).gif', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'fromPINTEREST (1).jpg', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'fromPINTEREST (2).gif', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'fromPINTEREST (2).jpg', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'fromPINTEREST (3).jpg', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'fromPINTEREST (4).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (1).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (12).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (13).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (14).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (15).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (17).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (18).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (19).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (2).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (20).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (25).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (26).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (28).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (3).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (31).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (32).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (33).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (34).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (35).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (39).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (4).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (40).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (41).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (43).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (46).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (47).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (49).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (5).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (52).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (53).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (54).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (55b).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (56b).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (57b).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (6).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (8).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities (9).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities22 (10).gif', alt:'' },
+    { href:'https://gifcities.org/', src:T+'gifcities22 (2).gif', alt:'' },
+    { href:'https://lazer-bunny.neocities.org/', src:T+'lazer-bunny-neocities.png', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'pinterest2 (1).gif', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'pinterest2 (10).jpg', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'pinterest2 (3).jpg', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'pinterest2 (4).jpg', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'pinterest2 (6).jpg', alt:'' },
+    { href:'https://www.pinterest.com/', src:T+'pinterest2 (8).jpg', alt:'' },
+    { href:'https://pixalina.neocities.org/', src:T+'pixalina-neocities.png', alt:'' },
+    { href:'https://web.archive.org/web/2009/http://www.pixelmyspace.com/', src:T+'pixelmyspacecom (2).gif', alt:'' },
+    { href:'https://web.archive.org/web/2009/http://www.pixelmyspace.com/', src:T+'pixelmyspacecom (3).gif', alt:'' },
+    { href:'https://web.archive.org/web/2009/http://www.pixelmyspace.com/', src:T+'pixelmyspacecom (4).gif', alt:'' },
+    { href:'https://web.archive.org/web/2009/http://www.pixelmyspace.com/', src:T+'pixelmyspacecom (5).gif', alt:'' },
+    { href:'https://web.archive.org/web/2009/http://www.pixelmyspace.com/', src:T+'pixelmyspacecom (6).gif', alt:'' },
+    { href:'https://web.archive.org/web/2009/http://www.pixelmyspace.com/', src:T+'pixelmyspacecom (8).gif', alt:'' },
+    { href:'https://web.archive.org/web/2009/http://www.pixelmyspace.com/', src:T+'pixelmyspacecom (9).gif', alt:'' },
+    { href:'http://it.geocities.com/vanillina88/gif_pucciose1.htm', src:T+'pucoisse (3).gif', alt:'' },
+    { href:'http://it.geocities.com/vanillina88/gif_pucciose1.htm', src:T+'pucoisse (4).gif', alt:'' },
+    { href:'http://it.geocities.com/vanillina88/gif_pucciose1.htm', src:T+'pucoisse (5).gif', alt:'' },
+    { href:'https://stephology.ca/', src:T+'stephology (1).gif', alt:'' },
+    { href:'https://stephology.ca/', src:T+'stephology (3).gif', alt:'' },
+    { href:'https://stephology.ca/', src:T+'stephology (4).gif', alt:'' },
+    { href:'https://stephology.ca/', src:T+'stephology (6).gif', alt:'' },
+    { href:'https://stephology.ca/', src:T+'stephology (7).gif', alt:'' },
+    { href:'https://stephology.ca/', src:T+'stephology (8).gif', alt:'' },
+    { href:'https://web.archive.org/web/20060506205737/http://www.yumestudio.it/', src:T+'yumestudio-it (11).gif', alt:'' },
+    { href:'https://web.archive.org/web/20060506205737/http://www.yumestudio.it/', src:T+'yumestudio-it (15).gif', alt:'' },
+    { href:'https://web.archive.org/web/20060506205737/http://www.yumestudio.it/', src:T+'yumestudio-it (16).gif', alt:'' },
+    { href:'https://web.archive.org/web/20060506205737/http://www.yumestudio.it/', src:T+'yumestudio-it (3).gif', alt:'' },
+    { href:'https://web.archive.org/web/20060506205737/http://www.yumestudio.it/', src:T+'yumestudio-it (5).gif', alt:'' },
+    { href:'https://web.archive.org/web/20060506205737/http://www.yumestudio.it/', src:T+'yumestudio-it (9).gif', alt:'' },
+  ];
+
   const FAVORITES = [
     { href:aw,  src:T+'artworkneocities (56).gif',               alt:'roseglass' },
     { href:geo, src:T+'sugarberryiconFROMgeocities-kajikan3.gif', alt:'mylittlepony3' },
@@ -848,6 +942,14 @@
       <hr>
     `;
     wrapper.appendChild(titleBox);
+
+    // ── New arrivals ──
+    const newBox = makeContentBox('New Arrivals');
+    const newShelf = document.createElement('div');
+    newShelf.id = 'shelf-new';
+    newBox.appendChild(newShelf);
+    wrapper.appendChild(newBox);
+    renderArray(NEW_ARRIVALS, 'shelf-new');
 
     // ── Favorites ──
     const favBox = makeContentBox('Favorites');

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CallMeCatherine ~ Avatars</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Pacifico&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stars"></div>
+<div id="clouds"></div>
+
+<div class="page-wrap">
+  <div id="layout-header"></div>
+
+  <div class="body-layout">
+    <div id="layout-sidebar"></div>
+    <div class="main-content">
+
+      <div class="page-container">
+        <main id="main-content">
+          <h2>Avatars</h2>
+          <hr>
+          <p class="page-intro">Little square icons from old forums, messengers and profiles. Some of them move.</p>
+          <div id="avatar-shelf"></div>
+        </main>
+      </div>
+
+    </div><!-- end main-content -->
+  </div><!-- end body-layout -->
+
+  <div id="layout-footer"></div>
+</div>
+
+<script src="sparkle.js"></script>
+<script src="layout.js"></script>
+<script src="gallery.js"></script>
+<script>
+var avatars=[
+  {src:"pixels/avatars/1315974sa2ydv46zz.gif",alt:"rose under a glass dome"},
+  {src:"pixels/avatars/206428ib1rn9bxv3.gif",alt:"Cinderella"},
+  {src:"pixels/avatars/491.gif",alt:"night city with a crescent moon"},
+];
+Gallery.shelf('avatar-shelf',avatars,{max:150});
+</script>
+</body>
+</html>

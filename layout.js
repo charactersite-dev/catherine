@@ -52,6 +52,8 @@
             <li><a href="greenhouse.html">Pixel Garden</a></li>
             <li><a href="people.html">Pixel People</a></li>
             <li><a href="space.html">Pixel Space</a></li>
+            <li><a href="scenes.html">Pixel Scenes</a></li>
+            <li><a href="avatars.html">Avatars</a></li>
             <li><a href="cliques.html">Cliques &amp; Clubs</a></li>
           </ul>
         </nav>
@@ -148,6 +150,54 @@
   document.querySelectorAll('.main-content img').forEach(function(img){
     if(img.complete && img.getAttribute('src') && img.naturalWidth === 0) hideBroken(img);
   });
+
+  // ── Freeze button: stops sparkles, bouncing letters, clouds and GIFs ──
+  var root = document.documentElement;
+  var freezeBtn = document.createElement('button');
+  freezeBtn.type = 'button';
+  freezeBtn.className = 'freeze-toggle';
+
+  function isAnimated(img){ return /\.(gif|webp)(\?|$)/i.test(img.dataset.animSrc || img.currentSrc || img.src); }
+  function freezeImg(img){
+    if(img.dataset.animSrc || !img.complete || !img.naturalWidth || !isAnimated(img)) return;
+    try {
+      var c = document.createElement('canvas');
+      c.width = img.naturalWidth; c.height = img.naturalHeight;
+      c.getContext('2d').drawImage(img, 0, 0);
+      var still = c.toDataURL('image/png');
+      // keep the same size while the still frame swaps in
+      if(!img.style.width) { img.style.width = img.width + 'px'; img.dataset.sized = '1'; }
+      img.dataset.animSrc = img.src;
+      img.src = still;
+    } catch(e) { /* pictures from other sites can't be frozen */ }
+  }
+  function thawImg(img){
+    if(!img.dataset.animSrc) return;
+    img.src = img.dataset.animSrc;
+    delete img.dataset.animSrc;
+    if(img.dataset.sized) { img.style.width = ''; delete img.dataset.sized; }
+  }
+  function setFrozen(on){
+    root.classList.toggle('frozen', on);
+    freezeBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    freezeBtn.textContent = on ? '▶ Play' : '❚❚ Freeze';
+    freezeBtn.title = on ? 'Start the animations again' : 'Pause all the animations';
+    document.querySelectorAll('img').forEach(on ? freezeImg : thawImg);
+    try { localStorage.setItem('frozen', on ? '1' : '0'); } catch(e) {}
+  }
+  // pictures that load later (lazy loading) freeze as they arrive
+  document.addEventListener('load', function(e){
+    if(root.classList.contains('frozen') && e.target.tagName === 'IMG' && !e.target.dataset.animSrc) freezeImg(e.target);
+  }, true);
+  freezeBtn.addEventListener('click', function(){ setFrozen(!root.classList.contains('frozen')); });
+  document.body.appendChild(freezeBtn);
+  var startFrozen = false;
+  try { startFrozen = localStorage.getItem('frozen') === '1'; } catch(e) {}
+  if(startFrozen){
+    root.classList.add('frozen');
+    window.addEventListener('load', function(){ setFrozen(true); });
+  }
+  setFrozen(startFrozen);
 
   // ── Back to top (fixed, bottom-right, shows after scrolling) ──
   var btn = document.createElement('a');
